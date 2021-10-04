@@ -1,18 +1,15 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import {Bar} from 'react-chartjs-2'
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { Bar } from 'react-chartjs-2';
+import Home from './components/Home/Home';
+
 export default function App() {
   return (
     <Router>
       <div>
-        <nav>
+        {/* <nav>
           <ul>
             <li>
               <Link to="/">Home</Link>
@@ -24,7 +21,7 @@ export default function App() {
               <Link to="/users">Users</Link>
             </li>
           </ul>
-        </nav>
+        </nav> */}
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
@@ -42,10 +39,6 @@ export default function App() {
       </div>
     </Router>
   );
-}
-
-function Home() {
-  return <h2>Home</h2>;
 }
 
 function About() {
