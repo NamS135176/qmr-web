@@ -1,0 +1,23 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-qmrwebreactjs-dev-133723-authRole",
+            "UnauthRoleArn": "arn:aws:iam::125501079021:role/amplify-qmrwebreactjs-dev-133723-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::125501079021:role/amplify-qmrwebreactjs-dev-133723-authRole",
+            "Region": "ap-southeast-1",
+            "DeploymentBucketName": "amplify-qmrwebreactjs-dev-133723-deployment",
+            "UnauthRoleName": "amplify-qmrwebreactjs-dev-133723-unauthRole",
+            "StackName": "amplify-qmrwebreactjs-dev-133723",
+            "StackId": "arn:aws:cloudformation:ap-southeast-1:125501079021:stack/amplify-qmrwebreactjs-dev-133723/8b1711c0-24dd-11ec-9f52-024ea24f3910",
+            "AmplifyAppId": "d2z742nrdym8e1"
+        },
+        "categories": {
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d2z742nrdym8e1",
+                    "type": "manual"
+                }
+            }
+        }
+    }
+}
