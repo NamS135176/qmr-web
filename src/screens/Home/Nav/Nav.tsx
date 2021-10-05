@@ -111,7 +111,6 @@ export default function Nav() {
   const onCloseMenu = () => {
     setChecked(false);
   };
-  const src = require(`../../../assets/images/logo_en.png`);
 
   const MyDrawer = () => {
     return (
@@ -197,7 +196,7 @@ export default function Nav() {
   };
 
   return (
-    <BrowserRouter>
+    <Box>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" className={classes.root}>
           <Toolbar className={classes.toolbar}>
@@ -292,6 +291,6 @@ export default function Nav() {
         <MyDrawer />
       </Box>
       <TranactionModal open={open} onClose={handleClose} />
-    </BrowserRouter>
+    </Box>
   );
 }
