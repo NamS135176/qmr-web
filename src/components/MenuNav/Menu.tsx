@@ -6,12 +6,16 @@ import React from 'react';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { useTranslation } from 'react-i18next';
+
 export default function MenuNav({ openMenu, onClose }: any) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+  const { t, i18n } = useTranslation();
+
   const handleClose = () => {
     setAnchorEl(null);
     if (onClose) {
@@ -42,11 +46,21 @@ export default function MenuNav({ openMenu, onClose }: any) {
           <SettingsIcon />
           <Typography> &nbsp;Language Setting</Typography>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            i18n.changeLanguage('jp');
+          }}
+        >
           <Box sx={{ width: '1em', height: '1em', fontSize: '1.5rem' }}></Box>
           <Typography> &nbsp;Japanese</Typography>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            i18n.changeLanguage('en');
+          }}
+        >
           <Box sx={{ width: '1em', height: '1em', fontSize: '1.5rem' }}></Box>
           <Typography> &nbsp;English</Typography>
         </MenuItem>

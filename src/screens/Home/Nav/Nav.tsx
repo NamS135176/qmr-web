@@ -21,6 +21,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import TranactionModal from '../../../components/Modal/TranactionModal';
 import { useHistory } from 'react-router-dom';
 import MenuNav from '../../../components/MenuNav/Menu';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
@@ -80,6 +81,7 @@ export default function Nav() {
   const [open, setOpen] = useState(false);
   const [checked, setChecked] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
+  const { t, i18n } = useTranslation();
   let history = useHistory();
   const handleClose = () => {
     console.log('close');
@@ -99,6 +101,7 @@ export default function Nav() {
   const onCloseMenu = () => {
     setChecked(false);
   };
+  const src = require(`../../../assets/images/logo_en.png`);
 
   const MyDrawer = () => {
     return (
@@ -111,7 +114,7 @@ export default function Nav() {
               toggleDrawer();
             }}
           >
-            <Typography sx={{ color: 'white' }}>Summary</Typography>
+            <Typography sx={{ color: 'white' }}> {t('nav.summary')}</Typography>
           </MenuItem>
           <MenuItem
             sx={{ backgroundColor: '#78CD51', px: 5 }}
@@ -119,7 +122,7 @@ export default function Nav() {
               toggleDrawer();
             }}
           >
-            <Typography sx={{ color: 'white' }}>List</Typography>
+            <Typography sx={{ color: 'white' }}> {t('nav.list')}</Typography>
           </MenuItem>
           <MenuItem
             sx={{ backgroundColor: '#78CD51', px: 5 }}
@@ -127,7 +130,7 @@ export default function Nav() {
               toggleDrawer();
             }}
           >
-            <Typography sx={{ color: 'white' }}>Graph</Typography>
+            <Typography sx={{ color: 'white' }}> {t('nav.graph')}</Typography>
           </MenuItem>
           <MenuItem
             sx={{ backgroundColor: '#78CD51', px: 5 }}
@@ -136,7 +139,7 @@ export default function Nav() {
               window.open(`http://smart-idea-apps.com/qmr/pc_support`);
             }}
           >
-            <Typography sx={{ color: 'white' }}>Support/Blog</Typography>
+            <Typography sx={{ color: 'white' }}> {t('nav.support')}</Typography>
           </MenuItem>
           <MenuItem
             sx={{
@@ -205,7 +208,7 @@ export default function Nav() {
                     className={classes.btnNav}
                     variant="text"
                   >
-                    Summary
+                    {t('nav.summary')}
                   </Button>
                   <Button
                     onClick={() => {
@@ -214,7 +217,7 @@ export default function Nav() {
                     className={classes.btnNav}
                     variant="text"
                   >
-                    List
+                    {t('nav.list')}
                   </Button>
                   <Button
                     onClick={() => {
@@ -223,7 +226,7 @@ export default function Nav() {
                     className={classes.btnNav}
                     variant="text"
                   >
-                    Graph
+                    {t('nav.graph')}
                   </Button>
                   <Button
                     onClick={() => {
@@ -232,7 +235,7 @@ export default function Nav() {
                     className={classes.btnNav}
                     variant="text"
                   >
-                    Support/Blog
+                    {t('nav.support')}
                   </Button>
                 </Box>
                 <Box

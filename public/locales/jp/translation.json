@@ -3,5 +3,11 @@
   "description": {
     "part1": "sdsdfsdfsdf.",
     "part2": "sdfsdfsdfsdf."
+  },
+  "nav": {
+    "summary": "サマリー",
+    "list": "リスト",
+    "graph": "グラフ",
+    "support": "サポートブログ"
   }
 }
