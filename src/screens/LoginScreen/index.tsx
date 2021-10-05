@@ -100,10 +100,10 @@ export default function LoginScreen() {
           QMR Subscription)
         </p>
         <InputBase
-        className={classes.inputBase}
-        placeholder="Search Google Maps"
-        inputProps={{ "aria-label": "search google maps" }}
-      />
+          type="email"
+          placeholder="type email"
+          className={classes.inputBase}
+        ></InputBase>
         <InputBase
           type="password"
           placeholder="password"
