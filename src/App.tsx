@@ -4,7 +4,9 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import LoginScreen from './screens/LoginScreen';
 import ForgotPassScreen from './screens/ForgotPassScreen';
+import TestScreen from './screens/TestScreen';
 import Home from './screens/Home/Home';
+
 export default function App() {
   return (
     <Router>
@@ -16,6 +18,9 @@ export default function App() {
         </Route>
         <Route path="/forgot_password">
           <ForgotPassScreen />
+        </Route>
+        <Route path="/test">
+         <TestScreen></TestScreen>
         </Route>
         <Route path="/">
           <LoginScreen></LoginScreen>

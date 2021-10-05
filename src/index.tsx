@@ -8,7 +8,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "./createEmotionCache";
 import theme from "./theme";
-
+import './i18n'
 const cache = createEmotionCache();
 
 ReactDOM.render(

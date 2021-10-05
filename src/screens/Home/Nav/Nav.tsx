@@ -21,6 +21,8 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import TranactionModal from '../../../components/Modal/TranactionModal';
 import { useHistory } from 'react-router-dom';
 import MenuNav from '../../../components/MenuNav/Menu';
+
+
 const useStyles = makeStyles((theme: any) => ({
   root: {
     background: '#78CD51',
