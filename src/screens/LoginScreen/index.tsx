@@ -35,7 +35,7 @@ const useStyle = makeStyles((theme: any) => ({
     marginTop: 100,
     padding: 20,
     minWidth: 250,
-    height:500,
+    height:520,
    
   },
   text: {
@@ -58,7 +58,18 @@ const useStyle = makeStyles((theme: any) => ({
     marginTop: 10,
     background: "#e4e6eb",
     width: "100%",
-    padding: theme.spacing(1, 1, 1, 2)
+    padding: theme.spacing(1, 1, 1, 2),
+    '& .MuiOutlinedInput-root': {  // - The Input-root, inside the TextField-root
+      '& fieldset': {            // - The <fieldset> inside the Input-root
+          borderColor: 'pink',   // - Set the Input border
+      },
+      '&:hover fieldset': {
+          borderColor: 'yellow', // - Set the Input border when parent has :hover
+      },
+      '&.Mui-focused fieldset': { // - Set the Input border when parent is focused 
+          borderColor: 'green',
+      },
+  },
   },
   btn: {
     marginTop: 20,
@@ -76,7 +87,22 @@ const useStyle = makeStyles((theme: any) => ({
     '&:hover':{
       color:'#428bca'
     }
+    ,
+   
   }
+  ,
+  root: {
+    marginTop: 10,
+    background: "#e4e6eb",
+    width: "100%",
+    padding: theme.spacing(1, 1, 1, 2)
+  },
+  focused: {
+    //<---- see here
+    borderColor: "red !important",
+    borderWidth:1
+   
+  },
 }));
 
 export default function LoginScreen() {
@@ -96,10 +122,10 @@ export default function LoginScreen() {
           QMR Subscription)
         </p>
         <InputBase
-          type="email"
-          placeholder="type email"
-          className={classes.inputBase}
-        ></InputBase>
+        classes={{ root: classes.root, focused: classes.focused }}
+        placeholder="Search Google Maps"
+        inputProps={{ "aria-label": "search google maps" }}
+      />
         <InputBase
           type="password"
           placeholder="password"
