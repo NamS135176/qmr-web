@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Suspense} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -16,7 +16,9 @@ ReactDOM.render(
    <CacheProvider value={cache}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <App />
+       <Suspense fallback='loading'>
+       <App />
+       </Suspense>
       </ThemeProvider>
     </CacheProvider>
   </React.StrictMode>,
