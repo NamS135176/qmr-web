@@ -34,13 +34,8 @@ const useStyle = makeStyles((theme: any) => ({
     marginTop: 100,
     padding: 20,
     minWidth: 250,
-<<<<<<< HEAD
     height:520,
    
-=======
-    height: 520,
-    // height: '50%',
->>>>>>> cf343eb812c6befe53f40c8f7e88f529f7349bf4
   },
   text: {
     fontSize: 15,
@@ -59,26 +54,9 @@ const useStyle = makeStyles((theme: any) => ({
   },
   inputBase: {
     marginTop: 10,
-<<<<<<< HEAD
-    background: "#e4e6eb",
-    width: "100%",
-    padding: theme.spacing(1, 1, 1, 2),
-    '& .MuiOutlinedInput-root': {  // - The Input-root, inside the TextField-root
-      '& fieldset': {            // - The <fieldset> inside the Input-root
-          borderColor: 'pink',   // - Set the Input border
-      },
-      '&:hover fieldset': {
-          borderColor: 'yellow', // - Set the Input border when parent has :hover
-      },
-      '&.Mui-focused fieldset': { // - Set the Input border when parent is focused 
-          borderColor: 'green',
-      },
-  },
-=======
     background: '#e4e6eb',
     width: '100%',
     padding: theme.spacing(1, 1, 1, 2),
->>>>>>> cf343eb812c6befe53f40c8f7e88f529f7349bf4
   },
   btn: {
     marginTop: 20,
@@ -90,36 +68,12 @@ const useStyle = makeStyles((theme: any) => ({
     fontSize: 15,
     margin: 0,
     padding: 0,
-<<<<<<< HEAD
-    lineHeightStep:1,
-    lineHeight:'1.1',
-    color:'black',
-    '&:hover':{
-      color:'#428bca'
-    }
-    ,
-   
-  }
-  ,
-  root: {
-    marginTop: 10,
-    background: "#e4e6eb",
-    width: "100%",
-    padding: theme.spacing(1, 1, 1, 2)
-  },
-  focused: {
-    //<---- see here
-    borderColor: "red !important",
-    borderWidth:1
-   
-=======
     lineHeightStep: 1,
     lineHeight: '1.1',
     color: 'black',
     '&:hover': {
       color: '#428bca',
     },
->>>>>>> cf343eb812c6befe53f40c8f7e88f529f7349bf4
   },
 }));
 
@@ -146,7 +100,7 @@ export default function LoginScreen() {
           QMR Subscription)
         </p>
         <InputBase
-        classes={{ root: classes.root, focused: classes.focused }}
+        className={classes.inputBase}
         placeholder="Search Google Maps"
         inputProps={{ "aria-label": "search google maps" }}
       />
