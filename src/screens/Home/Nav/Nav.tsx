@@ -14,7 +14,8 @@ import {
 } from '@mui/material';
 import { makeStyles, useTheme } from '@mui/styles';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
-import logo from '../../../assets/images/logo_en.png';
+import logoen from '../../../assets/images/logo_en.png';
+import logojp from '../../../assets/images/logo_jp.png';
 import MenuIcon from '@mui/icons-material/Menu';
 import BuildIcon from '@mui/icons-material/Build';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
@@ -72,6 +73,15 @@ const useStyles = makeStyles((theme: any) => ({
     color: 'white',
     margin: theme.spacing(2),
     // background: 'orange',
+  },
+  img: {
+    [theme.breakpoints.up('md')]: {
+      height: '100%',
+      width: '300px',
+    },
+    [theme.breakpoints.down('md')]: {
+      width: '220px',
+    },
   },
 }));
 
@@ -191,7 +201,11 @@ export default function Nav() {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" className={classes.root}>
           <Toolbar className={classes.toolbar}>
-            <img src={logo} height="100%" />
+            {t('logo') === 'jp' ? (
+              <img src={logojp} height="100%" className={classes.img} />
+            ) : (
+              <img src={logoen} height="100%" className={classes.img} />
+            )}
             <Box className={classes.boxNavPc}>
               <Box
                 sx={{
