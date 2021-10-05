@@ -8,6 +8,9 @@ import {
   Typography,
   Button,
   IconButton,
+  Fade,
+  Drawer,
+  MenuItem,
 } from '@mui/material';
 import { makeStyles, useTheme } from '@mui/styles';
 import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
@@ -15,7 +18,9 @@ import logo from '../../../assets/images/logo_en.png';
 import MenuIcon from '@mui/icons-material/Menu';
 import BuildIcon from '@mui/icons-material/Build';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import TranactionModal from '../Modal/TranactionModal';
+import TranactionModal from '../../../components/Modal/TranactionModal';
+import { useHistory } from 'react-router-dom';
+import MenuNav from '../../../components/MenuNav/Menu';
 const useStyles = makeStyles((theme: any) => ({
   root: {
     background: '#78CD51',
@@ -63,14 +68,18 @@ const useStyles = makeStyles((theme: any) => ({
   },
   menuButton: {
     color: 'white',
-    padding: theme.spacing(2),
-    // background: 'red',
+    margin: theme.spacing(2),
+    // background: 'orange',
   },
 }));
+
 export default function Nav() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
+  let history = useHistory();
   const handleClose = () => {
     console.log('close');
     setOpen(false);
@@ -79,7 +88,100 @@ export default function Nav() {
     console.log('open');
     setOpen(true);
   };
-  console.log({ theme });
+  const toggleDrawer = () => {
+    setChecked(!checked);
+  };
+  const onCloseDrawer = () => {
+    setChecked(false);
+  };
+
+  const onCloseMenu = () => {
+    setChecked(false);
+  };
+
+  const MyDrawer = () => {
+    return (
+      <Box sx={{ width: '300px', background: 'red' }}>
+        <Drawer anchor="right" onClose={onCloseDrawer} open={checked}>
+          <AppBar title="Menu" />
+          <MenuItem
+            sx={{ backgroundColor: '#78CD51', px: 5 }}
+            onClick={() => {
+              toggleDrawer();
+            }}
+          >
+            <Typography sx={{ color: 'white' }}>Summary</Typography>
+          </MenuItem>
+          <MenuItem
+            sx={{ backgroundColor: '#78CD51', px: 5 }}
+            onClick={() => {
+              toggleDrawer();
+            }}
+          >
+            <Typography sx={{ color: 'white' }}>List</Typography>
+          </MenuItem>
+          <MenuItem
+            sx={{ backgroundColor: '#78CD51', px: 5 }}
+            onClick={() => {
+              toggleDrawer();
+            }}
+          >
+            <Typography sx={{ color: 'white' }}>Graph</Typography>
+          </MenuItem>
+          <MenuItem
+            sx={{ backgroundColor: '#78CD51', px: 5 }}
+            onClick={() => {
+              toggleDrawer();
+              window.open(`http://smart-idea-apps.com/qmr/pc_support`);
+            }}
+          >
+            <Typography sx={{ color: 'white' }}>Support/Blog</Typography>
+          </MenuItem>
+          <MenuItem
+            sx={{
+              backgroundColor: '#78CD51',
+              px: 5,
+              // backgroundColor: 'red',
+              width: '100%',
+            }}
+            onClick={() => {
+              toggleDrawer();
+              handleOpen();
+            }}
+          >
+            <Box
+              sx={{
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+              }}
+            >
+              <AddCircleOutlineIcon
+                sx={{
+                  fontSize: 35,
+                  color: 'white',
+                }}
+              />
+            </Box>
+          </MenuItem>
+          <MenuItem
+            sx={{
+              backgroundColor: '#78CD51',
+              px: 5,
+            }}
+            onClick={() => {
+              setOpenMenu(!openMenu);
+            }}
+          >
+            <Box sx={{ width: '100%' }}>
+              <MenuNav openMenu={openMenu} onClose={onCloseMenu} />
+            </Box>
+          </MenuItem>
+        </Drawer>
+      </Box>
+    );
+  };
+
   return (
     <BrowserRouter>
       <Box sx={{ flexGrow: 1 }}>
@@ -95,16 +197,40 @@ export default function Nav() {
                 }}
               >
                 <Box>
-                  <Button className={classes.btnNav} variant="text">
+                  <Button
+                    onClick={() => {
+                      history.push('/home');
+                    }}
+                    className={classes.btnNav}
+                    variant="text"
+                  >
                     Summary
                   </Button>
-                  <Button className={classes.btnNav} variant="text">
+                  <Button
+                    onClick={() => {
+                      history.push('/list');
+                    }}
+                    className={classes.btnNav}
+                    variant="text"
+                  >
                     List
                   </Button>
-                  <Button className={classes.btnNav} variant="text">
+                  <Button
+                    onClick={() => {
+                      history.push('/graph');
+                    }}
+                    className={classes.btnNav}
+                    variant="text"
+                  >
                     Graph
                   </Button>
-                  <Button className={classes.btnNav} variant="text">
+                  <Button
+                    onClick={() => {
+                      window.open(`http://smart-idea-apps.com/qmr/pc_support`);
+                    }}
+                    className={classes.btnNav}
+                    variant="text"
+                  >
                     Support/Blog
                   </Button>
                 </Box>
@@ -112,27 +238,21 @@ export default function Nav() {
                   sx={{
                     display: 'flex',
                     marginRight: '2rem',
+                    alignItems: 'center',
                   }}
                 >
                   <Box>
                     <IconButton
                       className={classes.menuButton}
-                      edge="start"
-                      aria-label="menu"
-                      onClick={() => {}}
+                      // edge="start"
+                      // aria-label="menu"
+                      onClick={handleOpen}
                     >
-                      <AddCircleOutlineIcon />
+                      <AddCircleOutlineIcon sx={{ fontSize: 25 }} />
                     </IconButton>
                   </Box>
                   <Box>
-                    <IconButton
-                      className={classes.menuButton}
-                      edge="start"
-                      aria-label="menu"
-                      onClick={handleOpen}
-                    >
-                      <BuildIcon />
-                    </IconButton>
+                    <MenuNav />
                   </Box>
                 </Box>
               </Box>
@@ -142,13 +262,16 @@ export default function Nav() {
                 className={classes.menuButton}
                 edge="start"
                 aria-label="menu"
-                onClick={() => {}}
+                onClick={() => {
+                  setChecked(true);
+                }}
               >
                 <MenuIcon />
               </IconButton>
             </Box>
           </Toolbar>
         </AppBar>
+        <MyDrawer />
       </Box>
       <TranactionModal open={open} onClose={handleClose} />
     </BrowserRouter>
