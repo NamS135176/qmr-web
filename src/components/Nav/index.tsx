@@ -155,7 +155,7 @@ export default function Nav() {
                 <Box>
                   <Button
                     onClick={() => {
-                      history.push("/home");
+                      history.push("/");
                     }}
                     className="btnNav"
                     variant="text"
@@ -164,7 +164,7 @@ export default function Nav() {
                   </Button>
                   <Button
                     onClick={() => {
-                      history.push("/list");
+                      history.push("/transactions");
                     }}
                     className="btnNav"
                     variant="text"

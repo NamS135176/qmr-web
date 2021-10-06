@@ -17,14 +17,14 @@
     "from": "from",
     "to": "to"
   },
-  "table":{
-    "table_head":"List Expense / Income",
-    "column1":"Date/Time",
-    "column2":"Category Name",
-    "column3":"Price",
-    "column4":"Memo",
-    "column5":"Photo",
-    "column6":"Action"
+  "table": {
+    "table_head": "List Expense / Income",
+    "column1": "Date/Time",
+    "column2": "Category Name",
+    "column3": "Price",
+    "column4": "Memo",
+    "column5": "Photo",
+    "column6": "Action"
   },
   "money": {
     "income": "Income",
@@ -41,11 +41,11 @@
     "title": "Quick Input Panel",
     "date": "Date & Time",
     "category": "Category",
-    "price":"Price",
+    "price": "Price",
     "memo": "Memo",
     "limit_memo": "(Only limit 2000 characters)",
     "limit_size": "(Image size must 2mb or below)",
     "save": "Save",
     "reset": "Reset"
-}
+  }
 }

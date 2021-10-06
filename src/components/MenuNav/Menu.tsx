@@ -27,6 +27,12 @@ export default function MenuNav({ openMenu, onClose }: any) {
       onClose();
     }
   };
+
+  const handleLogout = () => {
+    window.localStorage.removeItem("access_token");
+    history.push("/login");
+  };
+
   return (
     <Box sx={{ display: "flex", flex: 1 }}>
       <IconButton
@@ -73,13 +79,7 @@ export default function MenuNav({ openMenu, onClose }: any) {
           <AttachMoneyIcon />
           <Typography> &nbsp;Curency Setting</Typography>
         </MenuItem>
-        <MenuItem
-          onClick={() => {
-            console.log("qweqwe", history);
-            handleClose();
-            history.push("/");
-          }}
-        >
+        <MenuItem onClick={handleLogout}>
           <LogoutIcon />
           <Typography> &nbsp;Log out</Typography>
         </MenuItem>

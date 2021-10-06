@@ -17,14 +17,14 @@
     "from": "開始日",
     "to": "終了日"
   },
-  "table":{
-    "table_head":"出費・収入リスト",
-    "column1":"日にち・時間",
-    "column2":"カテゴリー名",
-    "column3":"金額",
-    "column4":"メモ",
-    "column5":"写真",
-    "column6":"アクション"
+  "table": {
+    "table_head": "出費・収入リスト",
+    "column1": "日にち・時間",
+    "column2": "カテゴリー名",
+    "column3": "金額",
+    "column4": "メモ",
+    "column5": "写真",
+    "column6": "アクション"
   },
   "money": {
     "income": "収入",

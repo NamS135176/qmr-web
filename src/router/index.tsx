@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "screens/Login";
 import ForgotPassword from "screens/ForgotPassword";
 import Transactions from "screens/Transactions";
-import Home from "screens/Home/Home";
+import Home from "screens/Home";
 import AuthenticateRoute from "./AuthenticateRoute";
 
 function AppRouter() {
