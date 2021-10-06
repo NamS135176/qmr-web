@@ -1,15 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.scss";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { CacheProvider } from "@emotion/react";
-import createEmotionCache from "./createEmotionCache";
-import theme from "utils/theme";
+
+import "styles/index.scss";
 import "utils/i18n";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import reportWebVitals from "utils/reportWebVitals";
+import * as serviceWorkerRegistration from "utils/serviceWorkerRegistration";
+import createEmotionCache from "utils/createEmotionCache";
+import theme from "utils/theme";
+import AppRouter from "router";
 
 const cache = createEmotionCache();
 
@@ -18,7 +19,7 @@ ReactDOM.render(
     <CacheProvider value={cache}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <App />
+        <AppRouter />
       </ThemeProvider>
     </CacheProvider>
   </React.StrictMode>,

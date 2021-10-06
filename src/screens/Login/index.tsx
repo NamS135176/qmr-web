@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import Box from "@mui/material/Box";
 import InputBase from "@mui/material/InputBase";
 import Button from "@mui/material/Button";
@@ -10,26 +10,31 @@ import { login } from "api/member";
 export default function LoginScreen() {
   const history = useHistory();
   const [showError, setShowError] = useState<boolean>(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("tih920@smart-idea.jp");
+  const [password, setPassword] = useState("Smart2012");
 
   const handleChangeMail = (e: React.ChangeEvent<HTMLInputElement>) =>
     setEmail(e.target.value);
   const handleChangePass = (e: React.ChangeEvent<HTMLInputElement>) =>
     setPassword(e.target.value);
 
-  const handleLogin = async () => {
-    setShowError(false);
-    try {
-      const res: any = await login(email, password);
-      console.log(res);
-      history.push("/home");
-    } catch (error) {
-      console.log("sdfsdfsdf");
-      setShowError(true);
-      // history.push("/home");
-    }
-  };
+  const handleLogin = useCallback(
+    async (event: any) => {
+      event.preventDefault();
+      setShowError(false);
+      try {
+        const res: any = await login(email, password);
+        console.log(res);
+
+        window.localStorage.setItem("access_token", res.access_token);
+        history.push("/");
+      } catch (error) {
+        console.log("handleLogin... error", error);
+        setShowError(true);
+      }
+    },
+    [email, password, history]
+  );
 
   return (
     <Box
@@ -116,7 +121,8 @@ export default function LoginScreen() {
               paddingLeft: 2,
             }}
             onChange={handleChangeMail}
-          ></InputBase>
+            defaultValue={email}
+          />
           <InputBase
             type="password"
             placeholder="password"
@@ -128,7 +134,8 @@ export default function LoginScreen() {
               paddingLeft: 2,
             }}
             onChange={handleChangePass}
-          ></InputBase>
+            defaultValue={password}
+          />
           <Box
             sx={{
               borderBottom: 1,
@@ -157,7 +164,7 @@ export default function LoginScreen() {
           </Box>
           <Box sx={{ paddingTop: 1 }}>
             <Link
-              href="/forgot_password"
+              href="/forgot-password"
               sx={{
                 fontSize: 15,
                 margin: 0,
