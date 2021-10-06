@@ -12,17 +12,25 @@ import { makeStyles } from '@mui/styles';
 const useStyle = makeStyles((theme: any) => ({
   container: {
     backgroundColor: '#383e4b',
-    height: '100vh',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
+    // height: '100vh',
+    // display: 'flex',
+    // flexDirection: 'row',
+    // justifyContent: 'center',
     boxSizing: 'border-box',
+    // paddingBottom:100
+    paddingTop:50
+    ,
+    [theme.breakpoints.down('md')]: {
+      // width: '80%',
+      // marginTop: 30,
+      paddingTop:20
+    },
   },
   loginModal: {
     backgroundColor: 'white',
     [theme.breakpoints.down('md')]: {
       width: '80%',
-      marginTop: 30,
+      // marginTop: 30,
     },
     [theme.breakpoints.up('md')]: {
       width: '30%',
@@ -31,10 +39,12 @@ const useStyle = makeStyles((theme: any) => ({
       width: '20%',
     },
     borderRadius: 5,
-    marginTop: 100,
+    // marginTop: 100,
     padding: 20,
     minWidth: 250,
-    height:520,
+    marginLeft:`auto`,
+    marginRight:`auto`
+    // height:520,
    
   },
   text: {
@@ -81,7 +91,14 @@ export default function LoginScreen() {
   const classes = useStyle();
   const [showError, setShowError] = useState<boolean>(false);
   return (
-    <Box className={classes.container}>
+    <Box sx={{
+      width:`100%`,
+      height:`100vh`,
+      backgroundColor: '#383e4b',
+      // paddingTop:10,
+      // paddingBottom:10
+    }}>
+      <Box className={classes.container}>
       <Box className={classes.loginModal}>
         {showError ? (
           <p className={classes.textError}>
@@ -100,10 +117,10 @@ export default function LoginScreen() {
           QMR Subscription)
         </p>
         <InputBase
-        className={classes.inputBase}
-        placeholder="Search Google Maps"
-        inputProps={{ "aria-label": "search google maps" }}
-      />
+          type="email"
+          placeholder="type email"
+          className={classes.inputBase}
+        ></InputBase>
         <InputBase
           type="password"
           placeholder="password"
@@ -139,6 +156,7 @@ export default function LoginScreen() {
           </a>
         </Box>
       </Box>
+    </Box>
     </Box>
   );
 }
