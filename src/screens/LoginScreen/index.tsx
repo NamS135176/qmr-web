@@ -9,6 +9,7 @@ import {
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import logo from '../../assets/images/logo_en.png';
+import api from '../../api/api';
 const useStyle = makeStyles((theme: any) => ({
   container: {
     backgroundColor: '#383e4b',
@@ -90,6 +91,21 @@ const useStyle = makeStyles((theme: any) => ({
 export default function LoginScreen() {
   const classes = useStyle();
   const [showError, setShowError] = useState<boolean>(false);
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const handleChangeMail = (e:React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)
+  const handleChangePass = (e:React.ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)
+
+  const handleLogin = async () => {
+    const res = await api.post('/login',{
+      email:email,
+      password:password
+    })
+    console.log(res);
+    
+  }
+
   return (
     <Box sx={{
       width:`100%`,
@@ -120,11 +136,13 @@ export default function LoginScreen() {
           type="email"
           placeholder="type email"
           className={classes.inputBase}
+          onChange={handleChangeMail}
         ></InputBase>
         <InputBase
           type="password"
           placeholder="password"
           className={classes.inputBase}
+          onChange={handleChangePass}
         ></InputBase>
         <Box
           sx={{
@@ -135,9 +153,7 @@ export default function LoginScreen() {
           }}
         >
           <Button
-            onClick={() => {
-              setShowError(!showError);
-            }}
+            onClick={handleLogin}
             variant="contained"
             color="neutral"
             fullWidth
