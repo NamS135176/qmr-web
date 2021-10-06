@@ -8,7 +8,7 @@ import {
   Button,
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-
+import logo from '../../assets/images/logo_en.png';
 const useStyle = makeStyles((theme: any) => ({
   container: {
     backgroundColor: '#383e4b',
@@ -91,7 +91,7 @@ export default function LoginScreen() {
           <p className={classes.textError}></p>
         )}
         <img
-          src="http://www.test.quick-money-recorder.com/assets/images/logo_en.png"
+          src={logo}
           width="100%"
         />
         <p className={classes.text}>Log in to Quick Money Recorder PC</p>
