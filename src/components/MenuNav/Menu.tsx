@@ -7,6 +7,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
 
 export default function MenuNav({ openMenu, onClose }: any) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -15,6 +16,7 @@ export default function MenuNav({ openMenu, onClose }: any) {
     setAnchorEl(event.currentTarget);
   };
   const { t, i18n } = useTranslation();
+  const history = useHistory();
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -68,7 +70,13 @@ export default function MenuNav({ openMenu, onClose }: any) {
           <AttachMoneyIcon />
           <Typography> &nbsp;Curency Setting</Typography>
         </MenuItem>
-        <MenuItem onClick={() => {}}>
+        <MenuItem
+          onClick={() => {
+            console.log('qweqwe', history);
+            handleClose();
+            history.push('/');
+          }}
+        >
           <LogoutIcon />
           <Typography> &nbsp;Log out</Typography>
         </MenuItem>

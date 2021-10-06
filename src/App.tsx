@@ -16,11 +16,14 @@ export default function App() {
         <Route path="/home">
           <Home />
         </Route>
+        <Route path="/graph">
+          <p>Hello graph</p>
+        </Route>
         <Route path="/forgot_password">
           <ForgotPassScreen />
         </Route>
         <Route path="/test">
-         <TestScreen></TestScreen>
+          <TestScreen></TestScreen>
         </Route>
         <Route path="/">
           <LoginScreen></LoginScreen>
