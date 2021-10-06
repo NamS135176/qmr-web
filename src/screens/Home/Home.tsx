@@ -5,6 +5,7 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import DateRangeIcon from '@mui/icons-material/DateRange';
 import { makeStyles, useTheme } from '@mui/styles';
+import DateHomeModal from '../../components/Modal/DateHomeModal';
 const useStyles = makeStyles((theme: any) => ({
   buttonDate: {
     background: 'white',
@@ -23,7 +24,15 @@ const useStyles = makeStyles((theme: any) => ({
 }));
 export default function Home() {
   const classes = useStyles();
-
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    console.log('close');
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    console.log('open');
+    setOpen(true);
+  };
   return (
     <Box>
       <Nav />
@@ -43,10 +52,10 @@ export default function Home() {
         <Box className={classes.textDate}>
           <Typography>2021-10-05 ~ 2021-10-06</Typography>
           <IconButton
-          // className={classes.menuButton}
-          // edge="start"
-          // aria-label="menu"
-          // onClick={handleOpen}
+            // className={classes.menuButton}
+            // edge="start"
+            // aria-label="menu"
+            onClick={handleOpen}
           >
             <DateRangeIcon sx={{ fontSize: 25 }} />
           </IconButton>
@@ -57,6 +66,7 @@ export default function Home() {
           </Button>
         </Box>
       </Box>
+      <DateHomeModal open={open} onClose={handleClose} />
     </Box>
   );
 }

@@ -1,28 +1,17 @@
-import React, { useState } from 'react';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import MenuIcon from '@mui/icons-material/Menu';
 import {
-  Box,
-  useMediaQuery,
-  CardMedia,
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  IconButton,
-  Fade,
-  Drawer,
-  MenuItem,
+  AppBar, Box, Button, Drawer, IconButton, MenuItem, Toolbar,
+  Typography
 } from '@mui/material';
 import { makeStyles, useTheme } from '@mui/styles';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
 import logoen from '../../../assets/images/logo_en.png';
 import logojp from '../../../assets/images/logo_jp.png';
-import MenuIcon from '@mui/icons-material/Menu';
-import BuildIcon from '@mui/icons-material/Build';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import TranactionModal from '../../../components/Modal/TranactionModal';
-import { useHistory } from 'react-router-dom';
 import MenuNav from '../../../components/MenuNav/Menu';
-import { useTranslation } from 'react-i18next';
+import TranactionModal from '../../../components/Modal/TranactionModal';
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
