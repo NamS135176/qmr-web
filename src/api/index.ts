@@ -1,8 +1,8 @@
-import { create } from 'apisauce';
+import { create } from "apisauce";
 
 export const apiQMRWeb = create({
-  baseURL: 'http://api-web-dev.quick-money-recorder.com/',
-  headers: { 'Content-Type': 'application/json' },
+  baseURL: "http://api-web-dev.quick-money-recorder.com/",
+  headers: { "Content-Type": "application/json" },
   timeout: 10000,
 });
 

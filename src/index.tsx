@@ -1,15 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.scss';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
-import { CacheProvider } from '@emotion/react';
-import createEmotionCache from './createEmotionCache';
-import theme from 'utils/theme';
-import 'utils/i18n';
-import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.scss";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
+import { CacheProvider } from "@emotion/react";
+import createEmotionCache from "./createEmotionCache";
+import theme from "utils/theme";
+import "utils/i18n";
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 const cache = createEmotionCache();
 
@@ -22,7 +22,7 @@ ReactDOM.render(
       </ThemeProvider>
     </CacheProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

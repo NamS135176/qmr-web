@@ -1,27 +1,27 @@
-import { createTheme } from '@mui/material/styles';
+import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
     neutral: {
-      main: '#78cd51',
-      contrastText: '#fff',
+      main: "#78cd51",
+      contrastText: "#fff",
     },
   },
 });
 
-declare module '@mui/material/styles' {
+declare module "@mui/material/styles" {
   interface Palette {
-    neutral: Palette['primary'];
+    neutral: Palette["primary"];
   }
 
   // allow configuration using `createTheme`
   interface PaletteOptions {
-    neutral?: PaletteOptions['primary'];
+    neutral?: PaletteOptions["primary"];
   }
 }
 
 // Update the Button's color prop options
-declare module '@mui/material/Button' {
+declare module "@mui/material/Button" {
   interface ButtonPropsColorOverrides {
     neutral: true;
   }

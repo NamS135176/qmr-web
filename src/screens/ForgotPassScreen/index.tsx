@@ -1,129 +1,111 @@
-import React, { useState } from 'react';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import TextField from '@mui/material/TextField';
-import InputBase from '@mui/material/InputBase';
-import Button from '@mui/material/Button';
-import { Link } from 'react-router-dom';
-import { makeStyles } from '@mui/styles';
-
-const useStyle = makeStyles((theme: any) => ({
-  container: {
-    backgroundColor: '#383e4b',
-    height: '100vh',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    boxSizing: 'border-box',
-  },
-  loginModal: {
-    backgroundColor: 'white',
-    [theme.breakpoints.down('md')]: {
-      width: '80%',
-      marginTop: 30,
-    },
-    [theme.breakpoints.up('md')]: {
-      width: '30%',
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '20%',
-    },
-    borderRadius: 5,
-    marginTop: 100,
-    padding: 20,
-    minWidth: 250,
-    height: 400,
-  },
-  text: {
-    fontSize: 15,
-    margin: 0,
-    padding: 0,
-    lineHeightStep: 1,
-    lineHeight: '1.1',
-    wordBreak: 'break-word',
-  },
-  textError: {
-    fontSize: 13,
-    margin: 0,
-    padding: 0,
-    lineHeightStep: 1,
-    lineHeight: '1.1',
-    color: 'red',
-  },
-  inputBase: {
-    marginTop: 10,
-    background: '#e4e6eb',
-    width: '100%',
-    padding: theme.spacing(1, 1, 1, 2),
-  },
-  btn: {
-    marginTop: 20,
-    paddingBottom: 20,
-    borderBottomWidth: 1,
-    borderColor: '#000',
-  },
-  link: {
-    fontSize: 15,
-    margin: 0,
-    padding: 0,
-    lineHeightStep: 1,
-    lineHeight: '1.1',
-    color: 'black',
-    '&:hover': {
-      color: '#428bca',
-    },
-  },
-}));
+import React, { useState } from "react";
+import Box from "@mui/material/Box";
+import InputBase from "@mui/material/InputBase";
+import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 
 export default function ForgotPassScreen() {
-  const classes = useStyle();
   const [showError, setShowError] = useState<boolean>(false);
   return (
-    <Box className={classes.container}>
-      <Box className={classes.loginModal}>
-        {showError ? (
-          <p className={classes.textError}>
-            Email or password is invalid. Please try again.
-          </p>
-        ) : (
-          <p className={classes.textError}></p>
-        )}
-        <img src="assets/images/logo_en.png" width="100%" alt="" />
+    <Box
+      sx={{
+        width: `100%`,
+        height: `100vh`,
+        backgroundColor: "#383e4b",
+      }}
+    >
+      <Box
+        sx={{
+          backgroundColor: "#383e4b",
+          boxSizing: "border-box",
+          paddingTop: {
+            xs: 5,
+            md: 10,
+          },
+        }}
+      >
+        <Box
+          sx={{
+            backgroundColor: "white",
+            borderRadius: 2,
+            // marginTop: 100,
+            padding: 3,
+            minWidth: 250,
+            marginLeft: `auto`,
+            marginRight: `auto`,
+            width: {
+              xs: "80%",
+              md: "30%",
+              lg: "20%",
+            },
+          }}
+        >
+          {showError ? (
+            <p
+              style={{
+                fontSize: 13,
+                margin: 0,
+                padding: 0,
+                lineHeightStep: 1,
+                lineHeight: "1.1",
+                color: "red",
+              }}
+            >
+              Email or password is invalid. Please try again.
+            </p>
+          ) : (
+            <p></p>
+          )}
+          <img src="assets/images/logo_en.png" width="100%" />
 
-        <p className={classes.text}>
-          Enter your email address to reset your password. You may need to check
-          your spam folder or unblock okanereco_support_d@docomo.ne.jp
-        </p>
-        <InputBase
-          type="email"
-          placeholder="type email"
-          className={classes.inputBase}
-        ></InputBase>
-
-        <Box sx={{ marginTop: 2 }}>
-          <Button
-            onClick={() => {
-              setShowError(!showError);
+          <p
+            style={{
+              fontSize: 15,
+              margin: 0,
+              padding: 0,
+              lineHeightStep: 1,
+              lineHeight: "1.1",
             }}
-            variant="contained"
-            color="neutral"
-            fullWidth
           >
-            Send Mail
-          </Button>
-        </Box>
-        <Box sx={{ marginTop: 2 }}>
-          <Link style={{ textDecoration: 'none' }} to={`/`}>
+            Enter your email address to reset your password. You may need to
+            check your spam folder or unblock okanereco_support_d@docomo.ne.jp
+          </p>
+          <InputBase
+            type="email"
+            placeholder="type email"
+            sx={{
+              marginTop: 2,
+              background: "#e4e6eb",
+              width: "100%",
+              padding: 1,
+              paddingLeft: 2,
+            }}
+          ></InputBase>
+
+          <Box sx={{ marginTop: 2 }}>
             <Button
-              onClick={() => {}}
+              onClick={() => {
+                setShowError(!showError);
+              }}
               variant="contained"
               color="neutral"
               fullWidth
             >
-              Back
+              Send Mail
             </Button>
-          </Link>
+          </Box>
+          <Box sx={{ marginTop: 2 }}>
+            <Link style={{ textDecoration: "none" }} to={`/`}>
+              <Button
+                onClick={() => {}}
+                variant="contained"
+                color="neutral"
+                fullWidth
+              >
+                Back
+              </Button>
+            </Link>
+          </Box>
         </Box>
       </Box>
     </Box>

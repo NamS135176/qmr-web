@@ -1,19 +1,19 @@
-import { useState } from "react";
-import Box from "@mui/material/Box";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import Drawer from "@mui/material/Drawer";
-import MenuItem from "@mui/material/MenuItem";
 import { makeStyles, useTheme } from "@mui/styles";
-import MenuIcon from "@mui/icons-material/Menu";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import TranactionModal from "components/Modal/TranactionModal";
+import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import MenuNav from "components/MenuNav/Menu";
-import { useTranslation } from "react-i18next";
+import TranactionModal from "components/Modal/TranactionModal";
 
 const useStyles = makeStyles((theme: any) => ({
   root: {
@@ -196,14 +196,12 @@ export default function Nav() {
                 src={"assets/images/logo_jp.png"}
                 height="100%"
                 className={classes.img}
-                alt=""
               />
             ) : (
               <img
                 src={"assets/images/logo_en.png"}
                 height="100%"
                 className={classes.img}
-                alt=""
               />
             )}
             <Box className={classes.boxNavPc}>

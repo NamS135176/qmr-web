@@ -1,41 +1,41 @@
-import React, { useState } from 'react';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import TextField from '@mui/material/TextField';
-import FormControl from '@mui/material/FormControl';
-import MenuItem from '@mui/material/MenuItem';
-import InputLabel from '@mui/material/InputLabel';
-import InputAdornment from '@mui/material/InputAdornment';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import DateTimePicker from '@mui/lab/DateTimePicker';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import Dropzone from 'react-dropzone';
-import { makeStyles, useTheme } from '@mui/styles';
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
+import DateTimePicker from "@mui/lab/DateTimePicker";
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import FormControl from "@mui/material/FormControl";
+import InputAdornment from "@mui/material/InputAdornment";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { makeStyles } from "@mui/styles";
+import React, { useState } from "react";
+import Dropzone from "react-dropzone";
 
 const useStyles = makeStyles((theme: any) => ({
   dropzone: {
-    textAlign: 'center',
+    textAlign: "center",
     padding: 10,
     borderRadius: 5,
-    borderColor: '#eeeeee',
+    borderColor: "#eeeeee",
     borderWidth: 1,
-    borderStyle: 'dashed',
-    background: '#d6d6d6',
-    color: '#bdbdbd',
+    borderStyle: "dashed",
+    background: "#d6d6d6",
+    color: "#bdbdbd",
     marginBottom: 5,
   },
 }));
 export default function TranactionModal({ open, onClose }: any) {
   const [value, setValue] = useState<Date | null>(new Date());
-  const [category, setCategory] = useState('');
-  const [price, setPrice] = useState('');
-  const [memo, setMemo] = useState('');
-  const [fileNames, setFileNames] = useState('');
+  const [category, setCategory] = useState("");
+  const [price, setPrice] = useState("");
+  const [memo, setMemo] = useState("");
+  const [fileNames, setFileNames] = useState("");
   const classes = useStyles();
 
   const handleChange = (newValue: Date | null) => {
@@ -48,7 +48,7 @@ export default function TranactionModal({ open, onClose }: any) {
 
   const handleChangePrice = (e: any) => {
     const re = /^[0-9\b]+$/;
-    if (e.target.value === '' || re.test(e.target.value)) {
+    if (e.target.value === "" || re.test(e.target.value)) {
       setPrice(e.target.value);
     }
   };
@@ -70,7 +70,7 @@ export default function TranactionModal({ open, onClose }: any) {
     <Box>
       <Dialog fullWidth={true} open={open} onClose={onClose}>
         <Box sx={{}}>
-          <DialogTitle sx={{ background: '#78CD51', color: 'white' }}>
+          <DialogTitle sx={{ background: "#78CD51", color: "white" }}>
             Quick Input Panel
           </DialogTitle>
           <DialogContent>
@@ -106,7 +106,7 @@ export default function TranactionModal({ open, onClose }: any) {
                 label="Price"
                 id="price"
                 type="number"
-                sx={{ width: '100%' }}
+                sx={{ width: "100%" }}
                 onChange={handleChangePrice}
                 InputProps={{
                   startAdornment: (
@@ -118,7 +118,7 @@ export default function TranactionModal({ open, onClose }: any) {
             <Box sx={{ marginTop: 2 }}>
               <TextField
                 error={memo.length >= 2000}
-                sx={{ width: '100%' }}
+                sx={{ width: "100%" }}
                 label="Memo"
                 onChange={handleChangeMemo}
                 multiline
@@ -150,20 +150,20 @@ export default function TranactionModal({ open, onClose }: any) {
             <Box
               sx={{
                 marginTop: 2,
-                display: 'flex',
-                justifyContent: 'flex-end',
+                display: "flex",
+                justifyContent: "flex-end",
               }}
             >
               <Button
-                sx={{ background: '#78CD51', color: 'white' }}
+                sx={{ background: "#78CD51", color: "white" }}
                 onClick={onClose}
               >
                 Save
               </Button>
               <Button
                 sx={{
-                  background: '#D6D9E0',
-                  color: 'black',
+                  background: "#D6D9E0",
+                  color: "black",
                   marginLeft: 2,
                 }}
                 onClick={onClose}
