@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LoginScreen from "screens/LoginScreen";
 import ForgotPassScreen from "screens/ForgotPassScreen";
 import TestScreen from "screens/TestScreen";
+import ListPageScreen from "screens/ListPageScreen";
 import Home from "screens/Home/Home";
 
 export default function App() {
@@ -19,6 +20,9 @@ export default function App() {
         </Route>
         <Route path="/test">
           <TestScreen />
+        </Route>
+        <Route path="/list">
+          <ListPageScreen />
         </Route>
         <Route path="/">
           <LoginScreen />
