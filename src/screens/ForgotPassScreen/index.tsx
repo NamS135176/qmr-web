@@ -88,7 +88,6 @@ export default function ForgotPassScreen() {
                 setShowError(!showError);
               }}
               variant="contained"
-              color="neutral"
               fullWidth
             >
               Send Mail
@@ -96,12 +95,7 @@ export default function ForgotPassScreen() {
           </Box>
           <Box sx={{ marginTop: 2 }}>
             <Link style={{ textDecoration: "none" }} to={`/`}>
-              <Button
-                onClick={() => {}}
-                variant="contained"
-                color="neutral"
-                fullWidth
-              >
+              <Button onClick={() => {}} variant="contained" fullWidth>
                 Back
               </Button>
             </Link>

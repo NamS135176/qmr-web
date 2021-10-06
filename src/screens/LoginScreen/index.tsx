@@ -174,7 +174,6 @@ export default function LoginScreen() {
               <Button
                 // onClick={handleLogin}
                 variant="contained"
-                color="neutral"
                 fullWidth
                 type="submit"
               >

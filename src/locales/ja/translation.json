@@ -25,5 +25,27 @@
     "column4":"メモ",
     "column5":"写真",
     "column6":"アクション"
+  },
+  "money": {
+    "income": "収入",
+    "expense": "出費",
+    "total": "収支バランス"
+  },
+  "categories": {
+    "title": "カテゴリー",
+    "name": "カテゴリー名",
+    "price": "金額",
+    "total": "全体出費に対する割合"
+  },
+  "transaction": {
+    "title": "出費／収入登録",
+    "date": "日にち & 時間",
+    "category": "カテゴリ",
+    "price": "金額",
+    "memo": "カテゴリ",
+    "limit_memo": "(入力可能文字数は2,000文字までです)",
+    "limit_size": "(画像サイズは2MB以下にしてください)",
+    "save": "保存",
+    "reset": "リセット"
   }
 }

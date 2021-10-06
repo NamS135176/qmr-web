@@ -10,7 +10,7 @@ import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
 import { useTranslation } from "react-i18next";
-import Nav from "screens/Home/Nav";
+import Nav from "components/Nav";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import EditOutlined from "@mui/icons-material/EditOutlined";
 import DeleteOutlined from "@mui/icons-material/DeleteOutlined";
