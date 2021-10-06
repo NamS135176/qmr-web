@@ -1,5 +1,8 @@
 import BuildIcon from '@mui/icons-material/Build';
-import { Menu, Box, IconButton, Typography } from '@mui/material';
+import Menu from '@mui/material/Menu';
+import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
 import React from 'react';

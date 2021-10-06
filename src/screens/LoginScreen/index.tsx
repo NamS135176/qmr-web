@@ -1,14 +1,9 @@
 import React, { useState } from 'react';
-import {
-  Container,
-  Box,
-  Paper,
-  TextField,
-  InputBase,
-  Button,
-} from '@mui/material';
+import Box from '@mui/material/Box';
+import InputBase from '@mui/material/InputBase';
+import Button from '@mui/material/Button';
+
 import { makeStyles } from '@mui/styles';
-import logo from 'assets/images/logo_en.png';
 import { useHistory } from 'react-router-dom';
 import { login } from 'api/member';
 
@@ -136,7 +131,7 @@ export default function LoginScreen() {
           ) : (
             <p className={classes.textError}></p>
           )}
-          <img src={logo} width="100%" />
+          <img src={'assets/images/logo_en.png'} width="100%" alt="" />
           <p className={classes.text}>Log in to Quick Money Recorder PC</p>
           <p className={classes.text}>
             (Please input email address and password which has been registered

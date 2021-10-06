@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import {
-  Container,
-  Box,
-  Paper,
-  TextField,
-  InputBase,
-  Button,
-} from '@mui/material';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import TextField from '@mui/material/TextField';
+import InputBase from '@mui/material/InputBase';
+import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 
@@ -91,10 +89,7 @@ export default function ForgotPassScreen() {
         ) : (
           <p className={classes.textError}></p>
         )}
-        <img
-          src="http://www.test.quick-money-recorder.com/assets/images/logo_en.png"
-          width="100%"
-        />
+        <img src="assets/images/logo_en.png" width="100%" alt="" />
 
         <p className={classes.text}>
           Enter your email address to reset your password. You may need to check

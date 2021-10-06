@@ -1,27 +1,18 @@
-import React, { useState } from 'react';
-import {
-  Box,
-  useMediaQuery,
-  CardMedia,
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  IconButton,
-  Fade,
-  Drawer,
-  MenuItem,
-} from '@mui/material';
+import { useState } from 'react';
+import Box from '@mui/material/Box';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import Drawer from '@mui/material/Drawer';
+import MenuItem from '@mui/material/MenuItem';
 import { makeStyles, useTheme } from '@mui/styles';
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
-import logoen from '../../../assets/images/logo_en.png';
-import logojp from '../../../assets/images/logo_jp.png';
 import MenuIcon from '@mui/icons-material/Menu';
-import BuildIcon from '@mui/icons-material/Build';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import TranactionModal from '../../../components/Modal/TranactionModal';
+import TranactionModal from 'components/Modal/TranactionModal';
 import { useHistory } from 'react-router-dom';
-import MenuNav from '../../../components/MenuNav/Menu';
+import MenuNav from 'components/MenuNav/Menu';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: any) => ({
@@ -201,9 +192,19 @@ export default function Nav() {
         <AppBar position="static" className={classes.root}>
           <Toolbar className={classes.toolbar}>
             {t('logo') === 'jp' ? (
-              <img src={logojp} height="100%" className={classes.img} />
+              <img
+                src={'assets/images/logo_jp.png'}
+                height="100%"
+                className={classes.img}
+                alt=""
+              />
             ) : (
-              <img src={logoen} height="100%" className={classes.img} />
+              <img
+                src={'assets/images/logo_en.png'}
+                height="100%"
+                className={classes.img}
+                alt=""
+              />
             )}
             <Box className={classes.boxNavPc}>
               <Box

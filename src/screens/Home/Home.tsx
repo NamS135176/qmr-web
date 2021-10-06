@@ -1,6 +1,7 @@
 import React from 'react';
-import { Box } from '@mui/material';
-import Nav from './Nav/Nav';
+import Box from '@mui/material/Box';
+import Nav from './Nav';
+
 export default function Home() {
   return (
     <Box>
