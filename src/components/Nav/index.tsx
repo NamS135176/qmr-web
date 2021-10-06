@@ -1,84 +1,21 @@
-import { useState } from "react";
-import Box from "@mui/material/Box";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-import IconButton from "@mui/material/IconButton";
-import Drawer from "@mui/material/Drawer";
-import MenuItem from "@mui/material/MenuItem";
-import { makeStyles, useTheme } from "@mui/styles";
-import MenuIcon from "@mui/icons-material/Menu";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import TranactionModal from "components/Modal/TranactionModal";
-import { useHistory } from "react-router-dom";
 import MenuNav from "components/MenuNav/Menu";
+import TranactionModal from "components/Modal/TranactionModal";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-
-const useStyles = makeStyles((theme: any) => ({
-  root: {
-    background: "#78CD51",
-    // border: 0,
-    // boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    color: "white",
-    // height: 48,
-    // padding: '0 30px',
-  },
-  toolbar: {
-    [theme.breakpoints.up("md")]: {
-      padding: 0,
-      height: 65,
-    },
-    [theme.breakpoints.down("md")]: {
-      display: "flex",
-      height: 10,
-      justifyContent: "space-between",
-      padding: 0,
-      minHeight: 50,
-    },
-  },
-  btnNav: {
-    padding: theme.spacing(2),
-    color: "white",
-    margin: theme.spacing(1),
-  },
-  boxNavPc: {
-    [theme.breakpoints.up("md")]: {
-      display: "block",
-      flexGrow: 1,
-    },
-    [theme.breakpoints.down("md")]: {
-      display: "none",
-    },
-  },
-  boxNavMobile: {
-    [theme.breakpoints.up("md")]: {
-      display: "none",
-    },
-    [theme.breakpoints.down("md")]: {
-      display: "block",
-      padding: 5,
-    },
-  },
-  menuButton: {
-    color: "white",
-    margin: theme.spacing(2),
-    // background: 'orange',
-  },
-  img: {
-    [theme.breakpoints.up("md")]: {
-      height: "100%",
-      width: "300px",
-    },
-    [theme.breakpoints.down("md")]: {
-      width: "220px",
-    },
-  },
-}));
+import { useHistory } from "react-router-dom";
+import "./style.scss";
 
 export default function Nav() {
-  const classes = useStyles();
-  const theme = useTheme();
   const [open, setOpen] = useState(false);
   const [checked, setChecked] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
@@ -189,24 +126,25 @@ export default function Nav() {
   return (
     <Box>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" className={classes.root}>
-          <Toolbar className={classes.toolbar}>
+        <AppBar
+          sx={{ background: "#78CD51", color: "white" }}
+          position="static"
+        >
+          <Toolbar className="toolbar">
             {t("logo") === "jp" ? (
               <img
+                className="image"
                 src={"assets/images/logo_jp.png"}
                 height="100%"
-                className={classes.img}
-                alt=""
               />
             ) : (
               <img
+                className="image"
                 src={"assets/images/logo_en.png"}
                 height="100%"
-                className={classes.img}
-                alt=""
               />
             )}
-            <Box className={classes.boxNavPc}>
+            <Box className="boxNavPc">
               <Box
                 sx={{
                   display: "flex",
@@ -219,7 +157,7 @@ export default function Nav() {
                     onClick={() => {
                       history.push("/home");
                     }}
-                    className={classes.btnNav}
+                    className="btnNav"
                     variant="text"
                   >
                     {t("nav.summary")}
@@ -228,7 +166,7 @@ export default function Nav() {
                     onClick={() => {
                       history.push("/list");
                     }}
-                    className={classes.btnNav}
+                    className="btnNav"
                     variant="text"
                   >
                     {t("nav.list")}
@@ -237,7 +175,7 @@ export default function Nav() {
                     onClick={() => {
                       history.push("/graph");
                     }}
-                    className={classes.btnNav}
+                    className="btnNav"
                     variant="text"
                   >
                     {t("nav.graph")}
@@ -246,7 +184,7 @@ export default function Nav() {
                     onClick={() => {
                       window.open(`http://smart-idea-apps.com/qmr/pc_support`);
                     }}
-                    className={classes.btnNav}
+                    className="btnNav"
                     variant="text"
                   >
                     {t("nav.support")}
@@ -260,13 +198,11 @@ export default function Nav() {
                   }}
                 >
                   <Box>
-                    <IconButton
-                      className={classes.menuButton}
-                      // edge="start"
-                      // aria-label="menu"
-                      onClick={handleOpen}
-                    >
-                      <AddCircleOutlineIcon sx={{ fontSize: 25 }} />
+                    <IconButton onClick={handleOpen}>
+                      <AddCircleOutlineIcon
+                        className="menuButton"
+                        sx={{ fontSize: 25 }}
+                      />
                     </IconButton>
                   </Box>
                   <Box>
@@ -275,16 +211,15 @@ export default function Nav() {
                 </Box>
               </Box>
             </Box>
-            <Box className={classes.boxNavMobile}>
+            <Box className="boxNavMobile">
               <IconButton
-                className={classes.menuButton}
                 edge="start"
                 aria-label="menu"
                 onClick={() => {
                   setChecked(true);
                 }}
               >
-                <MenuIcon />
+                <MenuIcon className="menuButton" />
               </IconButton>
             </Box>
           </Toolbar>

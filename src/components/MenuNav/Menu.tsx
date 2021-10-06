@@ -54,7 +54,7 @@ export default function MenuNav({ openMenu, onClose }: any) {
         <MenuItem
           onClick={() => {
             handleClose();
-            i18n.changeLanguage("jp");
+            i18n.changeLanguage("ja");
           }}
         >
           <Box sx={{ width: "1em", height: "1em", fontSize: "1.5rem" }}></Box>

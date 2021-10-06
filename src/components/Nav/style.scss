@@ -1,0 +1,45 @@
+.image {
+  width: 300px;
+  height: 100%;
+}
+.menuButton {
+  color: white;
+  margin: 8px;
+}
+.boxNavMobile {
+  display: none;
+  height: 100px;
+}
+.boxNavPc {
+  display: block;
+  flex-grow: 1;
+}
+.btnNav {
+  padding: 16px !important;
+  color: white !important;
+  margin: 8px !important;
+}
+.toolbar {
+  padding: 0 !important;
+  height: 65px !important;
+}
+
+@media screen and (max-width: 900px) {
+  .image {
+    width: 220px;
+  }
+  .boxNavMobile {
+    display: block;
+    padding: 20px;
+  }
+  .boxNavPc {
+    display: none;
+  }
+  .toolbar {
+    display: flex;
+    min-height: 50px !important;
+    height: 60px !important;
+    justify-content: space-between;
+    padding: 0 !important;
+  }
+}

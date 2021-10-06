@@ -13,31 +13,20 @@ import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { makeStyles } from "@mui/styles";
 import React, { useState } from "react";
 import Dropzone from "react-dropzone";
+import { useTranslation } from "react-i18next";
+import jaLocale from "date-fns/locale/ja";
 
-const useStyles = makeStyles((theme: any) => ({
-  dropzone: {
-    textAlign: "center",
-    padding: 10,
-    borderRadius: 5,
-    borderColor: "#eeeeee",
-    borderWidth: 1,
-    borderStyle: "dashed",
-    background: "#d6d6d6",
-    color: "#bdbdbd",
-    marginBottom: 5,
-  },
-}));
+import "./style.scss";
+
 export default function TranactionModal({ open, onClose }: any) {
   const [value, setValue] = useState<Date | null>(new Date());
   const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [memo, setMemo] = useState("");
   const [fileNames, setFileNames] = useState("");
-  const classes = useStyles();
-
+  const { t, i18n } = useTranslation();
   const handleChange = (newValue: Date | null) => {
     setValue(newValue);
   };
@@ -74,20 +63,36 @@ export default function TranactionModal({ open, onClose }: any) {
             Quick Input Panel
           </DialogTitle>
           <DialogContent>
-            {/* <DialogContentText>Date</DialogContentText> */}
             <Box sx={{ marginTop: 3 }}>
-              <LocalizationProvider dateAdapter={AdapterDateFns}>
-                <DateTimePicker
-                  label="Date&Time picker"
-                  value={value}
-                  onChange={handleChange}
-                  renderInput={(params) => <TextField {...params} />}
-                />
-              </LocalizationProvider>
+              {t("transaction.date") === "Date & Time" ? (
+                <LocalizationProvider dateAdapter={AdapterDateFns}>
+                  <DateTimePicker
+                    label="Date&Time"
+                    value={value}
+                    onChange={handleChange}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </LocalizationProvider>
+              ) : (
+                <LocalizationProvider
+                  locale={jaLocale}
+                  dateAdapter={AdapterDateFns}
+                >
+                  <DateTimePicker
+                    label="日にち & 時間"
+                    value={value}
+                    onChange={handleChange}
+                    renderInput={(params) => <TextField {...params} />}
+                  />
+                </LocalizationProvider>
+              )}
             </Box>
             <Box sx={{ marginTop: 2 }}>
               <FormControl fullWidth>
-                <InputLabel id="category">Category</InputLabel>
+                <InputLabel id="category">
+                  {" "}
+                  {t("transaction.category")}
+                </InputLabel>
                 <Select
                   labelId="category"
                   id="categoryId"
@@ -131,11 +136,7 @@ export default function TranactionModal({ open, onClose }: any) {
             <Box>
               <Dropzone onDrop={handleDrop} multiple={false}>
                 {({ getRootProps, getInputProps }) => (
-                  <div
-                    {...getRootProps({
-                      className: classes.dropzone,
-                    })}
-                  >
+                  <div className="dropzone" {...getRootProps()}>
                     <input {...getInputProps()} />
                     <p>Drag'n'drop files, or click to select files</p>
                   </div>
@@ -144,7 +145,7 @@ export default function TranactionModal({ open, onClose }: any) {
               <Box>
                 <strong>Files: &nbsp;</strong>
                 <span>{fileNames}</span>
-                <Typography>(Image size must 2mb or below)</Typography>
+                <Typography> {t("transaction.limit_size")}</Typography>
               </Box>
             </Box>
             <Box
@@ -158,7 +159,7 @@ export default function TranactionModal({ open, onClose }: any) {
                 sx={{ background: "#78CD51", color: "white" }}
                 onClick={onClose}
               >
-                Save
+                {t("transaction.save")}
               </Button>
               <Button
                 sx={{
@@ -168,7 +169,7 @@ export default function TranactionModal({ open, onClose }: any) {
                 }}
                 onClick={onClose}
               >
-                Reset
+                {t("transaction.reset")}
               </Button>
             </Box>
           </DialogContent>
