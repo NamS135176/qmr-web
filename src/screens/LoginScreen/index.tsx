@@ -137,12 +137,7 @@ export default function LoginScreen() {
               borderColor: "#eee",
             }}
           >
-            <Button
-              onClick={handleLogin}
-              variant="contained"
-              color="neutral"
-              fullWidth
-            >
+            <Button onClick={handleLogin} variant="contained" fullWidth>
               Login
             </Button>
           </Box>
