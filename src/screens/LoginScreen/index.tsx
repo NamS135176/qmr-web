@@ -8,9 +8,9 @@ import {
   Button,
 } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import logo from "../../assets/images/logo_en.png";
-import api from "../../api/api";
+import logo from "assets/images/logo_en.png";
 import { useHistory } from "react-router-dom";
+import { login } from "api/member";
 
 const useStyle = makeStyles((theme: any) => ({
   container: {
@@ -103,14 +103,13 @@ export default function LoginScreen() {
   const handleLogin = async () => {
     setShowError(false);
     try {
-      const res: any = await api.post("/login", {
-        email: email,
-        password: password,
-      });
+      const res: any = await login(email, password);
       console.log(res);
       
       history.push('/home')
     } catch (error) {
+      console.log(error);
+      
       console.log('sdfsdfsdf');
       
       setShowError(true)
