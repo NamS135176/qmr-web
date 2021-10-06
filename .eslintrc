@@ -1,0 +1,17 @@
+{
+    "extends": [
+        "react-app",
+        "prettier"
+    ],
+    "rules": {
+        "@typescript-eslint/no-unused-vars": "off",
+        "jsx-a11y/alt-text": "off"
+    },
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "ignorePatterns": [
+        "src/**/**/**.scss"
+    ]
+}

@@ -143,7 +143,11 @@ export default function TranactionModal({ open, onClose }: any) {
             <Box>
               <Dropzone onDrop={handleDrop} multiple={false}>
                 {({ getRootProps, getInputProps }) => (
-                  <div {...getRootProps({ className: classes.dropzone })}>
+                  <div
+                    {...getRootProps({
+                      className: classes.dropzone,
+                    })}
+                  >
                     <input {...getInputProps()} />
                     <p>Drag'n'drop files, or click to select files</p>
                   </div>
@@ -156,7 +160,11 @@ export default function TranactionModal({ open, onClose }: any) {
               </Box>
             </Box>
             <Box
-              sx={{ marginTop: 2, display: 'flex', justifyContent: 'flex-end' }}
+              sx={{
+                marginTop: 2,
+                display: 'flex',
+                justifyContent: 'flex-end',
+              }}
             >
               <Button
                 sx={{ background: '#78CD51', color: 'white' }}

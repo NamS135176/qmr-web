@@ -1,28 +1,27 @@
-import { create } from 'apisauce'
+import { create } from 'apisauce';
 
 export const apiQMRWeb = create({
-    baseURL: 'http://api-web-dev.quick-money-recorder.com/',
-    headers: { 'Content-Type': 'application/json' },
-    timeout: 10000
+  baseURL: 'http://api-web-dev.quick-money-recorder.com/',
+  headers: { 'Content-Type': 'application/json' },
+  timeout: 10000,
 });
 
 export function getResponseData(res: any) {
-    if (res.ok) {
-      return res.data;
+  if (res.ok) {
+    return res.data;
+  } else {
+    if (res.data && res.data.message) {
+      return Promise.reject({
+        ...res.data,
+        message: res.data.message,
+        status: res.status,
+      });
     } else {
-      if (res.data && res.data.message) {
-        return Promise.reject({
-          ...res.data,
-          message: res.data.message,
-          status: res.status,
-        });
-      } else {
-        return Promise.reject({
-          ...res.data,
-          message: res.originalError.message,
-          status: res.status,
-        });
-      }
+      return Promise.reject({
+        ...res.data,
+        message: res.originalError.message,
+        status: res.status,
+      });
     }
   }
-  
+}

@@ -1,24 +1,25 @@
-import React,{Suspense} from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider } from "@mui/material/styles";
-import { CacheProvider } from "@emotion/react";
-import createEmotionCache from "./createEmotionCache";
-import theme from "./theme";
-import './i18n'
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider } from '@mui/material/styles';
+import { CacheProvider } from '@emotion/react';
+import createEmotionCache from './createEmotionCache';
+import theme from './theme';
+import 'utils/i18n';
+
 const cache = createEmotionCache();
 
 ReactDOM.render(
   <React.StrictMode>
-   <CacheProvider value={cache}>
+    <CacheProvider value={cache}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
-       <Suspense fallback='loading'>
-       <App />
-       </Suspense>
+        <Suspense fallback="loading">
+          <App />
+        </Suspense>
       </ThemeProvider>
     </CacheProvider>
   </React.StrictMode>,
