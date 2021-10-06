@@ -10,5 +10,11 @@
     "graph": "Graph",
     "support": "Support/Blog"
   },
-  "logo":"en"
+  "logo": "en",
+  "date_home_modal": {
+    "cancel": "Cancel",
+    "title": "Set Custom Period",
+    "from": "from",
+    "to": "to"
+  }
 }

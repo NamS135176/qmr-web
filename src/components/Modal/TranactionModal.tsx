@@ -1,34 +1,13 @@
-import React, { useState } from 'react';
-import {
-  Box,
-  useMediaQuery,
-  CardMedia,
-  AppBar,
-  Toolbar,
-  Typography,
-  Button,
-  IconButton,
-  Modal,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogContentText,
-  TextField,
-  FormControl,
-  MenuItem,
-  InputLabel,
-  OutlinedInput,
-  InputAdornment,
-  TextareaAutosize,
-  Fab,
-} from '@mui/material';
-import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import DateTimePicker from '@mui/lab/DateTimePicker';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import {
+  Box, Button, Dialog, DialogContent, DialogTitle, FormControl, InputAdornment, InputLabel, MenuItem, TextField, Typography
+} from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import AddIcon from '@mui/icons-material/Add';
+import { makeStyles } from '@mui/styles';
+import React, { useState } from 'react';
 import Dropzone from 'react-dropzone';
-import { makeStyles, useTheme } from '@mui/styles';
 const useStyles = makeStyles((theme: any) => ({
   dropzone: {
     textAlign: 'center',
