@@ -13,21 +13,16 @@ import {
   Typography,
   Divider,
 } from '@mui/material';
-import { makeStyles, useTheme } from '@mui/styles';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import MobileDatePicker from '@mui/lab/MobileDatePicker';
-const useStyles = makeStyles((theme: any) => ({
-  topDialog: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: 15,
-  },
-}));
+import { useTranslation } from 'react-i18next';
+
 export default function DateHomeModal({ open, onClose }: any) {
-  const classes = useStyles();
   const [valueFrom, setValueFrom] = useState<Date | null>(new Date());
   const [valueTo, setValueTo] = useState<Date | null>(new Date());
+  const { t, i18n } = useTranslation();
+
   const handleChangeFrom = (newValue: Date | null) => {
     setValueFrom(newValue);
   };
@@ -37,30 +32,95 @@ export default function DateHomeModal({ open, onClose }: any) {
   return (
     <Box>
       <Dialog fullWidth={true} open={open} onClose={onClose}>
-        <Box className={classes.topDialog}>
-          <Button>Cancel</Button>
-          <Typography>Set Custom Period</Typography>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 2,
+            position: 'relative',
+          }}
+        >
+          <Button
+            sx={{
+              background: '#D6D9E0',
+              color: 'black',
+              '&:hover': {
+                background: '#ebebeb',
+              },
+              position: 'absolute',
+              top: 10,
+              left: 10,
+            }}
+          >
+            {t('date_home_modal.cancel')}
+          </Button>
+          <Typography> {t('date_home_modal.title')}</Typography>
         </Box>
         <Divider />
-        <Box sx={{ marginTop: 3 }}>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <MobileDatePicker
-              label="From"
-              value={valueFrom}
-              onChange={handleChangeFrom}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
+        <Box sx={{ pb: 2 }}>
+          <Box
+            sx={{
+              marginTop: 3,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              {t('date_home_modal.from') === 'from' ? (
+                <MobileDatePicker
+                  label="From"
+                  value={valueFrom}
+                  onChange={handleChangeFrom}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              ) : (
+                <MobileDatePicker
+                  label="開始日"
+                  value={valueFrom}
+                  onChange={handleChangeFrom}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              )}
+            </LocalizationProvider>
+          </Box>
+          <Box
+            sx={{
+              marginTop: 3,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              {t('date_home_modal.to') === 'to' ? (
+                <MobileDatePicker
+                  label="To"
+                  value={valueTo}
+                  onChange={handleChangeTo}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              ) : (
+                <MobileDatePicker
+                  label="終了日"
+                  value={valueTo}
+                  onChange={handleChangeTo}
+                  renderInput={(params) => <TextField {...params} />}
+                />
+              )}
+            </LocalizationProvider>
+          </Box>
         </Box>
-        <Box sx={{ marginTop: 3 }}>
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <MobileDatePicker
-              label="From"
-              value={valueTo}
-              onChange={handleChangeTo}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
+        <Divider />
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            py: 1,
+          }}
+        >
+          <Button variant="contained">Ok</Button>
         </Box>
       </Dialog>
     </Box>

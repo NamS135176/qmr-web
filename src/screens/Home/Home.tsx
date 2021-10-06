@@ -4,26 +4,9 @@ import Nav from './Nav/Nav';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import DateRangeIcon from '@mui/icons-material/DateRange';
-import { makeStyles, useTheme } from '@mui/styles';
 import DateHomeModal from '../../components/Modal/DateHomeModal';
-const useStyles = makeStyles((theme: any) => ({
-  buttonDate: {
-    background: 'white',
-    color: 'black',
-    '&:hover': {
-      background: 'white',
-      color: 'black',
-    },
-  },
-  textDate: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingLeft: 10,
-    paddingRight: 10,
-  },
-}));
+
 export default function Home() {
-  const classes = useStyles();
   const [open, setOpen] = useState(false);
   const handleClose = () => {
     console.log('close');
@@ -41,15 +24,31 @@ export default function Home() {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: 2,
+          px: 2,
         }}
       >
         <Box>
-          <Button className={classes.buttonDate} variant="contained">
+          <Button
+            sx={{
+              background: 'white',
+              color: 'black',
+              '&:hover': {
+                background: 'white',
+                color: 'black',
+              },
+            }}
+            variant="contained"
+          >
             <KeyboardArrowLeftIcon />
           </Button>
         </Box>
-        <Box className={classes.textDate}>
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            p: 2,
+          }}
+        >
           <Typography>2021-10-05 ~ 2021-10-06</Typography>
           <IconButton
             // className={classes.menuButton}
@@ -61,7 +60,17 @@ export default function Home() {
           </IconButton>
         </Box>
         <Box>
-          <Button className={classes.buttonDate} variant="contained">
+          <Button
+            sx={{
+              background: 'white',
+              color: 'black',
+              '&:hover': {
+                background: 'white',
+                color: 'black',
+              },
+            }}
+            variant="contained"
+          >
             <KeyboardArrowRightIcon />
           </Button>
         </Box>

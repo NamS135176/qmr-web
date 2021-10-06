@@ -1,17 +1,28 @@
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import MenuIcon from '@mui/icons-material/Menu';
+import React, { useState } from 'react';
 import {
-  AppBar, Box, Button, Drawer, IconButton, MenuItem, Toolbar,
-  Typography
+  Box,
+  useMediaQuery,
+  CardMedia,
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  Fade,
+  Drawer,
+  MenuItem,
 } from '@mui/material';
 import { makeStyles, useTheme } from '@mui/styles';
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
 import logoen from '../../../assets/images/logo_en.png';
 import logojp from '../../../assets/images/logo_jp.png';
-import MenuNav from '../../../components/MenuNav/Menu';
+import MenuIcon from '@mui/icons-material/Menu';
+import BuildIcon from '@mui/icons-material/Build';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import TranactionModal from '../../../components/Modal/TranactionModal';
+import { useHistory } from 'react-router-dom';
+import MenuNav from '../../../components/MenuNav/Menu';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme: any) => ({
   root: {

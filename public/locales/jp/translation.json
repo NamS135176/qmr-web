@@ -10,5 +10,11 @@
     "graph": "グラフ",
     "support": "サポートブログ"
   },
-  "logo": "jp"
+  "logo": "jp",
+  "date_home_modal": {
+    "cancel": "キャンセル",
+    "title": "期間を設定してください",
+    "from": "開始日",
+    "to": "終了日"
+  }
 }
