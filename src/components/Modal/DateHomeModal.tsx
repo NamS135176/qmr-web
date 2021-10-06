@@ -9,6 +9,7 @@ import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import MobileDatePicker from "@mui/lab/MobileDatePicker";
 import { useTranslation } from "react-i18next";
+import jaLocale from "date-fns/locale/ja";
 
 export default function DateHomeModal({ open, onClose }: any) {
   const [valueFrom, setValueFrom] = useState<Date | null>(new Date());
@@ -59,23 +60,28 @@ export default function DateHomeModal({ open, onClose }: any) {
               alignItems: "center",
             }}
           >
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              {t("date_home_modal.from") === "from" ? (
+            {t("date_home_modal.from") === "from" ? (
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <MobileDatePicker
                   label="From"
                   value={valueFrom}
                   onChange={handleChangeFrom}
                   renderInput={(params) => <TextField {...params} />}
                 />
-              ) : (
+              </LocalizationProvider>
+            ) : (
+              <LocalizationProvider
+                locale={jaLocale}
+                dateAdapter={AdapterDateFns}
+              >
                 <MobileDatePicker
                   label="開始日"
                   value={valueFrom}
                   onChange={handleChangeFrom}
                   renderInput={(params) => <TextField {...params} />}
                 />
-              )}
-            </LocalizationProvider>
+              </LocalizationProvider>
+            )}
           </Box>
           <Box
             sx={{
@@ -85,23 +91,28 @@ export default function DateHomeModal({ open, onClose }: any) {
               alignItems: "center",
             }}
           >
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
-              {t("date_home_modal.to") === "to" ? (
+            {t("date_home_modal.to") === "to" ? (
+              <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <MobileDatePicker
                   label="To"
                   value={valueTo}
                   onChange={handleChangeTo}
                   renderInput={(params) => <TextField {...params} />}
                 />
-              ) : (
+              </LocalizationProvider>
+            ) : (
+              <LocalizationProvider
+                locale={jaLocale}
+                dateAdapter={AdapterDateFns}
+              >
                 <MobileDatePicker
                   label="終了日"
                   value={valueTo}
                   onChange={handleChangeTo}
                   renderInput={(params) => <TextField {...params} />}
                 />
-              )}
-            </LocalizationProvider>
+              </LocalizationProvider>
+            )}
           </Box>
         </Box>
         <Divider />

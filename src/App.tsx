@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LoginScreen from "screens/LoginScreen";
 import ForgotPassScreen from "screens/ForgotPassScreen";
 import TestScreen from "screens/TestScreen";
-import Home from "screens/Home/Home";
+import Home from "screens/Home";
 
 export default function App() {
   return (

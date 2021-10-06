@@ -16,5 +16,27 @@
     "title": "Set Custom Period",
     "from": "from",
     "to": "to"
+  },
+  "money": {
+    "income": "Income",
+    "expense": "Expense",
+    "total": "Total Balance"
+  },
+  "categories": {
+    "title": "Categories",
+    "name": "Category Name",
+    "price": "Price",
+    "total": "% in total expense"
+  },
+  "transaction": {
+    "title": "Quick Input Panel",
+    "date": "Date & Time",
+    "category": "Category",
+    "price":"Price",
+    "memo": "Memo",
+    "limit_memo": "(Only limit 2000 characters)",
+    "limit_size": "(Image size must 2mb or below)",
+    "save": "Save",
+    "reset": "Reset"
   }
 }
