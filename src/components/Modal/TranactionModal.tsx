@@ -156,7 +156,14 @@ export default function TranactionModal({ open, onClose }: any) {
               }}
             >
               <Button
-                sx={{ background: "#78CD51", color: "white" }}
+                sx={{
+                  background: "#78CD51",
+                  color: "white",
+                  "&:hover": {
+                    background: "#78CD51",
+                    color: "white",
+                  },
+                }}
                 onClick={onClose}
               >
                 {t("transaction.save")}
@@ -166,6 +173,10 @@ export default function TranactionModal({ open, onClose }: any) {
                   background: "#D6D9E0",
                   color: "black",
                   marginLeft: 2,
+                  "&:hover": {
+                    background: "#D6D9E0",
+                    color: "black",
+                  },
                 }}
                 onClick={onClose}
               >

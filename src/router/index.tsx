@@ -6,6 +6,7 @@ import ForgotPassword from "screens/ForgotPassword";
 import Transactions from "screens/Transactions";
 import Home from "screens/Home";
 import AuthenticateRoute from "./AuthenticateRoute";
+import Graph from "screens/Graph";
 
 function AppRouter() {
   useEffect(() => {
@@ -25,6 +26,7 @@ function AppRouter() {
           component={Transactions}
         />
         <AuthenticateRoute exact path="/" component={Home} />
+        <AuthenticateRoute exact path="/graph" component={Graph} />
       </Switch>
     </Router>
   );
