@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -18,6 +18,11 @@ import CameraAlt from "@mui/icons-material/CameraAlt";
 import ArrowDropUp from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDown from "@mui/icons-material/ArrowDropDown";
 import Button from "@mui/material/Button";
+import EditModal from "components/Modal/EditModal";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import DateHomeModal from "components/Modal/DateHomeModal";
+import CustomCell from "components/CustomCell";
 
 function createData(
   name: string,
@@ -39,10 +44,83 @@ const rows = [
 
 export default function ListPageScreen() {
   const { t, i18n } = useTranslation();
+  const [openModal, setOpenModal] = useState(false);
+  const [itemData, setItemData] = useState({});
+  const [open, setOpen] = useState(false);
+  const handleClose = () => {
+    console.log("close");
+    setOpen(false);
+  };
+  const handleOpen = () => {
+    console.log("open");
+    setOpen(true);
+  };
   useEffect(() => {});
   return (
     <Box>
       <Nav />
+      <DateHomeModal open={open} onClose={handleClose} />
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          px: 2,
+        }}
+      >
+        <Box>
+          <Button
+            sx={{
+              background: "white",
+              color: "black",
+              "&:hover": {
+                background: "white",
+                color: "black",
+              },
+            }}
+            variant="contained"
+          >
+            <KeyboardArrowLeftIcon />
+          </Button>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            p: 2,
+          }}
+        >
+          <Typography>2021-10-05 ~ 2021-10-06</Typography>
+          <IconButton
+            // className={classes.menuButton}
+            // edge="start"
+            // aria-label="menu"
+            onClick={handleOpen}
+          >
+            <DateRangeIcon sx={{ fontSize: 25 }} />
+          </IconButton>
+        </Box>
+        <Box>
+          <Button
+            sx={{
+              background: "white",
+              color: "black",
+              "&:hover": {
+                background: "white",
+                color: "black",
+              },
+            }}
+            variant="contained"
+          >
+            <KeyboardArrowRightIcon />
+          </Button>
+        </Box>
+      </Box>
+      <EditModal
+        data={itemData}
+        setOpen={setOpenModal}
+        open={openModal}
+      ></EditModal>
       <Box
         sx={{
           paddingLeft: {
@@ -55,7 +133,7 @@ export default function ListPageScreen() {
           },
           paddingTop: {
             xs: 2,
-            md: 10,
+            md: 5,
           },
         }}
       >
@@ -81,36 +159,28 @@ export default function ListPageScreen() {
                   <TableCell
                     sx={{
                       fontWeight: "bold",
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
                     }}
                     align="left"
                   >
                     {t("table.column1")}{" "}
-                    <Box
-                      sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <ArrowDropUp sx={{ fontSize: 20, color: "black" }} />
-                      <ArrowDropDown sx={{ fontSize: 20, color: "black" }} />
-                    </Box>
                   </TableCell>
+                  <CustomCell></CustomCell>
                   <TableCell sx={{ fontWeight: "bold" }} align="left">
                     {t("table.column2")}
                   </TableCell>
+                  <CustomCell></CustomCell>
                   <TableCell sx={{ fontWeight: "bold" }} align="left">
                     {t("table.column3")}
                   </TableCell>
+                  <CustomCell></CustomCell>
                   <TableCell sx={{ fontWeight: "bold" }} align="left">
                     {t("table.column4")}
                   </TableCell>
+                  <CustomCell></CustomCell>
                   <TableCell sx={{ fontWeight: "bold" }} align="left">
                     {t("table.column5")}
                   </TableCell>
+                  <CustomCell></CustomCell>
                   <TableCell sx={{ fontWeight: "bold" }} align="left">
                     {t("table.column6")}
                   </TableCell>
@@ -127,12 +197,32 @@ export default function ListPageScreen() {
                     key={row.name}
                   >
                     <TableCell>{row.name}</TableCell>
+                    <TableCell
+                      sx={{ borderRight: "1px solid #ddd" }}
+                      align="left"
+                    ></TableCell>
                     <TableCell align="left">{row.calories}</TableCell>
+                    <TableCell
+                      sx={{ borderRight: "1px solid #ddd" }}
+                      align="left"
+                    ></TableCell>
                     <TableCell align="left">{row.fat}</TableCell>
+                    <TableCell
+                      sx={{ borderRight: "1px solid #ddd" }}
+                      align="left"
+                    ></TableCell>
                     <TableCell align="left">{row.carbs}</TableCell>
+                    <TableCell
+                      sx={{ borderRight: "1px solid #ddd" }}
+                      align="left"
+                    ></TableCell>
                     <TableCell align="left">
                       <CameraAlt sx={{ fontSize: 25, color: "black" }} />
                     </TableCell>
+                    <TableCell
+                      sx={{ borderRight: "1px solid #ddd" }}
+                      align="left"
+                    ></TableCell>
                     <TableCell align="left">
                       <Button
                         sx={{
@@ -140,10 +230,19 @@ export default function ListPageScreen() {
                           minWidth: 40,
                           marginRight: 1,
                         }}
+                        onClick={() => {
+                          setOpenModal(true);
+                          setItemData(row);
+                        }}
                       >
                         <EditOutlined sx={{ fontSize: 25, color: "white" }} />
                       </Button>
-                      <Button sx={{ backgroundColor: "#fabb3d", minWidth: 40 }}>
+                      <Button
+                        onClick={() => {
+                          const r = window.confirm(t("editmodal.confirm"));
+                        }}
+                        sx={{ backgroundColor: "#fabb3d", minWidth: 40 }}
+                      >
                         <DeleteOutlined sx={{ fontSize: 25, color: "white" }} />
                       </Button>
                     </TableCell>

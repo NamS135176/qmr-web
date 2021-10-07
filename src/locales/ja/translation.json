@@ -47,5 +47,21 @@
     "limit_size": "(画像サイズは2MB以下にしてください)",
     "save": "保存",
     "reset": "リセット"
+  },
+  "editmodal":{
+    "title":"出費詳細",
+    "back":"戻る",
+    "edit":"編集",
+    "date":"日にち",
+    "time":"時間",
+    "category":"カテゴリ",
+    "price":"金額",
+    "memo":"メモ",
+    "noimg":"画像がありません",
+    "done":"完了",
+    "confirm":"削除します。よろしいでしょうか。",
+    "imgtitle":"写真編集",
+    "delete":"削除",
+    "size":"(画像サイズは2MB以下にしてください)"
   }
 }
