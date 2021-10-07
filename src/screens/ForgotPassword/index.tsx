@@ -1,11 +1,60 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Box from "@mui/material/Box";
 import InputBase from "@mui/material/InputBase";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-
+import { useFormik } from "formik";
+import * as yup from "yup";
+import TextField from "@mui/material/TextField";
 export default function ForgotPassScreen() {
   const [showError, setShowError] = useState<boolean>(false);
+
+  const initialValues = useMemo(() => {
+    return {
+      email: "tih920@smart-idea.jp",
+    };
+  }, []);
+
+  const validationSchema = useMemo(
+    () =>
+      yup.object({
+        email: yup
+          .string()
+          .email("Enter a valid email")
+          .required("Email is required"),
+      }),
+    []
+  );
+
+  const onSubmit = async ({ email }) => {
+    setShowError(false);
+  };
+
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit,
+  });
+
+  const {
+    handleSubmit,
+    handleChange,
+    validateForm,
+    isValid,
+    values,
+    errors,
+    touched,
+  } = formik;
+
+  const handleLogin = (e: any) => {
+    e.preventDefault();
+    validateForm();
+    if (!isValid) {
+      return;
+    }
+    handleSubmit();
+  };
+
   return (
     <Box
       sx={{
@@ -70,17 +119,17 @@ export default function ForgotPassScreen() {
             Enter your email address to reset your password. You may need to
             check your spam folder or unblock okanereco_support_d@docomo.ne.jp
           </p>
-          <InputBase
-            type="email"
-            placeholder="type email"
-            sx={{
-              marginTop: 2,
-              background: "#e4e6eb",
-              width: "100%",
-              padding: 1,
-              paddingLeft: 2,
-            }}
-          ></InputBase>
+          <TextField
+            fullWidth
+            id="email"
+            name="email"
+            label="Email"
+            sx={{ marginTop: 3 }}
+            value={values.email}
+            onChange={handleChange}
+            error={touched.email && Boolean(errors.email)}
+            helperText={touched.email && errors.email}
+          />
 
           <Box sx={{ marginTop: 2 }}>
             <Button
