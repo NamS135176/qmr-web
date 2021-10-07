@@ -48,20 +48,20 @@
     "save": "Save",
     "reset": "Reset"
   },
-  "editmodal":{
-    "title":"Expense Detail",
-    "back":"back",
-    "edit":"edit",
-    "date":"Date",
-    "time":"Time",
-    "category":"Category",
-    "price":"Price",
-    "memo":"Memo",
-    "noimg":"No Image",
-    "done":"done",
-    "confirm":"Do you want to delete?",
-    "imgtitle":"Image Edit",
-    "delete":"delete",
-    "size":"(Image size must 2mb or below)"
+  "editmodal": {
+    "title": "Expense Detail",
+    "back": "back",
+    "edit": "edit",
+    "date": "Date",
+    "time": "Time",
+    "category": "Category",
+    "price": "Price",
+    "memo": "Memo",
+    "noimg": "No Image",
+    "done": "done",
+    "confirm": "Do you want to delete?",
+    "imgtitle": "Image Edit",
+    "delete": "delete",
+    "size": "(Image size must 2mb or below)"
   }
 }

@@ -41,14 +41,28 @@ export default function DateHomeModal({ open, onClose }: any) {
               "&:hover": {
                 background: "#ebebeb",
               },
-              position: "absolute",
+              position: {
+                xs: "static",
+                md: "absolute",
+              },
               top: 10,
               left: 10,
             }}
           >
             {t("date_home_modal.cancel")}
           </Button>
-          <Typography> {t("date_home_modal.title")}</Typography>
+          <Typography
+            sx={{
+              paddingLeft: {
+                xs: 2,
+                md: 0,
+              },
+              textAlign: "center",
+            }}
+          >
+            {" "}
+            {t("date_home_modal.title")}
+          </Typography>
         </Box>
         <Divider />
         <Box sx={{ pb: 2 }}>

@@ -88,116 +88,124 @@ export default function Home() {
         </Box>
       </Box>
       {/* {money} */}
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-around",
-          flexDirection: {
-            sm: "row",
-            xs: "column",
-          },
-          mt: 3,
-          alignItems: "center",
-          // flexWrap: {
-          //   xs: 'wrap',
-          // },
-        }}
-      >
+      <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Box
           sx={{
-            minWidth: {
-              xs: 200,
-              md: 300,
-              lg: 400,
+            display: "flex",
+            justifyContent: "space-around",
+            flexDirection: {
+              sm: "row",
+              xs: "column",
             },
-            m: {
-              xs: 1,
-              sm: 0,
-            },
+            mt: 3,
+            width: "1500px",
+            // background: 'red',
+
+            alignItems: "center",
+            // flexWrap: {
+            //   xs: 'wrap',
+            // },
           }}
         >
-          <Card
-            sx={{ display: "flex", alignItems: "center" }}
-            variant="outlined"
+          <Box
+            sx={{
+              minWidth: {
+                xs: 200,
+                md: 300,
+                lg: 400,
+              },
+              m: {
+                xs: 1,
+                sm: 0,
+              },
+              boxShadow: 3,
+            }}
           >
-            <Box sx={{ p: 1, pb: 0, pr: 2 }}>
-              <DownloadIcon
-                sx={{ background: "#BDEA74", color: "white", fontSize: 50 }}
-              />
-            </Box>
-            <Box>
-              <Typography color="text.secondary" gutterBottom>
-                {t("money.income")}
-              </Typography>
-              <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                ₫ 23000
-              </Typography>
-            </Box>
-          </Card>
-        </Box>
-        <Box
-          sx={{
-            minWidth: {
-              xs: 200,
-              md: 300,
-              lg: 400,
-            },
-            m: {
-              xs: 1,
-              sm: 0,
-            },
-          }}
-        >
-          <Card
-            sx={{ display: "flex", alignItems: "center" }}
-            variant="outlined"
+            <Card
+              sx={{ display: "flex", alignItems: "center" }}
+              variant="outlined"
+            >
+              <Box sx={{ p: 1, pb: 0, pr: 2 }}>
+                <DownloadIcon
+                  sx={{ background: "#BDEA74", color: "white", fontSize: 50 }}
+                />
+              </Box>
+              <Box>
+                <Typography color="text.secondary" gutterBottom>
+                  {t("money.income")}
+                </Typography>
+                <Typography sx={{ fontWeight: "bold" }} gutterBottom>
+                  ₫ 23000
+                </Typography>
+              </Box>
+            </Card>
+          </Box>
+          <Box
+            sx={{
+              minWidth: {
+                xs: 200,
+                md: 300,
+                lg: 400,
+              },
+              m: {
+                xs: 1,
+                sm: 0,
+              },
+              boxShadow: 3,
+            }}
           >
-            <Box sx={{ p: 1, pb: 0, pr: 2 }}>
-              <DownloadIcon
-                sx={{ background: "#36A9E1", color: "white", fontSize: 50 }}
-              />
-            </Box>
-            <Box>
-              <Typography color="text.secondary" gutterBottom>
-                {t("money.expense")}
-              </Typography>
-              <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                ₫ 23000
-              </Typography>
-            </Box>
-          </Card>
-        </Box>
-        <Box
-          sx={{
-            minWidth: {
-              xs: 200,
-              md: 300,
-              lg: 400,
-            },
-            m: {
-              xs: 1,
-              sm: 0,
-            },
-          }}
-        >
-          <Card
-            sx={{ display: "flex", alignItems: "center" }}
-            variant="outlined"
+            <Card
+              sx={{ display: "flex", alignItems: "center" }}
+              variant="outlined"
+            >
+              <Box sx={{ p: 1, pb: 0, pr: 2 }}>
+                <DownloadIcon
+                  sx={{ background: "#36A9E1", color: "white", fontSize: 50 }}
+                />
+              </Box>
+              <Box>
+                <Typography color="text.secondary" gutterBottom>
+                  {t("money.expense")}
+                </Typography>
+                <Typography sx={{ fontWeight: "bold" }} gutterBottom>
+                  ₫ 23000
+                </Typography>
+              </Box>
+            </Card>
+          </Box>
+          <Box
+            sx={{
+              minWidth: {
+                xs: 200,
+                md: 300,
+                lg: 400,
+              },
+              m: {
+                xs: 1,
+                sm: 0,
+              },
+              boxShadow: 3,
+            }}
           >
-            <Box sx={{ p: 1, pb: 0, pr: 2 }}>
-              <LocalAtmIcon
-                sx={{ background: "#EAE874", color: "white", fontSize: 50 }}
-              />
-            </Box>
-            <Box>
-              <Typography color="text.secondary" gutterBottom>
-                {t("money.total")}
-              </Typography>
-              <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                ₫ 23000
-              </Typography>
-            </Box>
-          </Card>
+            <Card
+              sx={{ display: "flex", alignItems: "center" }}
+              variant="outlined"
+            >
+              <Box sx={{ p: 1, pb: 0, pr: 2 }}>
+                <LocalAtmIcon
+                  sx={{ background: "#EAE874", color: "white", fontSize: 50 }}
+                />
+              </Box>
+              <Box>
+                <Typography color="text.secondary" gutterBottom>
+                  {t("money.total")}
+                </Typography>
+                <Typography sx={{ fontWeight: "bold" }} gutterBottom>
+                  ₫ 23000
+                </Typography>
+              </Box>
+            </Card>
+          </Box>
         </Box>
       </Box>
       <Box
@@ -208,7 +216,7 @@ export default function Home() {
             md: "space-around",
           },
           alignItems: "center",
-          mt: 3,
+          mt: 4,
           flexDirection: {
             xs: "column",
             md: "row",
@@ -218,12 +226,30 @@ export default function Home() {
         <Box
           sx={{
             width: {
-              xs: 200,
-              md: 300,
+              xs: 300,
+              md: 500,
             },
+            background: "white",
+            boxShadow: 2,
+            display: "flex",
+            justifyContent: "center",
           }}
         >
-          <PieChart />
+          <Box
+            sx={{
+              width: {
+                xs: 200,
+                md: 300,
+              },
+              background: "white",
+              padding: {
+                xs: 1,
+                md: 3,
+              },
+            }}
+          >
+            <PieChart />
+          </Box>
         </Box>
         <Box
           sx={{
@@ -231,12 +257,22 @@ export default function Home() {
               xs: 300,
               md: 500,
             },
+            background: "white",
+            padding: {
+              xs: 1,
+              md: 3,
+            },
+            mt: {
+              xs: 2,
+              md: 0,
+            },
+            boxShadow: 2,
           }}
         >
           <BarChart />
         </Box>
       </Box>
-      <Box sx={{ mt: 3 }}>
+      <Box sx={{ mt: 3, mb: 3 }}>
         <HomeTable />
       </Box>
       <DateHomeModal open={open} onClose={handleClose} />

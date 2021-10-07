@@ -49,6 +49,7 @@ export default function Nav() {
             sx={{ backgroundColor: "#78CD51", px: 5 }}
             onClick={() => {
               toggleDrawer();
+              history.push("/");
             }}
           >
             <Typography sx={{ color: "white" }}> {t("nav.summary")}</Typography>
@@ -57,6 +58,7 @@ export default function Nav() {
             sx={{ backgroundColor: "#78CD51", px: 5 }}
             onClick={() => {
               toggleDrawer();
+              history.push("/transactions");
             }}
           >
             <Typography sx={{ color: "white" }}> {t("nav.list")}</Typography>
@@ -65,6 +67,7 @@ export default function Nav() {
             sx={{ backgroundColor: "#78CD51", px: 5 }}
             onClick={() => {
               toggleDrawer();
+              history.push("/graph");
             }}
           >
             <Typography sx={{ color: "white" }}> {t("nav.graph")}</Typography>
