@@ -227,7 +227,7 @@ export default function Home() {
           sx={{
             width: {
               xs: 300,
-              md: 500,
+              md: 450,
             },
             background: "white",
             boxShadow: 2,
@@ -255,7 +255,7 @@ export default function Home() {
           sx={{
             width: {
               xs: 300,
-              md: 500,
+              md: 450,
             },
             background: "white",
             padding: {
@@ -265,6 +265,9 @@ export default function Home() {
             mt: {
               xs: 2,
               md: 0,
+            },
+            height: {
+              md: 300,
             },
             boxShadow: 2,
           }}
