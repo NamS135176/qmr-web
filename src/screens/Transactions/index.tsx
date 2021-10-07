@@ -57,7 +57,7 @@ export default function ListPageScreen() {
   };
   useEffect(() => {});
   return (
-    <Box>
+    <Box sx={{ paddingBottom: 2 }}>
       <Nav />
       <DateHomeModal open={open} onClose={handleClose} />
       <Box
@@ -153,7 +153,7 @@ export default function ListPageScreen() {
         </Paper>
         <Paper square elevation={1} sx={{ padding: 2 }}>
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+            <Table sx={{ minWidth: 1000 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
                   <TableCell
