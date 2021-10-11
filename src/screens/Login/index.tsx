@@ -8,6 +8,7 @@ import * as yup from "yup";
 import TextField from "@mui/material/TextField";
 import { login } from "api/member";
 import CircularProgress from "@mui/material/CircularProgress";
+import { setAuthorize } from "api";
 
 function Page() {
   const history = useHistory();
@@ -40,6 +41,7 @@ function Page() {
     setLoading(true);
     try {
       const res: any = await login(email, password);
+      setAuthorize(res.access_token);
       window.localStorage.setItem("access_token", res.access_token);
       setLoading(false);
       history.push("/");

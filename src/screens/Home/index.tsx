@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -16,10 +16,33 @@ import Nav from "../../components/Nav";
 import BarChart from "components/Chart/BarChart";
 import PieChart from "components/Chart/PieChart";
 import HomeTable from "components/Table/HomeTable";
+import DatePicker from "components/DatePicker";
+import "./style.scss";
+import DateSelectContext from "utils/context";
+import { getSummary } from "api/summary";
+import CircularProgress from "@mui/material/CircularProgress";
+
+interface Summary {
+  price_balance: Number;
+  price_expense: Number;
+  price_income: Number;
+}
 export default function Home() {
   const [open, setOpen] = useState(false);
+  const [summary, setSummary] = useState({} as Summary);
   const { t, i18n } = useTranslation();
-
+  const dateSelect = useContext(DateSelectContext);
+  const { dateFrom, dateTo } = useContext(DateSelectContext);
+  const getSummaryData = async () => {
+    console.log({ dateFrom: dateFrom[0], dateTo: dateTo[0] });
+    const summary = await getSummary(dateFrom, dateTo);
+    // const summary = await getSummary(`2021-09-01`, `2021-09-30`);
+    setSummary(summary);
+    console.log({ summary });
+  };
+  useEffect(() => {
+    getSummaryData();
+  }, [dateFrom, dateTo]);
   const handleClose = () => {
     console.log("close");
     setOpen(false);
@@ -28,65 +51,10 @@ export default function Home() {
     console.log("open");
     setOpen(true);
   };
-  return (
+  return summary ? (
     <Box>
       <Nav />
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          px: 2,
-        }}
-      >
-        <Box>
-          <Button
-            sx={{
-              background: "white",
-              color: "black",
-              "&:hover": {
-                background: "white",
-                color: "black",
-              },
-            }}
-            variant="contained"
-          >
-            <KeyboardArrowLeftIcon />
-          </Button>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            p: 2,
-          }}
-        >
-          <Typography>2021-10-05 ~ 2021-10-06</Typography>
-          <IconButton
-            // className={classes.menuButton}
-            // edge="start"
-            // aria-label="menu"
-            onClick={handleOpen}
-          >
-            <DateRangeIcon sx={{ fontSize: 25 }} />
-          </IconButton>
-        </Box>
-        <Box>
-          <Button
-            sx={{
-              background: "white",
-              color: "black",
-              "&:hover": {
-                background: "white",
-                color: "black",
-              },
-            }}
-            variant="contained"
-          >
-            <KeyboardArrowRightIcon />
-          </Button>
-        </Box>
-      </Box>
+      <DatePicker dateSelect={dateSelect} isOpen={handleOpen} />
       {/* {money} */}
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Box
@@ -135,7 +103,7 @@ export default function Home() {
                   {t("money.income")}
                 </Typography>
                 <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                  ₫ 23000
+                  {summary.price_income}
                 </Typography>
               </Box>
             </Card>
@@ -168,7 +136,7 @@ export default function Home() {
                   {t("money.expense")}
                 </Typography>
                 <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                  ₫ 23000
+                  {summary.price_expense}
                 </Typography>
               </Box>
             </Card>
@@ -201,7 +169,7 @@ export default function Home() {
                   {t("money.total")}
                 </Typography>
                 <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                  ₫ 23000
+                  {summary.price_balance}
                 </Typography>
               </Box>
             </Card>
@@ -268,17 +236,33 @@ export default function Home() {
             },
             height: {
               md: 300,
+              sx: 100,
             },
             boxShadow: 2,
           }}
+          className="bar-chart"
         >
-          <BarChart />
+          <div className="bar-chart-fake">
+            <BarChart />
+          </div>
         </Box>
       </Box>
       <Box sx={{ mt: 3, mb: 3 }}>
         <HomeTable />
       </Box>
       <DateHomeModal open={open} onClose={handleClose} />
+    </Box>
+  ) : (
+    <Box
+      sx={{
+        display: "flex",
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <CircularProgress />
     </Box>
   );
 }

@@ -1,0 +1,17 @@
+.bar-chart {
+  overflow-x: scroll;
+  position: relative;
+}
+.chartWrapper > canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+.bar-chart-fake {
+  width: 400px;
+}
+
+// canvas {
+//   height: 200px !important;
+// }

@@ -3,23 +3,29 @@ import { Bar, defaults } from "react-chartjs-2";
 import Box from "@mui/material/Box";
 defaults.plugins.legend.display = true;
 defaults.plugins.legend.position = "bottom";
+const fakeA = new Array(100).fill(1).map((i, index) => index + 1);
+const fakeB = new Array(100).fill(1).map((i, index) => index + 10);
+console.log("🚀 ~ file: BarChart.tsx ~ line 7 ~ fakeA", fakeA);
 export default function BarChart() {
   return (
     <Box sx={{}}>
       <Bar
+        options={{
+          responsive: true,
+        }}
         data={{
-          labels: ["1", "05", "09", "13", "17", "21", "25", "29"],
+          labels: fakeA,
           datasets: [
             {
               label: "Population (millions)",
               backgroundColor: [
-                "#3e95cd",
-                "#8e5ea2",
-                "#3cba9f",
-                "#e8c3b9",
-                "#c45850",
+                "#59AF32",
+                "#59AF32",
+                "#59AF32",
+                "#59AF32",
+                "#59AF32",
               ],
-              data: [2478, 5267, 734, 784, 433],
+              data: fakeB,
             },
           ],
         }}

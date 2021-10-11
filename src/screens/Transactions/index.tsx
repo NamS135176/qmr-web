@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -23,6 +23,8 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import DateHomeModal from "components/Modal/DateHomeModal";
 import CustomCell from "components/CustomCell";
+import DatePicker from "components/DatePicker";
+import DateSelectContext from "utils/context";
 
 function createData(
   name: string,
@@ -47,6 +49,8 @@ export default function ListPageScreen() {
   const [openModal, setOpenModal] = useState(false);
   const [itemData, setItemData] = useState({});
   const [open, setOpen] = useState(false);
+  const dateSelect = useContext(DateSelectContext);
+
   const handleClose = () => {
     console.log("close");
     setOpen(false);
@@ -60,62 +64,8 @@ export default function ListPageScreen() {
     <Box sx={{ paddingBottom: 2 }}>
       <Nav />
       <DateHomeModal open={open} onClose={handleClose} />
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          px: 2,
-        }}
-      >
-        <Box>
-          <Button
-            sx={{
-              background: "white",
-              color: "black",
-              "&:hover": {
-                background: "white",
-                color: "black",
-              },
-            }}
-            variant="contained"
-          >
-            <KeyboardArrowLeftIcon />
-          </Button>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            p: 2,
-          }}
-        >
-          <Typography>2021-10-05 ~ 2021-10-06</Typography>
-          <IconButton
-            // className={classes.menuButton}
-            // edge="start"
-            // aria-label="menu"
-            onClick={handleOpen}
-          >
-            <DateRangeIcon sx={{ fontSize: 25 }} />
-          </IconButton>
-        </Box>
-        <Box>
-          <Button
-            sx={{
-              background: "white",
-              color: "black",
-              "&:hover": {
-                background: "white",
-                color: "black",
-              },
-            }}
-            variant="contained"
-          >
-            <KeyboardArrowRightIcon />
-          </Button>
-        </Box>
-      </Box>
+      <DatePicker dateSelect={dateSelect} isOpen={handleOpen} />
+
       <EditModal
         data={itemData}
         setOpen={setOpenModal}
