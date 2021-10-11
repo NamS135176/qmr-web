@@ -21,7 +21,7 @@ import "./style.scss";
 import DateSelectContext from "utils/context";
 import { getSummary } from "api/summary";
 import CircularProgress from "@mui/material/CircularProgress";
-
+import moment from "moment";
 interface Summary {
   price_balance: Number;
   price_expense: Number;
@@ -34,11 +34,12 @@ export default function Home() {
   const dateSelect = useContext(DateSelectContext);
   const { dateFrom, dateTo } = useContext(DateSelectContext);
   const getSummaryData = async () => {
-    console.log({ dateFrom: dateFrom[0], dateTo: dateTo[0] });
-    const summary = await getSummary(dateFrom, dateTo);
-    // const summary = await getSummary(`2021-09-01`, `2021-09-30`);
+    const summary = await getSummary(
+      moment(dateFrom[0]).format("YYYY-MM-DD"),
+      moment(dateTo[0]).format("YYYY-MM-DD")
+    );
+    // const summary = await getSummary(`2021-09-08`, `2021-09-15`);
     setSummary(summary);
-    console.log({ summary });
   };
   useEffect(() => {
     getSummaryData();
