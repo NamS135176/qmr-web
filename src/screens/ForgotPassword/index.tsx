@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import TextField from "@mui/material/TextField";
+import { forgotPassword } from "api/member";
+
 export default function ForgotPassScreen() {
   const [showError, setShowError] = useState<boolean>(false);
-
+  const [loading, setLoading] = useState<boolean>(false);
   const initialValues = useMemo(() => {
     return {
       email: "tih920@smart-idea.jp",
@@ -28,6 +30,21 @@ export default function ForgotPassScreen() {
 
   const onSubmit = async ({ email }) => {
     setShowError(false);
+    try {
+      console.log(email);
+
+      const res: any = await forgotPassword(email);
+      // window.localStorage.setItem("access_token", res.access_token);
+      // var decoded = jwt_decode(res.access_token);
+      console.log(res);
+
+      setLoading(false);
+      // history.push("/");
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+      setShowError(true);
+    }
   };
 
   const formik = useFormik({
@@ -46,7 +63,7 @@ export default function ForgotPassScreen() {
     touched,
   } = formik;
 
-  const handleLogin = (e: any) => {
+  const handleForgotPass = (e: any) => {
     e.preventDefault();
     validateForm();
     if (!isValid) {
@@ -114,6 +131,7 @@ export default function ForgotPassScreen() {
               padding: 0,
               lineHeightStep: 1,
               lineHeight: "1.1",
+              wordBreak: `break-word`,
             }}
           >
             Enter your email address to reset your password. You may need to
@@ -132,13 +150,7 @@ export default function ForgotPassScreen() {
           />
 
           <Box sx={{ marginTop: 2 }}>
-            <Button
-              onClick={() => {
-                setShowError(!showError);
-              }}
-              variant="contained"
-              fullWidth
-            >
+            <Button onClick={handleForgotPass} variant="contained" fullWidth>
               Send Mail
             </Button>
           </Box>

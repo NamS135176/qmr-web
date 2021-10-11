@@ -102,7 +102,7 @@ function Page() {
             borderRadius: 2,
             // marginTop: 100,
             padding: 3,
-            minWidth: 250,
+            minWidth: 300,
             marginLeft: `auto`,
             marginRight: `auto`,
             width: {
