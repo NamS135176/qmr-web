@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -16,10 +16,13 @@ import Nav from "../../components/Nav";
 import BarChart from "components/Chart/BarChart";
 import PieChart from "components/Chart/PieChart";
 import HomeTable from "components/Table/HomeTable";
+import DatePicker from "components/DatePicker";
+import DateSelectContext from "utils/context";
 export default function Graph() {
   const [open, setOpen] = useState(false);
   const [chart, setChart] = useState("pie");
   const { t, i18n } = useTranslation();
+  const dateSelect = useContext(DateSelectContext);
 
   const handleClose = () => {
     console.log("close");
@@ -32,62 +35,8 @@ export default function Graph() {
   return (
     <Box>
       <Nav />
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          px: 2,
-        }}
-      >
-        <Box>
-          <Button
-            sx={{
-              background: "white",
-              color: "black",
-              "&:hover": {
-                background: "white",
-                color: "black",
-              },
-            }}
-            variant="contained"
-          >
-            <KeyboardArrowLeftIcon />
-          </Button>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            p: 2,
-          }}
-        >
-          <Typography>2021-10-05 ~ 2021-10-06</Typography>
-          <IconButton
-            // className={classes.menuButton}
-            // edge="start"
-            // aria-label="menu"
-            onClick={handleOpen}
-          >
-            <DateRangeIcon sx={{ fontSize: 25 }} />
-          </IconButton>
-        </Box>
-        <Box>
-          <Button
-            sx={{
-              background: "white",
-              color: "black",
-              "&:hover": {
-                background: "white",
-                color: "black",
-              },
-            }}
-            variant="contained"
-          >
-            <KeyboardArrowRightIcon />
-          </Button>
-        </Box>
-      </Box>
+      <DatePicker dateSelect={dateSelect} isOpen={handleOpen} />
+
       {/* {money} */}
       <Box sx={{ display: "flex", justifyContent: "center" }}>
         <Box

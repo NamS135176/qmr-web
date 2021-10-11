@@ -6,6 +6,10 @@ export const apiQMRWeb = create({
   timeout: 10000,
 });
 
+export const setAuthorize = (value) => {
+  apiQMRWeb.setHeader("Authorization", value);
+};
+
 export function getResponseData(res: any) {
   if (res.ok) {
     return res.data;

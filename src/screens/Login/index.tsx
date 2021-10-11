@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import { login } from "api/member";
 import CircularProgress from "@mui/material/CircularProgress";
 import jwt_decode from "jwt-decode";
+import { setAuthorize } from "api";
 function Page() {
   const history = useHistory();
   const [showError, setShowError] = useState<boolean>(false);
@@ -40,6 +41,7 @@ function Page() {
     setLoading(true);
     try {
       const res: any = await login(email, password);
+      setAuthorize(res.access_token);
       window.localStorage.setItem("access_token", res.access_token);
       var decoded = jwt_decode(res.access_token);
 
