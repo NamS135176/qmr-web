@@ -24,13 +24,30 @@ export default function BarChart() {
     },
     plugins: {
       zoom: {
+        pan: {
+          enabled: true,
+          mode: "xy",
+          threshold: 5,
+        },
         zoom: {
           wheel: {
-            enabled: true, // SET SCROOL ZOOM TO TRUE
+            enabled: true,
           },
-          mode: "x",
-          speed: 100,
+          pinch: {
+            enabled: true,
+          },
+          mode: "xy",
         },
+      },
+    },
+    scales: {
+      x: {
+        type: "category",
+        min: 5,
+        max: 365,
+      },
+      y: {
+        type: "linear",
       },
     },
   };

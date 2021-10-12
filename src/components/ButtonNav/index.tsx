@@ -13,6 +13,7 @@ export default function ButtonNav(props) {
           backgroundColor: "#00B050",
         },
         backgroundColor: props.bgColor,
+        borderRadius: 0,
       }}
       onClick={() => {
         history.push(props.link);

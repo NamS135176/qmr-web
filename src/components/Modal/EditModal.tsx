@@ -209,7 +209,7 @@ export default function EditModal(props: any) {
                         </LocalizationProvider>
                       ) : (
                         <Typography sx={{ textAlign: "left" }}>
-                          {props.data.name}
+                          {props.data.time.split(" ")[0]}
                         </Typography>
                       )}
                     </Box>
@@ -268,7 +268,7 @@ export default function EditModal(props: any) {
                         </LocalizationProvider>
                       ) : (
                         <Typography sx={{ textAlign: "left" }}>
-                          {props.data.calories}
+                          {props.data.time.split(" ")[1]}
                         </Typography>
                       )}
                     </Box>
@@ -328,14 +328,16 @@ export default function EditModal(props: any) {
                             </MenuItem>
                             {props.listCategories.map((item) => {
                               return (
-                                <MenuItem value={item}>{item.name}</MenuItem>
+                                <MenuItem key={item.id} value={item}>
+                                  {item.name}
+                                </MenuItem>
                               );
                             })}
                           </Select>
                         </FormControl>
                       ) : (
                         <Typography sx={{ textAlign: "left" }}>
-                          {props.data.fat}
+                          {props.data.cate}
                         </Typography>
                       )}
                     </Box>
@@ -400,7 +402,7 @@ export default function EditModal(props: any) {
                         />
                       ) : (
                         <Typography sx={{ textAlign: "left" }}>
-                          {props.data.carbs}
+                          {props.data.price}
                         </Typography>
                       )}
                     </Box>
@@ -451,7 +453,7 @@ export default function EditModal(props: any) {
                         />
                       ) : (
                         <Typography sx={{ textAlign: "left" }}>
-                          {props.data.name}
+                          {props.data.memo}
                         </Typography>
                       )}
                     </Box>
@@ -475,12 +477,18 @@ export default function EditModal(props: any) {
                 ) : (
                   <Typography></Typography>
                 )}
-                <img
-                  width="100%"
-                  src="https://www.elle.vn/wp-content/uploads/2017/07/25/hinh-anh-dep-1.jpg"
-                  alt="note_img"
-                ></img>
-
+                {props.data.photo == "" ? (
+                  <Typography>{t("editmodal.noimg")}</Typography>
+                ) : (
+                  <img
+                    width="100%"
+                    src={
+                      "https://s3-ap-northeast-1.amazonaws.com/qmr-cloud-s3-dev/" +
+                      props.data.photo
+                    }
+                    alt="note_img"
+                  ></img>
+                )}
                 {editMode ? (
                   <Box>
                     <Dropzone onDrop={handleDrop} multiple={false}>

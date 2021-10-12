@@ -26,6 +26,8 @@ import CustomCell from "components/CustomCell";
 import DatePicker from "components/DatePicker";
 import DateSelectContext from "utils/context";
 import { getCategories } from "api/category";
+import { getListTransactions } from "api/transaction";
+import { AnyARecord } from "dns";
 function createData(
   name: string,
   calories: number,
@@ -36,21 +38,18 @@ function createData(
   return { name, calories, fat, carbs, protein };
 }
 
-const rows = [
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-];
-
 export default function ListPageScreen() {
   const { t, i18n } = useTranslation();
   const [openModal, setOpenModal] = useState(false);
-  const [itemData, setItemData] = useState({});
+  const [itemData, setItemData] = useState({ time: "2021-10-04 09:30:00" });
   const [open, setOpen] = useState(false);
   const dateSelect = useContext(DateSelectContext);
+  const { dateFrom, dateTo } = useContext(DateSelectContext);
   const [categories, setCategories] = useState([]);
+  const [transactions, setTransactions] = useState([]);
+  const [offset, setOffset] = useState(0);
+  const [total, setTotal] = useState(0);
+
   const handleClose = () => {
     console.log("close");
     setOpen(false);
@@ -60,13 +59,26 @@ export default function ListPageScreen() {
     setOpen(true);
   };
   useEffect(() => {
-    const getCate = async () => {
-      const res = await getCategories();
-      console.log(res);
-      setCategories(res.categories);
+    const getList = async () => {
+      const res1: any = await getCategories();
+      const res2: any = await getListTransactions(dateFrom, dateTo, 20, 0);
+      setCategories(res1.categories);
+      const newList = res2.data.map((item: any) => {
+        let cate: any = res1.categories.find(
+          (it: any) => it.id == item.category_id
+        );
+        item.cate = cate.name;
+        item.memo = item.memo.replaceAll("+", " ");
+        item.memo = item.memo.replaceAll("%2B", "+");
+        return item;
+      });
+      setTransactions(newList);
+      setOffset(res2.offset);
+      setTotal(res2.total);
     };
-    getCate();
-  }, []);
+    // getCate();
+    getList();
+  }, [dateFrom, dateTo]);
   return (
     <Box sx={{ paddingBottom: 2 }}>
       <Nav page="list" />
@@ -90,6 +102,10 @@ export default function ListPageScreen() {
             md: 10,
           },
           paddingTop: {
+            xs: 2,
+            md: 5,
+          },
+          paddingBottom: {
             xs: 2,
             md: 5,
           },
@@ -145,37 +161,46 @@ export default function ListPageScreen() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row, index) => (
+                {transactions.map((row: any, index) => (
                   <TableRow
                     sx={
                       index % 2 === 0
                         ? { backgroundColor: "#f9f9f9" }
                         : { backgroundColor: "white" }
                     }
-                    key={row.name}
+                    key={index}
                   >
-                    <TableCell>{row.name}</TableCell>
+                    <TableCell>{row.time}</TableCell>
                     <TableCell
                       sx={{ borderRight: "1px solid #ddd" }}
                       align="left"
                     ></TableCell>
-                    <TableCell align="left">{row.calories}</TableCell>
+                    <TableCell align="left">{row.cate}</TableCell>
                     <TableCell
                       sx={{ borderRight: "1px solid #ddd" }}
                       align="left"
                     ></TableCell>
-                    <TableCell align="left">{row.fat}</TableCell>
+                    <TableCell align="left">{row.price}</TableCell>
                     <TableCell
                       sx={{ borderRight: "1px solid #ddd" }}
                       align="left"
                     ></TableCell>
-                    <TableCell align="left">{row.carbs}</TableCell>
+                    <TableCell
+                      sx={{ maxWidth: 300, wordBreak: "break-word" }}
+                      align="left"
+                    >
+                      {row.memo}
+                    </TableCell>
                     <TableCell
                       sx={{ borderRight: "1px solid #ddd" }}
                       align="left"
                     ></TableCell>
                     <TableCell align="left">
-                      <CameraAlt sx={{ fontSize: 25, color: "black" }} />
+                      {row.photo == "" ? (
+                        <></>
+                      ) : (
+                        <CameraAlt sx={{ fontSize: 25, color: "black" }} />
+                      )}
                     </TableCell>
                     <TableCell
                       sx={{ borderRight: "1px solid #ddd" }}
@@ -209,6 +234,7 @@ export default function ListPageScreen() {
               </TableBody>
             </Table>
           </TableContainer>
+          {/* <Box>{total > 20 ? <Typography>ok page</Typography> : <></>}</Box> */}
         </Paper>
       </Box>
     </Box>

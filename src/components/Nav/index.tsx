@@ -205,6 +205,7 @@ export default function Nav(props) {
                       "&:hover": {
                         backgroundColor: "#00B050",
                       },
+                      borderRadius: 0,
                     }}
                     onClick={() => {
                       window.open(`http://smart-idea-apps.com/qmr/pc_support`);
