@@ -7,6 +7,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import TextField from "@mui/material/TextField";
 import { login } from "api/member";
+import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
 import jwt_decode from "jwt-decode";
 import { setAuthorize } from "api";
@@ -113,7 +114,7 @@ function Page() {
             marginLeft: `auto`,
             marginRight: `auto`,
             width: {
-              xs: "80%",
+              xs: "90%",
               md: "30%",
               lg: "20%",
             },
@@ -156,32 +157,41 @@ function Page() {
           <Box
             sx={{
               display: "flex",
-              justifyContent: "space-around",
+              justifyContent: {
+                xs: "space-between",
+                md: '"space-around"',
+              },
               marginTop: 5,
             }}
           >
-            <p
-              style={{
+            <Typography
+              sx={{
                 fontSize: 15,
                 margin: 0,
-                padding: 0,
+                paddingRight: {
+                  xs: 2,
+                  md: 0,
+                },
                 lineHeightStep: 1,
                 lineHeight: "1.1",
               }}
             >
               {t("login.title1")}
-            </p>
-            <p
-              style={{
+            </Typography>
+            <Typography
+              sx={{
                 fontSize: 15,
                 margin: 0,
-                padding: 0,
+                paddingLeft: {
+                  xs: 2,
+                  md: 0,
+                },
                 lineHeightStep: 1,
                 lineHeight: "1.1",
               }}
             >
               {t("login.title2")}
-            </p>
+            </Typography>
           </Box>
 
           <TextField
@@ -273,7 +283,7 @@ function Page() {
               style={{
                 fontSize: 14,
                 margin: 0,
-                padding: 0,
+                paddingRight: 0,
                 lineHeightStep: 1,
                 lineHeight: "1.1",
               }}
