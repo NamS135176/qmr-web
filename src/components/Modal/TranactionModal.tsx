@@ -13,16 +13,18 @@ import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Dropzone from "react-dropzone";
 import { useTranslation } from "react-i18next";
 import jaLocale from "date-fns/locale/ja";
 
 import "./style.scss";
+import { getCategory } from "api/category";
 
 export default function TranactionModal({ open, onClose }: any) {
   const [value, setValue] = useState<Date | null>(new Date());
   const [category, setCategory] = useState("");
+  const [listCategory, setListCategory] = useState([]);
   const [price, setPrice] = useState("");
   const [memo, setMemo] = useState("");
   const [fileNames, setFileNames] = useState("");
@@ -32,6 +34,7 @@ export default function TranactionModal({ open, onClose }: any) {
   };
 
   const handleChangeCategory = (event: SelectChangeEvent) => {
+    console.log("change");
     setCategory(event.target.value as string);
   };
 
@@ -54,6 +57,14 @@ export default function TranactionModal({ open, onClose }: any) {
     console.log({ acceptedFiles });
     setFileNames(acceptedFiles[0].name);
   };
+  const getCategoryData = async () => {
+    const response = await getCategory();
+    console.log({ response });
+    setListCategory(response.categories);
+  };
+  useEffect(() => {
+    getCategoryData();
+  }, []);
 
   return (
     <Box>
@@ -100,9 +111,11 @@ export default function TranactionModal({ open, onClose }: any) {
                   label="category"
                   onChange={handleChangeCategory}
                 >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  {listCategory.map((item: any) => (
+                    <MenuItem key={item.id} value={item.name}>
+                      {item.name}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Box>

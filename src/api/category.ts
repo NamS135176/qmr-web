@@ -1,6 +1,6 @@
-import { apiQMRWeb, getResponseData } from "api";
+import { apiQMRWeb, getResponseData } from "./index";
 
-export const getCategories = async () => {
-  const res = await apiQMRWeb.get("/category");
+export const getCategory = async () => {
+  const res = await apiQMRWeb.get(`/category`);
   return getResponseData(res);
 };

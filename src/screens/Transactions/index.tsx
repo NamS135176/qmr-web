@@ -25,7 +25,7 @@ import DateHomeModal from "components/Modal/DateHomeModal";
 import CustomCell from "components/CustomCell";
 import DatePicker from "components/DatePicker";
 import DateSelectContext from "utils/context";
-import { getCategories } from "api/category";
+import { getCategory } from "api/category";
 import { getListTransactions } from "api/transaction";
 import { AnyARecord } from "dns";
 function createData(
@@ -60,7 +60,7 @@ export default function ListPageScreen() {
   };
   useEffect(() => {
     const getList = async () => {
-      const res1: any = await getCategories();
+      const res1: any = await getCategory();
       const res2: any = await getListTransactions(dateFrom, dateTo, 20, 0);
       setCategories(res1.categories);
       const newList = res2.data.map((item: any) => {

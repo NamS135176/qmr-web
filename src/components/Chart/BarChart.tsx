@@ -2,15 +2,32 @@ import React from "react";
 import { Bar, defaults, Chart } from "react-chartjs-2";
 import Box from "@mui/material/Box";
 import zoomPlugin from "chartjs-plugin-zoom";
-
+import moment from "moment";
 Chart.register(zoomPlugin);
 
 defaults.plugins.legend.display = true;
 defaults.plugins.legend.position = "bottom";
-const fakeA = new Array(100).fill(1).map((i, index) => index + 1);
-const fakeB = new Array(100).fill(1).map((i, index) => index + 10);
-console.log("🚀 ~ file: BarChart.tsx ~ line 7 ~ fakeA", fakeA);
-export default function BarChart() {
+export default function BarChart({ data, dateFrom, dateTo }: any) {
+  const dateA = moment(dateFrom, "YYYY-MM-DD");
+  const dateB = moment(dateTo, "YYYY-MM-DD");
+  const arrDays: string[] = [];
+  const arrFullDays: string[] = [];
+  for (let i = 0; i < moment.duration(dateB.diff(dateA)).asDays() + 1; i++) {
+    arrDays.push(moment(dateFrom, "YYYY-MM-DD").add(i, "days").format("DD"));
+    arrFullDays.push(
+      moment(dateFrom, "YYYY-MM-DD").add(i, "days").format("YYYY-MM-DD")
+    );
+  }
+  const arrData = arrFullDays.map((item) => {
+    let count = 0;
+    for (let i = 0; i < data.length; i++) {
+      if (data[i]["date"] === item) {
+        count = data[i]["total"];
+        break;
+      }
+    }
+    return count;
+  });
   const options: any = {
     maintainAspectRatio: false,
     responsive: true,
@@ -56,18 +73,15 @@ export default function BarChart() {
       <Bar
         options={options}
         data={{
-          labels: fakeA,
+          labels: arrDays,
           datasets: [
             {
-              label: "Population (millions)",
-              backgroundColor: [
-                "#59AF32",
-                "#59AF32",
-                "#59AF32",
-                "#59AF32",
-                "#59AF32",
-              ],
-              data: fakeB,
+              label: "Graph",
+              backgroundColor: ["#BDDFAD"],
+              data: arrData,
+              borderWidth: 2,
+              borderColor: "#59AF32",
+              hoverBackgroundColor: "#A4D38F",
             },
           ],
         }}
