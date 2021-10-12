@@ -13,12 +13,13 @@ import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Dropzone from "react-dropzone";
 import { useTranslation } from "react-i18next";
 import jaLocale from "date-fns/locale/ja";
 
 import "./style.scss";
+import { getCategory } from "api/category";
 
 export default function TranactionModal({ open, onClose }: any) {
   const [value, setValue] = useState<Date | null>(new Date());
@@ -54,6 +55,13 @@ export default function TranactionModal({ open, onClose }: any) {
     console.log({ acceptedFiles });
     setFileNames(acceptedFiles[0].name);
   };
+  const getCategoryData = async () => {
+    const response = await getCategory();
+    console.log({ response });
+  };
+  useEffect(() => {
+    getCategoryData();
+  }, []);
 
   return (
     <Box>
