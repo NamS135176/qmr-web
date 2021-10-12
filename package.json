@@ -21,6 +21,7 @@
     "@mui/styles": "^5.0.1",
     "apisauce": "^2.1.2",
     "chart.js": "^3.5.1",
+    "chartjs-plugin-zoom": "^1.1.1",
     "date-fns": "^2.24.0",
     "formik": "^2.2.9",
     "i18next": "^21.2.4",
