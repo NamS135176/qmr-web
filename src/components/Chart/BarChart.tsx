@@ -59,7 +59,7 @@ export default function BarChart({ data, dateFrom, dateTo }: any) {
           labels: arrDays,
           datasets: [
             {
-              label: "Population (millions)",
+              label: "Graph",
               backgroundColor: ["#BDDFAD"],
               data: arrData,
               borderWidth: 2,
