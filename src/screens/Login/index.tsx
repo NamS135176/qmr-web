@@ -7,13 +7,16 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import TextField from "@mui/material/TextField";
 import { login } from "api/member";
+import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
+import jwt_decode from "jwt-decode";
 import { setAuthorize } from "api";
-
+import { useTranslation } from "react-i18next";
 function Page() {
   const history = useHistory();
   const [showError, setShowError] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
+  const { t, i18n } = useTranslation();
   const initialValues = useMemo(() => {
     return {
       email: "tih920@smart-idea.jp",
@@ -43,6 +46,8 @@ function Page() {
       const res: any = await login(email, password);
       setAuthorize(res.access_token);
       window.localStorage.setItem("access_token", res.access_token);
+      var decoded = jwt_decode(res.access_token);
+
       setLoading(false);
       history.push("/");
     } catch (error) {
@@ -102,11 +107,14 @@ function Page() {
             borderRadius: 2,
             // marginTop: 100,
             padding: 3,
-            minWidth: 250,
+            minWidth: {
+              xs: 270,
+              md: 350,
+            },
             marginLeft: `auto`,
             marginRight: `auto`,
             width: {
-              xs: "80%",
+              xs: "90%",
               md: "30%",
               lg: "20%",
             },
@@ -128,36 +136,90 @@ function Page() {
           ) : (
             <p></p>
           )}
-          <img src={"assets/images/logo_en.png"} width="100%" />
-          <p
-            style={{
-              fontSize: 15,
-              margin: 0,
-              padding: 0,
-              lineHeightStep: 1,
-              lineHeight: "1.1",
+          <Box sx={{ textAlign: "center" }}>
+            <img src={"assets/images/logo.png"} />
+          </Box>
+          <Box sx={{ textAlign: "center" }}>
+            {t("logo") === "jp" ? (
+              <img
+                className="image"
+                src={"assets/images/logo_jp.png"}
+                width="100%"
+              />
+            ) : (
+              <img
+                className="image"
+                src={"assets/images/logo_en.png"}
+                width="100%"
+              />
+            )}
+          </Box>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: {
+                xs: "space-between",
+                md: '"space-around"',
+              },
+              marginTop: 5,
             }}
           >
-            Log in to Quick Money Recorder PC
-          </p>
-          <p
-            style={{
-              fontSize: 15,
-              margin: 0,
-              padding: 0,
-              lineHeightStep: 1,
-              lineHeight: "1.1",
-            }}
-          >
-            (Please input email address and password which has been registered
-            to QMR Subscription)
-          </p>
+            <Typography
+              sx={{
+                fontSize: 15,
+                margin: 0,
+                paddingRight: {
+                  xs: 2,
+                  md: 0,
+                },
+                lineHeightStep: 1,
+                lineHeight: "1.1",
+              }}
+            >
+              {t("login.title1")}
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: 15,
+                margin: 0,
+                paddingLeft: {
+                  xs: 2,
+                  md: 0,
+                },
+                lineHeightStep: 1,
+                lineHeight: "1.1",
+              }}
+            >
+              {t("login.title2")}
+            </Typography>
+          </Box>
+
           <TextField
             fullWidth
             id="email"
             name="email"
-            label="Email"
-            sx={{ marginTop: 3 }}
+            placeholder={t("login.holder_email")}
+            sx={{
+              marginTop: 3,
+              borderRadius: 2,
+              backgroundColor: "#ddd",
+              "& .MuiOutlinedInput-root": {
+                // - The Input-root, inside the TextField-root
+                "& fieldset": {
+                  // - The <fieldset> inside the Input-root
+                  borderWidth: 0, // - Set the Input border
+                },
+                "&:hover fieldset": {
+                  borderWidth: 0, // - Set the Input border when parent has :hover
+                },
+                "&.Mui-focused fieldset": {
+                  // - Set the Input border when parent is focused
+                  borderWidth: 1,
+                  borderRadius: 2,
+                  borderColor: "black",
+                },
+              },
+            }}
             value={values.email}
             onChange={handleChange}
             error={touched.email && Boolean(errors.email)}
@@ -167,9 +229,29 @@ function Page() {
             fullWidth
             id="password"
             name="password"
-            label="Password"
+            placeholder={t("login.holder_password")}
             type="password"
-            sx={{ marginTop: 3 }}
+            sx={{
+              marginTop: 3,
+              borderRadius: 2,
+              backgroundColor: "#ddd",
+              "& .MuiOutlinedInput-root": {
+                // - The Input-root, inside the TextField-root
+                "& fieldset": {
+                  // - The <fieldset> inside the Input-root
+                  borderWidth: 0, // - Set the Input border
+                },
+                "&:hover fieldset": {
+                  borderWidth: 0, // - Set the Input border when parent has :hover
+                },
+                "&.Mui-focused fieldset": {
+                  // - Set the Input border when parent is focused
+                  borderWidth: 1,
+                  borderRadius: 2,
+                  borderColor: "black",
+                },
+              },
+            }}
             value={values.password}
             onChange={handleChange}
             error={touched.password && Boolean(errors.password)}
@@ -177,10 +259,7 @@ function Page() {
           />
           <Box
             sx={{
-              borderBottom: 1,
               marginTop: 2,
-              paddingBottom: 3,
-              borderColor: "#eee",
             }}
           >
             {loading ? (
@@ -195,41 +274,63 @@ function Page() {
               </Box>
             ) : (
               <Button variant="contained" fullWidth onClick={handleLogin}>
-                Login
+                {t("login.btn_text")}
               </Button>
             )}
           </Box>
           <Box sx={{ paddingTop: 2 }}>
             <p
               style={{
-                fontSize: 15,
+                fontSize: 14,
                 margin: 0,
-                padding: 0,
+                paddingRight: 0,
                 lineHeightStep: 1,
                 lineHeight: "1.1",
               }}
             >
-              Quick Money Recorder PC is Beta version. Some function may not
-              work.
+              {t("login.suggest")}
             </p>
           </Box>
-          <Box sx={{ paddingTop: 1 }}>
+          <Box
+            sx={{
+              textAlign: "center",
+              paddingTop: 2,
+              paddingBottom: 1,
+            }}
+          >
             <Link
               href="/forgot-password"
               sx={{
-                fontSize: 15,
+                fontSize: 16,
                 margin: 0,
                 padding: 0,
                 lineHeightStep: 1,
                 lineHeight: "1.1",
-                color: "black",
-                "&:hover": {
-                  color: "#428bca",
-                },
+                color: "#47C53E",
+                textDecoration: "none",
+
+                // "&:hover": {
+                //   color: "#428bca",
+                // },
               }}
             >
-              *If you forgot your password, re-issue new password here
+              {t("login.forgot_pass")}
             </Link>
+          </Box>
+          <Box>
+            <p
+              style={{
+                fontSize: 14,
+                margin: 0,
+                padding: 0,
+                lineHeightStep: 1,
+                lineHeight: "1.1",
+                paddingTop: 20,
+                paddingBottom: 20,
+              }}
+            >
+              {t("login.warning")}
+            </p>
           </Box>
         </Box>
       </Box>

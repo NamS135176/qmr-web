@@ -1,11 +1,77 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import Box from "@mui/material/Box";
 import InputBase from "@mui/material/InputBase";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
+import { useFormik } from "formik";
+import * as yup from "yup";
+import TextField from "@mui/material/TextField";
+import { forgotPassword } from "api/member";
 
 export default function ForgotPassScreen() {
   const [showError, setShowError] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
+  const initialValues = useMemo(() => {
+    return {
+      email: "tih920@smart-idea.jp",
+    };
+  }, []);
+
+  const validationSchema = useMemo(
+    () =>
+      yup.object({
+        email: yup
+          .string()
+          .email("Enter a valid email")
+          .required("Email is required"),
+      }),
+    []
+  );
+
+  const onSubmit = async ({ email }) => {
+    setShowError(false);
+    try {
+      console.log(email);
+
+      const res: any = await forgotPassword(email);
+      // window.localStorage.setItem("access_token", res.access_token);
+      // var decoded = jwt_decode(res.access_token);
+      console.log(res);
+
+      setLoading(false);
+      // history.push("/");
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+      setShowError(true);
+    }
+  };
+
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit,
+  });
+
+  const {
+    handleSubmit,
+    handleChange,
+    validateForm,
+    isValid,
+    values,
+    errors,
+    touched,
+  } = formik;
+
+  const handleForgotPass = (e: any) => {
+    e.preventDefault();
+    validateForm();
+    if (!isValid) {
+      return;
+    }
+    handleSubmit();
+  };
+
   return (
     <Box
       sx={{
@@ -65,31 +131,46 @@ export default function ForgotPassScreen() {
               padding: 0,
               lineHeightStep: 1,
               lineHeight: "1.1",
+              wordBreak: `break-word`,
             }}
           >
             Enter your email address to reset your password. You may need to
             check your spam folder or unblock okanereco_support_d@docomo.ne.jp
           </p>
-          <InputBase
-            type="email"
+          <TextField
+            fullWidth
+            id="email"
+            name="email"
             placeholder="type email"
             sx={{
-              marginTop: 2,
-              background: "#e4e6eb",
-              width: "100%",
-              padding: 1,
-              paddingLeft: 2,
+              marginTop: 3,
+              borderRadius: 2,
+              backgroundColor: "#ddd",
+              "& .MuiOutlinedInput-root": {
+                // - The Input-root, inside the TextField-root
+                "& fieldset": {
+                  // - The <fieldset> inside the Input-root
+                  borderWidth: 0, // - Set the Input border
+                },
+                "&:hover fieldset": {
+                  borderWidth: 0, // - Set the Input border when parent has :hover
+                },
+                "&.Mui-focused fieldset": {
+                  // - Set the Input border when parent is focused
+                  borderWidth: 1,
+                  borderRadius: 2,
+                  borderColor: "black",
+                },
+              },
             }}
-          ></InputBase>
+            value={values.email}
+            onChange={handleChange}
+            error={touched.email && Boolean(errors.email)}
+            helperText={touched.email && errors.email}
+          />
 
           <Box sx={{ marginTop: 2 }}>
-            <Button
-              onClick={() => {
-                setShowError(!showError);
-              }}
-              variant="contained"
-              fullWidth
-            >
+            <Button onClick={handleForgotPass} variant="contained" fullWidth>
               Send Mail
             </Button>
           </Box>

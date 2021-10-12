@@ -24,6 +24,7 @@ import { getCategory } from "api/category";
 export default function TranactionModal({ open, onClose }: any) {
   const [value, setValue] = useState<Date | null>(new Date());
   const [category, setCategory] = useState("");
+  const [listCategory, setListCategory] = useState([]);
   const [price, setPrice] = useState("");
   const [memo, setMemo] = useState("");
   const [fileNames, setFileNames] = useState("");
@@ -33,6 +34,7 @@ export default function TranactionModal({ open, onClose }: any) {
   };
 
   const handleChangeCategory = (event: SelectChangeEvent) => {
+    console.log("change");
     setCategory(event.target.value as string);
   };
 
@@ -58,6 +60,7 @@ export default function TranactionModal({ open, onClose }: any) {
   const getCategoryData = async () => {
     const response = await getCategory();
     console.log({ response });
+    setListCategory(response.categories);
   };
   useEffect(() => {
     getCategoryData();
@@ -108,9 +111,11 @@ export default function TranactionModal({ open, onClose }: any) {
                   label="category"
                   onChange={handleChangeCategory}
                 >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
+                  {listCategory.map((item: any) => (
+                    <MenuItem key={item.id} value={item.name}>
+                      {item.name}
+                    </MenuItem>
+                  ))}
                 </Select>
               </FormControl>
             </Box>

@@ -388,6 +388,7 @@ export default function EditModal(props: any) {
                           id="outlined-basic"
                           label={t("editmodal.price")}
                           variant="outlined"
+                          type="number"
                           sx={{
                             maxWidth: 220,
                           }}
