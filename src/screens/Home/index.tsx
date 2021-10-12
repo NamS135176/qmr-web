@@ -53,7 +53,7 @@ export default function Home() {
   };
   return summary ? (
     <Box>
-      <Nav />
+      <Nav page="home" />
       <DatePicker dateSelect={dateSelect} isOpen={handleOpen} />
       {/* {money} */}
       <Box sx={{ display: "flex", justifyContent: "center" }}>

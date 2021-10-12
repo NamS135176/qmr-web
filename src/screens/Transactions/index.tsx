@@ -62,7 +62,7 @@ export default function ListPageScreen() {
   useEffect(() => {});
   return (
     <Box sx={{ paddingBottom: 2 }}>
-      <Nav />
+      <Nav page="list" />
       <DateHomeModal open={open} onClose={handleClose} />
       <DatePicker dateSelect={dateSelect} isOpen={handleOpen} />
 

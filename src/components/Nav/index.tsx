@@ -13,13 +13,15 @@ import TranactionModal from "components/Modal/TranactionModal";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
+import ButtonNav from "components/ButtonNav";
 import "./style.scss";
 
-export default function Nav() {
+export default function Nav(props) {
   const [open, setOpen] = useState(false);
   const [checked, setChecked] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   const { t, i18n } = useTranslation();
+
   let history = useHistory();
   const handleClose = () => {
     console.log("close");
@@ -147,43 +149,63 @@ export default function Nav() {
                 height="100%"
               />
             )}
-            <Box className="boxNavPc">
+            <Box sx={{ height: "100%" }} className="boxNavPc">
               <Box
                 sx={{
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
+                  height: "100%",
                 }}
               >
-                <Box>
+                <Box sx={{ height: "100%" }}>
+                  {props.page == "home" ? (
+                    <ButtonNav
+                      toPage="nav.summary"
+                      link="/"
+                      bgColor="#398439"
+                    ></ButtonNav>
+                  ) : (
+                    <ButtonNav
+                      toPage="nav.summary"
+                      link="/"
+                      bgColor="transparent"
+                    ></ButtonNav>
+                  )}
+                  {props.page == "list" ? (
+                    <ButtonNav
+                      toPage="nav.list"
+                      link="/transactions"
+                      bgColor="#398439"
+                    ></ButtonNav>
+                  ) : (
+                    <ButtonNav
+                      toPage="nav.list"
+                      link="/transactions"
+                      bgColor="transparent"
+                    ></ButtonNav>
+                  )}
+                  {props.page == "graph" ? (
+                    <ButtonNav
+                      toPage="nav.graph"
+                      link="/graph"
+                      bgColor="#398439"
+                    ></ButtonNav>
+                  ) : (
+                    <ButtonNav
+                      toPage="nav.graph"
+                      link="/graph"
+                      bgColor="transparent"
+                    ></ButtonNav>
+                  )}
+
                   <Button
-                    onClick={() => {
-                      history.push("/");
+                    sx={{
+                      height: "100%",
+                      "&:hover": {
+                        backgroundColor: "#00B050",
+                      },
                     }}
-                    className="btnNav"
-                    variant="text"
-                  >
-                    {t("nav.summary")}
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      history.push("/transactions");
-                    }}
-                    className="btnNav"
-                    variant="text"
-                  >
-                    {t("nav.list")}
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      history.push("/graph");
-                    }}
-                    className="btnNav"
-                    variant="text"
-                  >
-                    {t("nav.graph")}
-                  </Button>
-                  <Button
                     onClick={() => {
                       window.open(`http://smart-idea-apps.com/qmr/pc_support`);
                     }}

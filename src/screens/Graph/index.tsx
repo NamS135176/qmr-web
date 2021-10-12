@@ -34,7 +34,7 @@ export default function Graph() {
   };
   return (
     <Box>
-      <Nav />
+      <Nav page="graph" />
       <DatePicker dateSelect={dateSelect} isOpen={handleOpen} />
 
       {/* {money} */}
