@@ -28,6 +28,7 @@ import DateSelectContext from "utils/context";
 import { getCategory } from "api/category";
 import { getListTransactions } from "api/transaction";
 import { AnyARecord } from "dns";
+import CircularProgress from "@mui/material/CircularProgress";
 function createData(
   name: string,
   calories: number,
@@ -49,6 +50,7 @@ export default function ListPageScreen() {
   const [transactions, setTransactions] = useState([]);
   const [offset, setOffset] = useState(0);
   const [total, setTotal] = useState(0);
+  const [loading, setLoading] = useState(false);
 
   const handleClose = () => {
     console.log("close");
@@ -60,6 +62,7 @@ export default function ListPageScreen() {
   };
   useEffect(() => {
     const getList = async () => {
+      setLoading(true);
       const res1: any = await getCategory();
       const res2: any = await getListTransactions(dateFrom, dateTo, 20, 0);
       setCategories(res1.categories);
@@ -75,6 +78,7 @@ export default function ListPageScreen() {
       setTransactions(newList);
       setOffset(res2.offset);
       setTotal(res2.total);
+      setLoading(false);
     };
     // getCate();
     getList();
@@ -91,152 +95,168 @@ export default function ListPageScreen() {
         open={openModal}
         listCategories={categories}
       ></EditModal>
-      <Box
-        sx={{
-          paddingLeft: {
-            xs: 2,
-            md: 10,
-          },
-          paddingRight: {
-            xs: 2,
-            md: 10,
-          },
-          paddingTop: {
-            xs: 2,
-            md: 5,
-          },
-          paddingBottom: {
-            xs: 2,
-            md: 5,
-          },
-        }}
-      >
-        <Paper
-          elevation={1}
-          square
+      {loading ? (
+        <Box
           sx={{
-            backgroundColor: "#78CD51",
-            color: "white",
-            padding: 1,
-            fontSize: 15,
-            borderTopLeftRadius: 5,
-            borderTopRightRadius: 5,
+            display: "flex",
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "80vh",
           }}
         >
-          <Typography>{t("table.table_head")}</Typography>
-        </Paper>
-        <Paper square elevation={1} sx={{ padding: 2 }}>
-          <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 1000 }} aria-label="customized table">
-              <TableHead>
-                <TableRow>
-                  <TableCell
-                    sx={{
-                      fontWeight: "bold",
-                    }}
-                    align="left"
-                  >
-                    {t("table.column1")}{" "}
-                  </TableCell>
-                  <CustomCell></CustomCell>
-                  <TableCell sx={{ fontWeight: "bold" }} align="left">
-                    {t("table.column2")}
-                  </TableCell>
-                  <CustomCell></CustomCell>
-                  <TableCell sx={{ fontWeight: "bold" }} align="left">
-                    {t("table.column3")}
-                  </TableCell>
-                  <CustomCell></CustomCell>
-                  <TableCell sx={{ fontWeight: "bold" }} align="left">
-                    {t("table.column4")}
-                  </TableCell>
-                  <CustomCell></CustomCell>
-                  <TableCell sx={{ fontWeight: "bold" }} align="left">
-                    {t("table.column5")}
-                  </TableCell>
-                  <CustomCell></CustomCell>
-                  <TableCell sx={{ fontWeight: "bold" }} align="left">
-                    {t("table.column6")}
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {transactions.map((row: any, index) => (
-                  <TableRow
-                    sx={
-                      index % 2 === 0
-                        ? { backgroundColor: "#f9f9f9" }
-                        : { backgroundColor: "white" }
-                    }
-                    key={index}
-                  >
-                    <TableCell>{row.time}</TableCell>
+          <CircularProgress />
+        </Box>
+      ) : (
+        <Box
+          sx={{
+            paddingLeft: {
+              xs: 2,
+              md: 10,
+            },
+            paddingRight: {
+              xs: 2,
+              md: 10,
+            },
+            paddingTop: {
+              xs: 2,
+              md: 5,
+            },
+            paddingBottom: {
+              xs: 2,
+              md: 5,
+            },
+          }}
+        >
+          <Paper
+            elevation={1}
+            square
+            sx={{
+              backgroundColor: "#78CD51",
+              color: "white",
+              padding: 1,
+              fontSize: 15,
+              borderTopLeftRadius: 5,
+              borderTopRightRadius: 5,
+            }}
+          >
+            <Typography>{t("table.table_head")}</Typography>
+          </Paper>
+          <Paper square elevation={1} sx={{ padding: 2 }}>
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 1000 }} aria-label="customized table">
+                <TableHead>
+                  <TableRow>
                     <TableCell
-                      sx={{ borderRight: "1px solid #ddd" }}
-                      align="left"
-                    ></TableCell>
-                    <TableCell align="left">{row.cate}</TableCell>
-                    <TableCell
-                      sx={{ borderRight: "1px solid #ddd" }}
-                      align="left"
-                    ></TableCell>
-                    <TableCell align="left">{row.price}</TableCell>
-                    <TableCell
-                      sx={{ borderRight: "1px solid #ddd" }}
-                      align="left"
-                    ></TableCell>
-                    <TableCell
-                      sx={{ maxWidth: 300, wordBreak: "break-word" }}
+                      sx={{
+                        fontWeight: "bold",
+                      }}
                       align="left"
                     >
-                      {row.memo}
+                      {t("table.column1")}{" "}
                     </TableCell>
-                    <TableCell
-                      sx={{ borderRight: "1px solid #ddd" }}
-                      align="left"
-                    ></TableCell>
-                    <TableCell align="left">
-                      {row.photo == "" ? (
-                        <></>
-                      ) : (
-                        <CameraAlt sx={{ fontSize: 25, color: "black" }} />
-                      )}
+                    <CustomCell></CustomCell>
+                    <TableCell sx={{ fontWeight: "bold" }} align="left">
+                      {t("table.column2")}
                     </TableCell>
-                    <TableCell
-                      sx={{ borderRight: "1px solid #ddd" }}
-                      align="left"
-                    ></TableCell>
-                    <TableCell align="left">
-                      <Button
-                        sx={{
-                          backgroundColor: "#67c2ef",
-                          minWidth: 40,
-                          marginRight: 1,
-                        }}
-                        onClick={() => {
-                          setOpenModal(true);
-                          setItemData(row);
-                        }}
-                      >
-                        <EditOutlined sx={{ fontSize: 25, color: "white" }} />
-                      </Button>
-                      <Button
-                        onClick={() => {
-                          const r = window.confirm(t("editmodal.confirm"));
-                        }}
-                        sx={{ backgroundColor: "#fabb3d", minWidth: 40 }}
-                      >
-                        <DeleteOutlined sx={{ fontSize: 25, color: "white" }} />
-                      </Button>
+                    <CustomCell></CustomCell>
+                    <TableCell sx={{ fontWeight: "bold" }} align="left">
+                      {t("table.column3")}
+                    </TableCell>
+                    <CustomCell></CustomCell>
+                    <TableCell sx={{ fontWeight: "bold" }} align="left">
+                      {t("table.column4")}
+                    </TableCell>
+                    <CustomCell></CustomCell>
+                    <TableCell sx={{ fontWeight: "bold" }} align="left">
+                      {t("table.column5")}
+                    </TableCell>
+                    <CustomCell></CustomCell>
+                    <TableCell sx={{ fontWeight: "bold" }} align="left">
+                      {t("table.column6")}
                     </TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-          {/* <Box>{total > 20 ? <Typography>ok page</Typography> : <></>}</Box> */}
-        </Paper>
-      </Box>
+                </TableHead>
+                <TableBody>
+                  {transactions.map((row: any, index) => (
+                    <TableRow
+                      sx={
+                        index % 2 === 0
+                          ? { backgroundColor: "#f9f9f9" }
+                          : { backgroundColor: "white" }
+                      }
+                      key={index}
+                    >
+                      <TableCell>{row.time}</TableCell>
+                      <TableCell
+                        sx={{ borderRight: "1px solid #ddd" }}
+                        align="left"
+                      ></TableCell>
+                      <TableCell align="left">{row.cate}</TableCell>
+                      <TableCell
+                        sx={{ borderRight: "1px solid #ddd" }}
+                        align="left"
+                      ></TableCell>
+                      <TableCell align="left">{row.price}</TableCell>
+                      <TableCell
+                        sx={{ borderRight: "1px solid #ddd" }}
+                        align="left"
+                      ></TableCell>
+                      <TableCell
+                        sx={{ maxWidth: 300, wordBreak: "break-word" }}
+                        align="left"
+                      >
+                        {row.memo}
+                      </TableCell>
+                      <TableCell
+                        sx={{ borderRight: "1px solid #ddd" }}
+                        align="left"
+                      ></TableCell>
+                      <TableCell align="left">
+                        {row.photo == "" ? (
+                          <></>
+                        ) : (
+                          <CameraAlt sx={{ fontSize: 25, color: "black" }} />
+                        )}
+                      </TableCell>
+                      <TableCell
+                        sx={{ borderRight: "1px solid #ddd" }}
+                        align="left"
+                      ></TableCell>
+                      <TableCell align="left">
+                        <Button
+                          sx={{
+                            backgroundColor: "#67c2ef",
+                            minWidth: 40,
+                            marginRight: 1,
+                          }}
+                          onClick={() => {
+                            setOpenModal(true);
+                            setItemData(row);
+                          }}
+                        >
+                          <EditOutlined sx={{ fontSize: 25, color: "white" }} />
+                        </Button>
+                        <Button
+                          onClick={() => {
+                            const r = window.confirm(t("editmodal.confirm"));
+                          }}
+                          sx={{ backgroundColor: "#fabb3d", minWidth: 40 }}
+                        >
+                          <DeleteOutlined
+                            sx={{ fontSize: 25, color: "white" }}
+                          />
+                        </Button>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            {/* <Box>{total > 20 ? <Typography>ok page</Typography> : <></>}</Box> */}
+          </Paper>
+        </Box>
+      )}
     </Box>
   );
 }
