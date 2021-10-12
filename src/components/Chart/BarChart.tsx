@@ -5,8 +5,8 @@ import zoomPlugin from "chartjs-plugin-zoom";
 import moment from "moment";
 Chart.register(zoomPlugin);
 
-defaults.plugins.legend.display = true;
-defaults.plugins.legend.position = "bottom";
+defaults.plugins.legend.display = false;
+// defaults.plugins.legend.position = "bottom";
 export default function BarChart({ data, dateFrom, dateTo }: any) {
   const dateA = moment(dateFrom, "YYYY-MM-DD");
   const dateB = moment(dateTo, "YYYY-MM-DD");
@@ -41,18 +41,18 @@ export default function BarChart({ data, dateFrom, dateTo }: any) {
     },
     plugins: {
       zoom: {
-        pan: {
-          enabled: true,
-          mode: "xy",
-          threshold: 5,
-        },
+        // pan: {
+        //   enabled: true,
+        //   mode: 'xy',
+        //   threshold: 5,
+        // },
         zoom: {
           wheel: {
             enabled: true,
           },
-          pinch: {
-            enabled: true,
-          },
+          // pinch: {
+          //   enabled: true,
+          // },
           mode: "xy",
         },
       },

@@ -2,8 +2,8 @@ import React from "react";
 import { Pie, defaults } from "react-chartjs-2";
 import Box from "@mui/material/Box";
 import color from "constant/";
-defaults.plugins.legend.display = true;
-defaults.plugins.legend.position = "bottom";
+defaults.plugins.legend.display = false;
+// defaults.plugins.legend.position = "bottom";
 export default function PieChart({ data }: any) {
   console.log({ data });
   const labels = data

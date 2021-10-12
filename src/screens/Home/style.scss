@@ -12,9 +12,11 @@
   pointer-events: none;
 }
 .bar-chart-fake {
-  width: 400px;
+  width: 500px;
 }
 
-// canvas {
-//   height: 200px !important;
-// }
+@media screen and (max-width: 600px) {
+  .bar-chart {
+    display: block;
+  }
+}
