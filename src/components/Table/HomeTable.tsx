@@ -11,10 +11,6 @@ import Typography from "@mui/material/Typography";
 import LinearProgress from "@mui/material/LinearProgress";
 import { useTranslation } from "react-i18next";
 
-const data = [
-  { categoryName: "Socializing", price: 123 },
-  { categoryName: "Rent", price: 234 },
-];
 const Progress = ({ value }: any) => {
   return (
     <LinearProgress
@@ -24,9 +20,17 @@ const Progress = ({ value }: any) => {
     />
   );
 };
-export default function HomeTable() {
+export default function HomeTable({ data }: any) {
   const { t, i18n } = useTranslation();
-
+  let totalPrice = 0;
+  const d = data?.sort((a, b) => {
+    return b.total - a.total;
+  });
+  if (d) {
+    for (const element of d) {
+      totalPrice += element.total;
+    }
+  }
   return (
     <Box
       sx={{
@@ -44,55 +48,61 @@ export default function HomeTable() {
         },
       }}
     >
-      <Paper
-        elevation={1}
-        square
-        sx={{
-          backgroundColor: "#78CD51",
-          color: "white",
-          padding: 1,
-          fontSize: 15,
-          borderTopLeftRadius: 5,
-          borderTopRightRadius: 5,
-        }}
-      >
-        <Typography>{t("categories.title")}</Typography>
-      </Paper>
-      <TableContainer component={Paper}>
-        <Table sx={{ minWidth: 600 }} size="small">
-          <TableHead>
-            <TableRow>
-              <TableCell sx={{ fontWeight: "bold" }} align="left">
-                {t("categories.name")}
-              </TableCell>
-              <TableCell sx={{ fontWeight: "bold" }} align="left">
-                {t("categories.price")}
-              </TableCell>
-              <TableCell sx={{ fontWeight: "bold" }} align="left">
-                {" "}
-                {t("categories.total")}
-              </TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((row, index) => (
-              <TableRow
-                key={row.categoryName}
-                sx={{
-                  "&:last-child td, &:last-child th": { border: 0 },
-                  background: index % 2 === 0 ? "#f9f9f9" : "white",
-                }}
-              >
-                <TableCell>{row.categoryName}</TableCell>
-                <TableCell align="left">{row.price}</TableCell>
-                <TableCell align="left">
-                  <Progress value={20} />
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      {d ? (
+        <>
+          <Paper
+            elevation={1}
+            square
+            sx={{
+              backgroundColor: "#78CD51",
+              color: "white",
+              padding: 1,
+              fontSize: 15,
+              borderTopLeftRadius: 5,
+              borderTopRightRadius: 5,
+            }}
+          >
+            <Typography>{t("categories.title")}</Typography>
+          </Paper>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 600 }} size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ fontWeight: "bold" }} align="left">
+                    {t("categories.name")}
+                  </TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }} align="left">
+                    {t("categories.price")}
+                  </TableCell>
+                  <TableCell sx={{ fontWeight: "bold" }} align="left">
+                    {" "}
+                    {t("categories.total")}
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {d.map((row, index) => (
+                  <TableRow
+                    key={row.category_id}
+                    sx={{
+                      "&:last-child td, &:last-child th": { border: 0 },
+                      background: index % 2 === 0 ? "#f9f9f9" : "white",
+                    }}
+                  >
+                    <TableCell>{row.category_name}</TableCell>
+                    <TableCell align="left">{row.total}</TableCell>
+                    <TableCell align="left">
+                      <Progress value={(row.total * 100) / totalPrice} />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </>
+      ) : (
+        <></>
+      )}
     </Box>
   );
 }

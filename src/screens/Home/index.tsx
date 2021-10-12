@@ -4,6 +4,7 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
+import { getGraph } from "api/graph";
 import { getSummary } from "api/summary";
 import BarChart from "components/Chart/BarChart";
 import PieChart from "components/Chart/PieChart";
@@ -25,6 +26,7 @@ interface Summary {
 export default function Home() {
   const [open, setOpen] = useState(false);
   const [summary, setSummary] = useState({} as Summary);
+  const [graph, setGraph] = useState<any>();
   const { t, i18n } = useTranslation();
   const dateSelect = useContext(DateSelectContext);
   const { dateFrom, dateTo } = useContext(DateSelectContext);
@@ -36,8 +38,17 @@ export default function Home() {
     // const summary = await getSummary(`2021-09-08`, `2021-09-15`);
     setSummary(summary);
   };
+  const getGraphData = async () => {
+    const graph = await getGraph(
+      moment(dateFrom[0]).format("YYYY-MM-DD"),
+      moment(dateTo[0]).format("YYYY-MM-DD")
+    );
+    setGraph(graph);
+    console.log("🚀 ~ file: index.tsx ~ line 45 ~ getGraphData ~ graph", graph);
+  };
   useEffect(() => {
     getSummaryData();
+    getGraphData();
   }, [dateFrom, dateTo]);
   const handleClose = () => {
     console.log("close");
@@ -47,218 +58,241 @@ export default function Home() {
     console.log("open");
     setOpen(true);
   };
-  return summary ? (
+  return (
     <Box>
       <Nav />
       <DatePicker dateSelect={dateSelect} isOpen={handleOpen} />
       {/* {money} */}
-      <Box sx={{ display: "flex", justifyContent: "center" }}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-around",
-            flexDirection: {
-              sm: "row",
-              xs: "column",
-            },
-            mt: 3,
-            width: "1500px",
-            // background: 'red',
+      {summary && graph ? (
+        <>
+          <Box sx={{ display: "flex", justifyContent: "center" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-around",
+                flexDirection: {
+                  sm: "row",
+                  xs: "column",
+                },
+                mt: 3,
+                width: "1500px",
+                // background: 'red',
 
-            alignItems: "center",
-            // flexWrap: {
-            //   xs: 'wrap',
-            // },
-          }}
-        >
-          <Box
-            sx={{
-              minWidth: {
-                xs: 200,
-                md: 300,
-                lg: 400,
-              },
-              m: {
-                xs: 1,
-                sm: 0,
-              },
-              boxShadow: 3,
-            }}
-          >
-            <Card
-              sx={{ display: "flex", alignItems: "center" }}
-              variant="outlined"
+                alignItems: "center",
+                // flexWrap: {
+                //   xs: 'wrap',
+                // },
+              }}
             >
-              <Box sx={{ p: 1, pb: 0, pr: 2 }}>
-                <DownloadIcon
-                  sx={{ background: "#BDEA74", color: "white", fontSize: 50 }}
-                />
+              <Box
+                sx={{
+                  minWidth: {
+                    xs: 200,
+                    md: 300,
+                    lg: 400,
+                  },
+                  m: {
+                    xs: 1,
+                    sm: 0,
+                  },
+                  boxShadow: 3,
+                }}
+              >
+                <Card
+                  sx={{ display: "flex", alignItems: "center" }}
+                  variant="outlined"
+                >
+                  <Box sx={{ p: 1, pb: 0, pr: 2 }}>
+                    <DownloadIcon
+                      sx={{
+                        background: "#BDEA74",
+                        color: "white",
+                        fontSize: 50,
+                      }}
+                    />
+                  </Box>
+                  <Box>
+                    <Typography color="text.secondary" gutterBottom>
+                      {t("money.income")}
+                    </Typography>
+                    <Typography sx={{ fontWeight: "bold" }} gutterBottom>
+                      {summary.price_income}
+                    </Typography>
+                  </Box>
+                </Card>
               </Box>
-              <Box>
-                <Typography color="text.secondary" gutterBottom>
-                  {t("money.income")}
-                </Typography>
-                <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                  {summary.price_income}
-                </Typography>
+              <Box
+                sx={{
+                  minWidth: {
+                    xs: 200,
+                    md: 300,
+                    lg: 400,
+                  },
+                  m: {
+                    xs: 1,
+                    sm: 0,
+                  },
+                  boxShadow: 3,
+                }}
+              >
+                <Card
+                  sx={{ display: "flex", alignItems: "center" }}
+                  variant="outlined"
+                >
+                  <Box sx={{ p: 1, pb: 0, pr: 2 }}>
+                    <DownloadIcon
+                      sx={{
+                        background: "#36A9E1",
+                        color: "white",
+                        fontSize: 50,
+                      }}
+                    />
+                  </Box>
+                  <Box>
+                    <Typography color="text.secondary" gutterBottom>
+                      {t("money.expense")}
+                    </Typography>
+                    <Typography sx={{ fontWeight: "bold" }} gutterBottom>
+                      {summary.price_expense}
+                    </Typography>
+                  </Box>
+                </Card>
               </Box>
-            </Card>
+              <Box
+                sx={{
+                  minWidth: {
+                    xs: 200,
+                    md: 300,
+                    lg: 400,
+                  },
+                  m: {
+                    xs: 1,
+                    sm: 0,
+                  },
+                  boxShadow: 3,
+                }}
+              >
+                <Card
+                  sx={{ display: "flex", alignItems: "center" }}
+                  variant="outlined"
+                >
+                  <Box sx={{ p: 1, pb: 0, pr: 2 }}>
+                    <LocalAtmIcon
+                      sx={{
+                        background: "#EAE874",
+                        color: "white",
+                        fontSize: 50,
+                      }}
+                    />
+                  </Box>
+                  <Box>
+                    <Typography color="text.secondary" gutterBottom>
+                      {t("money.total")}
+                    </Typography>
+                    <Typography sx={{ fontWeight: "bold" }} gutterBottom>
+                      {summary.price_balance}
+                    </Typography>
+                  </Box>
+                </Card>
+              </Box>
+            </Box>
           </Box>
           <Box
             sx={{
-              minWidth: {
-                xs: 200,
-                md: 300,
-                lg: 400,
+              display: "flex",
+              justifyContent: {
+                xs: "center",
+                md: "space-around",
               },
-              m: {
-                xs: 1,
-                sm: 0,
+              alignItems: "center",
+              mt: 4,
+              flexDirection: {
+                xs: "column",
+                md: "row",
               },
-              boxShadow: 3,
             }}
           >
-            <Card
-              sx={{ display: "flex", alignItems: "center" }}
-              variant="outlined"
+            <Box
+              sx={{
+                width: {
+                  xs: 300,
+                  md: 450,
+                },
+                background: "white",
+                boxShadow: 2,
+                display: "flex",
+                justifyContent: "center",
+              }}
             >
-              <Box sx={{ p: 1, pb: 0, pr: 2 }}>
-                <DownloadIcon
-                  sx={{ background: "#36A9E1", color: "white", fontSize: 50 }}
-                />
+              <Box
+                sx={{
+                  width: {
+                    xs: 200,
+                    md: 300,
+                  },
+                  background: "white",
+                  padding: {
+                    xs: 1,
+                    md: 3,
+                  },
+                }}
+              >
+                <PieChart data={graph?.price_by_category} />
               </Box>
-              <Box>
-                <Typography color="text.secondary" gutterBottom>
-                  {t("money.expense")}
-                </Typography>
-                <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                  {summary.price_expense}
-                </Typography>
-              </Box>
-            </Card>
-          </Box>
-          <Box
-            sx={{
-              minWidth: {
-                xs: 200,
-                md: 300,
-                lg: 400,
-              },
-              m: {
-                xs: 1,
-                sm: 0,
-              },
-              boxShadow: 3,
-            }}
-          >
-            <Card
-              sx={{ display: "flex", alignItems: "center" }}
-              variant="outlined"
+            </Box>
+            <Box
+              sx={{
+                width: {
+                  xs: 300,
+                  md: 450,
+                },
+                background: "white",
+                padding: {
+                  xs: 1,
+                  md: 3,
+                },
+                mt: {
+                  xs: 2,
+                  md: 0,
+                },
+                height: {
+                  md: 300,
+                  sx: 100,
+                },
+                boxShadow: 2,
+              }}
+              className="bar-chart"
             >
-              <Box sx={{ p: 1, pb: 0, pr: 2 }}>
-                <LocalAtmIcon
-                  sx={{ background: "#EAE874", color: "white", fontSize: 50 }}
+              <div className="bar-chart-fake">
+                <BarChart
+                  data={graph?.price_by_time}
+                  dateFrom={dateFrom}
+                  dateTo={dateTo}
                 />
-              </Box>
-              <Box>
-                <Typography color="text.secondary" gutterBottom>
-                  {t("money.total")}
-                </Typography>
-                <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                  {summary.price_balance}
-                </Typography>
-              </Box>
-            </Card>
+              </div>
+            </Box>
           </Box>
-        </Box>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: {
-            xs: "center",
-            md: "space-around",
-          },
-          alignItems: "center",
-          mt: 4,
-          flexDirection: {
-            xs: "column",
-            md: "row",
-          },
-        }}
-      >
-        <Box
-          sx={{
-            width: {
-              xs: 300,
-              md: 450,
-            },
-            background: "white",
-            boxShadow: 2,
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
+          <Box sx={{ mt: 3, mb: 3 }}>
+            <HomeTable data={graph?.price_by_category} />
+          </Box>
+        </>
+      ) : (
+        <>
+          {" "}
           <Box
             sx={{
-              width: {
-                xs: 200,
-                md: 300,
-              },
-              background: "white",
-              padding: {
-                xs: 1,
-                md: 3,
-              },
+              display: "flex",
+              width: "100%",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "80vh",
             }}
           >
-            <PieChart />
+            <CircularProgress />
           </Box>
-        </Box>
-        <Box
-          sx={{
-            width: {
-              xs: 300,
-              md: 450,
-            },
-            background: "white",
-            padding: {
-              xs: 1,
-              md: 3,
-            },
-            mt: {
-              xs: 2,
-              md: 0,
-            },
-            height: {
-              md: 300,
-              sx: 100,
-            },
-            boxShadow: 2,
-          }}
-          className="bar-chart"
-        >
-          <div className="bar-chart-fake">
-            <BarChart />
-          </div>
-        </Box>
-      </Box>
-      <Box sx={{ mt: 3, mb: 3 }}>
-        <HomeTable />
-      </Box>
+        </>
+      )}
       <DateHomeModal open={open} onClose={handleClose} />
-    </Box>
-  ) : (
-    <Box
-      sx={{
-        display: "flex",
-        width: "100%",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-      }}
-    >
-      <CircularProgress />
     </Box>
   );
 }
