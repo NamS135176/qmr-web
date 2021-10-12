@@ -217,6 +217,7 @@ export default function Home() {
                 width: {
                   xs: 300,
                   md: 450,
+                  lg: 600,
                 },
                 background: "white",
                 boxShadow: 2,
@@ -229,6 +230,7 @@ export default function Home() {
                   width: {
                     xs: 200,
                     md: 300,
+                    lg: 450,
                   },
                   background: "white",
                   padding: {
@@ -245,6 +247,7 @@ export default function Home() {
                 width: {
                   xs: 300,
                   md: 450,
+                  lg: 600,
                 },
                 background: "white",
                 padding: {
@@ -257,7 +260,8 @@ export default function Home() {
                 },
                 height: {
                   md: 300,
-                  sx: 100,
+                  xs: 200,
+                  lg: 450,
                 },
                 boxShadow: 2,
               }}
