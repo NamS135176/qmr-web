@@ -141,8 +141,28 @@ export default function ForgotPassScreen() {
             fullWidth
             id="email"
             name="email"
-            label="Email"
-            sx={{ marginTop: 3 }}
+            placeholder="type email"
+            sx={{
+              marginTop: 3,
+              borderRadius: 2,
+              backgroundColor: "#ddd",
+              "& .MuiOutlinedInput-root": {
+                // - The Input-root, inside the TextField-root
+                "& fieldset": {
+                  // - The <fieldset> inside the Input-root
+                  borderWidth: 0, // - Set the Input border
+                },
+                "&:hover fieldset": {
+                  borderWidth: 0, // - Set the Input border when parent has :hover
+                },
+                "&.Mui-focused fieldset": {
+                  // - Set the Input border when parent is focused
+                  borderWidth: 1,
+                  borderRadius: 2,
+                  borderColor: "black",
+                },
+              },
+            }}
             value={values.email}
             onChange={handleChange}
             error={touched.email && Boolean(errors.email)}

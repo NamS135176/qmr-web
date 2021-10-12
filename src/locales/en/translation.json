@@ -63,5 +63,15 @@
     "imgtitle": "Image Edit",
     "delete": "delete",
     "size": "(Image size must 2mb or below)"
+  },
+  "login":{
+    "title1":"Quick Money Recorder PC",
+    "title2":"QMR Subscription function",
+    "holder_email":"type email",
+    "holder_password":"password",
+    "btn_text":"Login",
+    "suggest":"Please input email and password which has been registered to QMR subcription or Recopass",
+    "forgot_pass":"If you forgot your password, re-issue new password here.",
+    "warning":"Quick Money Recorder PC is beta version. Some function may not work."
   }
 }
