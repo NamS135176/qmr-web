@@ -34,6 +34,7 @@ export default function EditModal(props: any) {
   const [category, setCategory] = useState("");
 
   const handleChangeCategory = (event: SelectChangeEvent) => {
+    console.log(event.target.value);
     setCategory(event.target.value);
   };
 
@@ -65,6 +66,7 @@ export default function EditModal(props: any) {
           props.setOpen(false);
           setEditMode(false);
           setFileNames("");
+          setCategory("");
         }}
         open={props.open}
         closeAfterTransition
@@ -107,6 +109,7 @@ export default function EditModal(props: any) {
                   props.setOpen(false);
                   setEditMode(false);
                   setFileNames("");
+                  setCategory("");
                 }}
                 sx={{ backgroundColor: "#d6d9e0", color: "black" }}
               >
@@ -323,8 +326,10 @@ export default function EditModal(props: any) {
                             <MenuItem value="">
                               <em>None</em>
                             </MenuItem>
-                            {names.map((item) => {
-                              return <MenuItem value={item}>{item}</MenuItem>;
+                            {props.listCategories.map((item) => {
+                              return (
+                                <MenuItem value={item}>{item.name}</MenuItem>
+                              );
                             })}
                           </Select>
                         </FormControl>

@@ -25,7 +25,7 @@ import DateHomeModal from "components/Modal/DateHomeModal";
 import CustomCell from "components/CustomCell";
 import DatePicker from "components/DatePicker";
 import DateSelectContext from "utils/context";
-
+import { getCategories } from "api/category";
 function createData(
   name: string,
   calories: number,
@@ -50,7 +50,7 @@ export default function ListPageScreen() {
   const [itemData, setItemData] = useState({});
   const [open, setOpen] = useState(false);
   const dateSelect = useContext(DateSelectContext);
-
+  const [categories, setCategories] = useState([]);
   const handleClose = () => {
     console.log("close");
     setOpen(false);
@@ -59,7 +59,14 @@ export default function ListPageScreen() {
     console.log("open");
     setOpen(true);
   };
-  useEffect(() => {});
+  useEffect(() => {
+    const getCate = async () => {
+      const res = await getCategories();
+      console.log(res);
+      setCategories(res.categories);
+    };
+    getCate();
+  }, []);
   return (
     <Box sx={{ paddingBottom: 2 }}>
       <Nav page="list" />
@@ -70,6 +77,7 @@ export default function ListPageScreen() {
         data={itemData}
         setOpen={setOpenModal}
         open={openModal}
+        listCategories={categories}
       ></EditModal>
       <Box
         sx={{
