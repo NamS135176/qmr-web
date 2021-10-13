@@ -271,39 +271,35 @@ export default function Graph() {
               <Box
                 sx={{
                   width: {
-                    xs: 300,
+                    xs: "90vw",
+                    sm: 400,
                     md: 600,
                   },
-                  background: "white",
+                  height: {
+                    md: 450,
+                    xs: 200,
+                    lg: 450,
+                  },
+                  mt: {
+                    xs: 2,
+                    md: 0,
+                  },
+
                   boxShadow: 2,
                   display: "flex",
                   justifyContent: "center",
                 }}
               >
-                <Box
-                  sx={{
-                    width: {
-                      xs: 200,
-                      md: 400,
-                    },
-                    background: "white",
-                    padding: {
-                      xs: 1,
-                      md: 3,
-                    },
-                  }}
-                >
-                  <PieChart data={graph?.price_by_category} />
-                </Box>
+                <PieChart data={graph?.price_by_category} />
               </Box>
             </Box>
             <Box
               sx={{
                 width: {
-                  xs: 300,
+                  xs: "90%",
+                  sm: 400,
                   md: 600,
                 },
-                background: "white",
                 padding: {
                   xs: 1,
                   md: 3,
@@ -313,7 +309,9 @@ export default function Graph() {
                   md: 0,
                 },
                 height: {
-                  md: 400,
+                  md: 450,
+                  xs: 200,
+                  lg: 450,
                 },
                 boxShadow: 2,
                 display: chart === "bar" ? "block" : "none",

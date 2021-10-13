@@ -219,28 +219,19 @@ export default function Home() {
                   md: 450,
                   lg: 600,
                 },
+                height: {
+                  md: 300,
+                  xs: 200,
+                  lg: 450,
+                },
+
                 background: "white",
                 boxShadow: 2,
                 display: "flex",
                 justifyContent: "center",
               }}
             >
-              <Box
-                sx={{
-                  width: {
-                    xs: 200,
-                    md: 300,
-                    lg: 450,
-                  },
-                  background: "white",
-                  padding: {
-                    xs: 1,
-                    md: 3,
-                  },
-                }}
-              >
-                <PieChart data={graph?.price_by_category} />
-              </Box>
+              <PieChart data={graph?.price_by_category} />
             </Box>
             <Box
               sx={{
