@@ -39,9 +39,9 @@ export default function ListPageScreen() {
   const [page, setPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
-  const [direction, setDirection] = useState("");
+  const [direction, setDirection] = useState("downtime");
   const [order, setOrder] = useState("time");
-  const [sort, setSort] = useState("asc");
+  const [sort, setSort] = useState("desc");
 
   const handlePaging = (offset, total) => {
     if (total <= 20) {
@@ -89,7 +89,7 @@ export default function ListPageScreen() {
       );
       item.cate = cate.name;
       item.memo = item.memo.replaceAll("+", " ");
-      item.memo = item.memo.replaceAll("%2B", "+");
+      item.memo = decodeURIComponent(item.memo);
       return item;
     });
     setTransactions(newList);
