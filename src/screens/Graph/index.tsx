@@ -228,7 +228,7 @@ export default function Graph() {
                 setChart("pie");
               }}
             >
-              Pie
+              {t("graph.pie")}
             </Button>
             <Button
               sx={{
@@ -245,7 +245,7 @@ export default function Graph() {
                 setChart("bar");
               }}
             >
-              Bar
+              {t("graph.bar")}
             </Button>
           </Box>
           <Box

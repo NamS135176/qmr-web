@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import TableCell from "@mui/material/TableCell";
 import Box from "@mui/material/Box";
 import ArrowDropUp from "@mui/icons-material/ArrowDropUp";
 import ArrowDropDown from "@mui/icons-material/ArrowDropDown";
-export default function CustomCell() {
+import IconButton from "@mui/material/IconButton";
+export default function CustomCell(props) {
+  // const [direction, setDirection] = useState('')
   return (
     <TableCell
       sx={{
@@ -15,17 +17,51 @@ export default function CustomCell() {
           md: 0,
         },
       }}
-      align="left"
+      align="right"
     >
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
+          justifyContent: "flex-end",
         }}
       >
-        <ArrowDropUp sx={{ fontSize: 20, color: "black" }} />
-        <ArrowDropDown sx={{ fontSize: 20, color: "black" }} />
+        <IconButton
+          onClick={() => {
+            props.setDirect("up" + props.sort);
+            props.setOrder(props.sort);
+            props.setSort("asc");
+            props.getList(0, props.sort, "asc");
+
+            props.setPage(1);
+          }}
+          aria-label="delete"
+          size="small"
+        >
+          {props.direct == `up${props.sort}` ? (
+            <ArrowDropUp sx={{ fontSize: 15, color: "black" }} />
+          ) : (
+            <ArrowDropUp sx={{ fontSize: 15, color: "#ddd" }} />
+          )}
+        </IconButton>
+        <IconButton
+          onClick={() => {
+            props.setDirect("down" + props.sort);
+            props.setOrder(props.sort);
+            props.setSort("desc");
+            props.getList(0, props.sort, "desc");
+
+            props.setPage(1);
+          }}
+          aria-label="delete"
+          size="small"
+        >
+          {props.direct == `down${props.sort}` ? (
+            <ArrowDropDown sx={{ fontSize: 15, color: "black" }} />
+          ) : (
+            <ArrowDropDown sx={{ fontSize: 15, color: "#ddd" }} />
+          )}
+        </IconButton>
       </Box>
     </TableCell>
   );

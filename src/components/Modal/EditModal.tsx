@@ -20,18 +20,32 @@ import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Dropzone from "react-dropzone";
 
 export default function EditModal(props: any) {
+  const toDateWithOutTimeZone = (date) => {
+    let tempTime = date.split(":");
+    let dt = new Date();
+    dt.setHours(tempTime[0]);
+    dt.setMinutes(tempTime[1]);
+    dt.setSeconds(tempTime[2]);
+    return dt;
+  };
+
   const { t, i18n } = useTranslation();
   const [editMode, setEditMode] = useState(false);
   const [fileNames, setFileNames] = useState("");
-  const [valueDate, setValueDate] = useState<Date | null>(new Date());
-  const [valueTime, setValueTime] = React.useState<Date | null>(
-    new Date("2018-01-01T00:00:00.000Z")
+  const [valueDate, setValueDate] = useState<Date | null>(
+    new Date(props.data.time.split(" ")[0])
   );
-
+  const [valueTime, setValueTime] = React.useState<Date | null>(
+    new Date(toDateWithOutTimeZone(props.data.time.split(" ")[1]))
+  );
+  const [price, setPrice] = useState(props.data.price);
   const handleChangeDate = (newValue: Date | null) => {
     setValueDate(newValue);
   };
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState<any>({
+    id: props.data.category_id,
+    name: props.data.cate,
+  });
 
   const handleChangeCategory = (event: SelectChangeEvent) => {
     console.log(event.target.value);
@@ -323,8 +337,8 @@ export default function EditModal(props: any) {
                             displayEmpty
                             inputProps={{ "aria-label": "Without label" }}
                           >
-                            <MenuItem value="">
-                              <em>None</em>
+                            <MenuItem value={category}>
+                              {props.data.cate}
                             </MenuItem>
                             {props.listCategories.map((item) => {
                               return (
@@ -392,10 +406,14 @@ export default function EditModal(props: any) {
                               </InputAdornment>
                             ),
                           }}
+                          onChange={(txt) => {
+                            setPrice(txt);
+                          }}
                           id="outlined-basic"
                           label={t("editmodal.price")}
                           variant="outlined"
                           type="number"
+                          defaultValue={props.data.price}
                           sx={{
                             maxWidth: 220,
                           }}
@@ -447,8 +465,8 @@ export default function EditModal(props: any) {
                           maxRows={4}
                           minRows={2}
                           aria-label="maximum height"
-                          placeholder="Maximum 4 rows"
-                          defaultValue={props.data.name}
+                          placeholder=""
+                          defaultValue={props.data.memo}
                           style={{ width: "100%", fontSize: 15 }}
                         />
                       ) : (
