@@ -73,5 +73,9 @@
     "suggest":"Please input email and password which has been registered to QMR subcription or Recopass",
     "forgot_pass":"If you forgot your password, re-issue new password here.",
     "warning":"Quick Money Recorder PC is beta version. Some function may not work."
+  },
+  "graph":{
+    "pie":"pie",
+    "bar":"bar"
   }
 }
