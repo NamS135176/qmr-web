@@ -99,7 +99,7 @@ export default function ListPageScreen() {
 
   const handleChangePage = (event, value) => {
     setPage(value);
-    getList((value - 1) * 20, "time", "asc");
+    getList((value - 1) * 20, order, sort);
   };
 
   useEffect(() => {

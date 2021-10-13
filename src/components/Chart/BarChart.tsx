@@ -3,6 +3,7 @@ import { Bar, defaults, Chart } from "react-chartjs-2";
 import Box from "@mui/material/Box";
 import zoomPlugin from "chartjs-plugin-zoom";
 import moment from "moment";
+
 Chart.register(zoomPlugin);
 
 defaults.plugins.legend.display = false;
@@ -13,7 +14,7 @@ export default function BarChart({ data, dateFrom, dateTo }: any) {
   const arrDays: string[] = [];
   const arrFullDays: string[] = [];
   for (let i = 0; i < moment.duration(dateB.diff(dateA)).asDays() + 1; i++) {
-    arrDays.push(moment(dateFrom, "YYYY-MM-DD").add(i, "days").format("DD"));
+    arrDays.push(moment(dateFrom, "YYYY-MM-DD").add(i, "days").format("DD-MM"));
     arrFullDays.push(
       moment(dateFrom, "YYYY-MM-DD").add(i, "days").format("YYYY-MM-DD")
     );
@@ -28,6 +29,8 @@ export default function BarChart({ data, dateFrom, dateTo }: any) {
     }
     return count;
   });
+  console.log("🚀 ~ file: BarChart.tsx ~ line 31 ~ arrData ~ arrData", arrData);
+
   const options: any = {
     maintainAspectRatio: false,
     responsive: true,
@@ -59,33 +62,63 @@ export default function BarChart({ data, dateFrom, dateTo }: any) {
     },
     // scales: {
     //   x: {
-    //     type: "category",
+    //     type: 'category',
     //     min: 5,
     //     max: 365,
     //   },
     //   y: {
-    //     type: "linear",
+    //     type: 'linear',
     //   },
     // },
   };
+  const option: any = {
+    xaxis: {
+      categories: arrDays,
+    },
+    // tooltip: {
+    //   shared: true,
+    //   followCursor: true,
+    //   inverseOrder: true,
+    // },
+  };
+  const series = [
+    {
+      name: "abc",
+      data: arrData,
+    },
+  ];
   return (
-    <Box sx={{}}>
-      <Bar
-        options={options}
-        data={{
-          labels: arrDays,
-          datasets: [
-            {
-              label: "Graph",
-              backgroundColor: ["#BDDFAD"],
-              data: arrData,
-              borderWidth: 2,
-              borderColor: "#59AF32",
-              hoverBackgroundColor: "#A4D38F",
-            },
-          ],
-        }}
-      />
+    <Box
+      sx={{
+        height: {
+          md: 300,
+          xs: 150,
+        },
+      }}
+    >
+      {data ? (
+        <>
+          <Bar
+            options={options}
+            data={{
+              labels: arrDays,
+              datasets: [
+                {
+                  label: "Graph",
+                  backgroundColor: ["#BDDFAD"],
+                  data: arrData,
+                  borderWidth: 2,
+                  borderColor: "#59AF32",
+                  hoverBackgroundColor: "#A4D38F",
+                },
+              ],
+            }}
+          />
+          {/* <Chart options={option} series={series} type="bar" width="500" /> */}
+        </>
+      ) : (
+        <></>
+      )}
     </Box>
   );
 }

@@ -29,9 +29,10 @@ export default function CustomCell(props) {
         <IconButton
           onClick={() => {
             props.setDirect("up" + props.sort);
-            props.getList(0, props.sort, "asc");
             props.setOrder(props.sort);
             props.setSort("asc");
+            props.getList(0, props.sort, "asc");
+
             props.setPage(1);
           }}
           aria-label="delete"
@@ -46,9 +47,10 @@ export default function CustomCell(props) {
         <IconButton
           onClick={() => {
             props.setDirect("down" + props.sort);
-            props.getList(0, props.sort, "desc");
             props.setOrder(props.sort);
             props.setSort("desc");
+            props.getList(0, props.sort, "desc");
+
             props.setPage(1);
           }}
           aria-label="delete"
