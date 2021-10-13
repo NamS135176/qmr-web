@@ -9,7 +9,7 @@ export const getListTransactions = async (
   sort
 ) => {
   const res = await apiQMRWeb.get(
-    `/expense?time_from=${timeFrom}&time_to=${timeTo}&count=${count}&offset=${offset}&order_by=${order}&sort_by=${sort}`
+    `/transactions?time_from=${timeFrom}&time_to=${timeTo}&count=${count}&offset=${offset}&order_by=${order}&sort_by=${sort}`
   );
   return getResponseData(res);
 };
