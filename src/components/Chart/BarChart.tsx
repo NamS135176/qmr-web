@@ -91,7 +91,7 @@ export default function BarChart({ data, dateFrom, dateTo }: any) {
     <Box
       sx={{
         height: {
-          md: 300,
+          lg: 300,
           xs: 150,
         },
       }}
