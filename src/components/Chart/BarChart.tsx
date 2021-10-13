@@ -57,16 +57,16 @@ export default function BarChart({ data, dateFrom, dateTo }: any) {
         },
       },
     },
-    scales: {
-      x: {
-        type: "category",
-        min: 5,
-        max: 365,
-      },
-      y: {
-        type: "linear",
-      },
-    },
+    // scales: {
+    //   x: {
+    //     type: "category",
+    //     min: 5,
+    //     max: 365,
+    //   },
+    //   y: {
+    //     type: "linear",
+    //   },
+    // },
   };
   return (
     <Box sx={{}}>
