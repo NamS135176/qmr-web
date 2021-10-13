@@ -257,6 +257,7 @@ export default function Graph() {
               },
               alignItems: "center",
               mt: 4,
+              mb: 3,
               flexDirection: {
                 xs: "column",
                 md: "row",
