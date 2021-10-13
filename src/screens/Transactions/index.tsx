@@ -194,7 +194,7 @@ export default function ListPageScreen() {
                       setOrder={setOrder}
                       setSort={setSort}
                       getList={getList}
-                      sort="cate"
+                      sort="category_id"
                       setDirect={setDirection}
                       direct={direction}
                     ></CustomCell>
