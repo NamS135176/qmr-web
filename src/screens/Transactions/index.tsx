@@ -274,7 +274,7 @@ export default function ListPageScreen() {
                         sx={{ borderRight: "1px solid #ddd" }}
                         align="left"
                       ></TableCell>
-                      <TableCell align="left">
+                      <TableCell align="left" sx={{ minWidth: 80 }}>
                         {row.photo == "" ? (
                           <></>
                         ) : (
@@ -285,7 +285,7 @@ export default function ListPageScreen() {
                         sx={{ borderRight: "1px solid #ddd" }}
                         align="left"
                       ></TableCell>
-                      <TableCell align="left">
+                      <TableCell align="left" sx={{ minWidth: 150 }}>
                         <Button
                           sx={{
                             backgroundColor: "#67c2ef",

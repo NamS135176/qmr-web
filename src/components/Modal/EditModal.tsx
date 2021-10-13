@@ -36,7 +36,7 @@ export default function EditModal(props: any) {
     new Date(props.data.time.split(" ")[0])
   );
   const [valueTime, setValueTime] = React.useState<Date | null>(
-    new Date(toDateWithOutTimeZone(props.data.time.split(" ")[1]))
+    toDateWithOutTimeZone(props.data.time.split(" ")[1])
   );
   const [price, setPrice] = useState(props.data.price);
   const handleChangeDate = (newValue: Date | null) => {
@@ -96,7 +96,7 @@ export default function EditModal(props: any) {
               top: "50%",
               left: "50%",
               transform: "translate(-50%, -50%)",
-              minWidth: {
+              width: {
                 xs: "90%",
                 md: 600,
               },
@@ -470,7 +470,9 @@ export default function EditModal(props: any) {
                           style={{ width: "100%", fontSize: 15 }}
                         />
                       ) : (
-                        <Typography sx={{ textAlign: "left" }}>
+                        <Typography
+                          sx={{ textAlign: "left", wordBreak: "break-word" }}
+                        >
                           {props.data.memo}
                         </Typography>
                       )}
