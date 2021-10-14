@@ -18,8 +18,12 @@ import Select, { SelectChangeEvent } from "@mui/material/Select";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Dropzone from "react-dropzone";
-
+import moment from "moment";
+import { updateTransaction } from "api/transaction";
+import { useHistory } from "react-router-dom";
 export default function EditModal(props: any) {
+  const history = useHistory();
+
   const toDateWithOutTimeZone = (date) => {
     let tempTime = date.split(":");
     let dt = new Date();
@@ -39,6 +43,8 @@ export default function EditModal(props: any) {
     toDateWithOutTimeZone(props.data.time.split(" ")[1])
   );
   const [price, setPrice] = useState(props.data.price);
+  const [memo, setMemo] = useState(props.data.memo);
+
   const handleChangeDate = (newValue: Date | null) => {
     setValueDate(newValue);
   };
@@ -57,18 +63,26 @@ export default function EditModal(props: any) {
     setFileNames(acceptedFiles[0].name);
   };
 
-  const names = [
-    "Oliver Hansen",
-    "Van Henry",
-    "April Tucker",
-    "Ralph Hubbard",
-    "Omar Alexander",
-    "Carlos Abbott",
-    "Miriam Wagner",
-    "Bradley Wilkerson",
-    "Virginia Andrews",
-    "Kelly Snyder",
-  ];
+  const handleUpdate = async () => {
+    const oldItem = props.data;
+
+    const res = await updateTransaction(
+      oldItem.id,
+      category.id,
+      oldItem.payment_method_id,
+      `${moment(valueDate).format("YYYY-MM-DD")} ${moment(valueTime).format(
+        "HH:mm:ss"
+      )}`,
+      Number(price),
+      memo,
+      oldItem.photo,
+      Number(oldItem.count),
+      oldItem.client_id,
+      oldItem.device_id
+    );
+    props.getList((props.page - 1) * 20, props.order, props.sort);
+    props.setOpen(false);
+  };
 
   return (
     <Box>
@@ -132,7 +146,7 @@ export default function EditModal(props: any) {
               <Typography>{t("editmodal.title")}</Typography>
               {editMode ? (
                 <Button
-                  onClick={() => {}}
+                  onClick={handleUpdate}
                   sx={{ backgroundColor: "#36a9e1", color: "white" }}
                 >
                   {t("editmodal.done")}
@@ -406,8 +420,8 @@ export default function EditModal(props: any) {
                               </InputAdornment>
                             ),
                           }}
-                          onChange={(txt) => {
-                            setPrice(txt);
+                          onChange={(e) => {
+                            setPrice(e.target.value);
                           }}
                           id="outlined-basic"
                           label={t("editmodal.price")}
@@ -468,6 +482,9 @@ export default function EditModal(props: any) {
                           placeholder=""
                           defaultValue={props.data.memo}
                           style={{ width: "100%", fontSize: 15 }}
+                          onChange={(e) => {
+                            setMemo(e.target.value);
+                          }}
                         />
                       ) : (
                         <Typography
