@@ -44,3 +44,28 @@ export const deleteTransaction = async (id) => {
   const res = await apiQMRWeb.delete(`transactions/${id}`);
   return getResponseData(res);
 };
+
+export const createTransaction = async (
+  category_id,
+  time,
+  price,
+  memo,
+  device_id,
+  photo = "",
+  count = 1,
+  client_id = "0",
+  payment_method_id = "0"
+) => {
+  const res = await apiQMRWeb.post(`transactions`, {
+    category_id,
+    payment_method_id,
+    time,
+    price,
+    memo,
+    photo,
+    count,
+    client_id,
+    device_id,
+  });
+  return getResponseData(res);
+};

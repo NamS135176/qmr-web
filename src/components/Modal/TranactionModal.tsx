@@ -17,21 +17,29 @@ import React, { useState, useEffect } from "react";
 import Dropzone from "react-dropzone";
 import { useTranslation } from "react-i18next";
 import jaLocale from "date-fns/locale/ja";
-
+import moment from "moment";
 import "./style.scss";
 import { getCategory } from "api/category";
+import { createTransaction } from "api/transaction";
 
 export default function TranactionModal({ open, onClose }: any) {
-  const [value, setValue] = useState<Date | null>(new Date());
+  const [value, setValue] = useState<any>(new Date());
   const [category, setCategory] = useState("");
   const [listCategory, setListCategory] = useState([]);
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState<Number>();
   const [memo, setMemo] = useState("");
   const [fileNames, setFileNames] = useState("");
   const { t, i18n } = useTranslation();
   const handleChange = (newValue: Date | null) => {
-    setValue(newValue);
+    console.log({ newValue });
+    const date = moment(newValue).format("YYYY-MM-DD HH:MM:ss");
+    console.log(
+      "🚀 ~ file: TranactionModal.tsx ~ line 35 ~ handleChange ~ date",
+      date
+    );
+    setValue(date);
   };
+  console.log(window.navigator.userAgent);
 
   const handleChangeCategory = (event: SelectChangeEvent) => {
     console.log("change");
@@ -41,7 +49,7 @@ export default function TranactionModal({ open, onClose }: any) {
   const handleChangePrice = (e: any) => {
     const re = /^[0-9\b]+$/;
     if (e.target.value === "" || re.test(e.target.value)) {
-      setPrice(e.target.value);
+      setPrice(parseInt(e.target.value));
     }
   };
   const handleChangeMemo = (e: any) => {
@@ -61,6 +69,24 @@ export default function TranactionModal({ open, onClose }: any) {
     const response = await getCategory();
     console.log({ response });
     setListCategory(response.categories);
+  };
+
+  const handleCreateTransaction = async () => {
+    if (category && value && price && memo) {
+      const res = await createTransaction(
+        category,
+        value,
+        price,
+        memo,
+        window.navigator.userAgent
+      );
+      setPrice(0);
+      setMemo("");
+      setCategory("");
+      window.location.reload();
+      console.log({ res });
+    }
+    onClose();
   };
   useEffect(() => {
     getCategoryData();
@@ -112,7 +138,7 @@ export default function TranactionModal({ open, onClose }: any) {
                   onChange={handleChangeCategory}
                 >
                   {listCategory.map((item: any) => (
-                    <MenuItem key={item.id} value={item.name}>
+                    <MenuItem key={item.id} value={item.id}>
                       {item.name}
                     </MenuItem>
                   ))}
@@ -177,7 +203,7 @@ export default function TranactionModal({ open, onClose }: any) {
                     color: "white",
                   },
                 }}
-                onClick={onClose}
+                onClick={handleCreateTransaction}
               >
                 {t("transaction.save")}
               </Button>
