@@ -32,14 +32,10 @@ export default function TranactionModal({ open, onClose }: any) {
   const { t, i18n } = useTranslation();
   const handleChange = (newValue: Date | null) => {
     console.log({ newValue });
-    const date = moment(newValue).format("YYYY-MM-DD HH:MM:ss");
-    console.log(
-      "🚀 ~ file: TranactionModal.tsx ~ line 35 ~ handleChange ~ date",
-      date
-    );
-    setValue(date);
+    const date = moment(newValue).format("YYYY-MM-DD HH:mm:ss");
+
+    setValue(newValue);
   };
-  console.log(window.navigator.userAgent);
 
   const handleChangeCategory = (event: SelectChangeEvent) => {
     console.log("change");
