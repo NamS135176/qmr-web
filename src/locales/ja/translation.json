@@ -78,5 +78,11 @@
   "graph":{
     "pie":"円グラフ",
     "bar":"棒グラフ"
+  },
+  "menunav":{
+    "setting":"言語設定",
+    "jap":"日本語",
+    "curency":"通貨設定",
+    "logout":"ログアウト"
   }
 }

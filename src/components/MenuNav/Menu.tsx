@@ -54,9 +54,9 @@ export default function MenuNav({ openMenu, onClose }: any) {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem onClick={() => {}}>
+        <MenuItem sx={{ minWidth: 250 }} onClick={() => {}}>
           <SettingsIcon />
-          <Typography> &nbsp;Language Setting</Typography>
+          <Typography> &nbsp;{t("menunav.setting")}</Typography>
         </MenuItem>
         <MenuItem
           onClick={() => {
@@ -67,7 +67,7 @@ export default function MenuNav({ openMenu, onClose }: any) {
           <Box sx={{ width: "1em", height: "1em", fontSize: "1.5rem" }}>
             {i18n.language == "ja" ? <Check /> : <></>}
           </Box>
-          <Typography> &nbsp;Japanese</Typography>
+          <Typography> &nbsp;{t("menunav.jap")}</Typography>
         </MenuItem>
         <MenuItem
           onClick={() => {
@@ -82,11 +82,11 @@ export default function MenuNav({ openMenu, onClose }: any) {
         </MenuItem>
         <MenuItem onClick={() => {}}>
           <AttachMoneyIcon />
-          <Typography> &nbsp;Curency Setting</Typography>
+          <Typography> &nbsp;{t("menunav.curency")}</Typography>
         </MenuItem>
         <MenuItem onClick={handleLogout}>
           <LogoutIcon />
-          <Typography> &nbsp;Log out</Typography>
+          <Typography> &nbsp;{t("menunav.logout")}</Typography>
         </MenuItem>
       </Menu>
     </Box>
