@@ -8,6 +8,7 @@ export default function ButtonNav(props) {
   return (
     <Button
       sx={{
+        width: 105,
         height: "100%",
         "&:hover": {
           backgroundColor: "#00B050",
