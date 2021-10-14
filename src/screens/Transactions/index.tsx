@@ -73,14 +73,14 @@ export default function ListPageScreen() {
     setLoading(true);
     const res1: any = await getCategory();
     const res2: any = await getListTransactions(
-      dateFrom,
-      dateTo,
+      dateFrom[0],
+      dateTo[0],
       20,
       offset,
       time,
       sort
     );
-    console.log(res2);
+    console.log({ res2 });
 
     setCategories(res1.categories);
     const newList = res2.data.map((item: any) => {
