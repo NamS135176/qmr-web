@@ -21,6 +21,8 @@ import Dropzone from "react-dropzone";
 import moment from "moment";
 import { updateTransaction } from "api/transaction";
 import { useHistory } from "react-router-dom";
+import DesktopTimePicker from "@mui/lab/DesktopTimePicker";
+
 export default function EditModal(props: any) {
   const history = useHistory();
 
@@ -285,11 +287,13 @@ export default function EditModal(props: any) {
                     >
                       {editMode ? (
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
-                          <MobileTimePicker
+                          <DesktopTimePicker
                             label={t("editmodal.time")}
                             value={valueTime}
-                            onChange={(newValue) => {
-                              setValueTime(newValue);
+                            onChange={(newValue: any) => {
+                              if (newValue != "Invalid Date") {
+                                setValueTime(newValue);
+                              }
                             }}
                             renderInput={(params) => <TextField {...params} />}
                           />
@@ -341,7 +345,7 @@ export default function EditModal(props: any) {
                           sx={{
                             minWidth: {
                               sx: "100%",
-                              md: 220,
+                              md: 200,
                             },
                           }}
                         >
