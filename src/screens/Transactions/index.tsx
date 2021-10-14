@@ -22,7 +22,7 @@ import CustomCell from "components/CustomCell";
 import DatePicker from "components/DatePicker";
 import DateSelectContext from "utils/context";
 import { getCategory } from "api/category";
-import { getListTransactions } from "api/transaction";
+import { getListTransactions, deleteTransaction } from "api/transaction";
 import { AnyARecord } from "dns";
 import CircularProgress from "@mui/material/CircularProgress";
 import Pagination from "@mui/material/Pagination";
@@ -308,8 +308,13 @@ export default function ListPageScreen() {
                           <EditOutlined sx={{ fontSize: 25, color: "white" }} />
                         </Button>
                         <Button
-                          onClick={() => {
+                          onClick={async () => {
                             const r = window.confirm(t("editmodal.confirm"));
+                            if (r) {
+                              const res = await deleteTransaction(row.id);
+                              getList((page - 1) * 20, order, sort);
+                              //  console.log('ssdkjfhsdjkfhskdjhf');
+                            }
                           }}
                           sx={{ backgroundColor: "#fabb3d", minWidth: 40 }}
                         >

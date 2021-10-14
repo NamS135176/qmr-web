@@ -37,5 +37,10 @@ export const updateTransaction = async (
     client_id,
     device_id,
   });
-  return 0;
+  return getResponseData(res);
+};
+
+export const deleteTransaction = async (id) => {
+  const res = await apiQMRWeb.delete(`transactions/${id}`);
+  return getResponseData(res);
 };
