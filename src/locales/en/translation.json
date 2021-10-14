@@ -62,7 +62,8 @@
     "confirm": "Do you want to delete?",
     "imgtitle": "Image Edit",
     "delete": "delete",
-    "size": "(Image size must 2mb or below)"
+    "size": "(Image size must 2mb or below)",
+    "warning":"(Only limit 2000 characters)"
   },
   "login":{
     "title1":"Quick Money Recorder PC",

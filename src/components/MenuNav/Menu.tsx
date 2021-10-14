@@ -11,6 +11,7 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
+import Check from "@mui/icons-material/Check";
 
 export default function MenuNav({ openMenu, onClose }: any) {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -63,7 +64,9 @@ export default function MenuNav({ openMenu, onClose }: any) {
             i18n.changeLanguage("ja");
           }}
         >
-          <Box sx={{ width: "1em", height: "1em", fontSize: "1.5rem" }}></Box>
+          <Box sx={{ width: "1em", height: "1em", fontSize: "1.5rem" }}>
+            {i18n.language == "ja" ? <Check /> : <></>}
+          </Box>
           <Typography> &nbsp;Japanese</Typography>
         </MenuItem>
         <MenuItem
@@ -72,7 +75,9 @@ export default function MenuNav({ openMenu, onClose }: any) {
             i18n.changeLanguage("en");
           }}
         >
-          <Box sx={{ width: "1em", height: "1em", fontSize: "1.5rem" }}></Box>
+          <Box sx={{ width: "1em", height: "1em", fontSize: "1.5rem" }}>
+            {i18n.language == "en" ? <Check /> : <></>}
+          </Box>
           <Typography> &nbsp;English</Typography>
         </MenuItem>
         <MenuItem onClick={() => {}}>

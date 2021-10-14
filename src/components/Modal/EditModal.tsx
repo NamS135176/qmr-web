@@ -22,9 +22,13 @@ import moment from "moment";
 import { updateTransaction } from "api/transaction";
 import { useHistory } from "react-router-dom";
 import DesktopTimePicker from "@mui/lab/DesktopTimePicker";
-
+import Checkbox from "@mui/material/Checkbox";
 export default function EditModal(props: any) {
   const history = useHistory();
+  const [checked, setChecked] = React.useState(false);
+  const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(event.target.checked);
+  };
 
   const toDateWithOutTimeZone = (date) => {
     let tempTime = date.split(":");
@@ -479,17 +483,24 @@ export default function EditModal(props: any) {
                       }}
                     >
                       {editMode ? (
-                        <TextareaAutosize
-                          maxRows={4}
-                          minRows={2}
-                          aria-label="maximum height"
-                          placeholder=""
-                          defaultValue={props.data.memo}
-                          style={{ width: "100%", fontSize: 15 }}
-                          onChange={(e) => {
-                            setMemo(e.target.value);
-                          }}
-                        />
+                        <Box>
+                          <TextareaAutosize
+                            maxRows={4}
+                            minRows={2}
+                            aria-label="maximum height"
+                            placeholder=""
+                            defaultValue={props.data.memo}
+                            style={{ width: "100%", fontSize: 15 }}
+                            onChange={(e) => {
+                              if (e.target.value.length <= 2000) {
+                                setMemo(e.target.value);
+                              }
+                            }}
+                          />
+                          <Typography sx={{ fontSize: 14 }}>
+                            {t("editmodal.warning")}
+                          </Typography>
+                        </Box>
                       ) : (
                         <Typography
                           sx={{ textAlign: "left", wordBreak: "break-word" }}
@@ -541,6 +552,19 @@ export default function EditModal(props: any) {
                       )}
                     </Dropzone>
                     <Box>
+                      {props.data.photo != "" ? (
+                        <Box sx={{ display: "flex", alignItems: "center" }}>
+                          <Checkbox
+                            sx={{ paddingLeft: 0 }}
+                            checked={checked}
+                            onChange={handleCheck}
+                            inputProps={{ "aria-label": "controlled" }}
+                          />
+                          <Typography>{t("editmodal.delete")}</Typography>
+                        </Box>
+                      ) : (
+                        <></>
+                      )}
                       <strong>Files: &nbsp;</strong>
                       <span>{fileNames}</span>
                       <Typography> {t("editmodal.size")}</Typography>

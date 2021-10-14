@@ -93,7 +93,7 @@ export default function TranactionModal({ open, onClose }: any) {
       <Dialog fullWidth={true} open={open} onClose={onClose}>
         <Box sx={{}}>
           <DialogTitle sx={{ background: "#78CD51", color: "white" }}>
-            Quick Input Panel
+            {t("transaction.title")}
           </DialogTitle>
           <DialogContent>
             <Box sx={{ marginTop: 3 }}>
@@ -143,7 +143,7 @@ export default function TranactionModal({ open, onClose }: any) {
             </Box>
             <Box sx={{ marginTop: 2 }}>
               <TextField
-                label="Price"
+                label={t("editmodal.price")}
                 id="price"
                 type="number"
                 sx={{ width: "100%" }}
@@ -159,13 +159,13 @@ export default function TranactionModal({ open, onClose }: any) {
               <TextField
                 error={memo.length >= 2000}
                 sx={{ width: "100%" }}
-                label="Memo"
+                label={t("editmodal.memo")}
                 onChange={handleChangeMemo}
                 multiline
                 id="memo"
                 variant="outlined"
                 rows={2}
-                helperText="(Only limit 2000 characters)"
+                helperText={t("editmodal.warning")}
               />
             </Box>
             <Box>
