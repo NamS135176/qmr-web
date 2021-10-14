@@ -111,12 +111,20 @@ export default function ListPageScreen() {
       <DateHomeModal open={open} onClose={handleClose} />
       <DatePicker dateSelect={dateSelect} isOpen={handleOpen} />
 
-      <EditModal
-        data={itemData}
-        setOpen={setOpenModal}
-        open={openModal}
-        listCategories={categories}
-      ></EditModal>
+      {openModal ? (
+        <EditModal
+          data={itemData}
+          setOpen={setOpenModal}
+          open={openModal}
+          listCategories={categories}
+          getList={getList}
+          page={page}
+          order={order}
+          sort={sort}
+        ></EditModal>
+      ) : (
+        <></>
+      )}
       {loading ? (
         <Box
           sx={{
