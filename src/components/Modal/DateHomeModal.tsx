@@ -141,6 +141,7 @@ export default function DateHomeModal({ open, onClose }: any) {
                     >
                       <MobileDatePicker
                         label="開始日"
+                        cancelText="キャンセル"
                         value={values.valueFrom}
                         onChange={(value) => {
                           setFieldValue(
@@ -199,6 +200,7 @@ export default function DateHomeModal({ open, onClose }: any) {
                     >
                       <MobileDatePicker
                         label="終了日"
+                        cancelText="キャンセル"
                         value={values.valueTo}
                         onChange={(value) => {
                           setFieldValue(

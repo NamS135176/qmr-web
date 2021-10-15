@@ -35,7 +35,7 @@ export default function MenuNav({ openMenu, onClose }: any) {
   };
 
   return (
-    <Box sx={{ display: "flex", flex: 1 }}>
+    <Box sx={{}}>
       <IconButton
         id="basic-button"
         aria-controls="basic-menu"
@@ -46,12 +46,23 @@ export default function MenuNav({ openMenu, onClose }: any) {
         <BuildIcon sx={{ color: "white", fontSize: 25 }} />
       </IconButton>
       <Menu
+        // sx={{
+        //   background: 'red',
+        // }}
         id="basic-menu"
         anchorEl={anchorEl}
         open={open || openMenu}
         onClose={handleClose}
         MenuListProps={{
           "aria-labelledby": "basic-button",
+        }}
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "left",
         }}
       >
         <MenuItem sx={{ minWidth: 250 }} onClick={() => {}}>
