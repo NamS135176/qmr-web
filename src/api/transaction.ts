@@ -24,7 +24,8 @@ export const updateTransaction = async (
   photo,
   count,
   client_id,
-  device_id
+  device_id,
+  remove_photo
 ) => {
   const res = await apiQMRWeb.put(`transactions/${id}`, {
     category_id,
@@ -36,6 +37,7 @@ export const updateTransaction = async (
     count,
     client_id,
     device_id,
+    remove_photo,
   });
   return getResponseData(res);
 };
@@ -67,5 +69,14 @@ export const createTransaction = async (
     client_id,
     device_id,
   });
+  return getResponseData(res);
+};
+
+export const uploadImage = async (file: any) => {
+  apiQMRWeb.setHeader("Content-Type", "multipart/form-data");
+  let formData = new FormData();
+  formData.append("image", file);
+  const res = await apiQMRWeb.post("upload-photo", formData);
+  apiQMRWeb.setHeader("Content-Type", "application/json");
   return getResponseData(res);
 };

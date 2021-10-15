@@ -19,16 +19,37 @@ import InputAdornment from "@mui/material/InputAdornment";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
 import Dropzone from "react-dropzone";
 import moment from "moment";
-import { updateTransaction } from "api/transaction";
+import { updateTransaction, uploadImage } from "api/transaction";
 import { useHistory } from "react-router-dom";
 import DesktopTimePicker from "@mui/lab/DesktopTimePicker";
 import Checkbox from "@mui/material/Checkbox";
+import el from "date-fns/esm/locale/el/index.js";
+import Resizer from "react-image-file-resizer";
+
 export default function EditModal(props: any) {
   const history = useHistory();
   const [checked, setChecked] = React.useState(false);
   const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
   };
+
+  const resizeFile = (file: any) =>
+    new Promise((resolve) => {
+      const fileType = file.type.split("/")[1];
+      console.log(fileType);
+      Resizer.imageFileResizer(
+        file,
+        1920,
+        1080,
+        fileType,
+        75,
+        0,
+        (uri) => {
+          resolve(uri);
+        },
+        "file"
+      );
+    });
 
   const toDateWithOutTimeZone = (date) => {
     let tempTime = date.split(":");
@@ -42,6 +63,7 @@ export default function EditModal(props: any) {
   const { t, i18n } = useTranslation();
   const [editMode, setEditMode] = useState(false);
   const [fileNames, setFileNames] = useState("");
+  const [file, setFile] = useState(null);
   const [valueDate, setValueDate] = useState<Date | null>(
     new Date(props.data.time.split(" ")[0])
   );
@@ -64,28 +86,84 @@ export default function EditModal(props: any) {
     setCategory(event.target.value);
   };
 
-  const handleDrop = (acceptedFiles: any) => {
-    console.log({ acceptedFiles });
-    setFileNames(acceptedFiles[0].name);
+  const checkSize = (file: any) => {
+    const mb = file.size / 1024 / 1024;
+    if (mb <= 2) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const handleDrop = async (acceptedFiles: any) => {
+    const newImg: any = await resizeFile(acceptedFiles[0]);
+    console.log(newImg);
+
+    if (checkSize(newImg)) {
+      setFile(newImg);
+      setFileNames(acceptedFiles[0].name);
+    } else {
+      window.alert("File size over 2MB");
+    }
   };
 
   const handleUpdate = async () => {
     const oldItem = props.data;
+    if (checked) {
+      const res = await updateTransaction(
+        oldItem.id,
+        category.id,
+        oldItem.payment_method_id,
+        `${moment(valueDate).format("YYYY-MM-DD")} ${moment(valueTime).format(
+          "HH:mm:ss"
+        )}`,
+        Number(price),
+        memo,
+        oldItem.photo,
+        Number(oldItem.count),
+        oldItem.client_id,
+        oldItem.device_id,
+        true
+      );
+    } else {
+      if (file) {
+        console.log("upload file");
 
-    const res = await updateTransaction(
-      oldItem.id,
-      category.id,
-      oldItem.payment_method_id,
-      `${moment(valueDate).format("YYYY-MM-DD")} ${moment(valueTime).format(
-        "HH:mm:ss"
-      )}`,
-      Number(price),
-      memo,
-      oldItem.photo,
-      Number(oldItem.count),
-      oldItem.client_id,
-      oldItem.device_id
-    );
+        const resImg = await uploadImage(file);
+
+        const res = await updateTransaction(
+          oldItem.id,
+          category.id,
+          oldItem.payment_method_id,
+          `${moment(valueDate).format("YYYY-MM-DD")} ${moment(valueTime).format(
+            "HH:mm:ss"
+          )}`,
+          Number(price),
+          memo,
+          resImg.photo_url,
+          Number(oldItem.count),
+          oldItem.client_id,
+          oldItem.device_id,
+          false
+        );
+      } else {
+        const res = await updateTransaction(
+          oldItem.id,
+          category.id,
+          oldItem.payment_method_id,
+          `${moment(valueDate).format("YYYY-MM-DD")} ${moment(valueTime).format(
+            "HH:mm:ss"
+          )}`,
+          Number(price),
+          memo,
+          oldItem.photo,
+          Number(oldItem.count),
+          oldItem.client_id,
+          oldItem.device_id,
+          false
+        );
+      }
+    }
     props.getList((props.page - 1) * 20, props.order, props.sort);
     props.setOpen(false);
   };
