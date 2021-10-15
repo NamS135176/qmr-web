@@ -1,6 +1,7 @@
 import { createContext, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 interface ContextState {
   // set the type of state you want to handle with context e.g.
   dateFrom: any;
@@ -11,6 +12,7 @@ interface ContextState {
 }
 const DateSelectContext = createContext({} as ContextState);
 export function DateSelectProvider(props) {
+  const { t, i18n } = useTranslation();
   const { children } = props;
 
   let monthYearInit = moment().format("MMMM YYYY");

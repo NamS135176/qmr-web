@@ -91,7 +91,6 @@ export default function TranactionModal({ open, onClose }: any) {
         setPrice(0);
         setMemo("");
         setCategory("");
-        // window.location.reload();
         reloadPage[1](!reloadPage[0]);
         console.log({ reloadPage });
 
