@@ -223,8 +223,20 @@ export default function Nav(props) {
                     alignItems: "center",
                   }}
                 >
-                  <Box>
-                    <IconButton onClick={handleOpen}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "cemter",
+                    }}
+                  >
+                    <IconButton
+                      sx={{
+                        width: 41,
+                        height: 41,
+                      }}
+                      onClick={handleOpen}
+                    >
                       <AddCircleOutlineIcon
                         className="menuButton"
                         sx={{ fontSize: 25 }}
