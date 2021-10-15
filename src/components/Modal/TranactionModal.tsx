@@ -20,8 +20,9 @@ import jaLocale from "date-fns/locale/ja";
 import moment from "moment";
 import "./style.scss";
 import { getCategory } from "api/category";
-import { createTransaction } from "api/transaction";
+import { createTransaction, uploadImage } from "api/transaction";
 import DateSelectContext from "utils/context";
+import { checkSize, resizeFile } from "utils/UploadFile";
 
 export default function TranactionModal({ open, onClose }: any) {
   const [value, setValue] = useState<any>(new Date());
@@ -31,6 +32,8 @@ export default function TranactionModal({ open, onClose }: any) {
   const [memo, setMemo] = useState("");
   const [fileNames, setFileNames] = useState("");
   const { t, i18n } = useTranslation();
+  const [file, setFile] = useState(null);
+
   const { dateFrom, dateTo, reloadPage } = useContext(DateSelectContext);
 
   const handleChange = (newValue: Date | null) => {
@@ -60,9 +63,14 @@ export default function TranactionModal({ open, onClose }: any) {
     console.log(e.target.file);
   };
 
-  const handleDrop = (acceptedFiles: any) => {
-    console.log({ acceptedFiles });
-    setFileNames(acceptedFiles[0].name);
+  const handleDrop = async (acceptedFiles: any) => {
+    const newImg: any = await resizeFile(acceptedFiles[0]);
+    if (checkSize(newImg)) {
+      setFile(newImg);
+      setFileNames(acceptedFiles[0].name);
+    } else {
+      window.alert("File size over 2MB");
+    }
   };
   const getCategoryData = async () => {
     const response = await getCategory();
@@ -72,21 +80,41 @@ export default function TranactionModal({ open, onClose }: any) {
 
   const handleCreateTransaction = async () => {
     if (category && value && price) {
-      const res = await createTransaction(
-        category,
-        value,
-        price,
-        memo,
-        window.navigator.userAgent
-      );
-      setPrice(0);
-      setMemo("");
-      setCategory("");
-      // window.location.reload();
-      reloadPage[1](!reloadPage[0]);
-      console.log({ reloadPage });
+      if (!file) {
+        const res = await createTransaction(
+          category,
+          value,
+          price,
+          memo,
+          window.navigator.userAgent
+        );
+        setPrice(0);
+        setMemo("");
+        setCategory("");
+        // window.location.reload();
+        reloadPage[1](!reloadPage[0]);
+        console.log({ reloadPage });
 
-      console.log({ res });
+        console.log({ res });
+      } else {
+        const resImg = await uploadImage(file);
+        const res = await createTransaction(
+          category,
+          value,
+          price,
+          memo,
+          window.navigator.userAgent,
+          resImg.photo_url
+        );
+        setPrice(0);
+        setMemo("");
+        setCategory("");
+        // window.location.reload();
+        reloadPage[1](!reloadPage[0]);
+        console.log({ reloadPage });
+
+        console.log({ res });
+      }
     }
     onClose();
   };
