@@ -13,7 +13,7 @@ import MenuItem from "@mui/material/MenuItem";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Dropzone from "react-dropzone";
 import { useTranslation } from "react-i18next";
 import jaLocale from "date-fns/locale/ja";
@@ -21,6 +21,7 @@ import moment from "moment";
 import "./style.scss";
 import { getCategory } from "api/category";
 import { createTransaction } from "api/transaction";
+import DateSelectContext from "utils/context";
 
 export default function TranactionModal({ open, onClose }: any) {
   const [value, setValue] = useState<any>(new Date());
@@ -30,6 +31,8 @@ export default function TranactionModal({ open, onClose }: any) {
   const [memo, setMemo] = useState("");
   const [fileNames, setFileNames] = useState("");
   const { t, i18n } = useTranslation();
+  const { dateFrom, dateTo, reloadPage } = useContext(DateSelectContext);
+
   const handleChange = (newValue: Date | null) => {
     console.log({ newValue });
     const date = moment(newValue).format("YYYY-MM-DD HH:mm:ss");
@@ -68,7 +71,7 @@ export default function TranactionModal({ open, onClose }: any) {
   };
 
   const handleCreateTransaction = async () => {
-    if (category && value && price && memo) {
+    if (category && value && price) {
       const res = await createTransaction(
         category,
         value,
@@ -79,7 +82,10 @@ export default function TranactionModal({ open, onClose }: any) {
       setPrice(0);
       setMemo("");
       setCategory("");
-      window.location.reload();
+      // window.location.reload();
+      reloadPage[1](!reloadPage[0]);
+      console.log({ reloadPage });
+
       console.log({ res });
     }
     onClose();

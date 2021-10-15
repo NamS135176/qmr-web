@@ -29,7 +29,7 @@ export default function Home() {
   const [graph, setGraph] = useState<any>();
   const { t, i18n } = useTranslation();
   const dateSelect = useContext(DateSelectContext);
-  const { dateFrom, dateTo } = useContext(DateSelectContext);
+  const { dateFrom, dateTo, reloadPage } = useContext(DateSelectContext);
   const getSummaryData = async () => {
     const summary = await getSummary(
       moment(dateFrom[0]).format("YYYY-MM-DD"),
