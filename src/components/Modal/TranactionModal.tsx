@@ -203,7 +203,7 @@ export default function TranactionModal({ open, onClose }: any) {
               />
             </Box>
             <Box>
-              <Dropzone onDrop={handleDrop} multiple={false}>
+              <Dropzone accept="image/*" onDrop={handleDrop} multiple={false}>
                 {({ getRootProps, getInputProps }) => (
                   <div className="dropzone" {...getRootProps()}>
                     <input {...getInputProps()} />

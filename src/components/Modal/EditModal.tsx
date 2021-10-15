@@ -595,7 +595,11 @@ export default function EditModal(props: any) {
                 )}
                 {editMode ? (
                   <Box>
-                    <Dropzone onDrop={handleDrop} multiple={false}>
+                    <Dropzone
+                      accept="image/*"
+                      onDrop={handleDrop}
+                      multiple={false}
+                    >
                       {({ getRootProps, getInputProps }) => (
                         <div className="dropzone" {...getRootProps()}>
                           <input {...getInputProps()} />
