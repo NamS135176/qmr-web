@@ -7,9 +7,10 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import DateRangeIcon from "@mui/icons-material/DateRange";
 import moment from "moment";
+import { useTranslation } from "react-i18next";
 export default function Index({ isOpen, dateSelect }) {
   const { dateFrom, dateTo, monthYear, openModal } = dateSelect;
-
+  const { t, i18n } = useTranslation();
   const handlePreviousMonth = () => {
     const currentTime = moment(monthYear[0])
       .subtract(1, "months")
@@ -100,7 +101,15 @@ export default function Index({ isOpen, dateSelect }) {
                   },
                 }}
               >
-                <Typography>{monthYear[0]}</Typography>
+                {i18n.language == "en" ? (
+                  <Typography>
+                    {moment(monthYear[0]).format("MMMM YYYY")}
+                  </Typography>
+                ) : (
+                  <Typography>
+                    {moment(monthYear[0]).format("YYYY年 MM月")}
+                  </Typography>
+                )}
               </Box>
             </div>
           )}
