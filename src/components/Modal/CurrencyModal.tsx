@@ -81,7 +81,7 @@ export default function CurrencyModal({ open, onClose }: any) {
           sx={{
             background: "#36a9e1",
             color: "black",
-            marginLeft: 2,
+            marginRight: 2,
             "&:hover": {
               background: "#1e8fc6",
               color: "black",
