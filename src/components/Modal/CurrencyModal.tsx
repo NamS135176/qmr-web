@@ -23,8 +23,8 @@ export default function CurrencyModal({ open, onClose }: any) {
   );
   const [currency, setCurrency] = useState(
     i18n.language === "en"
-      ? JSON.parse(nameCurrency).name
-      : JSON.parse(nameCurrency).nameJP
+      ? JSON.parse(nameCurrency)?.name
+      : JSON.parse(nameCurrency)?.nameJP
   );
   console.log({ currency });
   const getCurrenciesData = async () => {

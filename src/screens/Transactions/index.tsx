@@ -268,7 +268,7 @@ export default function ListPageScreen() {
                         align="left"
                       ></TableCell>
                       <TableCell align="left">
-                        {JSON.parse(currency)["symbol"]}{" "}
+                        {JSON.parse(currency)?.symbol}{" "}
                         {new Intl.NumberFormat("vi-VN", {
                           style: "currency",
                           currency: "VND",

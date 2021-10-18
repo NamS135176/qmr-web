@@ -92,7 +92,7 @@ export default function HomeTable({ data }: any) {
                   >
                     <TableCell>{row.category_name}</TableCell>
                     <TableCell align="left">
-                      {JSON.parse(currency)["symbol"]}
+                      {JSON.parse(currency)?.symbol}
                       {new Intl.NumberFormat("vi-VN", {
                         style: "currency",
                         currency: "VND",

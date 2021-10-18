@@ -189,7 +189,7 @@ export default function TranactionModal({ open, onClose }: any) {
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      {JSON.parse(currency)["symbol"]}
+                      {JSON.parse(currency)?.symbol}
                     </InputAdornment>
                   ),
                 }}

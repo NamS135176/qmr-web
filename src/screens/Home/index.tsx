@@ -120,7 +120,7 @@ export default function Home() {
                       {t("money.income")}
                     </Typography>
                     <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                      {JSON.parse(currency)["symbol"]}
+                      {JSON.parse(currency)?.symbol}
                       {new Intl.NumberFormat("vi-VN", {
                         style: "currency",
                         currency: "VND",
@@ -161,7 +161,7 @@ export default function Home() {
                       {t("money.expense")}
                     </Typography>
                     <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                      {JSON.parse(currency)["symbol"]}
+                      {JSON.parse(currency)?.symbol}
                       {new Intl.NumberFormat("vi-VN", {
                         style: "currency",
                         currency: "VND",
@@ -202,7 +202,7 @@ export default function Home() {
                       {t("money.total")}
                     </Typography>
                     <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                      {JSON.parse(currency)["symbol"]}
+                      {JSON.parse(currency)?.symbol}
                       {new Intl.NumberFormat("vi-VN", {
                         style: "currency",
                         currency: "VND",
