@@ -92,8 +92,11 @@ export default function HomeTable({ data }: any) {
                   >
                     <TableCell>{row.category_name}</TableCell>
                     <TableCell align="left">
-                      {" "}
-                      {JSON.parse(currency)["symbol"]} {row.total}
+                      {JSON.parse(currency)["symbol"]}
+                      {new Intl.NumberFormat("vi-VN", {
+                        style: "currency",
+                        currency: "VND",
+                      }).format(Number(row.total))}
                     </TableCell>
                     <TableCell align="left">
                       <Progress value={(row.total * 100) / totalPrice} />

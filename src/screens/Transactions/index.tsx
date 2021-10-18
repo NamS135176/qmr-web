@@ -267,7 +267,12 @@ export default function ListPageScreen() {
                         sx={{ borderRight: "1px solid #ddd" }}
                         align="left"
                       ></TableCell>
-                      <TableCell align="left">{row.price}</TableCell>
+                      <TableCell align="left">
+                        {new Intl.NumberFormat("vi-VN", {
+                          style: "currency",
+                          currency: "VND",
+                        }).format(row.price)}
+                      </TableCell>
                       <TableCell
                         sx={{ borderRight: "1px solid #ddd" }}
                         align="left"

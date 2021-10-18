@@ -120,7 +120,11 @@ export default function Home() {
                       {t("money.income")}
                     </Typography>
                     <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                      {JSON.parse(currency)["symbol"]} {summary.price_income}
+                      {JSON.parse(currency)["symbol"]}
+                      {new Intl.NumberFormat("vi-VN", {
+                        style: "currency",
+                        currency: "VND",
+                      }).format(Number(summary.price_income))}
                     </Typography>
                   </Box>
                 </Card>
@@ -157,7 +161,11 @@ export default function Home() {
                       {t("money.expense")}
                     </Typography>
                     <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                      {JSON.parse(currency)["symbol"]} {summary.price_expense}
+                      {JSON.parse(currency)["symbol"]}
+                      {new Intl.NumberFormat("vi-VN", {
+                        style: "currency",
+                        currency: "VND",
+                      }).format(Number(summary.price_expense))}
                     </Typography>
                   </Box>
                 </Card>
@@ -194,7 +202,11 @@ export default function Home() {
                       {t("money.total")}
                     </Typography>
                     <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                      {JSON.parse(currency)["symbol"]} {summary.price_balance}
+                      {JSON.parse(currency)["symbol"]}
+                      {new Intl.NumberFormat("vi-VN", {
+                        style: "currency",
+                        currency: "VND",
+                      }).format(Number(summary.price_balance))}
                     </Typography>
                   </Box>
                 </Card>
