@@ -42,7 +42,7 @@ export default function ListPageScreen() {
   const [direction, setDirection] = useState("downtime");
   const [order, setOrder] = useState("time");
   const [sort, setSort] = useState("desc");
-
+  const currency: any = localStorage.getItem("currency");
   const handlePaging = (offset, total) => {
     if (total <= 20) {
       setTotal(0);
@@ -268,6 +268,7 @@ export default function ListPageScreen() {
                         align="left"
                       ></TableCell>
                       <TableCell align="left">
+                        {JSON.parse(currency)["symbol"]}{" "}
                         {new Intl.NumberFormat("vi-VN", {
                           style: "currency",
                           currency: "VND",
