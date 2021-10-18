@@ -23,6 +23,7 @@ import { getCategory } from "api/category";
 import { createTransaction, uploadImage } from "api/transaction";
 import DateSelectContext from "utils/context";
 import { checkSize, resizeFile } from "utils/UploadFile";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function TranactionModal({ open, onClose }: any) {
   const [value, setValue] = useState<any>(new Date());
@@ -33,7 +34,7 @@ export default function TranactionModal({ open, onClose }: any) {
   const [fileNames, setFileNames] = useState("");
   const { t, i18n } = useTranslation();
   const [file, setFile] = useState(null);
-
+  const [loading, setLoading] = useState(false);
   const { dateFrom, dateTo, reloadPage } = useContext(DateSelectContext);
 
   const handleChange = (newValue: Date | null) => {
@@ -79,6 +80,7 @@ export default function TranactionModal({ open, onClose }: any) {
   };
 
   const handleCreateTransaction = async () => {
+    setLoading(true);
     if (category && value && price) {
       if (!file) {
         const res = await createTransaction(
@@ -95,6 +97,7 @@ export default function TranactionModal({ open, onClose }: any) {
         console.log({ reloadPage });
 
         console.log({ res });
+        setLoading(false);
       } else {
         const resImg = await uploadImage(file);
         const res = await createTransaction(
@@ -113,6 +116,7 @@ export default function TranactionModal({ open, onClose }: any) {
         console.log({ reloadPage });
 
         console.log({ res });
+        setLoading(false);
       }
     }
     onClose();
@@ -216,41 +220,54 @@ export default function TranactionModal({ open, onClose }: any) {
                 <Typography> {t("transaction.limit_size")}</Typography>
               </Box>
             </Box>
-            <Box
-              sx={{
-                marginTop: 2,
-                display: "flex",
-                justifyContent: "flex-end",
-              }}
-            >
-              <Button
+
+            {loading ? (
+              <Box
                 sx={{
-                  background: "#78CD51",
-                  color: "white",
-                  "&:hover": {
+                  marginTop: 2,
+                  display: "flex",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <CircularProgress />
+              </Box>
+            ) : (
+              <Box
+                sx={{
+                  marginTop: 2,
+                  display: "flex",
+                  justifyContent: "flex-end",
+                }}
+              >
+                <Button
+                  sx={{
                     background: "#78CD51",
                     color: "white",
-                  },
-                }}
-                onClick={handleCreateTransaction}
-              >
-                {t("transaction.save")}
-              </Button>
-              <Button
-                sx={{
-                  background: "#D6D9E0",
-                  color: "black",
-                  marginLeft: 2,
-                  "&:hover": {
+                    "&:hover": {
+                      background: "#78CD51",
+                      color: "white",
+                    },
+                  }}
+                  onClick={handleCreateTransaction}
+                >
+                  {t("transaction.save")}
+                </Button>
+                <Button
+                  sx={{
                     background: "#D6D9E0",
                     color: "black",
-                  },
-                }}
-                onClick={onClose}
-              >
-                {t("transaction.reset")}
-              </Button>
-            </Box>
+                    marginLeft: 2,
+                    "&:hover": {
+                      background: "#D6D9E0",
+                      color: "black",
+                    },
+                  }}
+                  onClick={onClose}
+                >
+                  {t("transaction.reset")}
+                </Button>
+              </Box>
+            )}
           </DialogContent>
         </Box>
       </Dialog>

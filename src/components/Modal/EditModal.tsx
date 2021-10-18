@@ -26,6 +26,7 @@ import Checkbox from "@mui/material/Checkbox";
 import el from "date-fns/esm/locale/el/index.js";
 import Resizer from "react-image-file-resizer";
 import { checkSize, resizeFile } from "utils/UploadFile";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function EditModal(props: any) {
   const history = useHistory();
@@ -47,6 +48,7 @@ export default function EditModal(props: any) {
   const [editMode, setEditMode] = useState(false);
   const [fileNames, setFileNames] = useState("");
   const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [valueDate, setValueDate] = useState<Date | null>(
     new Date(props.data.time.split(" ")[0])
   );
@@ -82,6 +84,7 @@ export default function EditModal(props: any) {
   };
 
   const handleUpdate = async () => {
+    setLoading(true);
     const oldItem = props.data;
     if (checked) {
       const res = await updateTransaction(
@@ -138,6 +141,7 @@ export default function EditModal(props: any) {
         );
       }
     }
+    setLoading(false);
     props.getList((props.page - 1) * 20, props.order, props.sort);
     props.setOpen(false);
   };
@@ -203,21 +207,29 @@ export default function EditModal(props: any) {
               </Button>
               <Typography>{t("editmodal.title")}</Typography>
               {editMode ? (
-                <Button
-                  onClick={handleUpdate}
-                  sx={{ backgroundColor: "#36a9e1", color: "white" }}
-                >
-                  {t("editmodal.done")}
-                </Button>
+                <Box>
+                  {loading ? (
+                    <CircularProgress />
+                  ) : (
+                    <Button
+                      onClick={handleUpdate}
+                      sx={{ backgroundColor: "#36a9e1", color: "white" }}
+                    >
+                      {t("editmodal.done")}
+                    </Button>
+                  )}
+                </Box>
               ) : (
-                <Button
-                  onClick={() => {
-                    setEditMode(true);
-                  }}
-                  sx={{ backgroundColor: "#36a9e1", color: "white" }}
-                >
-                  {t("editmodal.edit")}
-                </Button>
+                <Box>
+                  <Button
+                    onClick={() => {
+                      setEditMode(true);
+                    }}
+                    sx={{ backgroundColor: "#36a9e1", color: "white" }}
+                  >
+                    {t("editmodal.edit")}
+                  </Button>
+                </Box>
               )}
             </Box>
             <Box
@@ -536,7 +548,7 @@ export default function EditModal(props: any) {
                     >
                       {editMode ? (
                         <Box>
-                          <TextareaAutosize
+                          {/* <TextareaAutosize
                             maxRows={4}
                             minRows={2}
                             aria-label="maximum height"
@@ -548,6 +560,20 @@ export default function EditModal(props: any) {
                                 setMemo(e.target.value);
                               }
                             }}
+                          /> */}
+                          <TextField
+                            error={memo.length >= 2000}
+                            sx={{ width: "100%" }}
+                            onChange={(e) => {
+                              if (e.target.value.length <= 2000) {
+                                setMemo(e.target.value);
+                              }
+                            }}
+                            defaultValue={props.data.memo}
+                            multiline
+                            id="memo"
+                            variant="outlined"
+                            rows={2}
                           />
                           <Typography sx={{ fontSize: 14 }}>
                             {t("editmodal.warning")}

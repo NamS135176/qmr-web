@@ -90,7 +90,13 @@ export default function HomeTable({ data }: any) {
                     }}
                   >
                     <TableCell>{row.category_name}</TableCell>
-                    <TableCell align="left">{row.total}</TableCell>
+                    <TableCell align="left">
+                      {" "}
+                      {new Intl.NumberFormat("vi-VN", {
+                        style: "currency",
+                        currency: "VND",
+                      }).format(Number(row.total))}
+                    </TableCell>
                     <TableCell align="left">
                       <Progress value={(row.total * 100) / totalPrice} />
                     </TableCell>

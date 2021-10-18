@@ -116,7 +116,10 @@ export default function Home() {
                       {t("money.income")}
                     </Typography>
                     <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                      {summary.price_income}
+                      {new Intl.NumberFormat("vi-VN", {
+                        style: "currency",
+                        currency: "VND",
+                      }).format(Number(summary.price_income))}
                     </Typography>
                   </Box>
                 </Card>
@@ -153,7 +156,10 @@ export default function Home() {
                       {t("money.expense")}
                     </Typography>
                     <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                      {summary.price_expense}
+                      {new Intl.NumberFormat("vi-VN", {
+                        style: "currency",
+                        currency: "VND",
+                      }).format(Number(summary.price_expense))}
                     </Typography>
                   </Box>
                 </Card>
@@ -190,7 +196,10 @@ export default function Home() {
                       {t("money.total")}
                     </Typography>
                     <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                      {summary.price_balance}
+                      {new Intl.NumberFormat("vi-VN", {
+                        style: "currency",
+                        currency: "VND",
+                      }).format(Number(summary.price_balance))}
                     </Typography>
                   </Box>
                 </Card>
