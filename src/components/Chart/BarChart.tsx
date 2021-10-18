@@ -29,7 +29,6 @@ export default function BarChart({ data, dateFrom, dateTo }: any) {
     }
     return count;
   });
-  console.log("🚀 ~ file: BarChart.tsx ~ line 31 ~ arrData ~ arrData", arrData);
 
   const options: any = {
     maintainAspectRatio: false,

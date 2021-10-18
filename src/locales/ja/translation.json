@@ -63,26 +63,31 @@
     "imgtitle": "写真編集",
     "delete": "削除",
     "size": "(画像サイズは2MB以下にしてください)",
-    "warning":"(入力可能文字数は2,000文字までです)"
+    "warning": "(入力可能文字数は2,000文字までです)"
   },
-  "login":{
-    "title1":"パソコン用画面 ",
-    "title2":"※クラウド会員限定機能",
-    "holder_email":"メールアドレス",
-    "holder_password":"パスワード",
-    "btn_text":"ログイン ",
-    "suggest":"【クラウド会員】or【RecoPass】に登録したメールアドレスとパスワードを入力してください",
-    "forgot_pass":"パスワードを忘れた方はこちら",
-    "warning":"パソコン用画面はベータ版です。 不具合がある可能性があります。"
+  "login": {
+    "title1": "パソコン用画面 ",
+    "title2": "※クラウド会員限定機能",
+    "holder_email": "メールアドレス",
+    "holder_password": "パスワード",
+    "btn_text": "ログイン ",
+    "suggest": "【クラウド会員】or【RecoPass】に登録したメールアドレスとパスワードを入力してください",
+    "forgot_pass": "パスワードを忘れた方はこちら",
+    "warning": "パソコン用画面はベータ版です。 不具合がある可能性があります。"
   },
-  "graph":{
-    "pie":"円グラフ",
-    "bar":"棒グラフ"
+  "graph": {
+    "pie": "円グラフ",
+    "bar": "棒グラフ"
   },
-  "menunav":{
-    "setting":"言語設定",
-    "jap":"日本語",
-    "curency":"通貨設定",
-    "logout":"ログアウト"
+  "menunav": {
+    "setting": "言語設定",
+    "jap": "日本語",
+    "currency": "通貨設定",
+    "logout": "ログアウト"
+  },
+  "currency": {
+    "back": "戻る",
+    "setting": "通貨設定",
+    "label": "通貨設定"
   }
 }

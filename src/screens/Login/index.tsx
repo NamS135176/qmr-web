@@ -6,12 +6,13 @@ import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import TextField from "@mui/material/TextField";
-import { login } from "api/member";
+import { getCurrentMember, login } from "api/member";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
 import jwt_decode from "jwt-decode";
 import { setAuthorize } from "api";
 import { useTranslation } from "react-i18next";
+import { getCurrencies } from "api/curency";
 function Page() {
   const history = useHistory();
   const [showError, setShowError] = useState<boolean>(false);
@@ -38,13 +39,34 @@ function Page() {
       }),
     []
   );
+  const getMember = async () => {
+    const member = await getCurrentMember();
+    console.log(
+      "🚀 ~ file: index.tsx ~ line 52 ~ getCurrenciesData ~ currencies",
+      member.language
+    );
+    const currencies = await getCurrencies();
+
+    const currency = currencies.find((item) => item.id === member.currency_id);
+    console.log(
+      "🚀 ~ file: index.tsx ~ line 54 ~ getMember ~ currency",
+      currency
+    );
+    localStorage.setItem("currency", JSON.stringify(currency));
+    member.language === "en"
+      ? i18n.changeLanguage("en")
+      : i18n.changeLanguage("ja");
+  };
 
   const onSubmit = async ({ email, password }) => {
     setShowError(false);
     setLoading(true);
     try {
       const res: any = await login(email, password);
-      setAuthorize(res.access_token);
+      if (res) {
+        setAuthorize(res.access_token);
+        getMember();
+      }
       window.localStorage.setItem("access_token", res.access_token);
       var decoded = jwt_decode(res.access_token);
 

@@ -1,5 +1,4 @@
 import { createContext, useMemo, useState } from "react";
-import PropTypes from "prop-types";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 interface ContextState {
@@ -41,9 +40,5 @@ export function DateSelectProvider(props) {
     </DateSelectContext.Provider>
   );
 }
-
-// DateSelectProvider.propTypes = {
-//   children: PropTypes.node.isRequired,
-// };
 
 export default DateSelectContext;

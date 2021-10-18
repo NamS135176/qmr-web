@@ -22,6 +22,7 @@ const Progress = ({ value }: any) => {
 };
 export default function HomeTable({ data }: any) {
   const { t, i18n } = useTranslation();
+  const currency: any = localStorage.getItem("currency");
   let totalPrice = 0;
   const d = data?.sort((a, b) => {
     return b.total - a.total;
@@ -90,7 +91,10 @@ export default function HomeTable({ data }: any) {
                     }}
                   >
                     <TableCell>{row.category_name}</TableCell>
-                    <TableCell align="left">{row.total}</TableCell>
+                    <TableCell align="left">
+                      {" "}
+                      {JSON.parse(currency)["symbol"]} {row.total}
+                    </TableCell>
                     <TableCell align="left">
                       <Progress value={(row.total * 100) / totalPrice} />
                     </TableCell>

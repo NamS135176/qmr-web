@@ -58,7 +58,6 @@ export default function Graph() {
       moment(dateTo[0]).format("YYYY-MM-DD")
     );
     setGraph(graph);
-    console.log("🚀 ~ file: index.tsx ~ line 45 ~ getGraphData ~ graph", graph);
   };
   useEffect(() => {
     getSummaryData();

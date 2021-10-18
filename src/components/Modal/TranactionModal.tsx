@@ -33,7 +33,7 @@ export default function TranactionModal({ open, onClose }: any) {
   const [fileNames, setFileNames] = useState("");
   const { t, i18n } = useTranslation();
   const [file, setFile] = useState(null);
-
+  const currency: any = localStorage.getItem("currency");
   const { dateFrom, dateTo, reloadPage } = useContext(DateSelectContext);
 
   const handleChange = (newValue: Date | null) => {
@@ -183,7 +183,9 @@ export default function TranactionModal({ open, onClose }: any) {
                 onChange={handleChangePrice}
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment position="start">đ</InputAdornment>
+                    <InputAdornment position="start">
+                      {JSON.parse(currency)["symbol"]}
+                    </InputAdornment>
                   ),
                 }}
               />

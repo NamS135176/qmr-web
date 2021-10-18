@@ -4,7 +4,9 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
+import { getCurrencies } from "api/curency";
 import { getGraph } from "api/graph";
+import { getCurrentMember } from "api/member";
 import { getSummary } from "api/summary";
 import BarChart from "components/Chart/BarChart";
 import PieChart from "components/Chart/PieChart";
@@ -30,6 +32,7 @@ export default function Home() {
   const { t, i18n } = useTranslation();
   const dateSelect = useContext(DateSelectContext);
   const { dateFrom, dateTo, reloadPage } = useContext(DateSelectContext);
+  const currency: any = localStorage.getItem("currency");
   const getSummaryData = async () => {
     const summary = await getSummary(
       moment(dateFrom[0]).format("YYYY-MM-DD"),
@@ -46,6 +49,7 @@ export default function Home() {
     setGraph(graph);
     console.log("🚀 ~ file: index.tsx ~ line 45 ~ getGraphData ~ graph", graph);
   };
+
   useEffect(() => {
     getSummaryData();
     getGraphData();
@@ -116,7 +120,7 @@ export default function Home() {
                       {t("money.income")}
                     </Typography>
                     <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                      {summary.price_income}
+                      {JSON.parse(currency)["symbol"]} {summary.price_income}
                     </Typography>
                   </Box>
                 </Card>
@@ -153,7 +157,7 @@ export default function Home() {
                       {t("money.expense")}
                     </Typography>
                     <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                      {summary.price_expense}
+                      {JSON.parse(currency)["symbol"]} {summary.price_expense}
                     </Typography>
                   </Box>
                 </Card>
@@ -190,7 +194,7 @@ export default function Home() {
                       {t("money.total")}
                     </Typography>
                     <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                      {summary.price_balance}
+                      {JSON.parse(currency)["symbol"]} {summary.price_balance}
                     </Typography>
                   </Box>
                 </Card>

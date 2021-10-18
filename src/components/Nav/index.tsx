@@ -15,12 +15,14 @@ import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import ButtonNav from "components/ButtonNav";
 import "./style.scss";
+import CurrencyModal from "components/Modal/CurrencyModal";
 
 export default function Nav(props) {
   const [open, setOpen] = useState(false);
   const [checked, setChecked] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   const { t, i18n } = useTranslation();
+  const [openCurrency, setOpenCurrency] = useState(false);
 
   let history = useHistory();
   const handleClose = () => {
@@ -30,6 +32,13 @@ export default function Nav(props) {
   const handleOpen = () => {
     console.log("open");
     setOpen(true);
+  };
+  const handleOpenCurrency = () => {
+    console.log("open currencyt", openCurrency);
+    setOpenCurrency(true);
+  };
+  const onCloseCurrency = () => {
+    setOpenCurrency(false);
   };
   const toggleDrawer = () => {
     setChecked(!checked);
@@ -120,7 +129,11 @@ export default function Nav(props) {
             }}
           >
             <Box sx={{ width: "100%" }}>
-              <MenuNav openMenu={openMenu} onClose={onCloseMenu} />
+              <MenuNav
+                handleOpenCurrency={handleOpenCurrency}
+                openMenu={openMenu}
+                onClose={onCloseMenu}
+              />
             </Box>
           </MenuItem>
         </Drawer>
@@ -244,7 +257,7 @@ export default function Nav(props) {
                     </IconButton>
                   </Box>
                   <Box>
-                    <MenuNav />
+                    <MenuNav handleOpenCurrency={handleOpenCurrency} />
                   </Box>
                 </Box>
               </Box>
@@ -265,6 +278,7 @@ export default function Nav(props) {
         <MyDrawer />
       </Box>
       <TranactionModal open={open} onClose={handleClose} />
+      <CurrencyModal open={openCurrency} onClose={onCloseCurrency} />
     </Box>
   );
 }

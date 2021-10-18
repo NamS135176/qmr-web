@@ -5,16 +5,22 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
-import React from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import Check from "@mui/icons-material/Check";
+import CurrencyModal from "components/Modal/CurrencyModal";
+import React, { useState } from "react";
 
-export default function MenuNav({ openMenu, onClose }: any) {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+export default function MenuNav({
+  handleOpenCurrency,
+  openMenu,
+  onClose,
+}: any) {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -25,6 +31,7 @@ export default function MenuNav({ openMenu, onClose }: any) {
   const handleClose = () => {
     setAnchorEl(null);
     if (onClose) {
+      console.log("close");
       onClose();
     }
   };
@@ -91,9 +98,14 @@ export default function MenuNav({ openMenu, onClose }: any) {
           </Box>
           <Typography> &nbsp;English</Typography>
         </MenuItem>
-        <MenuItem onClick={() => {}}>
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            handleOpenCurrency();
+          }}
+        >
           <AttachMoneyIcon />
-          <Typography> &nbsp;{t("menunav.curency")}</Typography>
+          <Typography> &nbsp;{t("menunav.currency")}</Typography>
         </MenuItem>
         <MenuItem onClick={handleLogout}>
           <LogoutIcon />

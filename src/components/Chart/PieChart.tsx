@@ -6,7 +6,6 @@ import color from "constant/";
 defaults.plugins.legend.display = false;
 // defaults.plugins.legend.position = "bottom";
 export default function PieChart({ data }: any) {
-  console.log({ data });
   const labels = data
     ?.sort((a, b) => b.total - a.total)
     .map((item) => item.category_name);
