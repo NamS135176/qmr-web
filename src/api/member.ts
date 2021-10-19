@@ -16,6 +16,19 @@ export const forgotPassword = async (email: string) => {
   return getResponseData(res);
 };
 
+export const changePassword = async (
+  email: string,
+  password: string,
+  old_password: string
+) => {
+  const res = await apiQMRWeb.post("/change-password", {
+    email: email,
+    password: password,
+    old_password: old_password,
+  });
+  return getResponseData(res);
+};
+
 export const getCurrentMember = async () => {
   const res = await apiQMRWeb.get("/member");
   return getResponseData(res);

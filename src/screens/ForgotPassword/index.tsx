@@ -7,8 +7,10 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import TextField from "@mui/material/TextField";
 import { forgotPassword } from "api/member";
-
+import { useHistory } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
 export default function ForgotPassScreen() {
+  const history = useHistory();
   const [showError, setShowError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
   const initialValues = useMemo(() => {
@@ -29,6 +31,7 @@ export default function ForgotPassScreen() {
   );
 
   const onSubmit = async ({ email }) => {
+    setLoading(true);
     setShowError(false);
     try {
       console.log(email);
@@ -39,7 +42,7 @@ export default function ForgotPassScreen() {
       console.log(res);
 
       setLoading(false);
-      // history.push("/");
+      history.push("/send_mail_done");
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -117,7 +120,7 @@ export default function ForgotPassScreen() {
                 color: "red",
               }}
             >
-              Email or password is invalid. Please try again.
+              Member is not found
             </p>
           ) : (
             <p></p>
@@ -168,19 +171,37 @@ export default function ForgotPassScreen() {
             error={touched.email && Boolean(errors.email)}
             helperText={touched.email && errors.email}
           />
-
-          <Box sx={{ marginTop: 2 }}>
-            <Button onClick={handleForgotPass} variant="contained" fullWidth>
-              Send Mail
-            </Button>
-          </Box>
-          <Box sx={{ marginTop: 2 }}>
-            <Link style={{ textDecoration: "none" }} to={`/`}>
-              <Button onClick={() => {}} variant="contained" fullWidth>
-                Back
-              </Button>
-            </Link>
-          </Box>
+          {loading ? (
+            <Box
+              sx={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "center",
+                marginTop: 2,
+              }}
+            >
+              <CircularProgress />
+            </Box>
+          ) : (
+            <Box>
+              <Box sx={{ marginTop: 2 }}>
+                <Button
+                  onClick={handleForgotPass}
+                  variant="contained"
+                  fullWidth
+                >
+                  Send Mail
+                </Button>
+              </Box>
+              <Box sx={{ marginTop: 2 }}>
+                <Link style={{ textDecoration: "none" }} to={`/`}>
+                  <Button onClick={() => {}} variant="contained" fullWidth>
+                    Back
+                  </Button>
+                </Link>
+              </Box>
+            </Box>
+          )}
         </Box>
       </Box>
     </Box>

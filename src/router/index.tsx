@@ -9,7 +9,8 @@ import AuthenticateRoute from "./AuthenticateRoute";
 import Graph from "screens/Graph";
 import Page404 from "screens/Page404";
 import Nav from "components/Nav";
-
+import RequestDone from "screens/RequestDone";
+import ChangePassword from "screens/ChangePassword";
 function AppRouter() {
   useEffect(() => {
     if (typeof window.ResizeObserver === "undefined") {
@@ -22,6 +23,8 @@ function AppRouter() {
       <Switch>
         <Route exact path="/login" component={Login} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
+        <Route exact path="/send_mail_done" component={RequestDone} />
+        <Route exact path="/change-password" component={ChangePassword} />
         <div>
           <Nav />
           <AuthenticateRoute
