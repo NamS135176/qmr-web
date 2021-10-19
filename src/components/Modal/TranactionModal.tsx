@@ -206,7 +206,7 @@ export default function TranactionModal({ open, onClose }: any) {
                 label={t("editmodal.price")}
                 id="price"
                 value={price?.toFixed(2)}
-                inputProps={{ maxLength: 8 }}
+                // inputProps={{ maxLength: 8 }}
                 sx={{ width: "100%" }}
                 onChange={handleChangePrice}
                 InputProps={{

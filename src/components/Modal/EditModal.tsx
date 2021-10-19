@@ -27,6 +27,28 @@ import el from "date-fns/esm/locale/el/index.js";
 import Resizer from "react-image-file-resizer";
 import { checkSize, resizeFile } from "utils/UploadFile";
 import CircularProgress from "@mui/material/CircularProgress";
+import NumberFormat from "react-number-format";
+
+function NumberFormatCustom(props) {
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={inputRef}
+      onValueChange={(values) => {
+        onChange({
+          target: {
+            name: props.name,
+            value: values.value,
+          },
+        });
+      }}
+      thousandSeparator
+      // isNumericString
+    />
+  );
+}
 
 export default function EditModal(props: any) {
   const history = useHistory();
@@ -55,7 +77,7 @@ export default function EditModal(props: any) {
   const [valueTime, setValueTime] = React.useState<Date | null>(
     toDateWithOutTimeZone(props.data.time.split(" ")[1])
   );
-  const [price, setPrice] = useState(props.data.price);
+  const [price, setPrice] = useState<Number>(props.data.price);
   const [memo, setMemo] = useState(props.data.memo);
 
   const handleChangeDate = (newValue: Date | null) => {
@@ -485,23 +507,22 @@ export default function EditModal(props: any) {
                     >
                       {editMode ? (
                         <TextField
+                          label={t("editmodal.price")}
+                          id="price"
+                          // value={price?.toFixed(2)}
+                          // inputProps={{ maxLength: 8 }}
+                          sx={{ width: "100%" }}
+                          onChange={(e) => {
+                            setPrice(parseInt(e.target.value));
+                          }}
+                          defaultValue={props.data.price}
                           InputProps={{
                             startAdornment: (
                               <InputAdornment position="start">
                                 {JSON.parse(currency)?.symbol}
                               </InputAdornment>
                             ),
-                          }}
-                          onChange={(e) => {
-                            setPrice(e.target.value);
-                          }}
-                          id="outlined-basic"
-                          label={t("editmodal.price")}
-                          variant="outlined"
-                          type="number"
-                          defaultValue={props.data.price}
-                          sx={{
-                            maxWidth: 220,
+                            inputComponent: NumberFormatCustom,
                           }}
                         />
                       ) : (
