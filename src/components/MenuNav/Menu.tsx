@@ -13,6 +13,7 @@ import { useHistory } from "react-router-dom";
 import Check from "@mui/icons-material/Check";
 import CurrencyModal from "components/Modal/CurrencyModal";
 import React, { useState } from "react";
+import { updateCurrentMember } from "api/member";
 
 export default function MenuNav({
   handleOpenCurrency,
@@ -25,6 +26,9 @@ export default function MenuNav({
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
+  const currency: any = localStorage.getItem("currency");
+  console.log("🚀 ~ file: Menu.tsx ~ line 30 ~ currency", currency);
+
   const { t, i18n } = useTranslation();
   const history = useHistory();
 
@@ -38,6 +42,7 @@ export default function MenuNav({
 
   const handleLogout = () => {
     window.localStorage.removeItem("access_token");
+    window.localStorage.removeItem("currency");
     history.push("/login");
   };
 
@@ -77,7 +82,8 @@ export default function MenuNav({
           <Typography> &nbsp;{t("menunav.setting")}</Typography>
         </MenuItem>
         <MenuItem
-          onClick={() => {
+          onClick={async () => {
+            await updateCurrentMember("jp", JSON.parse(currency)?.id);
             handleClose();
             i18n.changeLanguage("ja");
           }}
@@ -88,7 +94,8 @@ export default function MenuNav({
           <Typography> &nbsp;{t("menunav.jap")}</Typography>
         </MenuItem>
         <MenuItem
-          onClick={() => {
+          onClick={async () => {
+            await updateCurrentMember("en", JSON.parse(currency)?.id);
             handleClose();
             i18n.changeLanguage("en");
           }}
