@@ -64,7 +64,7 @@ export default function Home() {
   };
   return (
     <Box>
-      <Nav page="home" />
+      {/* <Nav page="home" /> */}
       <DatePicker dateSelect={dateSelect} isOpen={handleOpen} />
       {/* {money} */}
       {summary && graph ? (

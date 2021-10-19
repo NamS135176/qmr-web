@@ -18,6 +18,7 @@ export default function ButtonNav(props) {
       }}
       onClick={() => {
         history.push(props.link);
+        props.logger(props.link);
       }}
       className="btnNav"
       variant="text"
