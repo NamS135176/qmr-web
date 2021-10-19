@@ -8,6 +8,7 @@ import Home from "screens/Home";
 import AuthenticateRoute from "./AuthenticateRoute";
 import Graph from "screens/Graph";
 import Page404 from "screens/Page404";
+import Nav from "components/Nav";
 
 function AppRouter() {
   useEffect(() => {
@@ -21,13 +22,16 @@ function AppRouter() {
       <Switch>
         <Route exact path="/login" component={Login} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
-        <AuthenticateRoute
-          exact
-          path="/transactions"
-          component={Transactions}
-        />
-        <AuthenticateRoute exact path="/" component={Home} />
-        <AuthenticateRoute exact path="/graph" component={Graph} />
+        <div>
+          <Nav />
+          <AuthenticateRoute
+            exact
+            path="/transactions"
+            component={Transactions}
+          />
+          <AuthenticateRoute exact path="/" component={Home} />
+          <AuthenticateRoute exact path="/graph" component={Graph} />
+        </div>
         <Route component={Page404} />
       </Switch>
     </Router>

@@ -107,7 +107,7 @@ export default function ListPageScreen() {
   }, [dateFrom, dateTo]);
   return (
     <Box sx={{ paddingBottom: 2 }}>
-      <Nav page="list" />
+      {/* <Nav page="list" /> */}
       <DateHomeModal open={open} onClose={handleClose} />
       <DatePicker dateSelect={dateSelect} isOpen={handleOpen} />
 

@@ -10,7 +10,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import MenuNav from "components/MenuNav/Menu";
 import TranactionModal from "components/Modal/TranactionModal";
-import React, { useState } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import ButtonNav from "components/ButtonNav";
@@ -23,8 +23,9 @@ export default function Nav(props) {
   const [openMenu, setOpenMenu] = useState(false);
   const { t, i18n } = useTranslation();
   const [openCurrency, setOpenCurrency] = useState(false);
-
+  const [changeRoute, setChangeRoute] = useState("/");
   let history = useHistory();
+  console.log("🚀 ~ file: index.tsx ~    line 27 ~ Nav ~ history", history);
   const handleClose = () => {
     console.log("close");
     setOpen(false);
@@ -51,6 +52,7 @@ export default function Nav(props) {
     setChecked(false);
   };
 
+  useEffect(() => {}, [changeRoute]);
   const MyDrawer = () => {
     return (
       <Box sx={{ width: "300px", background: "red" }}>
@@ -61,6 +63,7 @@ export default function Nav(props) {
             onClick={() => {
               toggleDrawer();
               history.push("/");
+              setChangeRoute("/");
             }}
           >
             <Typography sx={{ color: "white" }}> {t("nav.summary")}</Typography>
@@ -70,6 +73,8 @@ export default function Nav(props) {
             onClick={() => {
               toggleDrawer();
               history.push("/transactions");
+
+              setChangeRoute("/transactions");
             }}
           >
             <Typography sx={{ color: "white" }}> {t("nav.list")}</Typography>
@@ -79,6 +84,7 @@ export default function Nav(props) {
             onClick={() => {
               toggleDrawer();
               history.push("/graph");
+              setChangeRoute("/graph");
             }}
           >
             <Typography sx={{ color: "white" }}> {t("nav.graph")}</Typography>
@@ -172,40 +178,46 @@ export default function Nav(props) {
                 }}
               >
                 <Box sx={{ height: "100%" }}>
-                  {props.page == "home" ? (
+                  {history.location.pathname === "/" ? (
                     <ButtonNav
+                      logger={setChangeRoute}
                       toPage="nav.summary"
                       link="/"
                       bgColor="#398439"
                     ></ButtonNav>
                   ) : (
                     <ButtonNav
+                      logger={setChangeRoute}
                       toPage="nav.summary"
                       link="/"
                       bgColor="transparent"
                     ></ButtonNav>
                   )}
-                  {props.page == "list" ? (
+                  {history.location.pathname === "/transactions" ? (
                     <ButtonNav
+                      logger={setChangeRoute}
                       toPage="nav.list"
                       link="/transactions"
                       bgColor="#398439"
                     ></ButtonNav>
                   ) : (
                     <ButtonNav
+                      logger={setChangeRoute}
                       toPage="nav.list"
                       link="/transactions"
                       bgColor="transparent"
                     ></ButtonNav>
                   )}
-                  {props.page == "graph" ? (
+                  {history.location.pathname === "/graph" ? (
                     <ButtonNav
+                      logger={setChangeRoute}
                       toPage="nav.graph"
                       link="/graph"
                       bgColor="#398439"
                     ></ButtonNav>
                   ) : (
                     <ButtonNav
+                      logger={setChangeRoute}
                       toPage="nav.graph"
                       link="/graph"
                       bgColor="transparent"
@@ -277,8 +289,12 @@ export default function Nav(props) {
         </AppBar>
         <MyDrawer />
       </Box>
-      <TranactionModal open={open} onClose={handleClose} />
-      <CurrencyModal open={openCurrency} onClose={onCloseCurrency} />
+      {useMemo(() => {
+        return <TranactionModal open={open} onClose={handleClose} />;
+      }, [open])}
+      {useMemo(() => {
+        return <CurrencyModal open={openCurrency} onClose={onCloseCurrency} />;
+      }, [openCurrency])}
     </Box>
   );
 }

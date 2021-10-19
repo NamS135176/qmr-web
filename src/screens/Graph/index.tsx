@@ -1,27 +1,20 @@
-import React, { useState, useContext, useEffect } from "react";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
-import Card from "@mui/material/Card";
-import { useTranslation } from "react-i18next";
-
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import DateRangeIcon from "@mui/icons-material/DateRange";
-import DateHomeModal from "components/Modal/DateHomeModal";
 import DownloadIcon from "@mui/icons-material/Download";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
-import Nav from "../../components/Nav";
-import BarChart from "components/Chart/BarChart";
-import PieChart from "components/Chart/PieChart";
-import HomeTable from "components/Table/HomeTable";
-import DatePicker from "components/DatePicker";
-import DateSelectContext from "utils/context";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CircularProgress from "@mui/material/CircularProgress";
+import Typography from "@mui/material/Typography";
 import { getGraph } from "api/graph";
 import { getSummary } from "api/summary";
+import BarChart from "components/Chart/BarChart";
+import PieChart from "components/Chart/PieChart";
+import DatePicker from "components/DatePicker";
+import DateHomeModal from "components/Modal/DateHomeModal";
 import moment from "moment";
-import CircularProgress from "@mui/material/CircularProgress";
+import React, { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import DateSelectContext from "utils/context";
 
 interface Summary {
   price_balance: Number;
@@ -66,7 +59,7 @@ export default function Graph() {
   }, [dateFrom, dateTo]);
   return (
     <Box>
-      <Nav page="graph" />
+      {/* <Nav page="graph" /> */}
       <DatePicker dateSelect={dateSelect} isOpen={handleOpen} />
 
       {/* {money} */}
