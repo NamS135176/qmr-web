@@ -17,10 +17,10 @@ export default function CurrencyModal({ open, onClose }: any) {
   const [currencies, setCurrencies] = useState<any>([]);
 
   const nameCurrency: any = localStorage.getItem("currency");
-  console.log(
-    "🚀 ~ file: CurrencyModal.tsx ~ line 20 ~ CurrencyModal ~ nameCurrency",
-    nameCurrency
-  );
+  // console.log(
+  //   "🚀 ~ file: CurrencyModal.tsx ~ line 20 ~ CurrencyModal ~ nameCurrency",
+  //   nameCurrency
+  // );
   const [currency, setCurrency] = useState(
     i18n.language === "en"
       ? JSON.parse(nameCurrency)?.name
@@ -29,10 +29,10 @@ export default function CurrencyModal({ open, onClose }: any) {
   console.log({ currency });
   const getCurrenciesData = async () => {
     const response = await getCurrencies();
-    console.log(
-      "🚀 ~ file: CurrencyModal.tsx ~ line 22 ~ getCurrenciesData ~ response",
-      response
-    );
+    // console.log(
+    //   "🚀 ~ file: CurrencyModal.tsx ~ line 22 ~ getCurrenciesData ~ response",
+    //   response
+    // );
 
     setCurrencies(response);
   };

@@ -36,6 +36,7 @@ export default function Graph() {
   const { dateFrom, dateTo } = useContext(DateSelectContext);
   const [summary, setSummary] = useState({} as Summary);
   const [graph, setGraph] = useState<any>();
+  const currency: any = localStorage.getItem("currency");
   const handleClose = () => {
     console.log("close");
     setOpen(false);
@@ -122,7 +123,15 @@ export default function Graph() {
                       {t("money.income")}
                     </Typography>
                     <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                      {summary.price_income}
+                      {JSON.parse(currency)?.symbol}
+                      {new Intl.NumberFormat("jp-JA", {
+                        style: "currency",
+                        currency: "JPY",
+                        currencyDisplay: "code",
+                      })
+                        .format(Number(summary.price_income))
+                        .replace("JPY", "")
+                        .trim()}
                     </Typography>
                   </Box>
                 </Card>
@@ -159,7 +168,15 @@ export default function Graph() {
                       {t("money.expense")}
                     </Typography>
                     <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                      {summary.price_expense}
+                      {JSON.parse(currency)?.symbol}
+                      {new Intl.NumberFormat("jp-JA", {
+                        style: "currency",
+                        currency: "JPY",
+                        currencyDisplay: "code",
+                      })
+                        .format(Number(summary.price_expense))
+                        .replace("JPY", "")
+                        .trim()}
                     </Typography>
                   </Box>
                 </Card>
@@ -196,7 +213,15 @@ export default function Graph() {
                       {t("money.total")}
                     </Typography>
                     <Typography sx={{ fontWeight: "bold" }} gutterBottom>
-                      {summary.price_balance}
+                      {JSON.parse(currency)?.symbol}
+                      {new Intl.NumberFormat("jp-JA", {
+                        style: "currency",
+                        currency: "JPY",
+                        currencyDisplay: "code",
+                      })
+                        .format(Number(summary.price_balance))
+                        .replace("JPY", "")
+                        .trim()}
                     </Typography>
                   </Box>
                 </Card>

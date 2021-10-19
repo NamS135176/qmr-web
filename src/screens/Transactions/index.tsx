@@ -269,10 +269,14 @@ export default function ListPageScreen() {
                       ></TableCell>
                       <TableCell align="left">
                         {JSON.parse(currency)?.symbol}{" "}
-                        {new Intl.NumberFormat("vi-VN", {
+                        {new Intl.NumberFormat("ja-JP", {
                           style: "currency",
-                          currency: "VND",
-                        }).format(row.price)}
+                          currency: "JPY",
+                          currencyDisplay: "code",
+                        })
+                          .format(row.price)
+                          .replace("JPY", "")
+                          .trim()}
                       </TableCell>
                       <TableCell
                         sx={{ borderRight: "1px solid #ddd" }}

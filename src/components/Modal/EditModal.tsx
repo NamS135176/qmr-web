@@ -34,7 +34,7 @@ export default function EditModal(props: any) {
   const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(event.target.checked);
   };
-
+  const currency: any = localStorage.getItem("currency");
   const toDateWithOutTimeZone = (date) => {
     let tempTime = date.split(":");
     let dt = new Date();
@@ -488,7 +488,7 @@ export default function EditModal(props: any) {
                           InputProps={{
                             startAdornment: (
                               <InputAdornment position="start">
-                                đ
+                                {JSON.parse(currency)?.symbol}
                               </InputAdornment>
                             ),
                           }}
@@ -506,7 +506,15 @@ export default function EditModal(props: any) {
                         />
                       ) : (
                         <Typography sx={{ textAlign: "left" }}>
-                          {props.data.price}
+                          {JSON.parse(currency)?.symbol}
+                          {new Intl.NumberFormat("jp-JA", {
+                            style: "currency",
+                            currency: "JPY",
+                            currencyDisplay: "code",
+                          })
+                            .format(Number(props.data.price))
+                            .replace("JPY", "")
+                            .trim()}
                         </Typography>
                       )}
                     </Box>

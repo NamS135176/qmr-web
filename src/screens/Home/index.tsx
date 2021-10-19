@@ -121,10 +121,14 @@ export default function Home() {
                     </Typography>
                     <Typography sx={{ fontWeight: "bold" }} gutterBottom>
                       {JSON.parse(currency)?.symbol}
-                      {new Intl.NumberFormat("vi-VN", {
+                      {new Intl.NumberFormat("jp-JA", {
                         style: "currency",
-                        currency: "VND",
-                      }).format(Number(summary.price_income))}
+                        currency: "JPY",
+                        currencyDisplay: "code",
+                      })
+                        .format(Number(summary.price_income))
+                        .replace("JPY", "")
+                        .trim()}
                     </Typography>
                   </Box>
                 </Card>
@@ -162,10 +166,14 @@ export default function Home() {
                     </Typography>
                     <Typography sx={{ fontWeight: "bold" }} gutterBottom>
                       {JSON.parse(currency)?.symbol}
-                      {new Intl.NumberFormat("vi-VN", {
+                      {new Intl.NumberFormat("jp-JA", {
                         style: "currency",
-                        currency: "VND",
-                      }).format(Number(summary.price_expense))}
+                        currency: "JPY",
+                        currencyDisplay: "code",
+                      })
+                        .format(Number(summary.price_expense))
+                        .replace("JPY", "")
+                        .trim()}
                     </Typography>
                   </Box>
                 </Card>
@@ -203,10 +211,14 @@ export default function Home() {
                     </Typography>
                     <Typography sx={{ fontWeight: "bold" }} gutterBottom>
                       {JSON.parse(currency)?.symbol}
-                      {new Intl.NumberFormat("vi-VN", {
+                      {new Intl.NumberFormat("jp-JA", {
                         style: "currency",
-                        currency: "VND",
-                      }).format(Number(summary.price_balance))}
+                        currency: "JPY",
+                        currencyDisplay: "code",
+                      })
+                        .format(Number(summary.price_balance))
+                        .replace("JPY", "")
+                        .trim()}
                     </Typography>
                   </Box>
                 </Card>
