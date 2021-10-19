@@ -10,7 +10,7 @@ import { getCurrentMember, login } from "api/member";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
 import jwt_decode from "jwt-decode";
-import { setAuthorize } from "api";
+import { apiQMRWeb, setAuthorize } from "api";
 import { useTranslation } from "react-i18next";
 import { getCurrencies } from "api/curency";
 function Page() {
@@ -45,6 +45,7 @@ function Page() {
       "🚀 ~ file: index.tsx ~ line 52 ~ getCurrenciesData ~ currencies",
       member.language
     );
+    apiQMRWeb.setHeader("Accept-Language", member.language);
     const currencies = await getCurrencies();
 
     const currency = currencies.find((item) => item.id === member.currency_id);

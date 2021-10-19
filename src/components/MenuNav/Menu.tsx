@@ -14,6 +14,7 @@ import Check from "@mui/icons-material/Check";
 import CurrencyModal from "components/Modal/CurrencyModal";
 import React, { useState } from "react";
 import { updateCurrentMember } from "api/member";
+import { apiQMRWeb } from "api";
 
 export default function MenuNav({
   handleOpenCurrency,
@@ -83,6 +84,7 @@ export default function MenuNav({
         </MenuItem>
         <MenuItem
           onClick={async () => {
+            apiQMRWeb.setHeader("Accept-Language", "jp");
             await updateCurrentMember("jp", JSON.parse(currency)?.id);
             handleClose();
             i18n.changeLanguage("ja");
@@ -95,6 +97,7 @@ export default function MenuNav({
         </MenuItem>
         <MenuItem
           onClick={async () => {
+            apiQMRWeb.setHeader("Accept-Language", "en");
             await updateCurrentMember("en", JSON.parse(currency)?.id);
             handleClose();
             i18n.changeLanguage("en");

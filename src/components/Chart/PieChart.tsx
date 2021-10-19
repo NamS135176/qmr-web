@@ -3,8 +3,7 @@ import { Pie, defaults } from "react-chartjs-2";
 import Box from "@mui/material/Box";
 import Chart from "react-apexcharts";
 import color from "constant/";
-defaults.plugins.legend.display = false;
-// defaults.plugins.legend.position = "bottom";
+import "./style.scss";
 export default function PieChart({ data }: any) {
   const labels = data
     ?.sort((a, b) => b.total - a.total)
@@ -23,6 +22,7 @@ export default function PieChart({ data }: any) {
       //   // useSeriesColors: false,
       // },
     },
+
     theme: {
       monochrome: {
         enabled: false,
@@ -53,16 +53,25 @@ export default function PieChart({ data }: any) {
   return (
     <Box
       sx={{
-        width: "100%",
+        width: {
+          md: "90%",
+          lg: "80%",
+        },
+
         alignItems: "center",
         display: {
           xs: "flex",
           md: "block",
         },
         justifyContent: "center",
+        // background: 'yellow',
       }}
     >
-      {data ? <Chart options={option} series={d} type="pie" /> : <></>}
+      {data ? (
+        <Chart className="pie-chart" options={option} series={d} type="pie" />
+      ) : (
+        <></>
+      )}
     </Box>
   );
 }

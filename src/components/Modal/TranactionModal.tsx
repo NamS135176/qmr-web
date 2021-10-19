@@ -3,6 +3,7 @@ import DateTimePicker from "@mui/lab/DateTimePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
 import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -10,42 +11,20 @@ import FormControl from "@mui/material/FormControl";
 import InputAdornment from "@mui/material/InputAdornment";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import React, { useState, useEffect, useContext } from "react";
-import Dropzone from "react-dropzone";
-import { useTranslation } from "react-i18next";
-import jaLocale from "date-fns/locale/ja";
-import moment from "moment";
-import "./style.scss";
 import { getCategory } from "api/category";
 import { createTransaction, uploadImage } from "api/transaction";
+import NumberFormatCustom from "components/NumberInputCustom";
+import jaLocale from "date-fns/locale/ja";
+import moment from "moment";
+import React, { useContext, useEffect, useState } from "react";
+import Dropzone from "react-dropzone";
+import { useTranslation } from "react-i18next";
 import DateSelectContext from "utils/context";
 import { checkSize, resizeFile } from "utils/UploadFile";
-import CircularProgress from "@mui/material/CircularProgress";
-import NumberFormat from "react-number-format";
-
-function NumberFormatCustom(props) {
-  const { inputRef, onChange, ...other } = props;
-
-  return (
-    <NumberFormat
-      {...other}
-      getInputRef={inputRef}
-      onValueChange={(values) => {
-        onChange({
-          target: {
-            name: props.name,
-            value: values.value,
-          },
-        });
-      }}
-      thousandSeparator
-      // isNumericString
-    />
-  );
-}
+import "./style.scss";
 
 export default function TranactionModal({ open, onClose }: any) {
   const [value, setValue] = useState<any>(new Date());
@@ -195,7 +174,7 @@ export default function TranactionModal({ open, onClose }: any) {
                 >
                   {listCategory.map((item: any) => (
                     <MenuItem key={item.id} value={item.id}>
-                      {item.name}
+                      {i18n.language === "en" ? item.name : item.nameJP}
                     </MenuItem>
                   ))}
                 </Select>

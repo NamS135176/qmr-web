@@ -257,6 +257,7 @@ export default function Home() {
                 boxShadow: 2,
                 display: "flex",
                 justifyContent: "center",
+                alignItems: "center",
               }}
             >
               <PieChart data={graph?.price_by_category} />

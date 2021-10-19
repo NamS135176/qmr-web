@@ -91,6 +91,7 @@ export default function BarChart({ data, dateFrom, dateTo }: any) {
       sx={{
         height: {
           lg: 300,
+          md: 300,
           xs: 150,
         },
       }}
