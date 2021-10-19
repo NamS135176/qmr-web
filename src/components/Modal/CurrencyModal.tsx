@@ -10,17 +10,19 @@ import React, { useState, useEffect, useContext } from "react";
 import { getCurrencies } from "api/curency";
 import InputLabel from "@mui/material/InputLabel";
 import { useTranslation } from "react-i18next";
+import { updateCurrentMember } from "api/member";
 
 export default function CurrencyModal({ open, onClose }: any) {
   const { t, i18n } = useTranslation();
 
   const [currencies, setCurrencies] = useState<any>([]);
+  console.log(
+    "🚀 ~ file: CurrencyModal.tsx ~ line 19 ~ CurrencyModal ~ currencies",
+    currencies
+  );
 
   const nameCurrency: any = localStorage.getItem("currency");
-  console.log(
-    "🚀 ~ file: CurrencyModal.tsx ~ line 20 ~ CurrencyModal ~ nameCurrency",
-    nameCurrency
-  );
+
   const [currency, setCurrency] = useState(
     i18n.language === "en"
       ? JSON.parse(nameCurrency)?.name
@@ -39,6 +41,13 @@ export default function CurrencyModal({ open, onClose }: any) {
   const handleChangeCurrency = (event: SelectChangeEvent) => {
     console.log("change");
     setCurrency(event.target.value);
+  };
+  const submitChangeCurrency = async () => {
+    const language = i18n.language === "en" ? "en" : "jp";
+    const response = await updateCurrentMember(language, currency?.id);
+    localStorage.setItem("currency", JSON.stringify(currency));
+    // onClose();
+    window.location.reload();
   };
   useEffect(() => {
     getCurrenciesData();
@@ -71,6 +80,7 @@ export default function CurrencyModal({ open, onClose }: any) {
               color: "black",
             },
           }}
+          onClick={onClose}
         >
           {t("currency.back")}
         </Button>
@@ -87,6 +97,7 @@ export default function CurrencyModal({ open, onClose }: any) {
               color: "black",
             },
           }}
+          onClick={submitChangeCurrency}
         >
           Ok
         </Button>
@@ -106,10 +117,7 @@ export default function CurrencyModal({ open, onClose }: any) {
           >
             {currencies.map((item: any) => {
               return (
-                <MenuItem
-                  key={item.id}
-                  value={i18n.language === "en" ? item.name : item.nameJP}
-                >
+                <MenuItem key={item.id} value={item}>
                   {i18n.language === "en" ? item.name : item.nameJP}
                 </MenuItem>
               );
