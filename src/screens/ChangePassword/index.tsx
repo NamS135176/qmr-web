@@ -49,7 +49,6 @@ export default function ChangePassword() {
         const email: any = queryParams.get("email");
         const oldPass: any = queryParams.get("password");
         const res: any = await changePassword(email, password, oldPass);
-
         setLoading(false);
         history.push("/login");
       } catch (error) {

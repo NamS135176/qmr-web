@@ -31,7 +31,6 @@ import NumberFormat from "react-number-format";
 
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
-
   return (
     <NumberFormat
       {...other}
@@ -446,12 +445,16 @@ export default function EditModal(props: any) {
                             inputProps={{ "aria-label": "Without label" }}
                           >
                             <MenuItem value={category}>
-                              {props.data.cate}
+                              {i18n.language == "en"
+                                ? props.data.cate
+                                : props.data.nameJP}
                             </MenuItem>
                             {props.listCategories.map((item) => {
                               return (
                                 <MenuItem key={item.id} value={item}>
-                                  {item.name}
+                                  {i18n.language == "en"
+                                    ? item.name
+                                    : item.nameJP}
                                 </MenuItem>
                               );
                             })}
@@ -459,7 +462,9 @@ export default function EditModal(props: any) {
                         </FormControl>
                       ) : (
                         <Typography sx={{ textAlign: "left" }}>
-                          {props.data.cate}
+                          {i18n.language == "en"
+                            ? props.data.cate
+                            : props.data.nameJP}
                         </Typography>
                       )}
                     </Box>

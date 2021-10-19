@@ -88,6 +88,7 @@ export default function ListPageScreen() {
         (it: any) => it.id == item.category_id
       );
       item.cate = cate.name;
+      item.nameJP = cate.nameJP;
       item.memo = item.memo.replaceAll("+", " ");
       item.memo = decodeURIComponent(item.memo);
       return item;
@@ -262,7 +263,11 @@ export default function ListPageScreen() {
                         sx={{ borderRight: "1px solid #ddd" }}
                         align="left"
                       ></TableCell>
-                      <TableCell align="left">{row.cate}</TableCell>
+                      {i18n.language == "en" ? (
+                        <TableCell align="left">{row.cate}</TableCell>
+                      ) : (
+                        <TableCell align="left">{row.nameJP}</TableCell>
+                      )}
                       <TableCell
                         sx={{ borderRight: "1px solid #ddd" }}
                         align="left"
