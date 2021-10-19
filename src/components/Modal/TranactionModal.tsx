@@ -24,6 +24,28 @@ import { createTransaction, uploadImage } from "api/transaction";
 import DateSelectContext from "utils/context";
 import { checkSize, resizeFile } from "utils/UploadFile";
 import CircularProgress from "@mui/material/CircularProgress";
+import NumberFormat from "react-number-format";
+
+function NumberFormatCustom(props) {
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={inputRef}
+      onValueChange={(values) => {
+        onChange({
+          target: {
+            name: props.name,
+            value: values.value,
+          },
+        });
+      }}
+      thousandSeparator
+      // isNumericString
+    />
+  );
+}
 
 export default function TranactionModal({ open, onClose }: any) {
   const [value, setValue] = useState<any>(new Date());
@@ -183,7 +205,8 @@ export default function TranactionModal({ open, onClose }: any) {
               <TextField
                 label={t("editmodal.price")}
                 id="price"
-                type="number"
+                value={price?.toFixed(2)}
+                inputProps={{ maxLength: 8 }}
                 sx={{ width: "100%" }}
                 onChange={handleChangePrice}
                 InputProps={{
@@ -192,6 +215,7 @@ export default function TranactionModal({ open, onClose }: any) {
                       {JSON.parse(currency)?.symbol}
                     </InputAdornment>
                   ),
+                  inputComponent: NumberFormatCustom,
                 }}
               />
             </Box>
