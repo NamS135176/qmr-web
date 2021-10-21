@@ -26,7 +26,7 @@ import DateSelectContext from "utils/context";
 import { checkSize, resizeFile } from "utils/UploadFile";
 import "./style.scss";
 
-export default function TranactionModal({ open, onClose }: any) {
+export default function TranactionModal({ open, setOpen }: any) {
   const [value, setValue] = useState<any>(new Date());
   const [category, setCategory] = useState("");
   const [listCategory, setListCategory] = useState([]);
@@ -121,15 +121,21 @@ export default function TranactionModal({ open, onClose }: any) {
         setLoading(false);
       }
     }
-    onClose();
+    setOpen(false);
   };
   useEffect(() => {
     getCategoryData();
   }, []);
 
   return (
-    <Box>
-      <Dialog fullWidth={true} open={open} onClose={onClose}>
+    <Box sx={{ zIndex: 1000 }}>
+      <Dialog
+        fullWidth={true}
+        open={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+      >
         <Box sx={{}}>
           <DialogTitle sx={{ background: "#78CD51", color: "white" }}>
             {t("transaction.title")}
@@ -268,7 +274,9 @@ export default function TranactionModal({ open, onClose }: any) {
                       color: "black",
                     },
                   }}
-                  onClick={onClose}
+                  onClick={() => {
+                    setOpen(false);
+                  }}
                 >
                   {t("transaction.reset")}
                 </Button>

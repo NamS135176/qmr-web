@@ -682,7 +682,9 @@ export default function EditModal(props: any) {
                         <></>
                       )}
                       <strong>Files: &nbsp;</strong>
-                      <span>{fileNames}</span>
+                      <Typography sx={{ wordBreak: "break-word" }}>
+                        {fileNames}
+                      </Typography>
                       <Typography> {t("editmodal.size")}</Typography>
                     </Box>
                   </Box>

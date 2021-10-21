@@ -16,7 +16,7 @@ import { useHistory } from "react-router-dom";
 import ButtonNav from "components/ButtonNav";
 import "./style.scss";
 import CurrencyModal from "components/Modal/CurrencyModal";
-
+import InputModal from "components/Modal/InputModal";
 export default function Nav(props) {
   const [open, setOpen] = useState(false);
   const [checked, setChecked] = useState(false);
@@ -289,12 +289,7 @@ export default function Nav(props) {
         </AppBar>
         <MyDrawer />
       </Box>
-      {useMemo(() => {
-        return <TranactionModal open={open} onClose={handleClose} />;
-      }, [open])}
-      {useMemo(() => {
-        return <CurrencyModal open={openCurrency} onClose={onCloseCurrency} />;
-      }, [openCurrency])}
+      {open ? <InputModal open={open} setOpen={setOpen}></InputModal> : <></>}
     </Box>
   );
 }

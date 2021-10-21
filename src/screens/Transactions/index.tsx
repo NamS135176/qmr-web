@@ -272,7 +272,7 @@ export default function ListPageScreen() {
                         sx={{ borderRight: "1px solid #ddd" }}
                         align="left"
                       ></TableCell>
-                      <TableCell align="left">
+                      <TableCell sx={{ minWidth: 150 }} align="left">
                         {JSON.parse(currency)?.symbol}{" "}
                         {new Intl.NumberFormat("ja-JP", {
                           style: "currency",
