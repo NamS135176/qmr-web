@@ -11,6 +11,7 @@ export const getListTransactions = async (
   const res = await apiQMRWeb.get(
     `/transactions?time_from=${timeFrom}&time_to=${timeTo}&count=${count}&offset=${offset}&order_by=${order}&sort_by=${sort}`
   );
+  console.log("🚀 ~ file: transaction.ts ~ line 14 ~ res", res);
   return getResponseData(res);
 };
 
