@@ -5,3 +5,31 @@
   background-color: #d6d6d6;
   margin-bottom: 10px;
 }
+.keyboard {
+  transition: 0.3s;
+}
+.grid-item {
+  border: 1px solid black;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #729f03;
+  font-size: 40px;
+  background-color: #ecebeb;
+  &:active {
+    color: white;
+    background-color: #729f03;
+  }
+  font-weight: bold;
+}
+
+.grid-item-input {
+  border: 1px solid black;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+}

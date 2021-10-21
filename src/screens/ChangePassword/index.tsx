@@ -88,7 +88,7 @@ export default function ChangePassword() {
   useEffect(() => {
     console.log(queryParams.get("email"));
     if (!queryParams.get("email") || !queryParams.get("password")) {
-      history.push("/login");
+      history.push("/forgot-password");
     }
   });
   return (

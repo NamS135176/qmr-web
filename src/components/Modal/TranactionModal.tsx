@@ -123,15 +123,21 @@ export default function TranactionModal({ open, onClose }: any) {
         setLoading(false);
       }
     }
-    onClose();
+    setOpen(false);
   };
   useEffect(() => {
     getCategoryData();
   }, []);
 
   return (
-    <Box>
-      <Dialog fullWidth={true} open={open} onClose={onClose}>
+    <Box sx={{ zIndex: 1000 }}>
+      <Dialog
+        fullWidth={true}
+        open={open}
+        onClose={() => {
+          setOpen(false);
+        }}
+      >
         <Box sx={{}}>
           <DialogTitle sx={{ background: "#78CD51", color: "white" }}>
             {t("transaction.title")}
@@ -270,7 +276,9 @@ export default function TranactionModal({ open, onClose }: any) {
                       color: "black",
                     },
                   }}
-                  onClick={onClose}
+                  onClick={() => {
+                    setOpen(false);
+                  }}
                 >
                   {t("transaction.reset")}
                 </Button>
