@@ -8,7 +8,6 @@ export const apiQMRWeb = create({
 
 export const setAuthorize = (value) => {
   apiQMRWeb.setHeader("Authorization", value);
-  // apiQMRWeb.setHeader('Accept-Language', 'en, jp, cht, chs');
 };
 
 export function getResponseData(res: any) {
