@@ -244,6 +244,7 @@ export default function Home() {
               sx={{
                 width: {
                   xs: 300,
+                  sm: 400,
                   md: 450,
                   lg: 600,
                 },
@@ -267,6 +268,7 @@ export default function Home() {
                 width: {
                   xs: 300,
                   md: 450,
+                  sm: 400,
                   lg: 600,
                 },
                 background: "white",

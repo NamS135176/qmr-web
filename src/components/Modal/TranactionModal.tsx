@@ -26,8 +26,10 @@ import DateSelectContext from "utils/context";
 import { checkSize, resizeFile } from "utils/UploadFile";
 import "./style.scss";
 
-export default function TranactionModal({ open, setOpen }: any) {
-  const [value, setValue] = useState<any>(new Date());
+export default function TranactionModal({ open, onClose }: any) {
+  const [value, setValue] = useState<any>(
+    moment().format("YYYY-MM-DD HH:mm:ss")
+  );
   const [category, setCategory] = useState("");
   const [listCategory, setListCategory] = useState([]);
   const [price, setPrice] = useState<Number>();
@@ -43,7 +45,7 @@ export default function TranactionModal({ open, setOpen }: any) {
     console.log({ newValue });
     const date = moment(newValue).format("YYYY-MM-DD HH:mm:ss");
 
-    setValue(newValue);
+    setValue(date);
   };
 
   const handleChangeCategory = (event: SelectChangeEvent) => {
