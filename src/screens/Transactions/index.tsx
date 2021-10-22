@@ -87,8 +87,15 @@ export default function ListPageScreen() {
       let cate: any = res1.categories.find(
         (it: any) => it.id == item.category_id
       );
-      item.cate = cate.name;
-      item.nameJP = cate.nameJP;
+      // console.log('CATE',cate);
+
+      if (cate != undefined) {
+        item.cate = cate.name;
+        item.nameJP = cate.nameJP;
+      } else {
+        item.cate = "";
+        item.nameJP = "";
+      }
       item.memo = item.memo.replaceAll("+", " ");
       item.memo = decodeURIComponent(item.memo);
       return item;
