@@ -80,7 +80,7 @@ export default function InputModal(props) {
     const res: any = await getCategory();
     setListExpense(res.categories.filter((item: any) => item.count < 900));
     setListIncome(res.categories.filter((item: any) => item.count >= 900));
-    setDefault(res.categories.find((item: any) => item.name == "Income"));
+    setDefault(res.categories.find((item: any) => item.name == "?"));
     setIncome(res.categories.filter((item: any) => item.count >= 900)[0]);
     const list = res.categories;
     list.pop();
