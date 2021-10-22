@@ -17,10 +17,12 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { createTransaction } from "api/transaction";
 import moment from "moment";
 import DateSelectContext from "utils/context";
+import CustomizeModal from "./CustomizeModal";
 import DetailModal from "./DetailModal";
 
 export default function InputModal(props) {
   const [openDetailModal, setOpenDetailModal] = useState(false);
+  const [openCustom, setOpenCustom] = useState(false);
   const listNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   const [up, setUp] = useState(false);
   const [money, setMoney] = useState("0");
@@ -33,8 +35,9 @@ export default function InputModal(props) {
   const [loadCate, setLoadCate] = useState(false);
   const [cateSelect, setCateSelect] = useState<any>(null);
   const [loading, setLoading] = useState(false);
+  const [df, setDefault] = useState<any>(false);
   const { dateFrom, dateTo, reloadPage } = useContext(DateSelectContext);
-
+  const [listAll, setListAll] = useState<any>([]);
   const handleUp = () => {
     setUp(true);
   };
@@ -57,6 +60,18 @@ export default function InputModal(props) {
       setLoading(false);
       props.setOpen(false);
       reloadPage[1](!reloadPage[0]);
+    } else {
+      setLoading(true);
+      const res: any = await createTransaction(
+        df.id,
+        moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+        Number(money),
+        "",
+        window.navigator.userAgent
+      );
+      setLoading(false);
+      props.setOpen(false);
+      reloadPage[1](!reloadPage[0]);
     }
   };
 
@@ -65,7 +80,11 @@ export default function InputModal(props) {
     const res: any = await getCategory();
     setListExpense(res.categories.filter((item: any) => item.count < 900));
     setListIncome(res.categories.filter((item: any) => item.count >= 900));
-    setIncome(res.categories.find((item: any) => item.count == "1000"));
+    setDefault(res.categories.find((item: any) => item.name == "Income"));
+    setIncome(res.categories.filter((item: any) => item.count >= 900)[0]);
+    const list = res.categories;
+    list.pop();
+    setListAll(list);
     setLoadCate(false);
   };
 
@@ -81,6 +100,17 @@ export default function InputModal(props) {
           open={openDetailModal}
           setOpen={setOpenDetailModal}
         ></DetailModal>
+      ) : (
+        <></>
+      )}
+      {openCustom ? (
+        <CustomizeModal
+          closeParent={props.setOpen}
+          open={openCustom}
+          setOpen={setOpenCustom}
+          listAll={listExpense}
+          setListExpense={setListExpense}
+        ></CustomizeModal>
       ) : (
         <></>
       )}
@@ -142,31 +172,31 @@ export default function InputModal(props) {
                   ></HighlightOff>
                 </IconButton>
               </Box>
-              <Box
-                sx={{
-                  height: "90%",
-                  overflow: "scroll",
-                  paddingBottom: "25px",
-                }}
-              >
-                {loadCate ? (
-                  <Box
-                    sx={{
-                      display: "flex",
-                      width: "100%",
-                      justifyContent: "center",
-                      alignItems: "center",
-                    }}
-                  >
-                    <CircularProgress />
-                  </Box>
-                ) : (
+              {loadCate ? (
+                <Box
+                  sx={{
+                    display: "flex",
+                    width: "100%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <CircularProgress />
+                </Box>
+              ) : (
+                <Box
+                  sx={{
+                    height: "90%",
+                    overflow: "scroll",
+                    paddingBottom: "25px",
+                  }}
+                >
                   <Box
                     sx={{
                       display: "grid",
                       gridTemplateColumns: "1fr 1fr 1fr",
-                      gridGap: "3px",
-                      padding: "5px",
+                      gridGap: "5px",
+                      padding: "8px",
                     }}
                   >
                     {listExpense?.map((item: any, index) => {
@@ -181,7 +211,10 @@ export default function InputModal(props) {
                             sx={{
                               backgroundColor: "#9AC30C",
                               color: "black",
-                              minHeight: "60px",
+                              minHeight: {
+                                xs: "80px",
+                                md: "60px",
+                              },
                               wordBreak: "break-word",
                               fontWeight: "bold",
                               "&:hover": {
@@ -204,7 +237,10 @@ export default function InputModal(props) {
                             sx={{
                               backgroundColor: "#D7D6D6",
                               color: "black",
-                              minHeight: "60px",
+                              minHeight: {
+                                xs: "80px",
+                                md: "60px",
+                              },
                               wordBreak: "break-word",
                               fontWeight: "bold",
                               "&:hover": {
@@ -218,68 +254,76 @@ export default function InputModal(props) {
                       }
                     })}
                   </Box>
-                )}
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    width: "100%",
-                    paddingTop: "10px",
-                    flexDirection: "column",
-                    alignItems: "center",
-                  }}
-                >
-                  {isIncome ? (
-                    <Button
-                      onClick={() => {
-                        setCateSelect(null);
-                        setIsIncome(false);
-                      }}
-                      sx={{
-                        backgroundColor: "#9AC30C",
-                        color: "black",
-                        width: "70%",
-                        "&:hover": {
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      width: "100%",
+                      paddingTop: "10px",
+                      flexDirection: "column",
+                      alignItems: "center",
+                    }}
+                  >
+                    {isIncome ? (
+                      <Button
+                        onClick={() => {
+                          setCateSelect(null);
+                          setIsIncome(false);
+                        }}
+                        sx={{
                           backgroundColor: "#9AC30C",
-                        },
-                      }}
-                    >
-                      Income
-                    </Button>
-                  ) : (
+                          color: "black",
+                          width: "70%",
+                          "&:hover": {
+                            backgroundColor: "#9AC30C",
+                          },
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Income
+                      </Button>
+                    ) : (
+                      <Button
+                        onClick={() => {
+                          setUp(true);
+                          setExFocus(-1);
+                          setIsIncome(true);
+                          setCateSelect(income);
+                        }}
+                        sx={{
+                          backgroundColor: "#D7D6D6",
+                          color: "black",
+                          width: "70%",
+                          "&:hover": {
+                            backgroundColor: "#9AC30C",
+                          },
+                          fontWeight: "bold",
+                        }}
+                      >
+                        Income
+                      </Button>
+                    )}
                     <Button
                       onClick={() => {
-                        setExFocus(-1);
-                        setIsIncome(true);
-                        setCateSelect(income);
+                        setOpenCustom(true);
                       }}
                       sx={{
                         backgroundColor: "#D7D6D6",
                         color: "black",
                         width: "70%",
+                        marginTop: "10px",
                         "&:hover": {
                           backgroundColor: "#9AC30C",
                         },
+                        fontWeight: "bold",
                       }}
                     >
-                      Income
+                      Customize
                     </Button>
-                  )}
-                  <Button
-                    sx={{
-                      backgroundColor: "#D7D6D6",
-                      color: "black",
-                      width: "70%",
-                      marginTop: "10px",
-                      "&:hover": {
-                        backgroundColor: "#9AC30C",
-                      },
-                    }}
-                  >
-                    Customize
-                  </Button>
+                  </Box>
                 </Box>
-              </Box>
+              )}
+
               {up ? (
                 <Box
                   className="keyboard"
