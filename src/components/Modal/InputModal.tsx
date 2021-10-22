@@ -38,6 +38,7 @@ export default function InputModal(props) {
   const [df, setDefault] = useState<any>(false);
   const { dateFrom, dateTo, reloadPage } = useContext(DateSelectContext);
   const [listAll, setListAll] = useState<any>([]);
+  const [st, setSt] = useState("");
   const handleUp = () => {
     setUp(true);
   };
@@ -435,7 +436,11 @@ export default function InputModal(props) {
                           <Button
                             onClick={() => {
                               if (money.length < 8) {
-                                if (Number(money) == 0) {
+                                if (money.includes(".")) {
+                                  console.log("asdasdsad");
+
+                                  setMoney(money + `${item}`);
+                                } else if (Number(money) == 0) {
                                   setMoney(`${item}`);
                                 } else {
                                   setMoney(money + `${item}`);
