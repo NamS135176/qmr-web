@@ -56,10 +56,10 @@ export default function MenuNav({
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        // sx={{ padding: 1, margin: 0 }}
+        sx={inputModal ? { padding: 2, margin: 0, height: 63, width: 66 } : {}}
       >
         {inputModal ? (
-          <Box>
+          <Box sx={{}}>
             <SettingsIcon
               sx={{ color: "white", fontSize: 30, margin: 0 }}
             ></SettingsIcon>
