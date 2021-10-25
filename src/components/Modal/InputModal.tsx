@@ -26,8 +26,11 @@ import { useHistory } from "react-router";
 import CancelIcon from "@mui/icons-material/Cancel";
 import MenuNav from "components/MenuNav/Menu";
 import CurrencyModal from "components/Modal/CurrencyModal";
-
+import NumberFormatCustom from "components/NumberInputCustom";
+import TextField from "@mui/material/TextField";
+import InputAdornment from "@mui/material/InputAdornment";
 export default function InputModal(props) {
+  const [price, setPrice] = useState<Number>();
   const history = useHistory();
   const [openDetailModal, setOpenDetailModal] = useState(false);
   const [openCustom, setOpenCustom] = useState(false);
@@ -50,6 +53,14 @@ export default function InputModal(props) {
   const [st, setSt] = useState("");
   const [openMenu, setOpenMenu] = useState(false);
   const [openCurrency, setOpenCurrency] = useState(false);
+
+  const handleChangePrice = (e: any) => {
+    const re = /^[0-9\b]+$/;
+    if (e.target.value === "" || re.test(e.target.value)) {
+      setMoney(parseInt(e.target.value).toString());
+    }
+  };
+
   const handleOpenCurrency = () => {
     console.log("open currencyt", openCurrency);
     setOpenCurrency(true);
@@ -95,16 +106,18 @@ export default function InputModal(props) {
   };
 
   const getCate = async () => {
-    // setLoadCate(true);
+    setLoadCate(true);
     // const res: any = await getCategory();
     setListExpense(listCategories[0].filter((item: any) => item.count < 900));
     setListIncome(listCategories[0].filter((item: any) => item.count >= 900));
     setDefault(listCategories[0].find((item: any) => item.name == "?"));
+    console.log(listCategories[0]);
+
     setIncome(listCategories[0].filter((item: any) => item.count >= 900)[0]);
-    const list = listCategories[0];
+    const list = [...listCategories[0]];
     list.pop();
     setListAll(list);
-    // setLoadCate(false);
+    setLoadCate(false);
   };
 
   useEffect(() => {
@@ -172,6 +185,25 @@ export default function InputModal(props) {
                 position: "relative",
               }}
             >
+              <Box
+                sx={{
+                  padding: {
+                    xs: "1px",
+                    md: "5px",
+                  },
+                }}
+              >
+                <IconButton onClick={() => props.setOpen(false)}>
+                  <HighlightOff
+                    sx={{
+                      fontSize: {
+                        xs: 25,
+                        md: 30,
+                      },
+                    }}
+                  ></HighlightOff>
+                </IconButton>
+              </Box>
               {loadCate ? (
                 <Box
                   sx={{
@@ -188,7 +220,7 @@ export default function InputModal(props) {
                   sx={{
                     height: "90%",
                     overflow: "scroll",
-                    paddingBottom: "25px",
+                    paddingBottom: "30px",
                   }}
                 >
                   <Box
@@ -335,8 +367,8 @@ export default function InputModal(props) {
                     bottom: 0,
                     width: "100%",
                     height: {
-                      xs: "70%",
-                      sm: "70%",
+                      xs: "60%",
+                      sm: "60%",
                     },
                     backgroundColor: "#ecebeb",
                   }}
@@ -378,7 +410,59 @@ export default function InputModal(props) {
                       alignItems: "center",
                     }}
                   >
-                    <Typography
+                    <Box sx={{ width: "100%", px: "10px" }}>
+                      <TextField
+                        id="price"
+                        value={Number(money)?.toFixed(2)}
+                        // inputProps={{ maxLength: 10 }}
+                        sx={{
+                          width: "100%",
+                          backgroundColor: "transparent",
+                          border: "0px solid black",
+                          "& .MuiOutlinedInput-root": {
+                            // - The Input-root, inside the TextField-root
+                            "& fieldset": {
+                              // - The <fieldset> inside the Input-root
+                              border: "0 solid black", // - Set the Input border
+                            },
+                            "&:hover fieldset": {
+                              border: "0 solid black", // / - Set the Input border when parent has :hover
+                            },
+                            "&.Mui-focused fieldset": {
+                              // - Set the Input border when parent is focused
+                              border: "0 solid black", //
+                            },
+                          },
+                        }}
+                        onChange={handleChangePrice}
+                        inputProps={{
+                          min: 0,
+                          maxLength: 10,
+                          style: {
+                            textAlign: "right",
+                            fontSize: 30,
+                            fontWeight: "bold",
+                          },
+                        }}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="start">
+                              <IconButton
+                                onClick={() => {
+                                  setMoney("0");
+                                }}
+                              >
+                                <CancelIcon
+                                  sx={{ fontSize: "25px", color: "#787777" }}
+                                ></CancelIcon>
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                          inputComponent: NumberFormatCustom,
+                        }}
+                      />
+                    </Box>
+                    {/* <Typography
                       sx={{
                         textAlign: "right",
                         paddingRight: "10px",
@@ -406,13 +490,14 @@ export default function InputModal(props) {
                           sx={{ fontSize: "25px", color: "#787777" }}
                         ></CancelIcon>
                       </Button>
-                    </Typography>
+                    </Typography> */}
                   </Box>
                   <Box
                     sx={{
                       width: "100%",
-                      height: "65%",
-                      border: "1px solid #cbc9ca",
+                      height: "80%",
+                      borderTop: "1px solid #cbc9ca",
+                      borderLeft: "1px solid #cbc9ca",
                       display: "grid",
                     }}
                   >
@@ -439,12 +524,17 @@ export default function InputModal(props) {
                         <Box className="grid-item">
                           <Button
                             onClick={() => {
+                              console.log(money);
+
                               if (money.length < 8) {
                                 if (money.includes(".")) {
                                   console.log("asdasdsad");
 
                                   setMoney(money + `${item}`);
-                                } else if (Number(money) == 0) {
+                                } else if (
+                                  Number(money) == 0 ||
+                                  isNaN(Number(money))
+                                ) {
                                   setMoney(`${item}`);
                                 } else {
                                   setMoney(money + `${item}`);
@@ -468,7 +558,9 @@ export default function InputModal(props) {
                     <Box className="grid-item">
                       <Button
                         onClick={() => {
-                          if (money.length < 8 && Number(money) != 0) {
+                          if (isNaN(Number(money))) {
+                            setMoney("0");
+                          } else if (money.length < 8 && Number(money) != 0) {
                             if (money.length == 7) {
                               setMoney(money + "0");
                             } else {
@@ -491,7 +583,9 @@ export default function InputModal(props) {
                     <Box className="grid-item">
                       <Button
                         onClick={() => {
-                          if (money.length < 8 && Number(money) != 0) {
+                          if (isNaN(Number(money))) {
+                            setMoney("0");
+                          } else if (money.length < 8 && Number(money) != 0) {
                             setMoney(money + "0");
                           }
                         }}
@@ -510,7 +604,12 @@ export default function InputModal(props) {
                     <Box className="grid-item">
                       <Button
                         onClick={() => {
-                          if (!money.includes(".") && money.length != 7) {
+                          if (isNaN(Number(money))) {
+                            setMoney("0.");
+                          } else if (
+                            !money.includes(".") &&
+                            money.length != 7
+                          ) {
                             setMoney(money + ".");
                           }
                         }}
@@ -564,7 +663,7 @@ export default function InputModal(props) {
                       )}
                     </Box>
                   </Box>
-                  <Box
+                  {/* <Box
                     sx={{
                       height: "15%",
                       display: "flex",
@@ -626,7 +725,7 @@ export default function InputModal(props) {
                         handleOpenCurrency={handleOpenCurrency}
                       />
                     </Box>
-                  </Box>
+                  </Box> */}
                 </Box>
               ) : (
                 <Box
