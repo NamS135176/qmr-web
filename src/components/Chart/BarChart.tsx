@@ -41,24 +41,7 @@ export default function BarChart({ data, dateFrom, dateTo }: any) {
         borderWidth: 1.5,
       },
     },
-    plugins: {
-      zoom: {
-        // pan: {
-        //   enabled: true,
-        //   mode: 'xy',
-        //   threshold: 5,
-        // },
-        zoom: {
-          wheel: {
-            enabled: true,
-          },
-          // pinch: {
-          //   enabled: true,
-          // },
-          mode: "xy",
-        },
-      },
-    },
+
     // scales: {
     //   x: {
     //     type: 'category',

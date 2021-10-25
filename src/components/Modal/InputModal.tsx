@@ -24,7 +24,7 @@ export default function InputModal(props) {
   const [openDetailModal, setOpenDetailModal] = useState(false);
   const [openCustom, setOpenCustom] = useState(false);
   const listNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-  const [up, setUp] = useState(false);
+  const [up, setUp] = useState(true);
   const [money, setMoney] = useState("0");
   const [listExpense, setListExpense] = useState([]);
   const [listIncome, setListIncome] = useState([]);
@@ -138,7 +138,7 @@ export default function InputModal(props) {
               transform: "translate(-50%, -50%)",
               width: "100%",
               height: "100%",
-              bgcolor: "background.paper",
+              bgcolor: "#f0f0f0",
               // border: '2px solid #000',
               boxShadow: 24,
               maxHeight: "800px",
@@ -196,7 +196,7 @@ export default function InputModal(props) {
                     sx={{
                       display: "grid",
                       gridTemplateColumns: "1fr 1fr 1fr",
-                      gridGap: "5px",
+                      gridGap: "2px",
                       padding: "8px",
                     }}
                   >
@@ -221,6 +221,7 @@ export default function InputModal(props) {
                               "&:hover": {
                                 backgroundColor: "#9AC30C",
                               },
+                              borderRadius: "3px",
                             }}
                           >
                             {i18n.language == "en" ? item.name : item.nameJP}
@@ -247,6 +248,7 @@ export default function InputModal(props) {
                               "&:hover": {
                                 backgroundColor: "#9AC30C",
                               },
+                              borderRadius: "2px",
                             }}
                           >
                             {i18n.language == "en" ? item.name : item.nameJP}
@@ -334,8 +336,8 @@ export default function InputModal(props) {
                     bottom: 0,
                     width: "100%",
                     height: {
-                      xs: "75%",
-                      sm: '"70%"',
+                      xs: "55%",
+                      sm: "50%",
                     },
                     backgroundColor: "#ecebeb",
                   }}
@@ -409,7 +411,7 @@ export default function InputModal(props) {
                     sx={{
                       width: "100%",
                       height: "80%",
-                      border: "1px solid black",
+                      border: "1px solid #cbc9ca",
                       display: "grid",
                     }}
                   >
@@ -423,11 +425,12 @@ export default function InputModal(props) {
                         }}
                         sx={{
                           fontSize: "40px",
-                          width: "100%",
+                          // width: "100%",
                           height: "100%",
+                          maxWidth: "25%",
                         }}
                       >
-                        <NoteAdd sx={{ fontSize: "40px" }} />
+                        <NoteAdd sx={{ fontSize: "40px", color: "#729f03" }} />
                       </Button>
                     </Box>
                     {listNumber.map((item, index) => {
@@ -452,6 +455,8 @@ export default function InputModal(props) {
                               width: "100%",
                               height: "100%",
                               fontWeight: "bold",
+                              lineHeight: "normal",
+                              color: "#729f03",
                             }}
                           >
                             {item}
@@ -475,6 +480,8 @@ export default function InputModal(props) {
                           width: "100%",
                           height: "100%",
                           fontWeight: "bold",
+                          lineHeight: "normal",
+                          color: "#729f03",
                         }}
                       >
                         00
@@ -492,6 +499,8 @@ export default function InputModal(props) {
                           width: "100%",
                           height: "100%",
                           fontWeight: "bold",
+                          lineHeight: "normal",
+                          color: "#729f03",
                         }}
                       >
                         0
@@ -509,6 +518,8 @@ export default function InputModal(props) {
                           width: "100%",
                           height: "100%",
                           fontWeight: "bold",
+                          lineHeight: "normal",
+                          color: "#729f03",
                         }}
                       >
                         .
@@ -519,7 +530,7 @@ export default function InputModal(props) {
                       sx={{
                         gridRow: "2 / span 3",
                         gridColumn: "4",
-                        backgroundColor: "red",
+                        backgroundColor: "#729f03",
                         position: "relative",
                       }}
                     >
@@ -543,6 +554,8 @@ export default function InputModal(props) {
                             height: "100%",
                             fontWeight: "bold",
                             color: "white",
+                            lineHeight: "normal",
+                            maxWidth: "25%",
                           }}
                         >
                           input
