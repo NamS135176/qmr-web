@@ -290,6 +290,7 @@ export default function Nav(props) {
         <MyDrawer />
       </Box>
       {open ? <InputModal open={open} setOpen={setOpen}></InputModal> : <></>}
+      <CurrencyModal open={openCurrency} onClose={onCloseCurrency} />
     </Box>
   );
 }

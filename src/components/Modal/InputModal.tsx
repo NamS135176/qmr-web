@@ -25,6 +25,8 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { useHistory } from "react-router";
 import CancelIcon from "@mui/icons-material/Cancel";
 import MenuNav from "components/MenuNav/Menu";
+import CurrencyModal from "components/Modal/CurrencyModal";
+
 export default function InputModal(props) {
   const history = useHistory();
   const [openDetailModal, setOpenDetailModal] = useState(false);
@@ -47,7 +49,14 @@ export default function InputModal(props) {
   const [listAll, setListAll] = useState<any>([]);
   const [st, setSt] = useState("");
   const [openMenu, setOpenMenu] = useState(false);
-
+  const [openCurrency, setOpenCurrency] = useState(false);
+  const handleOpenCurrency = () => {
+    console.log("open currencyt", openCurrency);
+    setOpenCurrency(true);
+  };
+  const onCloseCurrency = () => {
+    setOpenCurrency(false);
+  };
   const handleUp = () => {
     setUp(true);
   };
@@ -326,8 +335,8 @@ export default function InputModal(props) {
                     bottom: 0,
                     width: "100%",
                     height: {
-                      xs: "60%",
-                      sm: "60%",
+                      xs: "70%",
+                      sm: "70%",
                     },
                     backgroundColor: "#ecebeb",
                   }}
@@ -610,22 +619,13 @@ export default function InputModal(props) {
                         </Typography>
                       </Box>
                     </IconButton>
-                    <IconButton onClick={() => {}}>
-                      <Box sx={{ textAlign: "center", px: "10px" }}>
-                        <MenuNav inputModal={true} />
 
-                        <Typography
-                          sx={{
-                            fontSize: 10,
-                            color: "white",
-                            lineHeight: "normal",
-                            margin: 0,
-                          }}
-                        >
-                          {t("nav.setting")}
-                        </Typography>
-                      </Box>
-                    </IconButton>
+                    <Box sx={{ textAlign: "center", px: "10px" }}>
+                      <MenuNav
+                        inputModal={true}
+                        handleOpenCurrency={handleOpenCurrency}
+                      />
+                    </Box>
                   </Box>
                 </Box>
               ) : (
@@ -673,6 +673,7 @@ export default function InputModal(props) {
           </Box>
         </Fade>
       </Modal>
+      <CurrencyModal open={openCurrency} onClose={onCloseCurrency} />
     </Box>
   );
 }

@@ -56,11 +56,24 @@ export default function MenuNav({
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
+        // sx={{ padding: 1, margin: 0 }}
       >
         {inputModal ? (
-          <SettingsIcon
-            sx={{ color: "white", fontSize: 30, margin: 0 }}
-          ></SettingsIcon>
+          <Box>
+            <SettingsIcon
+              sx={{ color: "white", fontSize: 30, margin: 0 }}
+            ></SettingsIcon>
+            <Typography
+              sx={{
+                fontSize: 10,
+                color: "white",
+                lineHeight: "normal",
+                margin: 0,
+              }}
+            >
+              {t("nav.setting")}
+            </Typography>
+          </Box>
         ) : (
           <BuildIcon sx={{ color: "white", fontSize: 25 }} />
         )}
