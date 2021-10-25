@@ -1,5 +1,6 @@
-import { createContext, useMemo, useState } from "react";
+import { createContext, useMemo, useState, useEffect } from "react";
 import moment from "moment";
+import { getCategory } from "api/category";
 import { useTranslation } from "react-i18next";
 interface ContextState {
   // set the type of state you want to handle with context e.g.
@@ -29,6 +30,13 @@ export function DateSelectProvider(props) {
   const [openModal, setOpenModal] = useState(false);
   const [reloadPage, setReloadPage] = useState(false);
   const [listCategories, setListCategories] = useState([]);
+  const getCate = async () => {
+    const res1: any = await getCategory();
+    setListCategories(res1.categories);
+  };
+  useEffect(() => {
+    getCate();
+  }, []);
   const value = {
     dateFrom: [dateFrom, setDateFrom],
     dateTo: [dateTo, setDateTo],

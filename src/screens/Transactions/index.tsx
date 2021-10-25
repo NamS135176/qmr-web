@@ -83,7 +83,7 @@ export default function ListPageScreen() {
     console.log({ res2 });
 
     setCategories(res1.categories);
-    listCategories[1](res1.categories);
+    // listCategories[1](res1.categories);
     const newList = res2.data.map((item: any) => {
       let cate: any = res1.categories.find(
         (it: any) => it.id == item.category_id

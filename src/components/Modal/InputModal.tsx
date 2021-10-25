@@ -23,6 +23,7 @@ import FormatListNumberedRtlIcon from "@mui/icons-material/FormatListNumberedRtl
 import PieChartIcon from "@mui/icons-material/PieChart";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useHistory } from "react-router";
+import CancelIcon from "@mui/icons-material/Cancel";
 export default function InputModal(props) {
   const history = useHistory();
   const [openDetailModal, setOpenDetailModal] = useState(false);
@@ -333,7 +334,7 @@ export default function InputModal(props) {
                       height: "5%",
                       width: "100%",
                       textAlign: "center",
-                      backgroundColor: "white",
+                      backgroundColor: "#f0f0f0",
                       position: "relative",
                     }}
                   >
@@ -344,11 +345,11 @@ export default function InputModal(props) {
                         top: 0,
                         left: "50%",
                         height: "130%",
-                        backgroundColor: "white",
+                        backgroundColor: "#f0f0f0",
                         transform: "translate(-50%, 0)",
                         width: "30%",
                         "&:hover": {
-                          backgroundColor: "white",
+                          backgroundColor: "#f0f0f0",
                         },
                       }}
                     >
@@ -389,7 +390,9 @@ export default function InputModal(props) {
                           setMoney("0");
                         }}
                       >
-                        <HighlightOff sx={{ fontSize: "35px" }}></HighlightOff>
+                        <CancelIcon
+                          sx={{ fontSize: "25px", color: "#787777" }}
+                        ></CancelIcon>
                       </Button>
                     </Typography>
                   </Box>
@@ -564,7 +567,7 @@ export default function InputModal(props) {
                         props.setOpen(false);
                       }}
                     >
-                      <Box sx={{ textAlign: "center", px: "5px" }}>
+                      <Box sx={{ textAlign: "center", px: "10px" }}>
                         <FormatListNumberedRtlIcon
                           sx={{ color: "white", fontSize: 30, margin: 0 }}
                         ></FormatListNumberedRtlIcon>
@@ -587,7 +590,7 @@ export default function InputModal(props) {
                         props.setOpen(false);
                       }}
                     >
-                      <Box sx={{ textAlign: "center", px: "5px" }}>
+                      <Box sx={{ textAlign: "center", px: "10px" }}>
                         <PieChartIcon
                           sx={{ color: "white", fontSize: 30, margin: 0 }}
                         ></PieChartIcon>
@@ -605,7 +608,7 @@ export default function InputModal(props) {
                       </Box>
                     </IconButton>
                     <IconButton onClick={() => {}}>
-                      <Box sx={{ textAlign: "center", px: "5px" }}>
+                      <Box sx={{ textAlign: "center", px: "10px" }}>
                         <SettingsIcon
                           sx={{ color: "white", fontSize: 30, margin: 0 }}
                         ></SettingsIcon>
@@ -641,7 +644,7 @@ export default function InputModal(props) {
                       height: "30%",
                       width: "100%",
                       textAlign: "center",
-                      backgroundColor: "white",
+                      backgroundColor: "#f0f0f0",
                       position: "relative",
                     }}
                   >
@@ -652,11 +655,11 @@ export default function InputModal(props) {
                         top: 0,
                         left: "50%",
                         height: "130%",
-                        backgroundColor: "white",
+                        backgroundColor: "#f0f0f0",
                         transform: "translate(-50%, 0)",
                         width: "30%",
                         "&:hover": {
-                          backgroundColor: "white",
+                          backgroundColor: "#f0f0f0",
                         },
                       }}
                     >

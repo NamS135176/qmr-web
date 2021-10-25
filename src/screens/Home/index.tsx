@@ -57,7 +57,7 @@ export default function Home() {
   };
 
   useEffect(() => {
-    getCate();
+    // getCate();
     getSummaryData();
     getGraphData();
   }, [dateFrom, dateTo]);
