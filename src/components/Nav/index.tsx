@@ -9,7 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import MenuNav from "components/MenuNav/Menu";
-import TranactionModal from "components/Modal/TranactionModal";
+// import TranactionModal from "components/Modal/TranactionModal";
 import React, { useState, useMemo, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";

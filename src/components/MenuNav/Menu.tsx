@@ -20,6 +20,7 @@ export default function MenuNav({
   handleOpenCurrency,
   openMenu,
   onClose,
+  inputModal,
 }: any) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -56,7 +57,13 @@ export default function MenuNav({
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
       >
-        <BuildIcon sx={{ color: "white", fontSize: 25 }} />
+        {inputModal ? (
+          <SettingsIcon
+            sx={{ color: "white", fontSize: 30, margin: 0 }}
+          ></SettingsIcon>
+        ) : (
+          <BuildIcon sx={{ color: "white", fontSize: 25 }} />
+        )}
       </IconButton>
       <Menu
         // sx={{
