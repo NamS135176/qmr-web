@@ -9,7 +9,7 @@
   transition: 0.3s;
 }
 .grid-item {
-  border: 1px solid black;
+  border: 1px solid #cbc9ca;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -22,10 +22,11 @@
     background-color: #729f03;
   }
   font-weight: bold;
+  line-height: 0%;
 }
 
 .grid-item-input {
-  border: 1px solid black;
+  border: 1px solid #cbc9ca;
   text-align: center;
   display: flex;
   justify-content: center;

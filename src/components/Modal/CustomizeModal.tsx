@@ -19,13 +19,24 @@ import { deleteExpense } from "api/category";
 import EditExpenseModal from "./EditExpenseModal";
 import AddExpenseModal from "./AddExpenseModal";
 import DeleteModal from "./DeleteModal";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
 export default function CustomizeModal(props) {
   const [item, setItem] = useState<any>(null);
   const [openAdd, setOpenAdd] = useState(false);
   const [openEdit, setOpenEdt] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [openCfDel, setOpenCfDel] = useState(false);
-
+  const [openMenu, setOpenMenu] = useState(false);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <Box>
       {openAdd ? (
@@ -117,7 +128,46 @@ export default function CustomizeModal(props) {
                   Edit Category
                 </Typography>
               </Box>
-              <Button
+
+              {editMode ? (
+                <Button
+                  onClick={() => {
+                    setEditMode(false);
+                  }}
+                  sx={{
+                    backgroundColor: "white",
+                    "&:hover": { backgroundColor: "white" },
+                  }}
+                >
+                  Done
+                </Button>
+              ) : (
+                <Box>
+                  <IconButton onClick={handleClick}>
+                    <MoreVertIcon sx={{ color: "white" }}></MoreVertIcon>
+                  </IconButton>
+                  <Menu
+                    sx={{ zIndex: 10006 }}
+                    id="basic-menu"
+                    anchorEl={anchorEl}
+                    open={open}
+                    onClose={handleClose}
+                    MenuListProps={{
+                      "aria-labelledby": "basic-button",
+                    }}
+                  >
+                    <MenuItem
+                      onClick={() => {
+                        setEditMode(true);
+                        setAnchorEl(null);
+                      }}
+                    >
+                      Edit
+                    </MenuItem>
+                  </Menu>
+                </Box>
+              )}
+              {/* <Button
                 onClick={() => {
                   setEditMode(!editMode);
                 }}
@@ -127,7 +177,7 @@ export default function CustomizeModal(props) {
                 }}
               >
                 Edit
-              </Button>
+              </Button> */}
             </Box>
             <Box sx={{ overflow: "scroll", height: "90%" }}>
               <List>

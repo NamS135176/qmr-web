@@ -8,6 +8,7 @@ interface ContextState {
   monthYear: any;
   openModal: any;
   reloadPage: any;
+  listCategories: any;
 }
 const DateSelectContext = createContext({} as ContextState);
 export function DateSelectProvider(props) {
@@ -27,12 +28,14 @@ export function DateSelectProvider(props) {
   const [monthYear, setMonthYear] = useState(monthYearInit);
   const [openModal, setOpenModal] = useState(false);
   const [reloadPage, setReloadPage] = useState(false);
+  const [listCategories, setListCategories] = useState([]);
   const value = {
     dateFrom: [dateFrom, setDateFrom],
     dateTo: [dateTo, setDateTo],
     monthYear: [monthYear, setMonthYear],
     openModal: [openModal, setOpenModal],
     reloadPage: [reloadPage, setReloadPage],
+    listCategories: [listCategories, setListCategories],
   };
   return (
     <DateSelectContext.Provider value={value}>

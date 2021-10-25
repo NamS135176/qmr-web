@@ -8,7 +8,8 @@
     "summary": "サマリー",
     "list": "リスト",
     "graph": "グラフ",
-    "support": "サポートブログ"
+    "support": "サポートブログ",
+    "setting":"設定"
   },
   "logo": "jp",
   "date_home_modal": {

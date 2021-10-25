@@ -8,7 +8,8 @@
     "summary": "Summary",
     "list": "List",
     "graph": "Graph",
-    "support": "Support/Blog"
+    "support": "Support/Blog",
+    "setting":"Setting"
   },
   "logo": "en",
   "date_home_modal": {
