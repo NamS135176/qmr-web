@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Box from "@mui/material/Box";
 import Backdrop from "@mui/material/Backdrop";
 import Modal from "@mui/material/Modal";
@@ -9,13 +9,16 @@ import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { deleteExpense, getCategory } from "api/category";
+import DateSelectContext from "utils/context";
 import CircularProgress from "@mui/material/CircularProgress";
 export default function DeleteModal(props) {
   const [loading, setLoading] = useState(false);
+  const { listCategories } = useContext(DateSelectContext);
   const handleDelete = async () => {
     setLoading(true);
     const res = await deleteExpense(props.item.id);
     const res1: any = await getCategory();
+    listCategories[1](res1.categories);
     props.setListExpense(
       res1.categories.filter((item: any) => item.count < 900)
     );

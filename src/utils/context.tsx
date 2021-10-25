@@ -8,6 +8,7 @@ interface ContextState {
   monthYear: any;
   openModal: any;
   reloadPage: any;
+  listCategories: any;
 }
 const DateSelectContext = createContext({} as ContextState);
 export function DateSelectProvider(props) {

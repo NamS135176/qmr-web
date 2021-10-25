@@ -17,9 +17,9 @@ import moment from "moment";
 import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import DateSelectContext from "utils/context";
+import { getCategory } from "api/category";
 import Nav from "../../components/Nav";
 import "./style.scss";
-
 interface Summary {
   price_balance: Number;
   price_expense: Number;
@@ -31,7 +31,8 @@ export default function Home() {
   const [graph, setGraph] = useState<any>();
   const { t, i18n } = useTranslation();
   const dateSelect = useContext(DateSelectContext);
-  const { dateFrom, dateTo, reloadPage } = useContext(DateSelectContext);
+  const { dateFrom, dateTo, reloadPage, listCategories } =
+    useContext(DateSelectContext);
   const currency: any = localStorage.getItem("currency");
   const getSummaryData = async () => {
     const summary = await getSummary(
@@ -50,7 +51,13 @@ export default function Home() {
     console.log("🚀 ~ file: index.tsx ~ line 45 ~ getGraphData ~ graph", graph);
   };
 
+  const getCate = async () => {
+    const res1: any = await getCategory();
+    listCategories[1](res1.categories);
+  };
+
   useEffect(() => {
+    getCate();
     getSummaryData();
     getGraphData();
   }, [dateFrom, dateTo]);

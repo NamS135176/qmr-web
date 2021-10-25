@@ -33,7 +33,7 @@ export default function ListPageScreen() {
   const [itemData, setItemData] = useState({ time: "2021-10-04 09:30:00" });
   const [open, setOpen] = useState(false);
   const dateSelect = useContext(DateSelectContext);
-  const { dateFrom, dateTo, setListCategories } = useContext(DateSelectContext);
+  const { dateFrom, dateTo, listCategories } = useContext(DateSelectContext);
   const [categories, setCategories] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [page, setPage] = useState(1);
@@ -83,7 +83,7 @@ export default function ListPageScreen() {
     console.log({ res2 });
 
     setCategories(res1.categories);
-    setListCategories(res1.categories);
+    listCategories[1](res1.categories);
     const newList = res2.data.map((item: any) => {
       let cate: any = res1.categories.find(
         (it: any) => it.id == item.category_id

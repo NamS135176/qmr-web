@@ -19,8 +19,12 @@ import moment from "moment";
 import DateSelectContext from "utils/context";
 import CustomizeModal from "./CustomizeModal";
 import DetailModal from "./DetailModal";
-
+import FormatListNumberedRtlIcon from "@mui/icons-material/FormatListNumberedRtl";
+import PieChartIcon from "@mui/icons-material/PieChart";
+import SettingsIcon from "@mui/icons-material/Settings";
+import { useHistory } from "react-router";
 export default function InputModal(props) {
+  const history = useHistory();
   const [openDetailModal, setOpenDetailModal] = useState(false);
   const [openCustom, setOpenCustom] = useState(false);
   const listNumber = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -36,7 +40,8 @@ export default function InputModal(props) {
   const [cateSelect, setCateSelect] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [df, setDefault] = useState<any>(false);
-  const { dateFrom, dateTo, reloadPage } = useContext(DateSelectContext);
+  const { dateFrom, dateTo, reloadPage, listCategories } =
+    useContext(DateSelectContext);
   const [listAll, setListAll] = useState<any>([]);
   const [st, setSt] = useState("");
   const handleUp = () => {
@@ -77,16 +82,16 @@ export default function InputModal(props) {
   };
 
   const getCate = async () => {
-    setLoadCate(true);
-    const res: any = await getCategory();
-    setListExpense(res.categories.filter((item: any) => item.count < 900));
-    setListIncome(res.categories.filter((item: any) => item.count >= 900));
-    setDefault(res.categories.find((item: any) => item.name == "?"));
-    setIncome(res.categories.filter((item: any) => item.count >= 900)[0]);
-    const list = res.categories;
+    // setLoadCate(true);
+    // const res: any = await getCategory();
+    setListExpense(listCategories[0].filter((item: any) => item.count < 900));
+    setListIncome(listCategories[0].filter((item: any) => item.count >= 900));
+    setDefault(listCategories[0].find((item: any) => item.name == "?"));
+    setIncome(listCategories[0].filter((item: any) => item.count >= 900)[0]);
+    const list = listCategories[0];
     list.pop();
     setListAll(list);
-    setLoadCate(false);
+    // setLoadCate(false);
   };
 
   useEffect(() => {
@@ -154,25 +159,6 @@ export default function InputModal(props) {
                 position: "relative",
               }}
             >
-              <Box
-                sx={{
-                  padding: {
-                    xs: "1px",
-                    md: "5px",
-                  },
-                }}
-              >
-                <IconButton onClick={() => props.setOpen(false)}>
-                  <HighlightOff
-                    sx={{
-                      fontSize: {
-                        xs: 25,
-                        md: 30,
-                      },
-                    }}
-                  ></HighlightOff>
-                </IconButton>
-              </Box>
               {loadCate ? (
                 <Box
                   sx={{
@@ -336,8 +322,8 @@ export default function InputModal(props) {
                     bottom: 0,
                     width: "100%",
                     height: {
-                      xs: "55%",
-                      sm: "50%",
+                      xs: "60%",
+                      sm: "60%",
                     },
                     backgroundColor: "#ecebeb",
                   }}
@@ -410,7 +396,7 @@ export default function InputModal(props) {
                   <Box
                     sx={{
                       width: "100%",
-                      height: "80%",
+                      height: "65%",
                       border: "1px solid #cbc9ca",
                       display: "grid",
                     }}
@@ -562,6 +548,80 @@ export default function InputModal(props) {
                         </Button>
                       )}
                     </Box>
+                  </Box>
+                  <Box
+                    sx={{
+                      height: "15%",
+                      display: "flex",
+                      justifyContent: "center",
+                      backgroundColor: "#a3a2a2",
+                      alignItems: "center",
+                    }}
+                  >
+                    <IconButton
+                      onClick={() => {
+                        history.push("/transactions");
+                        props.setOpen(false);
+                      }}
+                    >
+                      <Box sx={{ textAlign: "center", px: "5px" }}>
+                        <FormatListNumberedRtlIcon
+                          sx={{ color: "white", fontSize: 30, margin: 0 }}
+                        ></FormatListNumberedRtlIcon>
+
+                        <Typography
+                          sx={{
+                            fontSize: 10,
+                            color: "white",
+                            lineHeight: "normal",
+                            margin: 0,
+                          }}
+                        >
+                          {t("nav.list")}
+                        </Typography>
+                      </Box>
+                    </IconButton>
+                    <IconButton
+                      onClick={() => {
+                        history.push("/graph");
+                        props.setOpen(false);
+                      }}
+                    >
+                      <Box sx={{ textAlign: "center", px: "5px" }}>
+                        <PieChartIcon
+                          sx={{ color: "white", fontSize: 30, margin: 0 }}
+                        ></PieChartIcon>
+
+                        <Typography
+                          sx={{
+                            fontSize: 10,
+                            color: "white",
+                            lineHeight: "normal",
+                            margin: 0,
+                          }}
+                        >
+                          {t("nav.graph")}
+                        </Typography>
+                      </Box>
+                    </IconButton>
+                    <IconButton onClick={() => {}}>
+                      <Box sx={{ textAlign: "center", px: "5px" }}>
+                        <SettingsIcon
+                          sx={{ color: "white", fontSize: 30, margin: 0 }}
+                        ></SettingsIcon>
+
+                        <Typography
+                          sx={{
+                            fontSize: 10,
+                            color: "white",
+                            lineHeight: "normal",
+                            margin: 0,
+                          }}
+                        >
+                          {t("nav.graph")}
+                        </Typography>
+                      </Box>
+                    </IconButton>
                   </Box>
                 </Box>
               ) : (
