@@ -76,33 +76,35 @@ export default function InputModal(props) {
   };
 
   const handleQuickCreate = async () => {
-    if (cateSelect) {
-      console.log(cateSelect.id);
+    console.log(money);
 
-      setLoading(true);
-      const res: any = await createTransaction(
-        cateSelect.id,
-        moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
-        Number(money),
-        "",
-        window.navigator.userAgent
-      );
-      setLoading(false);
-      props.setOpen(false);
-      reloadPage[1](!reloadPage[0]);
-    } else {
-      setLoading(true);
-      const res: any = await createTransaction(
-        df.id,
-        moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
-        Number(money),
-        "",
-        window.navigator.userAgent
-      );
-      setLoading(false);
-      props.setOpen(false);
-      reloadPage[1](!reloadPage[0]);
-    }
+    // if (cateSelect) {
+    //   console.log(cateSelect.id);
+
+    //   setLoading(true);
+    //   const res: any = await createTransaction(
+    //     cateSelect.id,
+    //     moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+    //     Number(money),
+    //     "",
+    //     window.navigator.userAgent
+    //   );
+    //   setLoading(false);
+    //   props.setOpen(false);
+    //   reloadPage[1](!reloadPage[0]);
+    // } else {
+    //   setLoading(true);
+    //   const res: any = await createTransaction(
+    //     df.id,
+    //     moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+    //     Number(money),
+    //     "",
+    //     window.navigator.userAgent
+    //   );
+    //   setLoading(false);
+    //   props.setOpen(false);
+    //   reloadPage[1](!reloadPage[0]);
+    // }
   };
 
   const getCate = async () => {
@@ -413,7 +415,7 @@ export default function InputModal(props) {
                     <Box sx={{ width: "100%", px: "10px" }}>
                       <TextField
                         id="price"
-                        value={Number(money)?.toFixed(2)}
+                        value={Number(money)}
                         // inputProps={{ maxLength: 10 }}
                         sx={{
                           width: "100%",
