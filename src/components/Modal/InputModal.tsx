@@ -23,6 +23,7 @@ import FormatListNumberedRtlIcon from "@mui/icons-material/FormatListNumberedRtl
 import PieChartIcon from "@mui/icons-material/PieChart";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useHistory } from "react-router";
+import MenuNav from "components/MenuNav/Menu";
 export default function InputModal(props) {
   const history = useHistory();
   const [openDetailModal, setOpenDetailModal] = useState(false);
@@ -44,6 +45,8 @@ export default function InputModal(props) {
     useContext(DateSelectContext);
   const [listAll, setListAll] = useState<any>([]);
   const [st, setSt] = useState("");
+  const [openMenu, setOpenMenu] = useState(false);
+
   const handleUp = () => {
     setUp(true);
   };
@@ -606,9 +609,7 @@ export default function InputModal(props) {
                     </IconButton>
                     <IconButton onClick={() => {}}>
                       <Box sx={{ textAlign: "center", px: "5px" }}>
-                        <SettingsIcon
-                          sx={{ color: "white", fontSize: 30, margin: 0 }}
-                        ></SettingsIcon>
+                        <MenuNav inputModal={true} />
 
                         <Typography
                           sx={{
@@ -618,7 +619,7 @@ export default function InputModal(props) {
                             margin: 0,
                           }}
                         >
-                          {t("nav.graph")}
+                          {t("nav.setting")}
                         </Typography>
                       </Box>
                     </IconButton>
