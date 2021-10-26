@@ -31,8 +31,10 @@ export function DateSelectProvider(props) {
   const [reloadPage, setReloadPage] = useState(false);
   const [listCategories, setListCategories] = useState([]);
   const getCate = async () => {
-    const res1: any = await getCategory();
-    setListCategories(res1.categories);
+    if (localStorage.getItem("access_token")) {
+      const res1: any = await getCategory();
+      setListCategories(res1.categories);
+    }
   };
   useEffect(() => {
     getCate();
