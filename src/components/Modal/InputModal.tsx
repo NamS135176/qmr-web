@@ -613,7 +613,7 @@ export default function InputModal(props) {
                         <Box
                           sx={{
                             display: "flex",
-                            width: "100%",
+                            width: "55px",
                             justifyContent: "center",
                             alignItems: "center",
                           }}
@@ -625,12 +625,11 @@ export default function InputModal(props) {
                           onClick={handleQuickCreate}
                           sx={{
                             fontSize: "20px",
-                            width: "100%",
+                            width: "55px",
                             height: "100%",
                             fontWeight: "bold",
                             color: "white",
                             lineHeight: "normal",
-                            maxWidth: "25%",
                           }}
                         >
                           input

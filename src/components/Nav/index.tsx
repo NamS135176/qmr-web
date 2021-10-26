@@ -31,8 +31,9 @@ export default function Nav(props) {
     setOpen(false);
   };
   const handleOpen = () => {
-    console.log("open");
-    setOpen(true);
+    setTimeout(() => {
+      setOpen(true);
+    }, 100);
   };
   const handleOpenCurrency = () => {
     console.log("open currencyt", openCurrency);
