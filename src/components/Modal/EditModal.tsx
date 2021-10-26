@@ -222,7 +222,13 @@ export default function EditModal(props: any) {
                   setFileNames("");
                   setCategory("");
                 }}
-                sx={{ backgroundColor: "#d6d9e0", color: "black" }}
+                sx={{
+                  backgroundColor: "#d6d9e0",
+                  color: "black",
+                  ":hover": {
+                    backgroundColor: "#d6d9e0",
+                  },
+                }}
               >
                 {t("editmodal.back")}
               </Button>
@@ -234,7 +240,13 @@ export default function EditModal(props: any) {
                   ) : (
                     <Button
                       onClick={handleUpdate}
-                      sx={{ backgroundColor: "#36a9e1", color: "white" }}
+                      sx={{
+                        backgroundColor: "#36a9e1",
+                        color: "white",
+                        ":hover": {
+                          backgroundColor: "#36a9e1",
+                        },
+                      }}
                     >
                       {t("editmodal.done")}
                     </Button>
