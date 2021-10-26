@@ -277,7 +277,7 @@ export default function InputModal(props) {
                               wordBreak: "break-word",
                               fontWeight: "bold",
                               "&:hover": {
-                                backgroundColor: "#9AC30C",
+                                backgroundColor: "#D7D6D6",
                               },
                               borderRadius: "2px",
                             }}
@@ -329,7 +329,7 @@ export default function InputModal(props) {
                           color: "black",
                           width: "70%",
                           "&:hover": {
-                            backgroundColor: "#9AC30C",
+                            backgroundColor: "#D7D6D6",
                           },
                           fontWeight: "bold",
                         }}

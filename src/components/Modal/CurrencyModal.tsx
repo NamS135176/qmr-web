@@ -16,11 +16,6 @@ export default function CurrencyModal({ open, onClose }: any) {
   const { t, i18n } = useTranslation();
 
   const [currencies, setCurrencies] = useState<any>([]);
-  console.log(
-    "🚀 ~ file: CurrencyModal.tsx ~ line 19 ~ CurrencyModal ~ currencies",
-    currencies
-  );
-
   const nameCurrency: any = localStorage.getItem("currency");
 
   const [currency, setCurrency] = useState(
@@ -28,7 +23,6 @@ export default function CurrencyModal({ open, onClose }: any) {
       ? JSON.parse(nameCurrency)?.name
       : JSON.parse(nameCurrency)?.nameJP
   );
-  console.log({ currency });
   const getCurrenciesData = async () => {
     const response = await getCurrencies();
     // console.log(
