@@ -16,7 +16,7 @@ export function DateSelectProvider(props) {
   const { t, i18n } = useTranslation();
   const { children } = props;
 
-  let monthYearInit = moment().format("MMMM YYYY");
+  let monthYearInit = moment();
 
   const startOfMonth = moment(monthYearInit)
     .startOf("month")
