@@ -398,7 +398,7 @@ export default function InputModal(props) {
                         zIndex: 100005,
                       }}
                     >
-                      <ArrowDropDown></ArrowDropDown>
+                      <ArrowDropDown sx={{ fontSize: 35 }}></ArrowDropDown>
                     </IconButton>
                   </Box>
                   <Box
@@ -739,7 +739,7 @@ export default function InputModal(props) {
                         zIndex: 10005,
                       }}
                     >
-                      <ArrowDropUp></ArrowDropUp>
+                      <ArrowDropUp sx={{ fontSize: 35 }}></ArrowDropUp>
                     </IconButton>
                   </Box>
                   <Box
