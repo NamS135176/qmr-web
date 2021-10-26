@@ -14,8 +14,8 @@ export default function Index({ isOpen, dateSelect }) {
   const handlePreviousMonth = () => {
     const currentTime = moment(monthYear[0])
       .subtract(1, "months")
-      .endOf("month")
-      .format("MMMM YYYY");
+      .endOf("month");
+
     openModal[1](false);
     monthYear[1](currentTime);
     dateFrom[1](moment(currentTime).startOf("month").format("YYYY-MM-DD"));
@@ -23,10 +23,8 @@ export default function Index({ isOpen, dateSelect }) {
     console.log(dateFrom[0]);
   };
   const handleNextMonth = () => {
-    const currentTime = moment(monthYear[0])
-      .add(1, "months")
-      .endOf("month")
-      .format("MMMM YYYY");
+    const currentTime = moment(monthYear[0]).add(1, "months").endOf("month");
+
     openModal[1](false);
     monthYear[1](currentTime);
     dateFrom[1](moment(currentTime).startOf("month").format("YYYY-MM-DD"));
