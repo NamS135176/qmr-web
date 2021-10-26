@@ -11,6 +11,8 @@ import Page404 from "screens/Page404";
 import Nav from "components/Nav";
 import RequestDone from "screens/RequestDone";
 import ChangePassword from "screens/ChangePassword";
+import { DateSelectProvider } from "utils/context";
+
 function AppRouter() {
   useEffect(() => {
     if (typeof window.ResizeObserver === "undefined") {
@@ -25,7 +27,7 @@ function AppRouter() {
         <Route exact path="/forgot-password" component={ForgotPassword} />
         <Route exact path="/send_mail_done" component={RequestDone} />
         <Route exact path="/change-password" component={ChangePassword} />
-        <div>
+        <DateSelectProvider>
           <Nav />
           <AuthenticateRoute
             exact
@@ -34,7 +36,7 @@ function AppRouter() {
           />
           <AuthenticateRoute exact path="/" component={Home} />
           <AuthenticateRoute exact path="/graph" component={Graph} />
-        </div>
+        </DateSelectProvider>
         <Route component={Page404} />
       </Switch>
     </Router>
