@@ -6,6 +6,8 @@ import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import MenuItem from "@mui/material/MenuItem";
+import ListItem from "@mui/material/ListItem";
+
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import MenuNav from "components/MenuNav/Menu";
@@ -58,8 +60,16 @@ export default function Nav(props) {
       <Box sx={{ width: "300px", background: "red" }}>
         <Drawer anchor="right" onClose={onCloseDrawer} open={checked}>
           <AppBar title="Menu" />
-          <MenuItem
-            sx={{ backgroundColor: "#78CD51", px: 5 }}
+          <ListItem
+            key="1"
+            button
+            sx={{
+              backgroundColor: "#78CD51",
+              px: 5,
+              ":hover": {
+                backgroundColor: "#00B050",
+              },
+            }}
             onClick={() => {
               toggleDrawer();
               history.push("/");
@@ -67,9 +77,17 @@ export default function Nav(props) {
             }}
           >
             <Typography sx={{ color: "white" }}> {t("nav.summary")}</Typography>
-          </MenuItem>
-          <MenuItem
-            sx={{ backgroundColor: "#78CD51", px: 5 }}
+          </ListItem>
+          <ListItem
+            key="2"
+            button
+            sx={{
+              backgroundColor: "#78CD51",
+              px: 5,
+              ":hover": {
+                backgroundColor: "#00B050",
+              },
+            }}
             onClick={() => {
               toggleDrawer();
               history.push("/transactions");
@@ -78,9 +96,17 @@ export default function Nav(props) {
             }}
           >
             <Typography sx={{ color: "white" }}> {t("nav.list")}</Typography>
-          </MenuItem>
-          <MenuItem
-            sx={{ backgroundColor: "#78CD51", px: 5 }}
+          </ListItem>
+          <ListItem
+            key="3"
+            button
+            sx={{
+              backgroundColor: "#78CD51",
+              px: 5,
+              ":hover": {
+                backgroundColor: "#00B050",
+              },
+            }}
             onClick={() => {
               toggleDrawer();
               history.push("/graph");
@@ -88,22 +114,35 @@ export default function Nav(props) {
             }}
           >
             <Typography sx={{ color: "white" }}> {t("nav.graph")}</Typography>
-          </MenuItem>
-          <MenuItem
-            sx={{ backgroundColor: "#78CD51", px: 5 }}
+          </ListItem>
+          <ListItem
+            key="4"
+            button
+            sx={{
+              backgroundColor: "#78CD51",
+              px: 5,
+              ":hover": {
+                backgroundColor: "#00B050",
+              },
+            }}
             onClick={() => {
               toggleDrawer();
               window.open(`http://smart-idea-apps.com/qmr/pc_support`);
             }}
           >
             <Typography sx={{ color: "white" }}> {t("nav.support")}</Typography>
-          </MenuItem>
-          <MenuItem
+          </ListItem>
+          <ListItem
+            key="5"
+            button
             sx={{
               backgroundColor: "#78CD51",
               px: 5,
               // backgroundColor: 'red',
               width: "100%",
+              ":hover": {
+                backgroundColor: "#00B050",
+              },
             }}
             onClick={() => {
               toggleDrawer();
@@ -124,11 +163,16 @@ export default function Nav(props) {
                 }}
               />
             </Box>
-          </MenuItem>
-          <MenuItem
+          </ListItem>
+          <ListItem
+            key="6"
+            button
             sx={{
               backgroundColor: "#78CD51",
               px: 5,
+              ":hover": {
+                backgroundColor: "#00B050",
+              },
             }}
             onClick={() => {
               setOpenMenu(!openMenu);
@@ -141,7 +185,7 @@ export default function Nav(props) {
                 onClose={onCloseMenu}
               />
             </Box>
-          </MenuItem>
+          </ListItem>
         </Drawer>
       </Box>
     );
@@ -160,12 +204,14 @@ export default function Nav(props) {
                 className="image"
                 src={"assets/images/logo_jp.png"}
                 height="100%"
+                alt="logo"
               />
             ) : (
               <img
                 className="image"
                 src={"assets/images/logo_en.png"}
                 height="100%"
+                alt="logo"
               />
             )}
             <Box sx={{ height: "100%" }} className="boxNavPc">
