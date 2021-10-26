@@ -11,18 +11,15 @@ import * as serviceWorkerRegistration from "utils/serviceWorkerRegistration";
 import createEmotionCache from "utils/createEmotionCache";
 import theme from "utils/theme";
 import AppRouter from "router";
-import { DateSelectProvider } from "utils/context";
 const cache = createEmotionCache();
 
 ReactDOM.render(
   <React.StrictMode>
     <CacheProvider value={cache}>
-      <DateSelectProvider>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <AppRouter />
-        </ThemeProvider>
-      </DateSelectProvider>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <AppRouter />
+      </ThemeProvider>
     </CacheProvider>
   </React.StrictMode>,
   document.getElementById("root")

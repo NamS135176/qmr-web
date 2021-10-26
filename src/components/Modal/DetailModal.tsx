@@ -48,6 +48,7 @@ export default function DetailModal(props) {
   const currency: any = localStorage.getItem("currency");
   const [memo, setMemo] = useState("");
   const [fileNames, setFileNames] = useState("");
+  const [df, setDefault] = useState<any>(false);
 
   const handleDrop = async (acceptedFiles: any) => {
     const newImg: any = await resizeFile(acceptedFiles[0]);
@@ -105,12 +106,14 @@ export default function DetailModal(props) {
 
   const handleCreateTransaction = async () => {
     setLoading(true);
-    if (category && value && price) {
+    console.log({ file });
+    if (value) {
       if (!file) {
+        console.log("not image");
         const res = await createTransaction(
-          category,
+          category ? category : "483071",
           value,
-          price,
+          price ? price : 0,
           memo,
           window.navigator.userAgent
         );
@@ -125,11 +128,17 @@ export default function DetailModal(props) {
         props.setOpen(false);
         props.closeParent(false);
       } else {
+        console.log(" image");
+
         const resImg = await uploadImage(file);
+        console.log(
+          "🚀 ~ file: DetailModal.tsx ~ line 130 ~ handleCreateTransaction ~ resImg",
+          resImg
+        );
         const res = await createTransaction(
-          category,
+          category ? category : "483071",
           value,
-          price,
+          price ? price : 0,
           memo,
           window.navigator.userAgent,
           resImg.photo_url
@@ -422,6 +431,7 @@ export default function DetailModal(props) {
                     width: "100%",
                     justifyContent: "center",
                     alignItems: "center",
+                    paddingTop: 3,
                   }}
                 >
                   <CircularProgress />
