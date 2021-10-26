@@ -193,7 +193,10 @@ export default function DetailModal(props) {
             <Box
               sx={{
                 width: "100%",
-                height: "60%",
+                height: {
+                  xs: "90%",
+                  md: "65%",
+                },
                 minHeight: "500px",
                 backgroundColor: "#f5f5f5",
               }}
