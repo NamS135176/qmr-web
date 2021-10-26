@@ -173,280 +173,285 @@ export default function DetailModal(props) {
           <Box
             sx={{
               position: "absolute" as "absolute",
-              bottom: 0,
+              top: "50%",
               left: "50%",
-              transform: {
-                xs: "translate(-50%, 0%)",
-                md: "translate(-50%, -12%)",
-              },
+              transform: "translate(-50%, -50%)",
               width: "100%",
-              height: {
-                xs: "90%",
-                md: "60%",
-              },
-              bgcolor: "background.paper",
+              height: "100%",
+              bgcolor: "#f0f0f0",
               // border: '2px solid #000',
               boxShadow: 24,
-              //   maxHeight: "800px",
+              maxHeight: "800px",
               //   borderRadius: 2,
               maxWidth: "512px",
               overflow: "scroll",
-              backgroundColor: "#f5f5f5",
+              backgroundColor: "transparent",
+              display: "flex",
+              alignItems: "flex-end",
             }}
           >
-            <Typography sx={{ textAlign: "center", fontSize: 13, py: "5px" }}>
-              Type the expense details and press Enter
-            </Typography>
-            <Typography
-              sx={{
-                textAlign: "center",
-                fontSize: 16,
-                py: "5px",
-                backgroundColor: "#565351",
-                color: "white",
-                fontWeight: "bold",
-              }}
-            >
-              Quick Input
-            </Typography>
             <Box
               sx={{
-                display: "flex",
-                alignItems: "center",
-                pt: "10px",
-                justifyContent: "center",
+                width: "100%",
+                height: "60%",
+                minHeight: "500px",
+                backgroundColor: "#f5f5f5",
               }}
             >
-              <Box sx={{ width: "30%", pl: "10px" }}>
-                <Typography
-                  sx={{
-                    fontSize: "13px",
-                    textAlign: "right",
-                    width: "100%",
-                    wordBreak: "break-word",
-                  }}
-                >
-                  AMOUNT
-                </Typography>
-              </Box>
-              <Box sx={{ width: "70%", px: "10px" }}>
-                <TextField
-                  id="price"
-                  value={price?.toFixed(2)}
-                  inputProps={{ maxLength: 10 }}
-                  sx={{ width: "100%", backgroundColor: "white" }}
-                  onChange={handleChangePrice}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">
-                        {JSON.parse(currency)?.symbol}
-                      </InputAdornment>
-                    ),
-                    inputComponent: NumberFormatCustom,
-                  }}
-                />
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                pt: "10px",
-                justifyContent: "center",
-              }}
-            >
-              <Box sx={{ width: "30%", pl: "10px" }}>
-                <Typography
-                  sx={{
-                    fontSize: "13px",
-                    textAlign: "right",
-                    width: "100%",
-                    wordBreak: "break-word",
-                  }}
-                >
-                  DATE
-                </Typography>
-              </Box>
-              <Box sx={{ width: "70%", px: "10px" }}>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                  <DateTimePicker
-                    value={value}
-                    onChange={handleChange}
-                    renderInput={(params) => (
-                      <TextField
-                        sx={{ width: "100%", backgroundColor: "white" }}
-                        {...params}
-                      />
-                    )}
-                  />
-                </LocalizationProvider>
-              </Box>
-            </Box>
-
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                pt: "10px",
-                justifyContent: "center",
-              }}
-            >
-              <Box sx={{ width: "30%", pl: "10px" }}>
-                <Typography
-                  sx={{
-                    fontSize: "13px",
-                    textAlign: "right",
-                    width: "100%",
-                    wordBreak: "break-word",
-                  }}
-                >
-                  CATEGORY
-                </Typography>
-              </Box>
-              <Box sx={{ width: "70%", px: "10px" }}>
-                <FormControl fullWidth>
-                  <Select
-                    labelId="category"
-                    id="categoryId"
-                    value={category}
-                    onChange={handleChangeCategory}
-                    sx={{ backgroundColor: "white" }}
-                  >
-                    {listCategory.map((item: any) => (
-                      <MenuItem key={item.id} value={item.id}>
-                        {i18n.language === "en" ? item.name : item.nameJP}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <Box sx={{ width: "30%", pl: "10px" }}>
-                <Typography
-                  sx={{
-                    fontSize: "13px",
-                    textAlign: "right",
-                    width: "100%",
-                    wordBreak: "break-word",
-                  }}
-                >
-                  NOTE
-                </Typography>
-              </Box>
-              <Box sx={{ width: "70%", px: "10px" }}>
-                <Box sx={{ marginTop: 2 }}>
-                  <TextField
-                    error={memo.length >= 2000}
-                    sx={{ width: "100%", backgroundColor: "white" }}
-                    onChange={handleChangeMemo}
-                    multiline
-                    id="memo"
-                    variant="outlined"
-                    rows={2}
-                  />
-                </Box>
-              </Box>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                pt: "10px",
-                justifyContent: "center",
-              }}
-            >
-              <Box sx={{ width: "30%", pl: "10px" }}>
-                <Typography
-                  sx={{
-                    fontSize: "13px",
-                    textAlign: "right",
-                    width: "100%",
-                    wordBreak: "break-word",
-                  }}
-                >
-                  PICTURE
-                </Typography>
-              </Box>
-              <Box
+              <Typography sx={{ textAlign: "center", fontSize: 13, py: "5px" }}>
+                Type the expense details and press Enter
+              </Typography>
+              <Typography
                 sx={{
-                  width: "70%",
-                  px: "10px",
-                  display: "flex",
-                  alignItems: "center",
+                  textAlign: "center",
+                  fontSize: 16,
+                  py: "5px",
+                  backgroundColor: "#565351",
+                  color: "white",
+                  fontWeight: "bold",
                 }}
               >
-                <Box>
-                  <div className="container">
-                    <div {...getRootProps({ style })}>
-                      <input {...getInputProps()} />
-                      <IconButton>
-                        <AddBoxOutlinedIcon></AddBoxOutlinedIcon>
-                      </IconButton>
-                    </div>
-                  </div>
-                </Box>
-                <Box>
-                  {fileNames == "" ? (
-                    <></>
-                  ) : (
-                    <Box sx={{ border: "1px black solid", lineHeight: 0 }}>
-                      <img
-                        width="50px"
-                        height="50px"
-                        style={{ objectFit: "cover" }}
-                        src={fileNames}
-                      />
-                    </Box>
-                  )}
-                </Box>
-              </Box>
-            </Box>
-            {loading ? (
+                Quick Input
+              </Typography>
               <Box
                 sx={{
                   display: "flex",
-                  width: "100%",
+                  alignItems: "center",
+                  pt: "10px",
                   justifyContent: "center",
-                  alignItems: "center",
                 }}
               >
-                <CircularProgress />
-              </Box>
-            ) : (
-              <Box>
-                <Box sx={{ width: "100%", px: "10px", py: "10px" }}>
-                  <Button
-                    onClick={handleCreateTransaction}
+                <Box sx={{ width: "30%", pl: "10px" }}>
+                  <Typography
                     sx={{
-                      backgroundColor: "#92bc39",
-                      color: "white",
+                      fontSize: "13px",
+                      textAlign: "right",
                       width: "100%",
+                      wordBreak: "break-word",
                     }}
                   >
-                    ENTER
-                  </Button>
+                    AMOUNT
+                  </Typography>
                 </Box>
-                <Box sx={{ width: "100%", px: "10px" }}>
-                  <Button
-                    onClick={() => props.setOpen(false)}
-                    sx={{
-                      backgroundColor: "#787877",
-                      color: "white",
-                      width: "100%",
+                <Box sx={{ width: "70%", px: "10px" }}>
+                  <TextField
+                    id="price"
+                    value={price?.toFixed(2)}
+                    inputProps={{ maxLength: 10 }}
+                    sx={{ width: "100%", backgroundColor: "white" }}
+                    onChange={handleChangePrice}
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          {JSON.parse(currency)?.symbol}
+                        </InputAdornment>
+                      ),
+                      inputComponent: NumberFormatCustom,
                     }}
-                  >
-                    Cancel
-                  </Button>
+                  />
                 </Box>
               </Box>
-            )}
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  pt: "10px",
+                  justifyContent: "center",
+                }}
+              >
+                <Box sx={{ width: "30%", pl: "10px" }}>
+                  <Typography
+                    sx={{
+                      fontSize: "13px",
+                      textAlign: "right",
+                      width: "100%",
+                      wordBreak: "break-word",
+                    }}
+                  >
+                    DATE
+                  </Typography>
+                </Box>
+                <Box sx={{ width: "70%", px: "10px" }}>
+                  <LocalizationProvider dateAdapter={AdapterDateFns}>
+                    <DateTimePicker
+                      value={value}
+                      onChange={handleChange}
+                      renderInput={(params) => (
+                        <TextField
+                          sx={{ width: "100%", backgroundColor: "white" }}
+                          {...params}
+                        />
+                      )}
+                    />
+                  </LocalizationProvider>
+                </Box>
+              </Box>
+
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  pt: "10px",
+                  justifyContent: "center",
+                }}
+              >
+                <Box sx={{ width: "30%", pl: "10px" }}>
+                  <Typography
+                    sx={{
+                      fontSize: "13px",
+                      textAlign: "right",
+                      width: "100%",
+                      wordBreak: "break-word",
+                    }}
+                  >
+                    CATEGORY
+                  </Typography>
+                </Box>
+                <Box sx={{ width: "70%", px: "10px" }}>
+                  <FormControl fullWidth>
+                    <Select
+                      labelId="category"
+                      id="categoryId"
+                      value={category}
+                      onChange={handleChangeCategory}
+                      sx={{ backgroundColor: "white" }}
+                    >
+                      {listCategory.map((item: any) => (
+                        <MenuItem key={item.id} value={item.id}>
+                          {i18n.language === "en" ? item.name : item.nameJP}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Box sx={{ width: "30%", pl: "10px" }}>
+                  <Typography
+                    sx={{
+                      fontSize: "13px",
+                      textAlign: "right",
+                      width: "100%",
+                      wordBreak: "break-word",
+                    }}
+                  >
+                    NOTE
+                  </Typography>
+                </Box>
+                <Box sx={{ width: "70%", px: "10px" }}>
+                  <Box sx={{ marginTop: 2 }}>
+                    <TextField
+                      error={memo.length >= 2000}
+                      sx={{ width: "100%", backgroundColor: "white" }}
+                      onChange={handleChangeMemo}
+                      multiline
+                      id="memo"
+                      variant="outlined"
+                      rows={2}
+                    />
+                  </Box>
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  pt: "10px",
+                  justifyContent: "center",
+                }}
+              >
+                <Box sx={{ width: "30%", pl: "10px" }}>
+                  <Typography
+                    sx={{
+                      fontSize: "13px",
+                      textAlign: "right",
+                      width: "100%",
+                      wordBreak: "break-word",
+                    }}
+                  >
+                    PICTURE
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                    width: "70%",
+                    px: "10px",
+                    display: "flex",
+                    alignItems: "center",
+                  }}
+                >
+                  <Box>
+                    <div className="container">
+                      <div {...getRootProps({ style })}>
+                        <input {...getInputProps()} />
+                        <IconButton>
+                          <AddBoxOutlinedIcon></AddBoxOutlinedIcon>
+                        </IconButton>
+                      </div>
+                    </div>
+                  </Box>
+                  <Box>
+                    {fileNames == "" ? (
+                      <></>
+                    ) : (
+                      <Box sx={{ border: "1px black solid", lineHeight: 0 }}>
+                        <img
+                          width="50px"
+                          height="50px"
+                          style={{ objectFit: "cover" }}
+                          src={fileNames}
+                        />
+                      </Box>
+                    )}
+                  </Box>
+                </Box>
+              </Box>
+              {loading ? (
+                <Box
+                  sx={{
+                    display: "flex",
+                    width: "100%",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <CircularProgress />
+                </Box>
+              ) : (
+                <Box>
+                  <Box sx={{ width: "100%", px: "10px", py: "10px" }}>
+                    <Button
+                      onClick={handleCreateTransaction}
+                      sx={{
+                        backgroundColor: "#92bc39",
+                        color: "white",
+                        width: "100%",
+                      }}
+                    >
+                      ENTER
+                    </Button>
+                  </Box>
+                  <Box sx={{ width: "100%", px: "10px" }}>
+                    <Button
+                      onClick={() => props.setOpen(false)}
+                      sx={{
+                        backgroundColor: "#787877",
+                        color: "white",
+                        width: "100%",
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                  </Box>
+                </Box>
+              )}
+            </Box>
           </Box>
         </Fade>
       </Modal>

@@ -76,35 +76,33 @@ export default function InputModal(props) {
   };
 
   const handleQuickCreate = async () => {
-    console.log(money);
+    if (cateSelect) {
+      console.log(cateSelect.id);
 
-    // if (cateSelect) {
-    //   console.log(cateSelect.id);
-
-    //   setLoading(true);
-    //   const res: any = await createTransaction(
-    //     cateSelect.id,
-    //     moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
-    //     Number(money),
-    //     "",
-    //     window.navigator.userAgent
-    //   );
-    //   setLoading(false);
-    //   props.setOpen(false);
-    //   reloadPage[1](!reloadPage[0]);
-    // } else {
-    //   setLoading(true);
-    //   const res: any = await createTransaction(
-    //     df.id,
-    //     moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
-    //     Number(money),
-    //     "",
-    //     window.navigator.userAgent
-    //   );
-    //   setLoading(false);
-    //   props.setOpen(false);
-    //   reloadPage[1](!reloadPage[0]);
-    // }
+      setLoading(true);
+      const res: any = await createTransaction(
+        cateSelect.id,
+        moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+        Number(money),
+        "",
+        window.navigator.userAgent
+      );
+      setLoading(false);
+      props.setOpen(false);
+      reloadPage[1](!reloadPage[0]);
+    } else {
+      setLoading(true);
+      const res: any = await createTransaction(
+        df.id,
+        moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+        Number(money),
+        "",
+        window.navigator.userAgent
+      );
+      setLoading(false);
+      props.setOpen(false);
+      reloadPage[1](!reloadPage[0]);
+    }
   };
 
   const getCate = async () => {
@@ -222,7 +220,7 @@ export default function InputModal(props) {
                   sx={{
                     height: "90%",
                     overflow: "scroll",
-                    paddingBottom: "30px",
+                    paddingBottom: "50px",
                   }}
                 >
                   <Box
@@ -397,6 +395,7 @@ export default function InputModal(props) {
                         "&:hover": {
                           backgroundColor: "#f0f0f0",
                         },
+                        zIndex: 100005,
                       }}
                     >
                       <ArrowDropDown></ArrowDropDown>
@@ -410,12 +409,14 @@ export default function InputModal(props) {
                       display: "flex",
                       justifyContent: "flex-end",
                       alignItems: "center",
+                      minHeight: "50px",
                     }}
                   >
                     <Box sx={{ width: "100%", px: "10px" }}>
                       <TextField
                         id="price"
                         value={Number(money)}
+                        className="nop"
                         // inputProps={{ maxLength: 10 }}
                         sx={{
                           width: "100%",
@@ -444,6 +445,7 @@ export default function InputModal(props) {
                             textAlign: "right",
                             fontSize: 30,
                             fontWeight: "bold",
+                            paddingRight: 0,
                           },
                         }}
                         InputProps={{
@@ -464,35 +466,6 @@ export default function InputModal(props) {
                         }}
                       />
                     </Box>
-                    {/* <Typography
-                      sx={{
-                        textAlign: "right",
-                        paddingRight: "10px",
-                        fontSize: 40,
-                        alignItems: "center",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      {money.split("")[money.length - 1] == "."
-                        ? new Intl.NumberFormat("de-DE").format(Number(money)) +
-                          ","
-                        : new Intl.NumberFormat("de-DE").format(Number(money))}
-                      <Button
-                        sx={{
-                          color: "black",
-                          height: "100%",
-                          padding: 0,
-                          margin: 0,
-                        }}
-                        onClick={() => {
-                          setMoney("0");
-                        }}
-                      >
-                        <CancelIcon
-                          sx={{ fontSize: "25px", color: "#787777" }}
-                        ></CancelIcon>
-                      </Button>
-                    </Typography> */}
                   </Box>
                   <Box
                     sx={{
@@ -737,13 +710,13 @@ export default function InputModal(props) {
                     left: 0,
                     bottom: 0,
                     width: "100%",
-                    height: "5%",
+                    height: "10%",
                     backgroundColor: "#ddd",
                   }}
                 >
                   <Box
                     sx={{
-                      height: "30%",
+                      height: "20%",
                       width: "100%",
                       textAlign: "center",
                       backgroundColor: "#f0f0f0",
@@ -756,17 +729,86 @@ export default function InputModal(props) {
                         position: "absolute",
                         top: 0,
                         left: "50%",
-                        height: "130%",
+                        height: "150%",
                         backgroundColor: "#f0f0f0",
                         transform: "translate(-50%, 0)",
                         width: "30%",
                         "&:hover": {
                           backgroundColor: "#f0f0f0",
                         },
+                        zIndex: 10005,
                       }}
                     >
                       <ArrowDropUp></ArrowDropUp>
                     </IconButton>
+                  </Box>
+                  <Box
+                    sx={{
+                      width: "100%",
+                      height: "80%",
+                      backgroundColor: "#c7c6c6",
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Box sx={{ width: "100%", px: "10px" }}>
+                      <TextField
+                        onClick={() => {
+                          setUp(true);
+                        }}
+                        id="price"
+                        value={Number(money)}
+                        className="nop"
+                        // inputProps={{ maxLength: 10 }}
+                        sx={{
+                          width: "100%",
+                          backgroundColor: "transparent",
+                          border: "0px solid black",
+                          "& .MuiOutlinedInput-root": {
+                            // - The Input-root, inside the TextField-root
+                            "& fieldset": {
+                              // - The <fieldset> inside the Input-root
+                              border: "0 solid black", // - Set the Input border
+                            },
+                            "&:hover fieldset": {
+                              border: "0 solid black", // / - Set the Input border when parent has :hover
+                            },
+                            "&.Mui-focused fieldset": {
+                              // - Set the Input border when parent is focused
+                              border: "0 solid black", //
+                            },
+                          },
+                        }}
+                        onChange={handleChangePrice}
+                        inputProps={{
+                          min: 0,
+                          maxLength: 10,
+                          style: {
+                            textAlign: "right",
+                            fontSize: 30,
+                            fontWeight: "bold",
+                            paddingRight: 0,
+                          },
+                        }}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment position="start">
+                              <IconButton
+                                onClick={() => {
+                                  setMoney("0");
+                                }}
+                              >
+                                <CancelIcon
+                                  sx={{ fontSize: "25px", color: "#787777" }}
+                                ></CancelIcon>
+                              </IconButton>
+                            </InputAdornment>
+                          ),
+                          inputComponent: NumberFormatCustom,
+                        }}
+                      />
+                    </Box>
                   </Box>
                 </Box>
               )}
