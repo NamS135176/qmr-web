@@ -25,10 +25,10 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { useHistory } from "react-router";
 import CancelIcon from "@mui/icons-material/Cancel";
 import MenuNav from "components/MenuNav/Menu";
-import CurrencyModal from "components/Modal/CurrencyModal";
 import NumberFormatCustom from "components/NumberInputCustom";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
+import CategoryContext from "utils/CategoryContext";
 export default function InputModal(props) {
   const [price, setPrice] = useState<Number>();
   const history = useHistory();
@@ -47,12 +47,11 @@ export default function InputModal(props) {
   const [cateSelect, setCateSelect] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [df, setDefault] = useState<any>(false);
-  const { dateFrom, dateTo, reloadPage, listCategories } =
-    useContext(DateSelectContext);
+  const { dateFrom, dateTo, reloadPage } = useContext(DateSelectContext);
+  const { listCategories } = useContext(CategoryContext);
   const [listAll, setListAll] = useState<any>([]);
   const [st, setSt] = useState("");
   const [openMenu, setOpenMenu] = useState(false);
-  const [openCurrency, setOpenCurrency] = useState(false);
 
   const handleChangePrice = (e: any) => {
     const re = /^[0-9\b]+$/;
@@ -61,13 +60,6 @@ export default function InputModal(props) {
     }
   };
 
-  const handleOpenCurrency = () => {
-    console.log("open currencyt", openCurrency);
-    setOpenCurrency(true);
-  };
-  const onCloseCurrency = () => {
-    setOpenCurrency(false);
-  };
   const handleUp = () => {
     setUp(true);
   };
@@ -816,7 +808,6 @@ export default function InputModal(props) {
           </Box>
         </Fade>
       </Modal>
-      <CurrencyModal open={openCurrency} onClose={onCloseCurrency} />
     </Box>
   );
 }

@@ -12,11 +12,12 @@ import TextField from "@mui/material/TextField";
 import { editExpense, getCategory } from "api/category";
 import DateSelectContext from "utils/context";
 import CircularProgress from "@mui/material/CircularProgress";
+import CategoryContext from "utils/CategoryContext";
 
 export default function EditExpenseModal(props) {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
-  const { listCategories } = useContext(DateSelectContext);
+  const { listCategories } = useContext(CategoryContext);
   const handleCreateExpense = async () => {
     if (name != "") {
       setLoading(true);

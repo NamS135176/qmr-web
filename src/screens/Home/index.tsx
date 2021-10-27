@@ -4,9 +4,7 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
-import { getCurrencies } from "api/curency";
 import { getGraph } from "api/graph";
-import { getCurrentMember } from "api/member";
 import { getSummary } from "api/summary";
 import BarChart from "components/Chart/BarChart";
 import PieChart from "components/Chart/PieChart";
@@ -17,8 +15,6 @@ import moment from "moment";
 import React, { useContext, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import DateSelectContext from "utils/context";
-import { getCategory } from "api/category";
-import Nav from "../../components/Nav";
 import "./style.scss";
 interface Summary {
   price_balance: Number;
@@ -31,8 +27,7 @@ export default function Home() {
   const [graph, setGraph] = useState<any>();
   const { t, i18n } = useTranslation();
   const dateSelect = useContext(DateSelectContext);
-  const { dateFrom, dateTo, reloadPage, listCategories } =
-    useContext(DateSelectContext);
+  const { dateFrom, dateTo, reloadPage } = useContext(DateSelectContext);
   const currency: any = localStorage.getItem("currency");
   const getSummaryData = async () => {
     const summary = await getSummary(
@@ -48,25 +43,17 @@ export default function Home() {
       moment(dateTo[0]).format("YYYY-MM-DD")
     );
     setGraph(graph);
-    console.log("🚀 ~ file: index.tsx ~ line 45 ~ getGraphData ~ graph", graph);
-  };
-
-  const getCate = async () => {
-    const res1: any = await getCategory();
-    listCategories[1](res1.categories);
   };
 
   useEffect(() => {
-    // getCate();
     getSummaryData();
     getGraphData();
   }, [dateFrom, dateTo]);
+
   const handleClose = () => {
-    console.log("close");
     setOpen(false);
   };
   const handleOpen = () => {
-    console.log("open");
     setOpen(true);
   };
   return (

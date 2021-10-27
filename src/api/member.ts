@@ -5,7 +5,6 @@ export const login = async (email: string, password: string) => {
     email,
     password,
   });
-  console.log("🚀 ~ file: member.ts ~ line 8 ~ login ~ res", res);
   return getResponseData(res);
 };
 

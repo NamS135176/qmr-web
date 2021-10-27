@@ -11,9 +11,10 @@ import Typography from "@mui/material/Typography";
 import { deleteExpense, getCategory } from "api/category";
 import DateSelectContext from "utils/context";
 import CircularProgress from "@mui/material/CircularProgress";
+import CategoryContext from "utils/CategoryContext";
 export default function DeleteModal(props) {
   const [loading, setLoading] = useState(false);
-  const { listCategories } = useContext(DateSelectContext);
+  const { listCategories } = useContext(CategoryContext);
   const handleDelete = async () => {
     setLoading(true);
     const res = await deleteExpense(props.item.id);
