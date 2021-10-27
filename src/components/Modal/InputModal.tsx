@@ -48,8 +48,7 @@ export default function InputModal(props) {
   const [cateSelect, setCateSelect] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [df, setDefault] = useState<any>(false);
-  const { dateFrom, dateTo, reloadPage, listCategories } =
-    useContext(DateSelectContext);
+  const { dateFrom, dateTo, reloadPage } = useContext(DateSelectContext);
   const [listAll, setListAll] = useState<any>([]);
   const [st, setSt] = useState("");
   const [openMenu, setOpenMenu] = useState(false);
@@ -108,14 +107,13 @@ export default function InputModal(props) {
 
   const getCate = async () => {
     setLoadCate(true);
-    // const res: any = await getCategory();
-    setListExpense(listCategories[0].filter((item: any) => item.count < 900));
-    setListIncome(listCategories[0].filter((item: any) => item.count >= 900));
-    setDefault(listCategories[0].find((item: any) => item.name == "?"));
-    console.log(listCategories[0]);
+    const res: any = await getCategory();
+    setListExpense(res.categories.filter((item: any) => item.count < 900));
+    setListIncome(res.categories.filter((item: any) => item.count >= 900));
+    setDefault(res.categories.find((item: any) => item.name == "?"));
 
-    setIncome(listCategories[0].filter((item: any) => item.count >= 900)[0]);
-    const list = [...listCategories[0]];
+    setIncome(res.categories.filter((item: any) => item.count >= 900)[0]);
+    const list = [...res.categories];
     list.pop();
     setListAll(list);
     setLoadCate(false);
@@ -181,7 +179,8 @@ export default function InputModal(props) {
               maxWidth: "512px",
               overflow: "hidden",
               px: "16px",
-              py: "24px",
+              pt: "40px",
+              pb: "16px",
               backgroundColor: "transparent",
             }}
           >
@@ -200,8 +199,8 @@ export default function InputModal(props) {
                 <ClearIcon
                   sx={{
                     fontSize: {
-                      xs: 20,
-                      md: 20,
+                      xs: 30,
+                      md: 30,
                     },
                     color: "white",
                     zIndex: "100006",
@@ -214,7 +213,7 @@ export default function InputModal(props) {
                 width: "100%",
                 height: "100%",
                 position: "relative",
-                backgroundColor: "white",
+                backgroundColor: "#f0f0f0",
               }}
             >
               {loadCate ? (
@@ -230,6 +229,7 @@ export default function InputModal(props) {
                 </Box>
               ) : (
                 <Box
+                  className="scrollbar"
                   sx={{
                     height: "90%",
                     overflow: "scroll",
@@ -248,6 +248,7 @@ export default function InputModal(props) {
                       if (index == exFocus) {
                         return (
                           <Button
+                            className="btn"
                             onClick={() => {
                               setExFocus(-1);
                               setUp(false);
@@ -257,8 +258,8 @@ export default function InputModal(props) {
                               backgroundColor: "#9AC30C",
                               color: "black",
                               minHeight: {
-                                xs: "80px",
-                                md: "60px",
+                                xs: "50px",
+                                md: "50px",
                               },
                               wordBreak: "break-word",
                               fontWeight: "bold",
@@ -274,6 +275,7 @@ export default function InputModal(props) {
                       } else {
                         return (
                           <Button
+                            className="btn"
                             onClick={() => {
                               setIsIncome(false);
                               setExFocus(index);

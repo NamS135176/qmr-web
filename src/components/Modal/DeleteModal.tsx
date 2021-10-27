@@ -18,7 +18,7 @@ export default function DeleteModal(props) {
     setLoading(true);
     const res = await deleteExpense(props.item.id);
     const res1: any = await getCategory();
-    listCategories[1](res1.categories);
+    // listCategories[1](res1.categories);
     props.setListExpense(
       res1.categories.filter((item: any) => item.count < 900)
     );

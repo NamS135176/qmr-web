@@ -33,7 +33,7 @@ export default function ListPageScreen() {
   const [itemData, setItemData] = useState({ time: "2021-10-04 09:30:00" });
   const [open, setOpen] = useState(false);
   const dateSelect = useContext(DateSelectContext);
-  const { dateFrom, dateTo, listCategories } = useContext(DateSelectContext);
+  const { dateFrom, dateTo } = useContext(DateSelectContext);
   const [categories, setCategories] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [page, setPage] = useState(1);

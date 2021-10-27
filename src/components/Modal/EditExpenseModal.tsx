@@ -31,7 +31,7 @@ export default function EditExpenseModal(props) {
         name
       );
       const res1: any = await getCategory();
-      listCategories[1](res1.categories);
+      // listCategories[1](res1.categories);
       props.setListExpense(
         res1.categories.filter((item: any) => item.count < 900)
       );

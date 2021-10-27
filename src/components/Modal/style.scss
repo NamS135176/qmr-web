@@ -39,3 +39,12 @@
 .nop .css-h1wpvm-MuiInputBase-root-MuiOutlinedInput-root {
   padding: 0;
 }
+
+.scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.btn {
+  text-transform: unset !important;
+  line-height: 1 !important;
+}

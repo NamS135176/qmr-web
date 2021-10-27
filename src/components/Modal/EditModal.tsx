@@ -28,7 +28,7 @@ import Resizer from "react-image-file-resizer";
 import { checkSize, resizeFile } from "utils/UploadFile";
 import CircularProgress from "@mui/material/CircularProgress";
 import NumberFormat from "react-number-format";
-
+import "./style.scss";
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
   return (
@@ -188,6 +188,7 @@ export default function EditModal(props: any) {
       >
         <Fade in={props.open}>
           <Box
+            className="scrollbar"
             sx={{
               position: "absolute" as "absolute",
               top: "50%",

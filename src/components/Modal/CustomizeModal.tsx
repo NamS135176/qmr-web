@@ -42,7 +42,11 @@ export default function CustomizeModal(props) {
       {openAdd ? (
         <AddExpenseModal
           setListExpense={props.setListExpense}
-          lastCount={props.listAll[props.listAll.length - 1].count}
+          lastCount={
+            props.listAll.length == 0
+              ? 0
+              : props.listAll[props.listAll.length - 1].count
+          }
           setOpen={setOpenAdd}
         />
       ) : (
@@ -91,10 +95,14 @@ export default function CustomizeModal(props) {
               height: "100%",
               bgcolor: "background.paper",
               // border: '2px solid #000',
-              boxShadow: 24,
+              boxShadow: 0,
               maxHeight: "800px",
               //   borderRadius: 2,
               maxWidth: "512px",
+              px: "16px",
+              pt: "40px",
+              pb: "0px",
+              backgroundColor: "transparent",
               //   overflow: "scroll",
             }}
           >
@@ -179,7 +187,14 @@ export default function CustomizeModal(props) {
                 Edit
               </Button> */}
             </Box>
-            <Box sx={{ overflow: "scroll", height: "90%" }}>
+            <Box
+              className="scrollbar"
+              sx={{
+                overflow: "scroll",
+                height: "90%",
+                backgroundColor: "white",
+              }}
+            >
               <List>
                 {props.listAll.map((item, index) => {
                   if (editMode) {
