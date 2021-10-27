@@ -53,7 +53,10 @@ function Page() {
       "🚀 ~ file: index.tsx ~ line 54 ~ getMember ~ currency",
       currency
     );
-    localStorage.setItem("currency", JSON.stringify(currency));
+    localStorage.setItem(
+      "currency",
+      JSON.stringify(currency ? currency : null)
+    );
     member.language === "en"
       ? i18n.changeLanguage("en")
       : i18n.changeLanguage("ja");
