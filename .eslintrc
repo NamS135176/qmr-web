@@ -14,7 +14,9 @@
             }
         ],
         "@typescript-eslint/no-unused-vars": "off",
-        "jsx-a11y/alt-text": "off"
+        "jsx-a11y/alt-text": "off",
+        "react-hooks/exhaustive-deps": "off",
+        "eqeqeq": "off"
     },
     "env": {
         "browser": true,
