@@ -1,6 +1,5 @@
-import { createContext, useMemo, useState, useEffect } from "react";
 import moment from "moment";
-import { getCategory } from "api/category";
+import { createContext, useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 interface ContextState {
   // set the type of state you want to handle with context e.g.
@@ -9,13 +8,11 @@ interface ContextState {
   monthYear: any;
   openModal: any;
   reloadPage: any;
-  listCategories: any;
 }
 const DateSelectContext = createContext({} as ContextState);
 export function DateSelectProvider(props) {
   const { t, i18n } = useTranslation();
   const { children } = props;
-
   let monthYearInit = moment();
 
   const startOfMonth = moment(monthYearInit)
@@ -23,7 +20,6 @@ export function DateSelectProvider(props) {
     .format("YYYY-MM-DD");
   const endOfMonth = moment(monthYearInit).endOf("month").format("YYYY-MM-DD");
 
-  console.log({ monthYearInit, startOfMonth, endOfMonth });
   const [dateFrom, setDateFrom] = useState(startOfMonth);
   const [dateTo, setDateTo] = useState(endOfMonth);
   const [monthYear, setMonthYear] = useState(monthYearInit);
@@ -43,12 +39,15 @@ export function DateSelectProvider(props) {
     monthYear: [monthYear, setMonthYear],
     openModal: [openModal, setOpenModal],
     reloadPage: [reloadPage, setReloadPage],
-    listCategories: [listCategories, setListCategories],
   };
-  return (
-    <DateSelectContext.Provider value={value}>
-      {children}
-    </DateSelectContext.Provider>
+  console.log({ value });
+  return useMemo(
+    () => (
+      <DateSelectContext.Provider value={value}>
+        {children}
+      </DateSelectContext.Provider>
+    ),
+    [reloadPage, monthYear, dateTo, dateFrom, openModal]
   );
 }
 

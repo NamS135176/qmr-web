@@ -1,16 +1,16 @@
 import Box from "@mui/material/Box";
-import Dialog from "@mui/material/Dialog";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
+import Dialog from "@mui/material/Dialog";
 import Divider from "@mui/material/Divider";
 import FormControl from "@mui/material/FormControl";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
-import React, { useState, useEffect, useContext } from "react";
-import { getCurrencies } from "api/curency";
 import InputLabel from "@mui/material/InputLabel";
-import { useTranslation } from "react-i18next";
+import MenuItem from "@mui/material/MenuItem";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import Typography from "@mui/material/Typography";
+import { getCurrencies } from "api/curency";
 import { updateCurrentMember } from "api/member";
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function CurrencyModal({ open, onClose }: any) {
   const { t, i18n } = useTranslation();
@@ -25,15 +25,10 @@ export default function CurrencyModal({ open, onClose }: any) {
   );
   const getCurrenciesData = async () => {
     const response = await getCurrencies();
-    // console.log(
-    //   "🚀 ~ file: CurrencyModal.tsx ~ line 22 ~ getCurrenciesData ~ response",
-    //   response
-    // );
 
     setCurrencies(response);
   };
   const handleChangeCurrency = (event: SelectChangeEvent) => {
-    console.log("change");
     setCurrency(event.target.value);
   };
   const submitChangeCurrency = async () => {
@@ -43,6 +38,7 @@ export default function CurrencyModal({ open, onClose }: any) {
     // onClose();
     window.location.reload();
   };
+
   useEffect(() => {
     getCurrenciesData();
   }, [i18n.language]);

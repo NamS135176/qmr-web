@@ -29,7 +29,6 @@ export default function MenuNav({
     setAnchorEl(event.currentTarget);
   };
   const currency: any = localStorage.getItem("currency");
-  console.log("🚀 ~ file: Menu.tsx ~ line 30 ~ currency", currency);
 
   const { t, i18n } = useTranslation();
   const history = useHistory();
@@ -37,7 +36,6 @@ export default function MenuNav({
   const handleClose = () => {
     setAnchorEl(null);
     if (onClose) {
-      console.log("close");
       onClose();
     }
   };

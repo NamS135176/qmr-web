@@ -12,11 +12,13 @@ import TextField from "@mui/material/TextField";
 import { addExpense, getCategory } from "api/category";
 import DateSelectContext from "utils/context";
 import CircularProgress from "@mui/material/CircularProgress";
+import CategoryContext from "utils/CategoryContext";
 
 export default function AddExpenseModal(props) {
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
-  const { listCategories } = useContext(DateSelectContext);
+  const { listCategories } = useContext(CategoryContext);
+  const { reloadPage } = useContext(DateSelectContext);
   const handleCreateExpense = async () => {
     if (name != "") {
       console.log(Number(props.lastCount) + 1);
@@ -32,12 +34,13 @@ export default function AddExpenseModal(props) {
         name
       );
       const res1: any = await getCategory();
-      // listCategories[1](res1.categories);
+      listCategories[1](res1.categories);
       props.setListExpense(
         res1.categories.filter((item: any) => item.count < 900)
       );
       setLoading(false);
       props.setOpen(false);
+      reloadPage[1](!reloadPage[0]);
     }
   };
   return (

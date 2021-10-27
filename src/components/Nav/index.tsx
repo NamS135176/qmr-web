@@ -27,9 +27,7 @@ export default function Nav(props) {
   const [openCurrency, setOpenCurrency] = useState(false);
   const [changeRoute, setChangeRoute] = useState("/");
   let history = useHistory();
-  console.log("🚀 ~ file: index.tsx ~    line 27 ~ Nav ~ history", history);
   const handleClose = () => {
-    console.log("close");
     setOpen(false);
   };
   const handleOpen = () => {
@@ -38,7 +36,6 @@ export default function Nav(props) {
     }, 100);
   };
   const handleOpenCurrency = () => {
-    console.log("open currencyt", openCurrency);
     setOpenCurrency(true);
   };
   const onCloseCurrency = () => {

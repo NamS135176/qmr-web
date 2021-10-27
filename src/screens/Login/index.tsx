@@ -41,18 +41,10 @@ function Page() {
   );
   const getMember = async () => {
     const member = await getCurrentMember();
-    console.log(
-      "🚀 ~ file: index.tsx ~ line 52 ~ getCurrenciesData ~ currencies",
-      member.language
-    );
     apiQMRWeb.setHeader("Accept-Language", member.language);
     const currencies = await getCurrencies();
-
     const currency = currencies.find((item) => item.id === member.currency_id);
-    console.log(
-      "🚀 ~ file: index.tsx ~ line 54 ~ getMember ~ currency",
-      currency
-    );
+
     localStorage.setItem(
       "currency",
       JSON.stringify(currency ? currency : null)

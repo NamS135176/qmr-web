@@ -5,6 +5,7 @@ import Login from "screens/Login";
 import ForgotPassword from "screens/ForgotPassword";
 import Transactions from "screens/Transactions";
 import Home from "screens/Home";
+import Check from "screens/Check";
 import AuthenticateRoute from "./AuthenticateRoute";
 import Graph from "screens/Graph";
 import Page404 from "screens/Page404";
@@ -12,6 +13,7 @@ import Nav from "components/Nav";
 import RequestDone from "screens/RequestDone";
 import ChangePassword from "screens/ChangePassword";
 import { DateSelectProvider } from "utils/context";
+import { CategoryProvider } from "utils/CategoryContext";
 
 function AppRouter() {
   useEffect(() => {
@@ -27,16 +29,16 @@ function AppRouter() {
         <Route exact path="/forgot-password" component={ForgotPassword} />
         <Route exact path="/send_mail_done" component={RequestDone} />
         <Route exact path="/change-password" component={ChangePassword} />
-        <DateSelectProvider>
+        <CategoryProvider>
           <Nav />
+          <AuthenticateRoute exact path="/" component={Home} />
           <AuthenticateRoute
             exact
             path="/transactions"
             component={Transactions}
           />
-          <AuthenticateRoute exact path="/" component={Home} />
           <AuthenticateRoute exact path="/graph" component={Graph} />
-        </DateSelectProvider>
+        </CategoryProvider>
         <Route component={Page404} />
       </Switch>
     </Router>

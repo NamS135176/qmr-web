@@ -25,10 +25,10 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { useHistory } from "react-router";
 import CancelIcon from "@mui/icons-material/Cancel";
 import MenuNav from "components/MenuNav/Menu";
-import CurrencyModal from "components/Modal/CurrencyModal";
 import NumberFormatCustom from "components/NumberInputCustom";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
+import CategoryContext from "utils/CategoryContext";
 import ClearIcon from "@mui/icons-material/Clear";
 export default function InputModal(props) {
   const [price, setPrice] = useState<Number>();
@@ -49,10 +49,10 @@ export default function InputModal(props) {
   const [loading, setLoading] = useState(false);
   const [df, setDefault] = useState<any>(false);
   const { dateFrom, dateTo, reloadPage } = useContext(DateSelectContext);
+  const { listCategories } = useContext(CategoryContext);
   const [listAll, setListAll] = useState<any>([]);
   const [st, setSt] = useState("");
   const [openMenu, setOpenMenu] = useState(false);
-  const [openCurrency, setOpenCurrency] = useState(false);
 
   const handleChangePrice = (e: any) => {
     const re = /^[0-9\b]+$/;
@@ -61,13 +61,6 @@ export default function InputModal(props) {
     }
   };
 
-  const handleOpenCurrency = () => {
-    console.log("open currencyt", openCurrency);
-    setOpenCurrency(true);
-  };
-  const onCloseCurrency = () => {
-    setOpenCurrency(false);
-  };
   const handleUp = () => {
     setUp(true);
   };
@@ -107,13 +100,13 @@ export default function InputModal(props) {
 
   const getCate = async () => {
     setLoadCate(true);
-    const res: any = await getCategory();
-    setListExpense(res.categories.filter((item: any) => item.count < 900));
-    setListIncome(res.categories.filter((item: any) => item.count >= 900));
-    setDefault(res.categories.find((item: any) => item.name == "?"));
+    // const res: any = await getCategory();
+    setListExpense(listCategories[0].filter((item: any) => item.count < 900));
+    setListIncome(listCategories[0].filter((item: any) => item.count >= 900));
+    setDefault(listCategories[0].find((item: any) => item.name == "?"));
 
-    setIncome(res.categories.filter((item: any) => item.count >= 900)[0]);
-    const list = [...res.categories];
+    setIncome(listCategories.filter((item: any) => item.count >= 900)[0]);
+    const list = [...listCategories[0]];
     list.pop();
     setListAll(list);
     setLoadCate(false);
@@ -233,7 +226,7 @@ export default function InputModal(props) {
                   sx={{
                     height: "90%",
                     overflow: "scroll",
-                    paddingBottom: "50px",
+                    paddingBottom: "30px",
                   }}
                 >
                   <Box
@@ -286,8 +279,8 @@ export default function InputModal(props) {
                               backgroundColor: "#D7D6D6",
                               color: "black",
                               minHeight: {
-                                xs: "80px",
-                                md: "60px",
+                                xs: "50px",
+                                md: "50px",
                               },
                               wordBreak: "break-word",
                               fontWeight: "bold",
@@ -830,7 +823,6 @@ export default function InputModal(props) {
           </Box>
         </Fade>
       </Modal>
-      <CurrencyModal open={openCurrency} onClose={onCloseCurrency} />
     </Box>
   );
 }
