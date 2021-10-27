@@ -180,7 +180,6 @@ export default function DetailModal(props) {
       >
         <Fade in={true}>
           <Box
-            className="scrollbar"
             sx={{
               position: "absolute" as "absolute",
               top: "50%",
@@ -190,7 +189,7 @@ export default function DetailModal(props) {
               height: "100%",
               bgcolor: "#f0f0f0",
               // border: '2px solid #000',
-              boxShadow: 0,
+              boxShadow: 24,
               maxHeight: "800px",
               //   borderRadius: 2,
               maxWidth: "512px",
@@ -198,18 +197,12 @@ export default function DetailModal(props) {
               backgroundColor: "transparent",
               display: "flex",
               alignItems: "flex-end",
-              px: "16px",
-              pt: "40px",
-              pb: "16px",
             }}
           >
             <Box
               sx={{
                 width: "100%",
-                height: {
-                  xs: "90%",
-                  md: "70%",
-                },
+                height: "60%",
                 minHeight: "500px",
                 backgroundColor: "#f5f5f5",
               }}

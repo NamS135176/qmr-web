@@ -19,6 +19,7 @@ export default function AddExpenseModal(props) {
   const [name, setName] = useState("");
   const { listCategories } = useContext(CategoryContext);
   const { reloadPage } = useContext(DateSelectContext);
+  const [reload, setReloadPage] = reloadPage;
   const handleCreateExpense = async () => {
     if (name != "") {
       console.log(Number(props.lastCount) + 1);
@@ -40,7 +41,7 @@ export default function AddExpenseModal(props) {
       );
       setLoading(false);
       props.setOpen(false);
-      reloadPage[1](!reloadPage[0]);
+      setReloadPage(!reload);
     }
   };
   return (

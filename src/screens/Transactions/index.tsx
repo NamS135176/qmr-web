@@ -26,6 +26,7 @@ import { getListTransactions, deleteTransaction } from "api/transaction";
 import { AnyARecord } from "dns";
 import CircularProgress from "@mui/material/CircularProgress";
 import Pagination from "@mui/material/Pagination";
+import CategoryContext from "utils/CategoryContext";
 
 export default function ListPageScreen() {
   const { t, i18n } = useTranslation();
@@ -34,6 +35,7 @@ export default function ListPageScreen() {
   const [open, setOpen] = useState(false);
   const dateSelect = useContext(DateSelectContext);
   const { dateFrom, dateTo } = useContext(DateSelectContext);
+  const { listCategories } = useContext(CategoryContext);
   const [categories, setCategories] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [page, setPage] = useState(1);
@@ -71,7 +73,7 @@ export default function ListPageScreen() {
 
   const getList = async (offset, time, sort) => {
     setLoading(true);
-    const res1: any = await getCategory();
+    // const res1: any = await getCategory();
     const res2: any = await getListTransactions(
       dateFrom[0],
       dateTo[0],
@@ -81,11 +83,11 @@ export default function ListPageScreen() {
       sort
     );
     console.log({ res2 });
-
-    setCategories(res1.categories);
+    console.log("category", listCategories[0]);
+    setCategories(listCategories[0]);
     // listCategories[1](res1.categories);
     const newList = res2.data.map((item: any) => {
-      let cate: any = res1.categories.find(
+      let cate: any = listCategories[0].find(
         (it: any) => it.id == item.category_id
       );
       // console.log('CATE',cate);

@@ -25,7 +25,6 @@ export function DateSelectProvider(props) {
   const [monthYear, setMonthYear] = useState(monthYearInit);
   const [openModal, setOpenModal] = useState(false);
   const [reloadPage, setReloadPage] = useState(false);
-  const [listCategories, setListCategories] = useState([]);
   // const getCate = async () => {
   //   const res1: any = await getCategory();
   //   setListCategories(res1.categories);
