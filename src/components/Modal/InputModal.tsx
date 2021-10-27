@@ -29,6 +29,7 @@ import CurrencyModal from "components/Modal/CurrencyModal";
 import NumberFormatCustom from "components/NumberInputCustom";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
+import ClearIcon from "@mui/icons-material/Clear";
 export default function InputModal(props) {
   const [price, setPrice] = useState<Number>();
   const history = useHistory();
@@ -158,6 +159,9 @@ export default function InputModal(props) {
         BackdropComponent={Backdrop}
         BackdropProps={{
           timeout: 500,
+          sx: {
+            boxShadow: "none",
+          },
         }}
       >
         <Fade in={true}>
@@ -171,39 +175,48 @@ export default function InputModal(props) {
               height: "100%",
               bgcolor: "#f0f0f0",
               // border: '2px solid #000',
-              boxShadow: 24,
+              boxShadow: 0,
               maxHeight: "800px",
               //   borderRadius: 2,
               maxWidth: "512px",
               overflow: "hidden",
+              px: "16px",
+              py: "24px",
+              backgroundColor: "transparent",
             }}
           >
+            <Box
+              sx={{
+                paddingRight: "8px",
+                position: "absolute",
+                top: -5,
+                right: 0,
+              }}
+            >
+              <IconButton
+                sx={{ paddingRight: 0 }}
+                onClick={() => props.setOpen(false)}
+              >
+                <ClearIcon
+                  sx={{
+                    fontSize: {
+                      xs: 20,
+                      md: 20,
+                    },
+                    color: "white",
+                    zIndex: "100006",
+                  }}
+                ></ClearIcon>
+              </IconButton>
+            </Box>
             <Box
               sx={{
                 width: "100%",
                 height: "100%",
                 position: "relative",
+                backgroundColor: "white",
               }}
             >
-              <Box
-                sx={{
-                  padding: {
-                    xs: "1px",
-                    md: "5px",
-                  },
-                }}
-              >
-                <IconButton onClick={() => props.setOpen(false)}>
-                  <HighlightOff
-                    sx={{
-                      fontSize: {
-                        xs: 25,
-                        md: 30,
-                      },
-                    }}
-                  ></HighlightOff>
-                </IconButton>
-              </Box>
               {loadCate ? (
                 <Box
                   sx={{
