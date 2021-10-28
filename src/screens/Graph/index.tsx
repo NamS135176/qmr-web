@@ -108,6 +108,7 @@ export default function Graph() {
                         background: "#BDEA74",
                         color: "white",
                         fontSize: 50,
+                        borderRadius: "10px",
                       }}
                     />
                   </Box>
@@ -153,6 +154,7 @@ export default function Graph() {
                         background: "#36A9E1",
                         color: "white",
                         fontSize: 50,
+                        borderRadius: "10px",
                       }}
                     />
                   </Box>
@@ -197,6 +199,7 @@ export default function Graph() {
                       sx={{
                         background: "#EAE874",
                         color: "white",
+                        borderRadius: "10px",
                         fontSize: 50,
                       }}
                     />
