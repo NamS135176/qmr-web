@@ -615,6 +615,9 @@ export default function InputModal(props) {
                         gridColumn: "4",
                         backgroundColor: "#729f03",
                         position: "relative",
+                        "&:hover": {
+                          backgroundColor: "#9ac30c",
+                        },
                       }}
                     >
                       {loading ? (
