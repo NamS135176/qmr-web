@@ -44,6 +44,10 @@ function Page() {
     apiQMRWeb.setHeader("Accept-Language", member.language);
     const currencies = await getCurrencies();
     const currency = currencies.find((item) => item.id === member.currency_id);
+    console.log(
+      "🚀 ~ file: index.tsx ~ line 47 ~ getMember ~ currency",
+      currency
+    );
 
     localStorage.setItem(
       "currency",

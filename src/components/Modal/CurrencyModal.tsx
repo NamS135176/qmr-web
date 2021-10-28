@@ -17,24 +17,26 @@ export default function CurrencyModal({ open, onClose }: any) {
 
   const [currencies, setCurrencies] = useState<any>([]);
   const nameCurrency: any = localStorage.getItem("currency");
+  console.log("currency", JSON.parse(nameCurrency));
 
-  const [currency, setCurrency] = useState(
-    i18n.language === "en"
-      ? JSON.parse(nameCurrency)?.name
-      : JSON.parse(nameCurrency)?.nameJP
-  );
+  const [currency, setCurrency] = useState(JSON.parse(nameCurrency));
   const getCurrenciesData = async () => {
     const response = await getCurrencies();
 
     setCurrencies(response);
   };
   const handleChangeCurrency = (event: SelectChangeEvent) => {
+    console.log(event.target.value);
     setCurrency(event.target.value);
   };
   const submitChangeCurrency = async () => {
+    const idCurrency = currency ? currency?.id : JSON.parse(nameCurrency)?.id;
+    console.log("ahihi", idCurrency);
     const language = i18n.language === "en" ? "en" : "jp";
-    const response = await updateCurrentMember(language, currency?.id);
-    localStorage.setItem("currency", JSON.stringify(currency));
+    const response = await updateCurrentMember(language, idCurrency);
+    if (currency) {
+      localStorage.setItem("currency", JSON.stringify(currency));
+    }
     // onClose();
     window.location.reload();
   };
