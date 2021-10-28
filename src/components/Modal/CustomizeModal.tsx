@@ -22,7 +22,9 @@ import DeleteModal from "./DeleteModal";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import { useTranslation } from "react-i18next";
 export default function CustomizeModal(props) {
+  const { t, i18n } = useTranslation();
   const [item, setItem] = useState<any>(null);
   const [openAdd, setOpenAdd] = useState(false);
   const [openEdit, setOpenEdt] = useState(false);
@@ -133,7 +135,7 @@ export default function CustomizeModal(props) {
                 <Typography
                   sx={{ color: "white", fontWeight: "bold", fontSize: 22 }}
                 >
-                  Edit Category
+                  {t("customize.title")}
                 </Typography>
               </Box>
 
@@ -147,7 +149,7 @@ export default function CustomizeModal(props) {
                     "&:hover": { backgroundColor: "white" },
                   }}
                 >
-                  Done
+                  {t("customize.done")}
                 </Button>
               ) : (
                 <Box>
@@ -170,7 +172,7 @@ export default function CustomizeModal(props) {
                         setAnchorEl(null);
                       }}
                     >
-                      Edit
+                      {t("customize.edit")}
                     </MenuItem>
                   </Menu>
                 </Box>
@@ -221,7 +223,11 @@ export default function CustomizeModal(props) {
                           }}
                           sx={{ borderBottom: "1px solid #ddd", mx: "10px" }}
                         >
-                          <ListItemText primary={`${item.name}`} />
+                          {i18n.language == "en" ? (
+                            <ListItemText primary={`${item.name}`} />
+                          ) : (
+                            <ListItemText primary={`${item.nameJP}`} />
+                          )}
                         </ListItemButton>
                       </ListItem>
                     );
@@ -235,7 +241,11 @@ export default function CustomizeModal(props) {
                           }}
                           sx={{ borderBottom: "1px solid #ddd", mx: "10px" }}
                         >
-                          <ListItemText primary={item.name} />
+                          {i18n.language == "en" ? (
+                            <ListItemText primary={`${item.name}`} />
+                          ) : (
+                            <ListItemText primary={`${item.nameJP}`} />
+                          )}
                         </ListItemButton>
                       </ListItem>
                     );
@@ -251,7 +261,7 @@ export default function CustomizeModal(props) {
                 >
                   <ListItemText
                     sx={{ color: "#ddd", fontWeight: "bold" }}
-                    primary="+ Add Expense Category"
+                    primary={t("customize.add")}
                   />
                 </ListItemButton>
               </ListItem>

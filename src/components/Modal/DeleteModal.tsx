@@ -10,9 +10,11 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import { deleteExpense, getCategory } from "api/category";
 import DateSelectContext from "utils/context";
+import { useTranslation } from "react-i18next";
 import CircularProgress from "@mui/material/CircularProgress";
 import CategoryContext from "utils/CategoryContext";
 export default function DeleteModal(props) {
+  const { t, i18n } = useTranslation();
   const [loading, setLoading] = useState(false);
   const { listCategories } = useContext(CategoryContext);
   const { reloadPage } = useContext(DateSelectContext);
@@ -85,7 +87,7 @@ export default function DeleteModal(props) {
                     pl: "5px",
                   }}
                 >
-                  Confirm Delete
+                  {t("customize.deleteTitle")}
                 </Typography>
               </Box>
             </Box>
@@ -97,7 +99,7 @@ export default function DeleteModal(props) {
                 px: "10px",
               }}
             >
-              Are you sure you want to delete this category?
+              {t("customize.confirmtext")}
             </Typography>
             {loading ? (
               <Box
@@ -124,7 +126,7 @@ export default function DeleteModal(props) {
                       marginTop: "15px",
                     }}
                   >
-                    Confirm
+                    {t("detailModal.enter")}
                   </Button>
                 </Box>
                 <Box sx={{ px: "10px" }}>
@@ -140,7 +142,7 @@ export default function DeleteModal(props) {
                       marginTop: "15px",
                     }}
                   >
-                    Cancel
+                    {t("detailModal.cancel")}
                   </Button>
                 </Box>
               </Box>

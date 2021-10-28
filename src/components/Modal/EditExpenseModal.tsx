@@ -5,6 +5,7 @@ import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import Button from "@mui/material/Button";
 import HighlightOff from "@mui/icons-material/HighlightOff";
+import { useTranslation } from "react-i18next";
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
@@ -15,6 +16,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import CategoryContext from "utils/CategoryContext";
 
 export default function EditExpenseModal(props) {
+  const { t, i18n } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const { listCategories } = useContext(CategoryContext);
@@ -104,7 +106,7 @@ export default function EditExpenseModal(props) {
                 <Typography
                   sx={{ color: "white", fontWeight: "bold", fontSize: 22 }}
                 >
-                  Edit Expense Category
+                  {t("customize.editTitle")}
                 </Typography>
               </Box>
             </Box>
@@ -116,7 +118,9 @@ export default function EditExpenseModal(props) {
                 sx={{ width: "100%" }}
                 id="outlined-basic"
                 variant="outlined"
-                defaultValue={props.item.name}
+                defaultValue={
+                  i18n.language == "en" ? props.item.name : props.item.nameJP
+                }
               />
               {loading ? (
                 <Box
@@ -142,7 +146,7 @@ export default function EditExpenseModal(props) {
                   }}
                   variant="text"
                 >
-                  Add
+                  {t("detailModal.enter")}
                 </Button>
               )}
             </Box>

@@ -180,6 +180,7 @@ export default function DetailModal(props) {
       >
         <Fade in={true}>
           <Box
+            className="scrollbar"
             sx={{
               position: "absolute" as "absolute",
               top: "50%",
@@ -189,7 +190,7 @@ export default function DetailModal(props) {
               height: "100%",
               bgcolor: "#f0f0f0",
               // border: '2px solid #000',
-              boxShadow: 24,
+              boxShadow: 0,
               maxHeight: "800px",
               //   borderRadius: 2,
               maxWidth: "512px",
@@ -197,18 +198,20 @@ export default function DetailModal(props) {
               backgroundColor: "transparent",
               display: "flex",
               alignItems: "flex-end",
+              px: "16px",
+              pb: "16px",
             }}
           >
             <Box
               sx={{
                 width: "100%",
                 height: "60%",
-                minHeight: "500px",
+                minHeight: "530px",
                 backgroundColor: "#f5f5f5",
               }}
             >
               <Typography sx={{ textAlign: "center", fontSize: 13, py: "5px" }}>
-                Type the expense details and press Enter
+                {t("detailModal.des")}
               </Typography>
               <Typography
                 sx={{
@@ -220,7 +223,7 @@ export default function DetailModal(props) {
                   fontWeight: "bold",
                 }}
               >
-                Quick Input
+                {t("detailModal.title")}
               </Typography>
               <Box
                 sx={{
@@ -239,7 +242,7 @@ export default function DetailModal(props) {
                       wordBreak: "break-word",
                     }}
                   >
-                    AMOUNT
+                    {t("detailModal.amount")}
                   </Typography>
                 </Box>
                 <Box sx={{ width: "70%", px: "10px" }}>
@@ -277,7 +280,7 @@ export default function DetailModal(props) {
                       wordBreak: "break-word",
                     }}
                   >
-                    DATE
+                    {t("detailModal.date")}
                   </Typography>
                 </Box>
                 <Box sx={{ width: "70%", px: "10px" }}>
@@ -313,7 +316,7 @@ export default function DetailModal(props) {
                       wordBreak: "break-word",
                     }}
                   >
-                    CATEGORY
+                    {t("detailModal.category")}
                   </Typography>
                 </Box>
                 <Box sx={{ width: "70%", px: "10px" }}>
@@ -350,7 +353,7 @@ export default function DetailModal(props) {
                       wordBreak: "break-word",
                     }}
                   >
-                    NOTE
+                    {t("detailModal.note")}
                   </Typography>
                 </Box>
                 <Box sx={{ width: "70%", px: "10px" }}>
@@ -384,7 +387,7 @@ export default function DetailModal(props) {
                       wordBreak: "break-word",
                     }}
                   >
-                    PICTURE
+                    {t("detailModal.picture")}
                   </Typography>
                 </Box>
                 <Box
@@ -444,7 +447,7 @@ export default function DetailModal(props) {
                         width: "100%",
                       }}
                     >
-                      ENTER
+                      {t("detailModal.enter")}
                     </Button>
                   </Box>
                   <Box sx={{ width: "100%", px: "10px" }}>
@@ -456,7 +459,7 @@ export default function DetailModal(props) {
                         width: "100%",
                       }}
                     >
-                      Cancel
+                      {t("detailModal.cancel")}
                     </Button>
                   </Box>
                 </Box>

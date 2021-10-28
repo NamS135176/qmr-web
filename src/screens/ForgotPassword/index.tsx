@@ -9,7 +9,9 @@ import TextField from "@mui/material/TextField";
 import { forgotPassword } from "api/member";
 import { useHistory } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useTranslation } from "react-i18next";
 export default function ForgotPassScreen() {
+  const { t, i18n } = useTranslation();
   const history = useHistory();
   const [showError, setShowError] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -120,12 +122,26 @@ export default function ForgotPassScreen() {
                 color: "red",
               }}
             >
-              Member is not found
+              {t("forgotPass.error")}
             </p>
           ) : (
             <p></p>
           )}
-          <img src="assets/images/logo_en.png" width="100%" />
+          <Box sx={{ textAlign: "center", paddingBottom: "30px" }}>
+            {t("logo") === "jp" ? (
+              <img
+                className="image"
+                src={"assets/images/new_logo_jp.png"}
+                width="100%"
+              />
+            ) : (
+              <img
+                className="image"
+                src={"assets/images/logo_en.png"}
+                width="100%"
+              />
+            )}
+          </Box>
 
           <p
             style={{
@@ -137,14 +153,13 @@ export default function ForgotPassScreen() {
               wordBreak: `break-word`,
             }}
           >
-            Enter your email address to reset your password. You may need to
-            check your spam folder or unblock okanereco_support_d@docomo.ne.jp
+            {t("forgotPass.des")}
           </p>
           <TextField
             fullWidth
             id="email"
             name="email"
-            placeholder="type email"
+            placeholder={t("forgotPass.placeholder")}
             sx={{
               marginTop: 3,
               borderRadius: 2,
@@ -169,7 +184,7 @@ export default function ForgotPassScreen() {
             value={values.email}
             onChange={handleChange}
             error={touched.email && Boolean(errors.email)}
-            helperText={touched.email && errors.email}
+            // helperText={touched.email && errors.email}
           />
           {loading ? (
             <Box
@@ -190,13 +205,13 @@ export default function ForgotPassScreen() {
                   variant="contained"
                   fullWidth
                 >
-                  Send Mail
+                  {t("forgotPass.submit")}
                 </Button>
               </Box>
               <Box sx={{ marginTop: 2 }}>
                 <Link style={{ textDecoration: "none" }} to={`/`}>
                   <Button onClick={() => {}} variant="contained" fullWidth>
-                    Back
+                    {t("forgotPass.back")}
                   </Button>
                 </Link>
               </Box>

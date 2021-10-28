@@ -322,7 +322,7 @@ export default function InputModal(props) {
                           fontWeight: "bold",
                         }}
                       >
-                        Income
+                        {t("quickInput.income")}
                       </Button>
                     ) : (
                       <Button
@@ -342,7 +342,7 @@ export default function InputModal(props) {
                           fontWeight: "bold",
                         }}
                       >
-                        Income
+                        {t("quickInput.income")}
                       </Button>
                     )}
                     <Button
@@ -360,7 +360,7 @@ export default function InputModal(props) {
                         fontWeight: "bold",
                       }}
                     >
-                      Customize
+                      {t("quickInput.customize")}
                     </Button>
                   </Box>
                 </Box>
@@ -640,7 +640,7 @@ export default function InputModal(props) {
                             lineHeight: "normal",
                           }}
                         >
-                          input
+                          {t("quickInput.input")}
                         </Button>
                       )}
                     </Box>

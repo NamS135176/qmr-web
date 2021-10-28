@@ -149,7 +149,7 @@ function Page() {
                 color: "red",
               }}
             >
-              Email or password is invalid. Please try again.
+              {t("login.error")}
             </p>
           ) : (
             <p></p>
@@ -161,7 +161,7 @@ function Page() {
             {t("logo") === "jp" ? (
               <img
                 className="image"
-                src={"assets/images/logo_jp.png"}
+                src={"assets/images/new_logo_jp.png"}
                 width="100%"
               />
             ) : (
@@ -241,8 +241,9 @@ function Page() {
             value={values.email}
             onChange={handleChange}
             error={touched.email && Boolean(errors.email)}
-            helperText={touched.email && errors.email}
+            // helperText={touched.email && errors.email}
           />
+          {/* <Typography sx={{py:'5px', fontSize:'14px', color:'red'}}>{touched.email && errors.email}</Typography> */}
           <TextField
             fullWidth
             id="password"
@@ -272,8 +273,8 @@ function Page() {
             }}
             value={values.password}
             onChange={handleChange}
-            error={touched.password && Boolean(errors.password)}
-            helperText={touched.password && errors.password}
+            // error={touched.password && Boolean(errors.password)}
+            // helperText={touched.password && errors.password}
           />
           <Box
             sx={{
@@ -304,6 +305,7 @@ function Page() {
                 paddingRight: 0,
                 lineHeightStep: 1,
                 lineHeight: "1.1",
+                color: "#333333",
               }}
             >
               {t("login.suggest")}
@@ -345,6 +347,7 @@ function Page() {
                 lineHeight: "1.1",
                 paddingTop: 20,
                 paddingBottom: 20,
+                color: "#999",
               }}
             >
               {t("login.warning")}

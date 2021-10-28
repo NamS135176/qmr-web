@@ -10,11 +10,13 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import { addExpense, getCategory } from "api/category";
+import { useTranslation } from "react-i18next";
 import DateSelectContext from "utils/context";
 import CircularProgress from "@mui/material/CircularProgress";
 import CategoryContext from "utils/CategoryContext";
 
 export default function AddExpenseModal(props) {
+  const { t, i18n } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState("");
   const { listCategories } = useContext(CategoryContext);
@@ -106,7 +108,7 @@ export default function AddExpenseModal(props) {
                 <Typography
                   sx={{ color: "white", fontWeight: "bold", fontSize: 22 }}
                 >
-                  Add Expense Category
+                  {t("customize.addTitle")}
                 </Typography>
               </Box>
             </Box>
@@ -143,7 +145,7 @@ export default function AddExpenseModal(props) {
                   }}
                   variant="text"
                 >
-                  Add
+                  {t("detailModal.enter")}
                 </Button>
               )}
             </Box>

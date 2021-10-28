@@ -186,7 +186,7 @@ export default function ChangePassword() {
             value={values.password}
             onChange={handleChange}
             error={touched.password && Boolean(errors.password)}
-            helperText={touched.password && errors.password}
+            // helperText={touched.password && errors.password}
           />
 
           <TextField
@@ -219,7 +219,7 @@ export default function ChangePassword() {
             value={values.cfPassword}
             onChange={handleChange}
             error={touched.cfPassword && Boolean(errors.cfPassword)}
-            helperText={touched.cfPassword && errors.cfPassword}
+            // helperText={touched.cfPassword && errors.cfPassword}
           />
 
           {loading ? (
