@@ -312,7 +312,19 @@ function Page() {
                 color: "#333333",
               }}
             >
-              {t("login.suggest")}
+              {t("login.suggest1")}
+            </p>
+            <p
+              style={{
+                fontSize: 14,
+                margin: 0,
+                paddingRight: 0,
+                lineHeightStep: 1,
+                lineHeight: "1.1",
+                color: "#333333",
+              }}
+            >
+              {t("login.suggest2")}
             </p>
           </Box>
           <Box
@@ -350,11 +362,25 @@ function Page() {
                 lineHeightStep: 1,
                 lineHeight: "1.1",
                 paddingTop: 20,
+
+                color: "#999",
+              }}
+            >
+              {t("login.warning1")}
+            </p>
+            <p
+              style={{
+                fontSize: 14,
+                margin: 0,
+                padding: 0,
+                lineHeightStep: 1,
+                lineHeight: "1.1",
+
                 paddingBottom: 20,
                 color: "#999",
               }}
             >
-              {t("login.warning")}
+              {t("login.warning2")}
             </p>
           </Box>
         </Box>

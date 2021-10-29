@@ -259,7 +259,13 @@ export default function EditModal(props: any) {
                     onClick={() => {
                       setEditMode(true);
                     }}
-                    sx={{ backgroundColor: "#36a9e1", color: "white" }}
+                    sx={{
+                      backgroundColor: "#36a9e1",
+                      color: "white",
+                      ":hover": {
+                        backgroundColor: "#36a9e1",
+                      },
+                    }}
                   >
                     {t("editmodal.edit")}
                   </Button>

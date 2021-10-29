@@ -205,9 +205,10 @@ export default function DetailModal(props) {
             <Box
               sx={{
                 width: "100%",
-                height: "60%",
-                minHeight: "530px",
+                // height: "60%",
+                // minHeight: "530px",
                 backgroundColor: "#f5f5f5",
+                paddingBottom: "30px",
               }}
             >
               <Typography sx={{ textAlign: "center", fontSize: 13, py: "5px" }}>

@@ -343,6 +343,9 @@ export default function ListPageScreen() {
                             backgroundColor: "#67c2ef",
                             minWidth: 40,
                             marginRight: 1,
+                            "&:hover": {
+                              backgroundColor: "#1eb2fb",
+                            },
                           }}
                           onClick={() => {
                             setOpenModal(true);
@@ -360,7 +363,13 @@ export default function ListPageScreen() {
                               //  console.log('ssdkjfhsdjkfhskdjhf');
                             }
                           }}
-                          sx={{ backgroundColor: "#fabb3d", minWidth: 40 }}
+                          sx={{
+                            backgroundColor: "#fabb3d",
+                            minWidth: 40,
+                            "&:hover": {
+                              backgroundColor: "#faf13d",
+                            },
+                          }}
                         >
                           <DeleteOutlined
                             sx={{ fontSize: 25, color: "white" }}

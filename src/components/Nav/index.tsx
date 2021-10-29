@@ -277,7 +277,7 @@ export default function Nav(props) {
                       borderRadius: 0,
                     }}
                     onClick={() => {
-                      window.open(`http://smart-idea-apps.com/qmr/pc_support`);
+                      window.open(`http://smart-idea.jp/qmr/pc_support`);
                     }}
                     className="btnNav"
                     variant="text"

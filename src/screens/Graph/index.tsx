@@ -235,10 +235,10 @@ export default function Graph() {
             <Button
               sx={{
                 background: chart === "pie" ? "#78CD51" : "#D6D9E0",
-                color: "white",
+                color: chart === "pie" ? "white" : "black",
                 "&:hover": {
                   background: chart === "pie" ? "#78CD51" : "#D6D9E0",
-                  color: "white",
+                  color: chart === "pie" ? "white" : "black",
                 },
                 p: 2,
                 px: 4,
@@ -253,10 +253,10 @@ export default function Graph() {
             <Button
               sx={{
                 background: chart === "bar" ? "#78CD51" : "#D6D9E0",
-                color: "white",
+                color: chart === "pie" ? "black" : "white",
                 "&:hover": {
                   background: chart === "bar" ? "#78CD51" : "#D6D9E0",
-                  color: "white",
+                  color: chart === "pie" ? "black" : "white",
                 },
                 p: 2,
                 px: 4,
