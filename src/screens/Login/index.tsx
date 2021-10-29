@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useContext } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
@@ -13,11 +13,13 @@ import jwt_decode from "jwt-decode";
 import { apiQMRWeb, setAuthorize } from "api";
 import { useTranslation } from "react-i18next";
 import { getCurrencies } from "api/curency";
+import DateSelectContext from "utils/context";
 function Page() {
   const history = useHistory();
   const [showError, setShowError] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const { t, i18n } = useTranslation();
+  const { reloadPage } = useContext(DateSelectContext);
   const initialValues = useMemo(() => {
     return {
       email: "tih920@smart-idea.jp",
@@ -72,8 +74,8 @@ function Page() {
       window.localStorage.setItem("access_token", res.access_token);
       var decoded = jwt_decode(res.access_token);
 
-      setLoading(false);
       history.push("/");
+      setLoading(false);
     } catch (error) {
       setLoading(false);
       console.log(error);
