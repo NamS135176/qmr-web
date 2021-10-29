@@ -39,9 +39,9 @@ export default function CustomCell(props) {
           size="small"
         >
           {props.direct == `up${props.sort}` ? (
-            <ArrowDropUp sx={{ fontSize: 15, color: "black" }} />
+            <ArrowDropUp sx={{ fontSize: 25, color: "black" }} />
           ) : (
-            <ArrowDropUp sx={{ fontSize: 15, color: "#ddd" }} />
+            <ArrowDropUp sx={{ fontSize: 25, color: "#ddd" }} />
           )}
         </IconButton>
         <IconButton
@@ -57,9 +57,9 @@ export default function CustomCell(props) {
           size="small"
         >
           {props.direct == `down${props.sort}` ? (
-            <ArrowDropDown sx={{ fontSize: 15, color: "black" }} />
+            <ArrowDropDown sx={{ fontSize: 25, color: "black" }} />
           ) : (
-            <ArrowDropDown sx={{ fontSize: 15, color: "#ddd" }} />
+            <ArrowDropDown sx={{ fontSize: 25, color: "#ddd" }} />
           )}
         </IconButton>
       </Box>
