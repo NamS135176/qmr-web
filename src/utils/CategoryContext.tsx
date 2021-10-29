@@ -1,4 +1,4 @@
-import { getCategory } from "api/category";
+import { addExpense, getCategory } from "api/category";
 import { createContext, useEffect, useState } from "react";
 interface CategoryContextState {
   listCategories: any;
@@ -9,6 +9,13 @@ export function CategoryProvider(props) {
   const [listCategories, setListCategories] = useState([]);
   const getCate = async () => {
     const res1: any = await getCategory();
+    const itemDefault = res1.categories.find((item) => item.name === "?");
+    if (!itemDefault) {
+      await addExpense("?", 1000);
+      const newList = await getCategory();
+      setListCategories(newList.categories);
+      return;
+    }
     setListCategories(res1.categories);
   };
   useEffect(() => {
