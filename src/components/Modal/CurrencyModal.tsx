@@ -43,7 +43,7 @@ export default function CurrencyModal({ open, onClose }: any) {
 
   useEffect(() => {
     getCurrenciesData();
-  }, [i18n.language]);
+  }, []);
   return (
     <Dialog fullWidth={true} open={open} onClose={onClose}>
       <Box
