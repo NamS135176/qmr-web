@@ -91,9 +91,8 @@ export default function ListPageScreen() {
       setCategories(res1.categories);
       responseList = res1.categories.map((item) => {
         if (item.name === "?") {
-          i18n.language === "en"
-            ? (item.name = "Uncategorized")
-            : (item.name = "未分類");
+          item.name = "Uncategorized";
+          item.nameJP = "未分類";
         }
         return item;
       });
@@ -101,9 +100,8 @@ export default function ListPageScreen() {
       setCategories(listCategories[0]);
       responseList = listCategories[0].map((item) => {
         if (item.name === "?") {
-          i18n.language === "en"
-            ? (item.name = "Uncategorized")
-            : (item.name = "未分類");
+          item.name = "Uncategorized";
+          item.nameJP = "未分類";
         }
         return item;
       });
