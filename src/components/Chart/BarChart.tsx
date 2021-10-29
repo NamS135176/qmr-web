@@ -21,7 +21,7 @@ export default function BarChart({ data, dateFrom, dateTo }: any) {
   }
   const arrData = arrFullDays.map((item) => {
     let count = 0;
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < data?.length; i++) {
       if (data[i]["date"] === item) {
         count = data[i]["total"];
         break;

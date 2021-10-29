@@ -29,7 +29,7 @@ export default function HomeTable({ data }: any) {
     return b.total - a.total;
   });
 
-  const graphChangeName = d.map((item) => {
+  const graphChangeName = d?.map((item) => {
     if (item.category_name === "?") {
       i18n.language === "en"
         ? (item.category_name = "Uncategorized")

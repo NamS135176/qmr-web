@@ -22,7 +22,7 @@ export default function CurrencyModal({ open, onClose }: any) {
   const [currency, setCurrency] = useState(JSON.parse(nameCurrency));
   const getCurrenciesData = async () => {
     const response = await getCurrencies();
-
+    console.log("getcurrency");
     setCurrencies(response);
   };
   const handleChangeCurrency = (event: SelectChangeEvent) => {
@@ -43,7 +43,7 @@ export default function CurrencyModal({ open, onClose }: any) {
 
   useEffect(() => {
     getCurrenciesData();
-  }, [i18n.language]);
+  }, []);
   return (
     <Dialog fullWidth={true} open={open} onClose={onClose}>
       <Box

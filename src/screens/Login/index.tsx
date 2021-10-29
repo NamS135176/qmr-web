@@ -6,7 +6,7 @@ import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import TextField from "@mui/material/TextField";
-import { getCurrentMember, login } from "api/member";
+import { getCurrentMember, login, updateCurrentMember } from "api/member";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
 import jwt_decode from "jwt-decode";
@@ -43,16 +43,18 @@ function Page() {
     const member = await getCurrentMember();
     apiQMRWeb.setHeader("Accept-Language", member.language);
     const currencies = await getCurrencies();
-    const currency = currencies.find((item) => item.id === member.currency_id);
-    console.log(
-      "🚀 ~ file: index.tsx ~ line 47 ~ getMember ~ currency",
-      currency
-    );
+
+    const currency = currencies.find((item) => item.id === member?.currency_id);
+    const currencyDollar = currencies.find((item) => item.id === "2");
+    if (!currency) {
+      await updateCurrentMember("en", currencyDollar?.id);
+    }
 
     localStorage.setItem(
       "currency",
-      JSON.stringify(currency ? currency : null)
+      JSON.stringify(currency ? currency : currencyDollar)
     );
+
     member.language === "en"
       ? i18n.changeLanguage("en")
       : i18n.changeLanguage("ja");

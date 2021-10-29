@@ -367,7 +367,7 @@ export default function ListPageScreen() {
                             backgroundColor: "#fabb3d",
                             minWidth: 40,
                             "&:hover": {
-                              backgroundColor: "#faf13d",
+                              backgroundColor: "#ef9526",
                             },
                           }}
                         >
