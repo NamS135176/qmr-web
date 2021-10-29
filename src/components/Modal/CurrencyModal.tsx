@@ -8,34 +8,47 @@ import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Typography from "@mui/material/Typography";
 import { getCurrencies } from "api/curency";
-import { updateCurrentMember } from "api/member";
-import React, { useEffect, useState } from "react";
+import { getCurrentMember, updateCurrentMember } from "api/member";
+import React, { useEffect, useState, useContext } from "react";
 import { useTranslation } from "react-i18next";
+import NativeSelect from "@mui/material/NativeSelect";
+import DateSelectContext from "utils/context";
 
 export default function CurrencyModal({ open, onClose }: any) {
   const { t, i18n } = useTranslation();
 
   const [currencies, setCurrencies] = useState<any>([]);
   const nameCurrency: any = localStorage.getItem("currency");
-  console.log("currency", JSON.parse(nameCurrency));
 
-  const [currency, setCurrency] = useState(JSON.parse(nameCurrency));
+  const [currency, setCurrency] = useState<any>(JSON.parse(nameCurrency)?.id);
+  console.log({ currency });
+  const { reloadPage } = useContext(DateSelectContext);
+
   const getCurrenciesData = async () => {
     const response = await getCurrencies();
-    console.log("getcurrency");
+    if (!JSON.parse(nameCurrency)) {
+      const member = await getCurrentMember();
+      const c = response.find((item) => item.id === member?.currency_id);
+      setCurrencies(response);
+      setCurrency(c?.id);
+      return;
+    }
     setCurrencies(response);
+    console.log("data ne", JSON.parse(nameCurrency));
+    setCurrency(JSON.parse(nameCurrency)?.id);
   };
-  const handleChangeCurrency = (event: SelectChangeEvent) => {
+  const handleChangeCurrency = (event: any) => {
     console.log(event.target.value);
     setCurrency(event.target.value);
   };
   const submitChangeCurrency = async () => {
-    const idCurrency = currency ? currency?.id : JSON.parse(nameCurrency)?.id;
-    console.log("ahihi", idCurrency);
+    const idCurrency = currency ? currency : JSON.parse(nameCurrency)?.id;
+
     const language = i18n.language === "en" ? "en" : "jp";
     const response = await updateCurrentMember(language, idCurrency);
     if (currency) {
-      localStorage.setItem("currency", JSON.stringify(currency));
+      const item = currencies.find((i) => i.id === currency);
+      localStorage.setItem("currency", JSON.stringify(item));
     }
     // onClose();
     window.location.reload();
@@ -101,6 +114,7 @@ export default function CurrencyModal({ open, onClose }: any) {
         <FormControl fullWidth>
           <InputLabel id="currencies"> {t("currency.label")}</InputLabel>
           <Select
+            defaultValue={currency}
             labelId="currencies"
             id="currencies"
             value={currency}
@@ -109,7 +123,7 @@ export default function CurrencyModal({ open, onClose }: any) {
           >
             {currencies.map((item: any) => {
               return (
-                <MenuItem key={item.id} value={item}>
+                <MenuItem key={item.id} value={item.id}>
                   {i18n.language === "en" ? item.name : item.nameJP}
                 </MenuItem>
               );
