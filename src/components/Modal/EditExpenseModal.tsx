@@ -22,7 +22,10 @@ export default function EditExpenseModal(props) {
   const { listCategories } = useContext(CategoryContext);
   const { reloadPage } = useContext(DateSelectContext);
   const handleCreateExpense = async () => {
-    if (name != "") {
+    if (name.length > 50) {
+      alert(t("customize.over"));
+    }
+    if (name != "" && name.length <= 50) {
       setLoading(true);
       const res: any = await editExpense(
         props.item.id,

@@ -451,9 +451,13 @@ export default function EditModal(props: any) {
                       {editMode ? (
                         <FormControl
                           sx={{
-                            minWidth: {
-                              sx: "100%",
-                              md: 200,
+                            width: {
+                              xs: "100%",
+                              md: 224,
+                            },
+                            maxWidth: {
+                              xs: 145,
+                              md: 224,
                             },
                           }}
                         >
@@ -480,7 +484,9 @@ export default function EditModal(props: any) {
                           </Select>
                         </FormControl>
                       ) : (
-                        <Typography sx={{ textAlign: "left" }}>
+                        <Typography
+                          sx={{ textAlign: "left", wordBreak: "break-word" }}
+                        >
                           {i18n.language == "en"
                             ? props.data.cate
                             : props.data.nameJP}

@@ -125,6 +125,8 @@
     "editTitle":"カスタマイズ",
     "deleteTitle":"削除の確認",
     "confirmtext":"このカテゴリを削除してもよろしいですか？",
-    "addTitle":"経費カテゴリを追加"
+    "addTitle":"経費カテゴリを追加",
+    "invalid":"Category is invalid!",
+    "over":"登録できる文字数は50文字までです。"
   }
 }
