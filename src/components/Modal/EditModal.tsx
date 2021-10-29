@@ -111,7 +111,7 @@ export default function EditModal(props: any) {
       const res = await updateTransaction(
         oldItem.id,
         category.id,
-        oldItem.payment_method_id,
+        "106806",
         `${moment(valueDate).format("YYYY-MM-DD")} ${moment(valueTime).format(
           "HH:mm:ss"
         )}`,
