@@ -50,7 +50,7 @@ function Page() {
     if (!currency) {
       await updateCurrentMember("en", currencyDollar?.id);
     }
-
+    localStorage.setItem("currencies", JSON.stringify(currencies));
     localStorage.setItem(
       "currency",
       JSON.stringify(currency ? currency : currencyDollar)

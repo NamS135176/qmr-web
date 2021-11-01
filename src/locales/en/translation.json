@@ -9,7 +9,7 @@
     "list": "List",
     "graph": "Graph",
     "support": "Support/Blog",
-    "setting":"Setting"
+    "setting": "Setting"
   },
   "logo": "en",
   "date_home_modal": {
@@ -73,7 +73,7 @@
     "holder_password": "password",
     "btn_text": "Login",
     "suggest1": "Please input email and password which has been registered to QMR subcription or Recopass",
-    "suggest2":"",
+    "suggest2": "",
     "forgot_pass": "If you forgot your password, re-issue new password here.",
     "warning1": "Quick Money Recorder PC is beta version. Some function may not work.",
     "warning2":"",

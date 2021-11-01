@@ -16,24 +16,18 @@ import DateSelectContext from "utils/context";
 
 export default function CurrencyModal({ open, onClose }: any) {
   const { t, i18n } = useTranslation();
-
   const [currencies, setCurrencies] = useState<any>([]);
   const nameCurrency: any = localStorage.getItem("currency");
-
+  const listCurrency: any = localStorage.getItem("currencies");
   const [currency, setCurrency] = useState<any>(JSON.parse(nameCurrency)?.id);
-  console.log({ currency });
   const getCurrenciesData = async () => {
-    const response = await getCurrencies();
-    // if (!JSON.parse(nameCurrency)) {
-    //   const member = await getCurrentMember();
-    //   const c = response.find((item) => item.id === member?.currency_id);
-    //   setCurrencies(response);
-    //   setCurrency(c?.id);
-    //   return;
-    // }
+    if (!JSON.parse(listCurrency)) {
+      const response = await getCurrencies();
+      setCurrencies(response);
+    } else {
+      setCurrencies(JSON.parse(listCurrency));
+    }
 
-    setCurrencies(response);
-    console.log("data ne", JSON.parse(nameCurrency).id);
     setCurrency(JSON.parse(nameCurrency)?.id);
   };
   const handleChangeCurrency = (event: any) => {
@@ -49,15 +43,18 @@ export default function CurrencyModal({ open, onClose }: any) {
       const item = currencies.find((i) => i.id === currency);
       localStorage.setItem("currency", JSON.stringify(item));
     }
-    // onClose();
     window.location.reload();
+  };
+  const handleCloseModal = () => {
+    setCurrency(JSON.parse(nameCurrency)?.id);
+    onClose();
   };
 
   useEffect(() => {
     getCurrenciesData();
   }, []);
   return (
-    <Dialog fullWidth={true} open={open} onClose={onClose}>
+    <Dialog fullWidth={true} open={open} onClose={handleCloseModal}>
       <Box
         sx={{
           display: "flex",

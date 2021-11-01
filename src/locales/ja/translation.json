@@ -9,7 +9,7 @@
     "list": "リスト",
     "graph": "グラフ",
     "support": "サポートブログ",
-    "setting":"設定"
+    "setting": "設定"
   },
   "logo": "jp",
   "date_home_modal": {
@@ -73,7 +73,7 @@
     "holder_password": "パスワード",
     "btn_text": "ログイン ",
     "suggest1": "【クラウド会員】or【RecoPass】に登録した",
-    "suggest2":"メールアドレスとパスワードを入力してください",
+    "suggest2": "メールアドレスとパスワードを入力してください",
     "forgot_pass": "パスワードを忘れた方はこちら",
     "warning1": "パソコン用画面はベータ版です。",
     "warning2":"不具合がある可能性があります。",
