@@ -10,7 +10,7 @@ import Typography from "@mui/material/Typography";
 import jaLocale from "date-fns/locale/ja";
 import { Formik } from "formik";
 import moment from "moment";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import DateSelectContext from "utils/context";
 import * as Yup from "yup";
@@ -20,9 +20,6 @@ export default function DateHomeModal({ open, onClose }: any) {
     useContext(DateSelectContext);
 
   const { t, i18n } = useTranslation();
-  useEffect(() => {
-    console.log("render date home", t("error"));
-  }, [onClose]);
 
   return (
     <Box>
@@ -43,8 +40,6 @@ export default function DateHomeModal({ open, onClose }: any) {
             dateFrom[1](values.valueFrom);
             openModal[1](true);
           } catch (e: any) {
-            console.log(e.message);
-
             setSubmitting(false);
           }
         }}
@@ -173,9 +168,6 @@ export default function DateHomeModal({ open, onClose }: any) {
                         label="To"
                         value={values.valueTo}
                         onChange={(value) => {
-                          console.log({
-                            value: moment(value).format("YYYY-MM-DD"),
-                          });
                           setFieldValue(
                             "valueTo",
                             moment(value).format("YYYY-MM-DD")
@@ -229,7 +221,6 @@ export default function DateHomeModal({ open, onClose }: any) {
               >
                 <Button
                   onClick={() => {
-                    console.log("abc", values.valueFrom);
                     handleSubmit();
                     onClose();
                   }}
