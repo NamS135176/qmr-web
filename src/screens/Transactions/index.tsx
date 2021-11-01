@@ -118,8 +118,10 @@ export default function ListPageScreen() {
         item.cate = "";
         item.nameJP = "";
       }
-      item.memo = item.memo.replaceAll("+", " ");
-      item.memo = decodeURIComponent(item.memo);
+      // if (item.memo) {
+      //   item.memo = item.memo.replaceAll("+", " ");
+      //   item.memo = decodeURIComponent(item.memo);
+      // }
       return item;
     });
     setTransactions(newList);

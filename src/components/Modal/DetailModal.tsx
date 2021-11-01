@@ -110,7 +110,7 @@ export default function DetailModal(props) {
   };
 
   const handleCreateTransaction = async () => {
-    // setLoading(true);
+    setLoading(true);
     console.log({ file });
     if (value) {
       console.log("handle create", listCategories[0]);
@@ -259,7 +259,7 @@ export default function DetailModal(props) {
                 <Box sx={{ width: "70%", px: "10px" }}>
                   <TextField
                     id="price"
-                    value={price?.toFixed(2)}
+                    value={price}
                     inputProps={{ maxLength: 10 }}
                     sx={{ width: "100%", backgroundColor: "white" }}
                     onChange={handleChangePrice}
