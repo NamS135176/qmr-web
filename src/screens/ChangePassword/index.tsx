@@ -30,11 +30,11 @@ export default function ChangePassword() {
       yup.object({
         password: yup
           .string()
-          .email(t("login.typepass"))
+          .min(8, t("login.typepass"))
           .required(t("login.requirepass")),
         cfPassword: yup
           .string()
-          .email(t("login.typepass"))
+          .min(8, t("login.typepass"))
           .required(t("login.requirepass")),
       }),
     []
@@ -139,7 +139,7 @@ export default function ChangePassword() {
                 color: "red",
               }}
             >
-              {errorMessage}
+              {t("changePass.error")}
             </p>
           ) : (
             <p></p>
@@ -205,6 +205,7 @@ export default function ChangePassword() {
             value={values.password}
             onChange={handleChange}
             onBlur={handleBlur}
+            // error={Boolean(errors.password)}
             // helperText={touched.password && errors.password}
           />
           <Typography sx={{ py: "5px", fontSize: "14px", color: "red" }}>
@@ -240,6 +241,7 @@ export default function ChangePassword() {
             value={values.cfPassword}
             onChange={handleChange}
             onBlur={handleBlur}
+            // error={Boolean(errors.cfPassword)}
             // helperText={touched.cfPassword && errors.cfPassword}
           />
           <Typography sx={{ py: "5px", fontSize: "14px", color: "red" }}>

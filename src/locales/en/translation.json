@@ -138,7 +138,8 @@
   },
   "changePass": {
     "newpass": "New Password",
-    "cfnew": "Confirm new password"
+    "cfnew": "Confirm new password",
+    "error": "Password and confirm password doesn't match"
   },
   "error": "error",
   "pick_file": "Choose File"
