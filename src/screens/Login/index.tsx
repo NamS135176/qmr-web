@@ -55,9 +55,13 @@ function Page() {
       JSON.stringify(currency ? currency : currencyDollar)
     );
 
-    member.language === "en"
-      ? i18n.changeLanguage("en")
-      : i18n.changeLanguage("ja");
+    if (member.language === "en") {
+      i18n.changeLanguage("en");
+      apiQMRWeb.setHeader("Accept-Language", "en");
+    } else {
+      i18n.changeLanguage("ja");
+      apiQMRWeb.setHeader("Accept-Language", "jp");
+    }
   };
 
   const onSubmit = async ({ email, password }) => {
