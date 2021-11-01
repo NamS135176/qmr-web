@@ -41,8 +41,9 @@ export default function MenuNav({
   };
 
   const handleLogout = () => {
-    window.localStorage.removeItem("access_token");
-    window.localStorage.removeItem("currency");
+    // window.localStorage.removeItem('access_token');
+    // window.localStorage.removeItem('currency');
+    localStorage.clear();
     history.push("/login");
   };
 

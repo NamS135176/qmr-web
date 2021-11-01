@@ -95,7 +95,7 @@ export default function HomeTable({ data }: any) {
               <TableBody>
                 {d.map((row, index) => (
                   <TableRow
-                    key={row.category_id}
+                    key={row.id}
                     sx={{
                       "&:last-child td, &:last-child th": { border: 0 },
                       background: index % 2 === 0 ? "#f9f9f9" : "white",
