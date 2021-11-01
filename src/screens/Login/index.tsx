@@ -20,8 +20,8 @@ function Page() {
   const { t, i18n } = useTranslation();
   const initialValues = useMemo(() => {
     return {
-      email: "tih920@smart-idea.jp",
-      password: "Smart2012",
+      email: "",
+      password: "",
     };
   }, []);
 
@@ -90,11 +90,13 @@ function Page() {
   const {
     handleSubmit,
     handleChange,
+    handleBlur,
     validateForm,
     isValid,
     values,
     errors,
     touched,
+    dirty,
   } = formik;
 
   const handleLogin = (e: any) => {
@@ -244,12 +246,13 @@ function Page() {
                 },
               },
             }}
-            value={values.email}
+            defaultValue={values.email}
             onChange={handleChange}
-            error={touched.email && Boolean(errors.email)}
-            // helperText={touched.email && errors.email}
+            onBlur={handleBlur}
           />
-          {/* <Typography sx={{py:'5px', fontSize:'14px', color:'red'}}>{touched.email && errors.email}</Typography> */}
+          <Typography sx={{ py: "5px", fontSize: "14px", color: "red" }}>
+            {errors.email}
+          </Typography>
           <TextField
             fullWidth
             id="password"
@@ -277,11 +280,13 @@ function Page() {
                 },
               },
             }}
-            value={values.password}
+            defaultValue={values.password}
             onChange={handleChange}
-            // error={touched.password && Boolean(errors.password)}
-            // helperText={touched.password && errors.password}
+            onBlur={handleBlur}
           />
+          <Typography sx={{ py: "5px", fontSize: "14px", color: "red" }}>
+            {errors.password}
+          </Typography>
           <Box
             sx={{
               marginTop: 2,
@@ -298,7 +303,12 @@ function Page() {
                 <CircularProgress />
               </Box>
             ) : (
-              <Button variant="contained" fullWidth onClick={handleLogin}>
+              <Button
+                variant="contained"
+                fullWidth
+                onClick={handleLogin}
+                disabled={!dirty && isValid}
+              >
                 {t("login.btn_text")}
               </Button>
             )}
