@@ -9,10 +9,12 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import CircularProgress from "@mui/material/CircularProgress";
 import { changePassword } from "api/member";
-
+import Typography from "@mui/material/Typography";
+import { useTranslation } from "react-i18next";
 export default function ChangePassword() {
   const history = useHistory();
   const queryParams = new URLSearchParams(window.location.search);
+  const { t, i18n } = useTranslation();
   //   const [oldPass, setOldpass] = useState(queryParams.get("password"));
   const [loading, setLoading] = useState(false);
   const [showError, setShowError] = useState<boolean>(false);
@@ -28,12 +30,12 @@ export default function ChangePassword() {
       yup.object({
         password: yup
           .string()
-          .min(8, "Password should be of minimum 8 characters length")
-          .required("Password is required"),
+          .email(t("login.typepass"))
+          .required(t("login.requirepass")),
         cfPassword: yup
           .string()
-          .min(8, "Password should be of minimum 8 characters length")
-          .required("Confirm Password is required"),
+          .email(t("login.typepass"))
+          .required(t("login.requirepass")),
       }),
     []
   );
@@ -79,6 +81,7 @@ export default function ChangePassword() {
     handleSubmit,
     handleChange,
     validateForm,
+    handleBlur,
     isValid,
     values,
     errors,
@@ -141,7 +144,23 @@ export default function ChangePassword() {
           ) : (
             <p></p>
           )}
-          <img src="assets/images/logo_en.png" width="100%" />
+          <Box sx={{ textAlign: "center", paddingBottom: "30px" }}>
+            {t("logo") === "jp" ? (
+              <img
+                className="image"
+                src={"assets/images/new_logo_jp.png"}
+                width="100%"
+                style={{ maxWidth: "200px" }}
+              />
+            ) : (
+              <img
+                className="image"
+                src={"assets/images/logo_en.png"}
+                style={{ maxWidth: "200px" }}
+                width="100%"
+              />
+            )}
+          </Box>
 
           {/* <p
               style={{
@@ -161,7 +180,7 @@ export default function ChangePassword() {
             id="password"
             name="password"
             type="password"
-            placeholder="New password"
+            placeholder={t("changePass.newpass")}
             sx={{
               marginTop: 3,
               borderRadius: 2,
@@ -185,16 +204,19 @@ export default function ChangePassword() {
             }}
             value={values.password}
             onChange={handleChange}
-            error={touched.password && Boolean(errors.password)}
+            onBlur={handleBlur}
+            error={Boolean(errors.password)}
             // helperText={touched.password && errors.password}
           />
-
+          <Typography sx={{ py: "5px", fontSize: "14px", color: "red" }}>
+            {errors.password}
+          </Typography>
           <TextField
             fullWidth
             id="cfPassword"
             name="cfPassword"
             type="password"
-            placeholder="Confirm New password"
+            placeholder={t("changePass.cfnew")}
             sx={{
               marginTop: 3,
               borderRadius: 2,
@@ -218,10 +240,13 @@ export default function ChangePassword() {
             }}
             value={values.cfPassword}
             onChange={handleChange}
-            error={touched.cfPassword && Boolean(errors.cfPassword)}
+            onBlur={handleBlur}
+            error={Boolean(errors.cfPassword)}
             // helperText={touched.cfPassword && errors.cfPassword}
           />
-
+          <Typography sx={{ py: "5px", fontSize: "14px", color: "red" }}>
+            {errors.cfPassword}
+          </Typography>
           {loading ? (
             <Box
               sx={{
@@ -241,7 +266,7 @@ export default function ChangePassword() {
                   variant="contained"
                   fullWidth
                 >
-                  Change Password
+                  OK
                 </Button>
               </Box>
             </Box>

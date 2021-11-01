@@ -132,5 +132,12 @@
     "addTitle":"経費カテゴリを追加",
     "invalid":"Category is invalid!",
     "over":"登録できる文字数は50文字までです。"
+  },
+  "done":{
+    "des":"ご登録のメールアドレスにメールをお送りしました。"
+  },
+  "changePass":{
+    "newpass":"新しいパースワード",
+    "cfnew":"新しいパースワードの再入力"
   }
 }

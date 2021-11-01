@@ -132,5 +132,12 @@
     "addTitle":"Add Expense Category",
     "invalid":"Category is invalid!",
     "over":"Number of characters limited of 50!"
+  },
+  "done":{
+    "des":"An e-mail has been sent to you with further instructions"
+  },
+  "changePass":{
+    "newpass":"New Password",
+    "cfnew":"Confirm new password"
   }
 }

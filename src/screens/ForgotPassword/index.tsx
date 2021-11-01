@@ -63,6 +63,7 @@ export default function ForgotPassScreen() {
     handleSubmit,
     handleChange,
     validateForm,
+    handleBlur,
     isValid,
     values,
     errors,
@@ -186,11 +187,12 @@ export default function ForgotPassScreen() {
             }}
             value={values.email}
             onChange={handleChange}
-            error={touched.email && Boolean(errors.email)}
+            onBlur={handleBlur}
+            error={Boolean(errors.email)}
             // helperText={touched.email && errors.email}
           />
           <Typography sx={{ py: "5px", fontSize: "14px", color: "red" }}>
-            {touched.email && errors.email}
+            {errors.email}
           </Typography>
           {loading ? (
             <Box

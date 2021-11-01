@@ -14,6 +14,7 @@ import { apiQMRWeb, setAuthorize } from "api";
 import { useTranslation } from "react-i18next";
 import { getCurrencies } from "api/curency";
 import DateSelectContext from "utils/context";
+import { isNil } from "ramda";
 function Page() {
   const history = useHistory();
   const [showError, setShowError] = useState<boolean>(false);
@@ -36,7 +37,7 @@ function Page() {
         password: yup
           .string()
           .min(8, t("login.typepass"))
-          .required(t("login.requireppass")),
+          .required(t("login.requirepass")),
       }),
     []
   );
@@ -91,6 +92,7 @@ function Page() {
     handleSubmit,
     handleChange,
     validateForm,
+    handleBlur,
     isValid,
     values,
     errors,
@@ -246,11 +248,12 @@ function Page() {
             }}
             value={values.email}
             onChange={handleChange}
-            error={touched.email && Boolean(errors.email)}
+            onBlur={handleBlur}
+            error={isNil(errors.email)}
             // helperText={touched.email && errors.email}
           />
           <Typography sx={{ py: "5px", fontSize: "14px", color: "red" }}>
-            {touched.email && errors.email}
+            {errors.email}
           </Typography>
           <TextField
             fullWidth
@@ -281,11 +284,12 @@ function Page() {
             }}
             value={values.password}
             onChange={handleChange}
-            error={touched.password && Boolean(errors.password)}
+            onBlur={handleBlur}
+            error={isNil(errors.password)}
             // helperText={touched.password && errors.password}
           />
           <Typography sx={{ py: "5px", fontSize: "14px", color: "red" }}>
-            {touched.password && errors.password}
+            {errors.password}
           </Typography>
           <Box
             sx={{
