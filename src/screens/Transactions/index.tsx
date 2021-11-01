@@ -35,7 +35,9 @@ export default function ListPageScreen() {
   const [open, setOpen] = useState(false);
   const dateSelect = useContext(DateSelectContext);
   const { dateFrom, dateTo } = useContext(DateSelectContext);
-  const { listCategories } = useContext(CategoryContext);
+  const { listCategories, shopNameDefault, paymentMethodDefault } =
+    useContext(CategoryContext);
+
   const [categories, setCategories] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [page, setPage] = useState(1);
