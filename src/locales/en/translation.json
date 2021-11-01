@@ -139,5 +139,7 @@
   "changePass": {
     "newpass": "New Password",
     "cfnew": "Confirm new password"
-  }
+  },
+  "error": "error",
+  "pick_file": "Choose File"
 }

@@ -688,7 +688,7 @@ export default function EditModal(props: any) {
                       {({ getRootProps, getInputProps }) => (
                         <div className="dropzone" {...getRootProps()}>
                           <input {...getInputProps()} />
-                          <p>Drag'n'drop files, or click to select files</p>
+                          <p>{t("pick_file")}</p>
                         </div>
                       )}
                     </Dropzone>
