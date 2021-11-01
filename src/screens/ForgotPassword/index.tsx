@@ -10,6 +10,7 @@ import { forgotPassword } from "api/member";
 import { useHistory } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useTranslation } from "react-i18next";
+import Typography from "@mui/material/Typography";
 export default function ForgotPassScreen() {
   const { t, i18n } = useTranslation();
   const history = useHistory();
@@ -26,8 +27,8 @@ export default function ForgotPassScreen() {
       yup.object({
         email: yup
           .string()
-          .email("Enter a valid email")
-          .required("Email is required"),
+          .email(t("login.typemail"))
+          .required(t("login.requiremail")),
       }),
     []
   );
@@ -188,6 +189,9 @@ export default function ForgotPassScreen() {
             error={touched.email && Boolean(errors.email)}
             // helperText={touched.email && errors.email}
           />
+          <Typography sx={{ py: "5px", fontSize: "14px", color: "red" }}>
+            {touched.email && errors.email}
+          </Typography>
           {loading ? (
             <Box
               sx={{

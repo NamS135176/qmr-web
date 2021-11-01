@@ -32,12 +32,12 @@ function Page() {
       yup.object({
         email: yup
           .string()
-          .email("Enter a valid email")
-          .required("Email is required"),
+          .email(t("login.typemail"))
+          .required(t("login.requiremail")),
         password: yup
           .string()
-          // .min(8, "Password should be of minimum 8 characters length")
-          .required("Password is required"),
+          .min(8, t("login.typepass"))
+          .required(t("login.requireppass")),
       }),
     []
   );
@@ -251,7 +251,9 @@ function Page() {
             error={touched.email && Boolean(errors.email)}
             // helperText={touched.email && errors.email}
           />
-          {/* <Typography sx={{py:'5px', fontSize:'14px', color:'red'}}>{touched.email && errors.email}</Typography> */}
+          <Typography sx={{ py: "5px", fontSize: "14px", color: "red" }}>
+            {touched.email && errors.email}
+          </Typography>
           <TextField
             fullWidth
             id="password"
@@ -281,9 +283,12 @@ function Page() {
             }}
             value={values.password}
             onChange={handleChange}
-            // error={touched.password && Boolean(errors.password)}
+            error={touched.password && Boolean(errors.password)}
             // helperText={touched.password && errors.password}
           />
+          <Typography sx={{ py: "5px", fontSize: "14px", color: "red" }}>
+            {touched.password && errors.password}
+          </Typography>
           <Box
             sx={{
               marginTop: 2,
