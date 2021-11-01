@@ -22,19 +22,18 @@ export default function CurrencyModal({ open, onClose }: any) {
 
   const [currency, setCurrency] = useState<any>(JSON.parse(nameCurrency)?.id);
   console.log({ currency });
-  const { reloadPage } = useContext(DateSelectContext);
-
   const getCurrenciesData = async () => {
     const response = await getCurrencies();
-    if (!JSON.parse(nameCurrency)) {
-      const member = await getCurrentMember();
-      const c = response.find((item) => item.id === member?.currency_id);
-      setCurrencies(response);
-      setCurrency(c?.id);
-      return;
-    }
+    // if (!JSON.parse(nameCurrency)) {
+    //   const member = await getCurrentMember();
+    //   const c = response.find((item) => item.id === member?.currency_id);
+    //   setCurrencies(response);
+    //   setCurrency(c?.id);
+    //   return;
+    // }
+
     setCurrencies(response);
-    console.log("data ne", JSON.parse(nameCurrency));
+    console.log("data ne", JSON.parse(nameCurrency).id);
     setCurrency(JSON.parse(nameCurrency)?.id);
   };
   const handleChangeCurrency = (event: any) => {
