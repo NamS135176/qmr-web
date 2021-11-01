@@ -76,12 +76,12 @@
     "suggest2": "",
     "forgot_pass": "If you forgot your password, re-issue new password here.",
     "warning1": "Quick Money Recorder PC is beta version. Some function may not work.",
-    "warning2":"",
-    "error":"Email or password is invalid. Please try again.",
-    "typemail":"Enter a valid email",
-    "typepass":"Password should be of minimum 8 characters length",
-    "requiremail":"Email is required",
-    "requirepass":"Password is required。"
+    "warning2": "",
+    "error": "Email or password is invalid. Please try again.",
+    "typemail": "Enter a valid email",
+    "typepass": "Password should be of minimum 8 characters length",
+    "requiremail": "Email is required",
+    "requirepass": "Password is required。"
   },
   "graph": {
     "pie": "pie",
@@ -98,46 +98,48 @@
     "setting": "Currency Setting",
     "label": "Currencies"
   },
-  "forgotPass":{
-    "des":"Enter your email address to reset your password. You may need to check your spam folder or unblock okanereco_support_d@docomo.ne.jp",
-    "placeholder":"type email",
-    "submit":"Send email",
-    "back":"Back",
-    "error":"Member is not found."
+  "forgotPass": {
+    "des": "Enter your email address to reset your password. You may need to check your spam folder or unblock okanereco_support_d@docomo.ne.jp",
+    "placeholder": "type email",
+    "submit": "Send email",
+    "back": "Back",
+    "error": "Member is not found."
   },
-  "quickInput":{
-    "income":"Income",
-    "customize":"Customize",
-    "input":"input"
+  "quickInput": {
+    "income": "Income",
+    "customize": "Customize",
+    "input": "input"
   },
-  "detailModal":{
-    "des":"Type the expense details and press Enter",
-    "title":"Quick Input",
-    "amount":"AMOUNT",
-    "date":"DATE",
-    "category":"CATEGORY",
-    "note":"NOTE",
-    "picture":"PICTURE",
-    "enter":"ENTER",
-    "cancel":"CANCEL"
+  "detailModal": {
+    "des": "Type the expense details and press Enter",
+    "title": "Quick Input",
+    "amount": "AMOUNT",
+    "date": "DATE",
+    "category": "CATEGORY",
+    "note": "NOTE",
+    "picture": "PICTURE",
+    "enter": "ENTER",
+    "cancel": "CANCEL"
   },
-  "customize":{
-    "title":"Edit Category",
-    "edit":"Edit",
-    "done":"Done",
-    "add":"+ Add Expense Category",
-    "editTitle":"Edit Expense Category",
-    "deleteTitle":"Confirm Delete",
-    "confirmtext":"Are you sure you want to delete this category?",
-    "addTitle":"Add Expense Category",
-    "invalid":"Category is invalid!",
-    "over":"Number of characters limited of 50!"
+  "customize": {
+    "title": "Edit Category",
+    "edit": "Edit",
+    "done": "Done",
+    "add": "+ Add Expense Category",
+    "editTitle": "Edit Expense Category",
+    "deleteTitle": "Confirm Delete",
+    "confirmtext": "Are you sure you want to delete this category?",
+    "addTitle": "Add Expense Category",
+    "invalid": "Category is invalid!",
+    "over": "Number of characters limited of 50!"
   },
-  "done":{
-    "des":"An e-mail has been sent to you with further instructions"
+  "done": {
+    "des": "An e-mail has been sent to you with further instructions"
   },
-  "changePass":{
-    "newpass":"New Password",
-    "cfnew":"Confirm new password"
-  }
+  "changePass": {
+    "newpass": "New Password",
+    "cfnew": "Confirm new password"
+  },
+  "error": "error",
+  "pick_file": "Choose File"
 }
