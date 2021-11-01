@@ -29,15 +29,15 @@ export default function HomeTable({ data }: any) {
     return b.total - a.total;
   });
 
-  const graphChangeName = d?.map((item) => {
-    if (item.category_name === "?") {
-      i18n.language === "en"
-        ? (item.category_name = "Uncategorized")
-        : (item.category_name = "未分類");
-    }
-    return item;
-  });
-  console.log({ graphChangeName });
+  // const graphChangeName = d?.map((item) => {
+  //   if (item.category_name === '?') {
+  //     i18n.language === 'en'
+  //       ? (item.category_name = 'Uncategorized')
+  //       : (item.category_name = '未分類');
+  //   }
+  //   return item;
+  // });
+  // console.log({ graphChangeName });
   if (d) {
     for (const element of d) {
       totalPrice += element.total;
@@ -95,13 +95,15 @@ export default function HomeTable({ data }: any) {
               <TableBody>
                 {d.map((row, index) => (
                   <TableRow
-                    key={row.category_id}
+                    key={row.id}
                     sx={{
                       "&:last-child td, &:last-child th": { border: 0 },
                       background: index % 2 === 0 ? "#f9f9f9" : "white",
                     }}
                   >
-                    <TableCell>{row.category_name}</TableCell>
+                    <TableCell>
+                      {i18n.language === "en" ? row.name : row.nameJP}
+                    </TableCell>
                     <TableCell align="left">
                       {JSON.parse(currency)?.symbol}
                       {new Intl.NumberFormat("ja-JP", {

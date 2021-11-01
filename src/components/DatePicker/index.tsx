@@ -100,11 +100,11 @@ export default function Index({ isOpen, dateSelect }) {
                 }}
               >
                 {i18n.language == "en" ? (
-                  <Typography>
+                  <Typography sx={{ textAlign: "center" }}>
                     {moment(monthYear[0]).format("MMMM YYYY")}
                   </Typography>
                 ) : (
-                  <Typography>
+                  <Typography sx={{ textAlign: "center" }}>
                     {moment(monthYear[0]).format("YYYY年 MM月")}
                   </Typography>
                 )}

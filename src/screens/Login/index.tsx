@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useContext } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
@@ -13,6 +13,8 @@ import jwt_decode from "jwt-decode";
 import { apiQMRWeb, setAuthorize } from "api";
 import { useTranslation } from "react-i18next";
 import { getCurrencies } from "api/curency";
+import DateSelectContext from "utils/context";
+import { isNil } from "ramda";
 function Page() {
   const history = useHistory();
   const [showError, setShowError] = useState<boolean>(false);
@@ -30,12 +32,12 @@ function Page() {
       yup.object({
         email: yup
           .string()
-          .email("Enter a valid email")
-          .required("Email is required"),
+          .email(t("login.typemail"))
+          .required(t("login.requiremail")),
         password: yup
           .string()
-          // .min(8, "Password should be of minimum 8 characters length")
-          .required("Password is required"),
+          .min(8, t("login.typepass"))
+          .required(t("login.requirepass")),
       }),
     []
   );
@@ -43,13 +45,12 @@ function Page() {
     const member = await getCurrentMember();
     apiQMRWeb.setHeader("Accept-Language", member.language);
     const currencies = await getCurrencies();
-
     const currency = currencies.find((item) => item.id === member?.currency_id);
     const currencyDollar = currencies.find((item) => item.id === "2");
     if (!currency) {
       await updateCurrentMember("en", currencyDollar?.id);
     }
-
+    localStorage.setItem("currencies", JSON.stringify(currencies));
     localStorage.setItem(
       "currency",
       JSON.stringify(currency ? currency : currencyDollar)
@@ -71,13 +72,13 @@ function Page() {
       const res: any = await login(email, password);
       if (res) {
         setAuthorize(res.access_token);
-        getMember();
+        await getMember();
       }
       window.localStorage.setItem("access_token", res.access_token);
       var decoded = jwt_decode(res.access_token);
 
-      setLoading(false);
       history.push("/");
+      setLoading(false);
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -94,8 +95,8 @@ function Page() {
   const {
     handleSubmit,
     handleChange,
-    handleBlur,
     validateForm,
+    handleBlur,
     isValid,
     values,
     errors,

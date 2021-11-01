@@ -10,6 +10,7 @@ import { forgotPassword } from "api/member";
 import { useHistory } from "react-router-dom";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useTranslation } from "react-i18next";
+import Typography from "@mui/material/Typography";
 export default function ForgotPassScreen() {
   const { t, i18n } = useTranslation();
   const history = useHistory();
@@ -26,8 +27,8 @@ export default function ForgotPassScreen() {
       yup.object({
         email: yup
           .string()
-          .email("Enter a valid email")
-          .required("Email is required"),
+          .email(t("login.typemail"))
+          .required(t("login.requiremail")),
       }),
     []
   );
@@ -62,6 +63,7 @@ export default function ForgotPassScreen() {
     handleSubmit,
     handleChange,
     validateForm,
+    handleBlur,
     isValid,
     values,
     errors,
@@ -133,11 +135,13 @@ export default function ForgotPassScreen() {
                 className="image"
                 src={"assets/images/new_logo_jp.png"}
                 width="100%"
+                style={{ maxWidth: "200px" }}
               />
             ) : (
               <img
                 className="image"
                 src={"assets/images/logo_en.png"}
+                style={{ maxWidth: "200px" }}
                 width="100%"
               />
             )}
@@ -183,9 +187,12 @@ export default function ForgotPassScreen() {
             }}
             value={values.email}
             onChange={handleChange}
-            error={touched.email && Boolean(errors.email)}
+            onBlur={handleBlur}
             // helperText={touched.email && errors.email}
           />
+          <Typography sx={{ py: "5px", fontSize: "14px", color: "red" }}>
+            {errors.email}
+          </Typography>
           {loading ? (
             <Box
               sx={{

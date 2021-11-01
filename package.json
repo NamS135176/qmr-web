@@ -97,6 +97,9 @@
     "src/**/**/**.scss": [
       "prettier --write"
     ],
+    "src/**/**/**.json": [
+      "prettier --write"
+    ],
     "*.js": "eslint --cache --fix",
     "*.{ts,tsx,scss}": "prettier --write"
   }

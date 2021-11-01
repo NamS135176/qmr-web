@@ -224,9 +224,15 @@ export default function CustomizeModal(props) {
                           sx={{ borderBottom: "1px solid #ddd", mx: "10px" }}
                         >
                           {i18n.language == "en" ? (
-                            <ListItemText primary={`${item.name}`} />
+                            <ListItemText
+                              sx={{ wordBreak: "break-word" }}
+                              primary={`${item.name}`}
+                            />
                           ) : (
-                            <ListItemText primary={`${item.nameJP}`} />
+                            <ListItemText
+                              sx={{ wordBreak: "break-word" }}
+                              primary={`${item.nameJP}`}
+                            />
                           )}
                         </ListItemButton>
                       </ListItem>
@@ -242,9 +248,15 @@ export default function CustomizeModal(props) {
                           sx={{ borderBottom: "1px solid #ddd", mx: "10px" }}
                         >
                           {i18n.language == "en" ? (
-                            <ListItemText primary={`${item.name}`} />
+                            <ListItemText
+                              sx={{ wordBreak: "break-word" }}
+                              primary={`${item.name}`}
+                            />
                           ) : (
-                            <ListItemText primary={`${item.nameJP}`} />
+                            <ListItemText
+                              sx={{ wordBreak: "break-word" }}
+                              primary={`${item.nameJP}`}
+                            />
                           )}
                         </ListItemButton>
                       </ListItem>
