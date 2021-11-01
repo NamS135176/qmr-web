@@ -9,7 +9,7 @@
     "list": "リスト",
     "graph": "グラフ",
     "support": "サポートブログ",
-    "setting":"設定"
+    "setting": "設定"
   },
   "logo": "jp",
   "date_home_modal": {
@@ -73,11 +73,11 @@
     "holder_password": "パスワード",
     "btn_text": "ログイン ",
     "suggest1": "【クラウド会員】or【RecoPass】に登録した",
-    "suggest2":"メールアドレスとパスワードを入力してください",
+    "suggest2": "メールアドレスとパスワードを入力してください",
     "forgot_pass": "パスワードを忘れた方はこちら",
     "warning1": "パソコン用画面はベータ版です。",
-    "warning2":"不具合がある可能性があります。",
-    "error":"ログインに失敗しました。入力内容に誤りがあります。再度入力してください。"
+    "warning2": "不具合がある可能性があります。",
+    "error": "ログインに失敗しました。入力内容に誤りがあります。再度入力してください。"
   },
   "graph": {
     "pie": "円グラフ",
@@ -94,37 +94,38 @@
     "setting": "通貨設定",
     "label": "通貨設定"
   },
-  "forgotPass":{
-    "des":"おカネレコにご登録済みのメールアドレスを入力してください。＊迷惑メールフィルタを設定している場合は、下記のメールアドレスを許可してください。okanereco_support_d@docomo.ne.jp",
-    "placeholder":"メールアドレス入力",
-    "submit":"メール送信",
-    "back":"戻る",
-    "error":"入力されたメールアドレスの登録はありませんでした。"
+  "forgotPass": {
+    "des": "おカネレコにご登録済みのメールアドレスを入力してください。＊迷惑メールフィルタを設定している場合は、下記のメールアドレスを許可してください。okanereco_support_d@docomo.ne.jp",
+    "placeholder": "メールアドレス入力",
+    "submit": "メール送信",
+    "back": "戻る",
+    "error": "入力されたメールアドレスの登録はありませんでした。"
   },
-  "quickInput":{
-    "income":"収入",
-    "customize":"カスタマイズ",
-    "input":"入力"
+  "quickInput": {
+    "income": "収入",
+    "customize": "カスタマイズ",
+    "input": "入力"
   },
-  "detailModal":{
-    "des":"出費の詳細を入力して入力を押してください",
-    "title":"クイックインプット",
-    "amount":"金額",
-    "date":"日付",
-    "category":"カテゴリ",
-    "note":"メモ",
-    "picture":"写真",
-    "enter":"入力",
-    "cancel":"キャンセル"
+  "detailModal": {
+    "des": "出費の詳細を入力して入力を押してください",
+    "title": "クイックインプット",
+    "amount": "金額",
+    "date": "日付",
+    "category": "カテゴリ",
+    "note": "メモ",
+    "picture": "写真",
+    "enter": "入力",
+    "cancel": "キャンセル"
   },
-  "customize":{
-    "title":"カテゴリー編集",
-    "edit":"編集",
-    "done":"完了",
-    "add":"+出費カテゴリを追加",
-    "editTitle":"カスタマイズ",
-    "deleteTitle":"削除の確認",
-    "confirmtext":"このカテゴリを削除してもよろしいですか？",
-    "addTitle":"経費カテゴリを追加"
-  }
+  "customize": {
+    "title": "カテゴリー編集",
+    "edit": "編集",
+    "done": "完了",
+    "add": "+出費カテゴリを追加",
+    "editTitle": "カスタマイズ",
+    "deleteTitle": "削除の確認",
+    "confirmtext": "このカテゴリを削除してもよろしいですか？",
+    "addTitle": "経費カテゴリを追加"
+  },
+  "error": "エラー"
 }

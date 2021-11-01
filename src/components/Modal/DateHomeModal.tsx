@@ -7,11 +7,10 @@ import Dialog from "@mui/material/Dialog";
 import Divider from "@mui/material/Divider";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { getSummary } from "api/summary";
 import jaLocale from "date-fns/locale/ja";
 import { Formik } from "formik";
 import moment from "moment";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import DateSelectContext from "utils/context";
 import * as Yup from "yup";
@@ -21,11 +20,10 @@ export default function DateHomeModal({ open, onClose }: any) {
     useContext(DateSelectContext);
 
   const { t, i18n } = useTranslation();
+  useEffect(() => {
+    console.log("render date home", t("error"));
+  }, [onClose]);
 
-  // const handleOk = async () => {
-  //   dateTo[1](moment(valueTo).format('YYYY-MM-DD'));
-  //   dateFrom[1](moment(valueFrom).format('YYYY-MM-DD'));
-  // };
   return (
     <Box>
       <Formik
@@ -36,7 +34,7 @@ export default function DateHomeModal({ open, onClose }: any) {
         validationSchema={Yup.object().shape({
           valueTo: Yup.date().when(
             "valueFrom",
-            (valueFrom, yup) => valueFrom && yup.min(valueFrom, "error time")
+            (valueFrom, yup) => valueFrom && yup.min(valueFrom, t("error"))
           ),
         })}
         onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
