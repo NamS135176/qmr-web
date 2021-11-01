@@ -46,7 +46,7 @@ function Page() {
     apiQMRWeb.setHeader("Accept-Language", member.language);
     const currencies = await getCurrencies();
     const currency = currencies.find((item) => item.id === member?.currency_id);
-    const currencyDollar = currencies.find((item) => item.id === "2");
+    const currencyDollar = currencies.find((item) => item.id === "1");
     if (!currency) {
       await updateCurrentMember("en", currencyDollar?.id);
     }
