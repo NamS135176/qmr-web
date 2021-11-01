@@ -45,7 +45,7 @@ export default function ForgotPassScreen() {
       console.log(res);
 
       setLoading(false);
-      history.push("/send_mail_done");
+      history.push("/send-mail-done");
     } catch (error) {
       setLoading(false);
       console.log(error);

@@ -27,7 +27,7 @@ function AppRouter() {
       <Switch>
         <Route exact path="/login" component={Login} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
-        <Route exact path="/send_mail_done" component={RequestDone} />
+        <Route exact path="/send-mail-done" component={RequestDone} />
         <Route exact path="/change-password" component={ChangePassword} />
         <CategoryProvider>
           <Nav />
