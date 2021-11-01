@@ -4,10 +4,15 @@ import Box from "@mui/material/Box";
 import Chart from "react-apexcharts";
 import color from "constant/";
 import "./style.scss";
+import { useTranslation } from "react-i18next";
+
 export default function PieChart({ data }: any) {
-  const labels = data
-    ?.sort((a, b) => b.total - a.total)
-    .map((item) => item.category_name);
+  const { t, i18n } = useTranslation();
+
+  const labels =
+    i18n.language === "en"
+      ? data?.sort((a, b) => b.total - a.total).map((item) => item.name)
+      : data?.sort((a, b) => b.total - a.total).map((item) => item.nameJP);
   const d = data?.map((item) => item.total);
   const option: any = {
     labels: labels,

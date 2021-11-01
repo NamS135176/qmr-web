@@ -23,7 +23,15 @@ export default function AddExpenseModal(props) {
   const { reloadPage } = useContext(DateSelectContext);
   const [reload, setReloadPage] = reloadPage;
   const handleCreateExpense = async () => {
-    if (name != "") {
+    const find = listCategories[0].find((item) => item.name == name.trim());
+    console.log(name.length);
+    if (find != undefined && name == "?") {
+      alert(t("customize.invalid"));
+    }
+    if (name.length > 50) {
+      alert(t("customize.over"));
+    }
+    if (name != "" && find == undefined && name != "?" && name.length <= 50) {
       console.log(Number(props.lastCount) + 1);
 
       setLoading(true);

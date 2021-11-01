@@ -106,6 +106,7 @@ export default function Home() {
                         background: "#BDEA74",
                         color: "white",
                         fontSize: 50,
+                        borderRadius: "10px",
                       }}
                     />
                   </Box>
@@ -151,6 +152,7 @@ export default function Home() {
                         background: "#36A9E1",
                         color: "white",
                         fontSize: 50,
+                        borderRadius: "10px",
                       }}
                     />
                   </Box>
@@ -196,6 +198,7 @@ export default function Home() {
                         background: "#EAE874",
                         color: "white",
                         fontSize: 50,
+                        borderRadius: "10px",
                       }}
                     />
                   </Box>

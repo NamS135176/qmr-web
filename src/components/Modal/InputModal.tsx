@@ -103,9 +103,9 @@ export default function InputModal(props) {
     // const res: any = await getCategory();
     setListExpense(listCategories[0].filter((item: any) => item.count < 900));
     setListIncome(listCategories[0].filter((item: any) => item.count >= 900));
-    setDefault(listCategories[0].find((item: any) => item.name == "?"));
+    setDefault(listCategories[0].find((item: any) => item.count == "1000"));
 
-    setIncome(listCategories.filter((item: any) => item.count >= 900)[0]);
+    setIncome(listCategories[0].find((item: any) => item.name == "Income"));
     const list = [...listCategories[0]];
     list.pop();
     setListAll(list);
@@ -327,6 +327,8 @@ export default function InputModal(props) {
                     ) : (
                       <Button
                         onClick={() => {
+                          console.log(income);
+
                           setUp(true);
                           setExFocus(-1);
                           setIsIncome(true);

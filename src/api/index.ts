@@ -1,8 +1,12 @@
 import { create } from "apisauce";
+import i18n from "utils/i18n";
 
 export const apiQMRWeb = create({
   baseURL: "http://api-web-dev.quick-money-recorder.com/",
-  headers: { "Content-Type": "application/json" },
+  headers: {
+    "Content-Type": "application/json",
+    "Accept-Language": i18n.language ?? "jp",
+  },
   timeout: 10000,
 });
 

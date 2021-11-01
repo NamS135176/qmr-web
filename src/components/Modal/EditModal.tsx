@@ -111,7 +111,7 @@ export default function EditModal(props: any) {
       const res = await updateTransaction(
         oldItem.id,
         category.id,
-        oldItem.payment_method_id,
+        "106806",
         `${moment(valueDate).format("YYYY-MM-DD")} ${moment(valueTime).format(
           "HH:mm:ss"
         )}`,
@@ -259,7 +259,13 @@ export default function EditModal(props: any) {
                     onClick={() => {
                       setEditMode(true);
                     }}
-                    sx={{ backgroundColor: "#36a9e1", color: "white" }}
+                    sx={{
+                      backgroundColor: "#36a9e1",
+                      color: "white",
+                      ":hover": {
+                        backgroundColor: "#36a9e1",
+                      },
+                    }}
                   >
                     {t("editmodal.edit")}
                   </Button>
@@ -445,9 +451,13 @@ export default function EditModal(props: any) {
                       {editMode ? (
                         <FormControl
                           sx={{
-                            minWidth: {
-                              sx: "100%",
-                              md: 200,
+                            width: {
+                              xs: "100%",
+                              md: 224,
+                            },
+                            maxWidth: {
+                              xs: 145,
+                              md: 224,
                             },
                           }}
                         >
@@ -474,7 +484,9 @@ export default function EditModal(props: any) {
                           </Select>
                         </FormControl>
                       ) : (
-                        <Typography sx={{ textAlign: "left" }}>
+                        <Typography
+                          sx={{ textAlign: "left", wordBreak: "break-word" }}
+                        >
                           {i18n.language == "en"
                             ? props.data.cate
                             : props.data.nameJP}

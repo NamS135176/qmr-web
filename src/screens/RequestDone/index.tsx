@@ -2,8 +2,9 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import { useHistory } from "react-router-dom";
-
+import { useTranslation } from "react-i18next";
 export default function RequestDone() {
+  const { t, i18n } = useTranslation();
   const history = useHistory();
   return (
     <Box
@@ -39,7 +40,23 @@ export default function RequestDone() {
             },
           }}
         >
-          <img src="assets/images/logo_en.png" width="100%" />
+          <Box sx={{ textAlign: "center", paddingBottom: "30px" }}>
+            {t("logo") === "jp" ? (
+              <img
+                className="image"
+                src={"assets/images/new_logo_jp.png"}
+                width="100%"
+                style={{ maxWidth: "200px" }}
+              />
+            ) : (
+              <img
+                className="image"
+                src={"assets/images/logo_en.png"}
+                style={{ maxWidth: "200px" }}
+                width="100%"
+              />
+            )}
+          </Box>
 
           <p
             style={{
@@ -51,7 +68,7 @@ export default function RequestDone() {
               wordBreak: `break-word`,
             }}
           >
-            An e-mail has been sent to you with further instructions
+            {t("done.des")}
           </p>
 
           <Box sx={{ marginTop: 2 }}>

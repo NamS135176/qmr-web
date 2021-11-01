@@ -108,6 +108,7 @@ export default function Graph() {
                         background: "#BDEA74",
                         color: "white",
                         fontSize: 50,
+                        borderRadius: "10px",
                       }}
                     />
                   </Box>
@@ -153,6 +154,7 @@ export default function Graph() {
                         background: "#36A9E1",
                         color: "white",
                         fontSize: 50,
+                        borderRadius: "10px",
                       }}
                     />
                   </Box>
@@ -197,6 +199,7 @@ export default function Graph() {
                       sx={{
                         background: "#EAE874",
                         color: "white",
+                        borderRadius: "10px",
                         fontSize: 50,
                       }}
                     />
@@ -232,10 +235,10 @@ export default function Graph() {
             <Button
               sx={{
                 background: chart === "pie" ? "#78CD51" : "#D6D9E0",
-                color: "white",
+                color: chart === "pie" ? "white" : "black",
                 "&:hover": {
                   background: chart === "pie" ? "#78CD51" : "#D6D9E0",
-                  color: "white",
+                  color: chart === "pie" ? "white" : "black",
                 },
                 p: 2,
                 px: 4,
@@ -250,10 +253,10 @@ export default function Graph() {
             <Button
               sx={{
                 background: chart === "bar" ? "#78CD51" : "#D6D9E0",
-                color: "white",
+                color: chart === "pie" ? "black" : "white",
                 "&:hover": {
                   background: chart === "bar" ? "#78CD51" : "#D6D9E0",
-                  color: "white",
+                  color: chart === "pie" ? "black" : "white",
                 },
                 p: 2,
                 px: 4,

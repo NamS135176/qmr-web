@@ -26,6 +26,7 @@ import { checkSize, resizeFile } from "utils/UploadFile";
 import { uploadImage, createTransaction } from "api/transaction";
 import { useDropzone } from "react-dropzone";
 import CircularProgress from "@mui/material/CircularProgress";
+import CategoryContext from "utils/CategoryContext";
 const baseStyle = {};
 
 export default function DetailModal(props) {
@@ -40,6 +41,7 @@ export default function DetailModal(props) {
   const [file, setFile] = useState(null);
   const [listCategory, setListCategory] = useState([]);
   const [category, setCategory] = useState("");
+  const { listCategories } = useContext(CategoryContext);
   const [value, setValue] = useState<any>(
     moment().format("YYYY-MM-DD HH:mm:ss")
   );
@@ -49,7 +51,10 @@ export default function DetailModal(props) {
   const [memo, setMemo] = useState("");
   const [fileNames, setFileNames] = useState("");
   const [df, setDefault] = useState<any>(false);
-
+  console.log(
+    "item ?",
+    listCategories[0].find((item) => item.name === "?")
+  );
   const handleDrop = async (acceptedFiles: any) => {
     const newImg: any = await resizeFile(acceptedFiles[0]);
 
@@ -105,13 +110,18 @@ export default function DetailModal(props) {
   };
 
   const handleCreateTransaction = async () => {
-    setLoading(true);
+    // setLoading(true);
     console.log({ file });
     if (value) {
+      console.log("handle create", listCategories[0]);
+      const itemDefault: any = listCategories[0].find(
+        (item: any) => item.count === "1000"
+      );
+      console.log("id", itemDefault.id);
       if (!file) {
         console.log("not image");
         const res = await createTransaction(
-          category ? category : "483071",
+          category ? category : itemDefault?.id,
           value,
           price ? price : 0,
           memo,
@@ -136,7 +146,7 @@ export default function DetailModal(props) {
           resImg
         );
         const res = await createTransaction(
-          category ? category : "483071",
+          category ? category : itemDefault?.id,
           value,
           price ? price : 0,
           memo,
@@ -205,9 +215,10 @@ export default function DetailModal(props) {
             <Box
               sx={{
                 width: "100%",
-                height: "60%",
-                minHeight: "530px",
+                // height: "60%",
+                // minHeight: "530px",
                 backgroundColor: "#f5f5f5",
+                paddingBottom: "30px",
               }}
             >
               <Typography sx={{ textAlign: "center", fontSize: 13, py: "5px" }}>

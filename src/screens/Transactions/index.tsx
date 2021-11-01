@@ -84,14 +84,33 @@ export default function ListPageScreen() {
     );
     console.log({ res2 });
     console.log("category", listCategories[0]);
-    setCategories(listCategories[0]);
+    let responseList;
+    if (!listCategories[0].length) {
+      const res1: any = await getCategory();
+      console.log("data category", res1.categories);
+      setCategories(res1.categories);
+      responseList = res1.categories.map((item) => {
+        if (item.name === "?") {
+          item.name = "Uncategorized";
+          item.nameJP = "未分類";
+        }
+        return item;
+      });
+    } else {
+      setCategories(listCategories[0]);
+      responseList = listCategories[0].map((item) => {
+        if (item.name === "?") {
+          item.name = "Uncategorized";
+          item.nameJP = "未分類";
+        }
+        return item;
+      });
+    }
+    console.log({ responseList });
+
     // listCategories[1](res1.categories);
     const newList = res2.data.map((item: any) => {
-      let cate: any = listCategories[0].find(
-        (it: any) => it.id == item.category_id
-      );
-      // console.log('CATE',cate);
-
+      let cate: any = responseList.find((it: any) => it.id == item.category_id);
       if (cate != undefined) {
         item.cate = cate.name;
         item.nameJP = cate.nameJP;
@@ -324,6 +343,9 @@ export default function ListPageScreen() {
                             backgroundColor: "#67c2ef",
                             minWidth: 40,
                             marginRight: 1,
+                            "&:hover": {
+                              backgroundColor: "#1eb2fb",
+                            },
                           }}
                           onClick={() => {
                             setOpenModal(true);
@@ -341,7 +363,13 @@ export default function ListPageScreen() {
                               //  console.log('ssdkjfhsdjkfhskdjhf');
                             }
                           }}
-                          sx={{ backgroundColor: "#fabb3d", minWidth: 40 }}
+                          sx={{
+                            backgroundColor: "#fabb3d",
+                            minWidth: 40,
+                            "&:hover": {
+                              backgroundColor: "#ef9526",
+                            },
+                          }}
                         >
                           <DeleteOutlined
                             sx={{ fontSize: 25, color: "white" }}

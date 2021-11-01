@@ -10,11 +10,11 @@ export const getCategory = async () => {
 export const addExpense = async (
   name,
   count,
-  nameJP,
-  nameCHT,
-  nameCHS,
-  nameFR,
-  nameES,
+  nameJP = "?",
+  nameCHT = "?",
+  nameCHS = "?",
+  nameFR = "?",
+  nameES = "?",
   income_flag = false
 ) => {
   const res = await apiQMRWeb.post("/categories", {

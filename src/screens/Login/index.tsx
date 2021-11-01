@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useContext } from "react";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
@@ -6,13 +6,15 @@ import { useHistory } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import TextField from "@mui/material/TextField";
-import { getCurrentMember, login } from "api/member";
+import { getCurrentMember, login, updateCurrentMember } from "api/member";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
 import jwt_decode from "jwt-decode";
 import { apiQMRWeb, setAuthorize } from "api";
 import { useTranslation } from "react-i18next";
 import { getCurrencies } from "api/curency";
+import DateSelectContext from "utils/context";
+import { isNil } from "ramda";
 function Page() {
   const history = useHistory();
   const [showError, setShowError] = useState<boolean>(false);
@@ -20,8 +22,8 @@ function Page() {
   const { t, i18n } = useTranslation();
   const initialValues = useMemo(() => {
     return {
-      email: "tih920@smart-idea.jp",
-      password: "Smart2012",
+      email: "",
+      password: "",
     };
   }, []);
 
@@ -30,12 +32,12 @@ function Page() {
       yup.object({
         email: yup
           .string()
-          .email("Enter a valid email")
-          .required("Email is required"),
+          .email(t("login.typemail"))
+          .required(t("login.requiremail")),
         password: yup
           .string()
-          // .min(8, "Password should be of minimum 8 characters length")
-          .required("Password is required"),
+          .min(8, t("login.typepass"))
+          .required(t("login.requirepass")),
       }),
     []
   );
@@ -43,19 +45,24 @@ function Page() {
     const member = await getCurrentMember();
     apiQMRWeb.setHeader("Accept-Language", member.language);
     const currencies = await getCurrencies();
-    const currency = currencies.find((item) => item.id === member.currency_id);
-    console.log(
-      "🚀 ~ file: index.tsx ~ line 47 ~ getMember ~ currency",
-      currency
-    );
-
+    const currency = currencies.find((item) => item.id === member?.currency_id);
+    const currencyDollar = currencies.find((item) => item.id === "2");
+    if (!currency) {
+      await updateCurrentMember("en", currencyDollar?.id);
+    }
+    localStorage.setItem("currencies", JSON.stringify(currencies));
     localStorage.setItem(
       "currency",
-      JSON.stringify(currency ? currency : null)
+      JSON.stringify(currency ? currency : currencyDollar)
     );
-    member.language === "en"
-      ? i18n.changeLanguage("en")
-      : i18n.changeLanguage("ja");
+
+    if (member.language === "en") {
+      i18n.changeLanguage("en");
+      apiQMRWeb.setHeader("Accept-Language", "en");
+    } else {
+      i18n.changeLanguage("ja");
+      apiQMRWeb.setHeader("Accept-Language", "jp");
+    }
   };
 
   const onSubmit = async ({ email, password }) => {
@@ -65,13 +72,13 @@ function Page() {
       const res: any = await login(email, password);
       if (res) {
         setAuthorize(res.access_token);
-        getMember();
+        await getMember();
       }
       window.localStorage.setItem("access_token", res.access_token);
       var decoded = jwt_decode(res.access_token);
 
-      setLoading(false);
       history.push("/");
+      setLoading(false);
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -89,10 +96,12 @@ function Page() {
     handleSubmit,
     handleChange,
     validateForm,
+    handleBlur,
     isValid,
     values,
     errors,
     touched,
+    dirty,
   } = formik;
 
   const handleLogin = (e: any) => {
@@ -242,12 +251,13 @@ function Page() {
                 },
               },
             }}
-            value={values.email}
+            defaultValue={values.email}
             onChange={handleChange}
-            error={touched.email && Boolean(errors.email)}
-            // helperText={touched.email && errors.email}
+            onBlur={handleBlur}
           />
-          {/* <Typography sx={{py:'5px', fontSize:'14px', color:'red'}}>{touched.email && errors.email}</Typography> */}
+          <Typography sx={{ py: "5px", fontSize: "14px", color: "red" }}>
+            {errors.email}
+          </Typography>
           <TextField
             fullWidth
             id="password"
@@ -275,11 +285,13 @@ function Page() {
                 },
               },
             }}
-            value={values.password}
+            defaultValue={values.password}
             onChange={handleChange}
-            // error={touched.password && Boolean(errors.password)}
-            // helperText={touched.password && errors.password}
+            onBlur={handleBlur}
           />
+          <Typography sx={{ py: "5px", fontSize: "14px", color: "red" }}>
+            {errors.password}
+          </Typography>
           <Box
             sx={{
               marginTop: 2,
@@ -296,7 +308,12 @@ function Page() {
                 <CircularProgress />
               </Box>
             ) : (
-              <Button variant="contained" fullWidth onClick={handleLogin}>
+              <Button
+                variant="contained"
+                fullWidth
+                onClick={handleLogin}
+                disabled={!dirty && isValid}
+              >
                 {t("login.btn_text")}
               </Button>
             )}
@@ -312,7 +329,19 @@ function Page() {
                 color: "#333333",
               }}
             >
-              {t("login.suggest")}
+              {t("login.suggest1")}
+            </p>
+            <p
+              style={{
+                fontSize: 14,
+                margin: 0,
+                paddingRight: 0,
+                lineHeightStep: 1,
+                lineHeight: "1.1",
+                color: "#333333",
+              }}
+            >
+              {t("login.suggest2")}
             </p>
           </Box>
           <Box
@@ -350,11 +379,25 @@ function Page() {
                 lineHeightStep: 1,
                 lineHeight: "1.1",
                 paddingTop: 20,
+
+                color: "#999",
+              }}
+            >
+              {t("login.warning1")}
+            </p>
+            <p
+              style={{
+                fontSize: 14,
+                margin: 0,
+                padding: 0,
+                lineHeightStep: 1,
+                lineHeight: "1.1",
+
                 paddingBottom: 20,
                 color: "#999",
               }}
             >
-              {t("login.warning")}
+              {t("login.warning2")}
             </p>
           </Box>
         </Box>
