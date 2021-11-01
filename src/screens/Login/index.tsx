@@ -19,7 +19,6 @@ function Page() {
   const [showError, setShowError] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
   const { t, i18n } = useTranslation();
-  const { reloadPage } = useContext(DateSelectContext);
   const initialValues = useMemo(() => {
     return {
       email: "tih920@smart-idea.jp",
@@ -45,7 +44,6 @@ function Page() {
     const member = await getCurrentMember();
     apiQMRWeb.setHeader("Accept-Language", member.language);
     const currencies = await getCurrencies();
-
     const currency = currencies.find((item) => item.id === member?.currency_id);
     const currencyDollar = currencies.find((item) => item.id === "2");
     if (!currency) {
@@ -69,7 +67,7 @@ function Page() {
       const res: any = await login(email, password);
       if (res) {
         setAuthorize(res.access_token);
-        getMember();
+        await getMember();
       }
       window.localStorage.setItem("access_token", res.access_token);
       var decoded = jwt_decode(res.access_token);
