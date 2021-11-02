@@ -49,10 +49,12 @@ export default function InputModal(props) {
   const [loading, setLoading] = useState(false);
   const [df, setDefault] = useState<any>(false);
   const { dateFrom, dateTo, reloadPage } = useContext(DateSelectContext);
-  const { listCategories } = useContext(CategoryContext);
+  const { listCategories, paymentMethodDefault, shopNameDefault } =
+    useContext(CategoryContext);
   const [listAll, setListAll] = useState<any>([]);
   const [st, setSt] = useState("");
   const [openMenu, setOpenMenu] = useState(false);
+  console.log(shopNameDefault[0]);
 
   const handleChangePrice = (e: any) => {
     const re = /^[0-9\b]+$/;
@@ -78,7 +80,12 @@ export default function InputModal(props) {
         moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
         Number(money),
         "",
-        window.navigator.userAgent
+        window.navigator.userAgent,
+        "",
+        1,
+        "0",
+        paymentMethodDefault[0]?.id,
+        shopNameDefault[0]?.id
       );
       setLoading(false);
       props.setOpen(false);
@@ -90,7 +97,12 @@ export default function InputModal(props) {
         moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
         Number(money),
         "",
-        window.navigator.userAgent
+        window.navigator.userAgent,
+        "",
+        1,
+        "0",
+        paymentMethodDefault[0]?.id,
+        shopNameDefault[0]?.id
       );
       setLoading(false);
       props.setOpen(false);

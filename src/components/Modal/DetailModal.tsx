@@ -41,7 +41,8 @@ export default function DetailModal(props) {
   const [file, setFile] = useState(null);
   const [listCategory, setListCategory] = useState([]);
   const [category, setCategory] = useState("");
-  const { listCategories } = useContext(CategoryContext);
+  const { listCategories, paymentMethodDefault, shopNameDefault } =
+    useContext(CategoryContext);
   const [value, setValue] = useState<any>(
     moment().format("YYYY-MM-DD HH:mm:ss")
   );
@@ -125,7 +126,12 @@ export default function DetailModal(props) {
           value,
           price ? price : 0,
           memo,
-          window.navigator.userAgent
+          window.navigator.userAgent,
+          "",
+          1,
+          "0",
+          paymentMethodDefault[0]?.id,
+          shopNameDefault[0]?.id
         );
         setPrice(0);
         setMemo("");
@@ -151,7 +157,11 @@ export default function DetailModal(props) {
           price ? price : 0,
           memo,
           window.navigator.userAgent,
-          resImg.photo_url
+          resImg.photo_url,
+          1,
+          "0",
+          paymentMethodDefault[0]?.id,
+          shopNameDefault[0]?.id
         );
         setPrice(0);
         setMemo("");

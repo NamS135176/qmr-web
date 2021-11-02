@@ -26,8 +26,7 @@ export const updateTransaction = async (
   count,
   client_id,
   device_id,
-  remove_photo,
-  shop_name_id = "189763"
+  remove_photo
 ) => {
   const res = await apiQMRWeb.put(`transactions/${id}`, {
     category_id,
@@ -40,7 +39,6 @@ export const updateTransaction = async (
     client_id,
     device_id,
     remove_photo,
-    shop_name_id,
   });
   return getResponseData(res);
 };
@@ -59,8 +57,8 @@ export const createTransaction = async (
   photo = "",
   count = 1,
   client_id = "0",
-  payment_method_id = "106806",
-  shop_name_id = "189763"
+  payment_method_id = "0",
+  shop_name_id = "0"
 ) => {
   const res = await apiQMRWeb.post(`transactions`, {
     category_id,
