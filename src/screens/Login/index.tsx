@@ -123,287 +123,290 @@ function Page() {
         backgroundColor: "#383e4b",
       }}
     >
-      <Box
-        sx={{
-          backgroundColor: "#383e4b",
-          boxSizing: "border-box",
-          paddingTop: {
-            xs: 5,
-            md: 10,
-          },
-          paddingBottom: 5,
-        }}
-      >
+      <form noValidate onSubmit={handleLogin}>
         <Box
           sx={{
-            backgroundColor: "white",
-            borderRadius: 2,
-            // marginTop: 100,
-            padding: 3,
-            minWidth: {
-              xs: 270,
-              md: 350,
+            backgroundColor: "#383e4b",
+            boxSizing: "border-box",
+            paddingTop: {
+              xs: 5,
+              md: 10,
             },
-            marginLeft: `auto`,
-            marginRight: `auto`,
-            width: {
-              xs: "90%",
-              md: "30%",
-              lg: "20%",
-            },
+            paddingBottom: 5,
           }}
         >
-          {showError ? (
-            <p
-              style={{
-                fontSize: 13,
-                margin: 0,
-                padding: 0,
-                lineHeightStep: 1,
-                lineHeight: "1.1",
-                color: "red",
-              }}
-            >
-              {t("login.error")}
-            </p>
-          ) : (
-            <p></p>
-          )}
-          <Box sx={{ textAlign: "center" }}>
-            <img src={"assets/images/logo.png"} />
-          </Box>
-          <Box sx={{ textAlign: "center" }}>
-            {t("logo") === "jp" ? (
-              <img
-                className="image"
-                src={"assets/images/new_logo_jp.png"}
-                width="100%"
-              />
-            ) : (
-              <img
-                className="image"
-                src={"assets/images/logo_en.png"}
-                width="100%"
-              />
-            )}
-          </Box>
           <Box
             sx={{
-              display: "flex",
-              justifyContent: {
-                xs: "space-between",
-                md: '"space-around"',
+              backgroundColor: "white",
+              borderRadius: 2,
+              // marginTop: 100,
+              padding: 3,
+              minWidth: {
+                xs: 270,
+                md: 350,
               },
-              marginTop: 5,
+              marginLeft: `auto`,
+              marginRight: `auto`,
+              width: {
+                xs: "90%",
+                md: "30%",
+                lg: "20%",
+              },
             }}
           >
-            <Typography
-              sx={{
-                fontSize: 15,
-                margin: 0,
-                paddingRight: {
-                  xs: 2,
-                  md: 0,
-                },
-                lineHeightStep: 1,
-                lineHeight: "1.1",
-              }}
-            >
-              {t("login.title1")}
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: 15,
-                margin: 0,
-                paddingLeft: {
-                  xs: 2,
-                  md: 0,
-                },
-                lineHeightStep: 1,
-                lineHeight: "1.1",
-              }}
-            >
-              {t("login.title2")}
-            </Typography>
-          </Box>
-
-          <TextField
-            fullWidth
-            id="email"
-            name="email"
-            placeholder={t("login.holder_email")}
-            sx={{
-              marginTop: 3,
-              borderRadius: 2,
-              backgroundColor: "#ddd",
-              "& .MuiOutlinedInput-root": {
-                // - The Input-root, inside the TextField-root
-                "& fieldset": {
-                  // - The <fieldset> inside the Input-root
-                  borderWidth: 0, // - Set the Input border
-                },
-                "&:hover fieldset": {
-                  borderWidth: 0, // - Set the Input border when parent has :hover
-                },
-                "&.Mui-focused fieldset": {
-                  // - Set the Input border when parent is focused
-                  borderWidth: 1,
-                  borderRadius: 2,
-                  borderColor: "black",
-                },
-              },
-            }}
-            defaultValue={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <Typography sx={{ py: "5px", fontSize: "14px", color: "red" }}>
-            {errors.email}
-          </Typography>
-          <TextField
-            fullWidth
-            id="password"
-            name="password"
-            placeholder={t("login.holder_password")}
-            type="password"
-            sx={{
-              marginTop: 3,
-              borderRadius: 2,
-              backgroundColor: "#ddd",
-              "& .MuiOutlinedInput-root": {
-                // - The Input-root, inside the TextField-root
-                "& fieldset": {
-                  // - The <fieldset> inside the Input-root
-                  borderWidth: 0, // - Set the Input border
-                },
-                "&:hover fieldset": {
-                  borderWidth: 0, // - Set the Input border when parent has :hover
-                },
-                "&.Mui-focused fieldset": {
-                  // - Set the Input border when parent is focused
-                  borderWidth: 1,
-                  borderRadius: 2,
-                  borderColor: "black",
-                },
-              },
-            }}
-            defaultValue={values.password}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          <Typography sx={{ py: "5px", fontSize: "14px", color: "red" }}>
-            {errors.password}
-          </Typography>
-          <Box
-            sx={{
-              marginTop: 2,
-            }}
-          >
-            {loading ? (
-              <Box
-                sx={{
-                  display: "flex",
-                  width: "100%",
-                  justifyContent: "center",
+            {showError ? (
+              <p
+                style={{
+                  fontSize: 13,
+                  margin: 0,
+                  padding: 0,
+                  lineHeightStep: 1,
+                  lineHeight: "1.1",
+                  color: "red",
                 }}
               >
-                <CircularProgress />
-              </Box>
+                {t("login.error")}
+              </p>
             ) : (
-              <Button
-                variant="contained"
-                fullWidth
-                onClick={handleLogin}
-                disabled={!dirty && isValid}
-              >
-                {t("login.btn_text")}
-              </Button>
+              <p></p>
             )}
-          </Box>
-          <Box sx={{ paddingTop: 2 }}>
-            <p
-              style={{
-                fontSize: 14,
-                margin: 0,
-                paddingRight: 0,
-                lineHeightStep: 1,
-                lineHeight: "1.1",
-                color: "#333333",
-              }}
-            >
-              {t("login.suggest1")}
-            </p>
-            <p
-              style={{
-                fontSize: 14,
-                margin: 0,
-                paddingRight: 0,
-                lineHeightStep: 1,
-                lineHeight: "1.1",
-                color: "#333333",
-              }}
-            >
-              {t("login.suggest2")}
-            </p>
-          </Box>
-          <Box
-            sx={{
-              textAlign: "center",
-              paddingTop: 2,
-              paddingBottom: 1,
-            }}
-          >
-            <Link
-              href="/forgot-password"
+            <Box sx={{ textAlign: "center" }}>
+              <img src={"assets/images/logo.png"} />
+            </Box>
+            <Box sx={{ textAlign: "center" }}>
+              {t("logo") === "jp" ? (
+                <img
+                  className="image"
+                  src={"assets/images/new_logo_jp.png"}
+                  width="100%"
+                />
+              ) : (
+                <img
+                  className="image"
+                  src={"assets/images/logo_en.png"}
+                  width="100%"
+                />
+              )}
+            </Box>
+            <Box
               sx={{
-                fontSize: 16,
-                margin: 0,
-                padding: 0,
-                lineHeightStep: 1,
-                lineHeight: "1.1",
-                color: "#47C53E",
-                textDecoration: "none",
-
-                // "&:hover": {
-                //   color: "#428bca",
-                // },
+                display: "flex",
+                justifyContent: {
+                  xs: "space-between",
+                  md: '"space-around"',
+                },
+                marginTop: 5,
               }}
             >
-              {t("login.forgot_pass")}
-            </Link>
-          </Box>
-          <Box>
-            <p
-              style={{
-                fontSize: 14,
-                margin: 0,
-                padding: 0,
-                lineHeightStep: 1,
-                lineHeight: "1.1",
-                paddingTop: 20,
+              <Typography
+                sx={{
+                  fontSize: 15,
+                  margin: 0,
+                  paddingRight: {
+                    xs: 2,
+                    md: 0,
+                  },
+                  lineHeightStep: 1,
+                  lineHeight: "1.1",
+                }}
+              >
+                {t("login.title1")}
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: 15,
+                  margin: 0,
+                  paddingLeft: {
+                    xs: 2,
+                    md: 0,
+                  },
+                  lineHeightStep: 1,
+                  lineHeight: "1.1",
+                }}
+              >
+                {t("login.title2")}
+              </Typography>
+            </Box>
 
-                color: "#999",
+            <TextField
+              fullWidth
+              id="email"
+              name="email"
+              placeholder={t("login.holder_email")}
+              sx={{
+                marginTop: 3,
+                borderRadius: 2,
+                backgroundColor: "#ddd",
+                "& .MuiOutlinedInput-root": {
+                  // - The Input-root, inside the TextField-root
+                  "& fieldset": {
+                    // - The <fieldset> inside the Input-root
+                    borderWidth: 0, // - Set the Input border
+                  },
+                  "&:hover fieldset": {
+                    borderWidth: 0, // - Set the Input border when parent has :hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    // - Set the Input border when parent is focused
+                    borderWidth: 1,
+                    borderRadius: 2,
+                    borderColor: "black",
+                  },
+                },
+              }}
+              defaultValue={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            <Typography sx={{ py: "5px", fontSize: "14px", color: "red" }}>
+              {errors.email}
+            </Typography>
+            <TextField
+              fullWidth
+              id="password"
+              name="password"
+              placeholder={t("login.holder_password")}
+              type="password"
+              sx={{
+                marginTop: 3,
+                borderRadius: 2,
+                backgroundColor: "#ddd",
+                "& .MuiOutlinedInput-root": {
+                  // - The Input-root, inside the TextField-root
+                  "& fieldset": {
+                    // - The <fieldset> inside the Input-root
+                    borderWidth: 0, // - Set the Input border
+                  },
+                  "&:hover fieldset": {
+                    borderWidth: 0, // - Set the Input border when parent has :hover
+                  },
+                  "&.Mui-focused fieldset": {
+                    // - Set the Input border when parent is focused
+                    borderWidth: 1,
+                    borderRadius: 2,
+                    borderColor: "black",
+                  },
+                },
+              }}
+              defaultValue={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+            <Typography sx={{ py: "5px", fontSize: "14px", color: "red" }}>
+              {errors.password}
+            </Typography>
+            <Box
+              sx={{
+                marginTop: 2,
               }}
             >
-              {t("login.warning1")}
-            </p>
-            <p
-              style={{
-                fontSize: 14,
-                margin: 0,
-                padding: 0,
-                lineHeightStep: 1,
-                lineHeight: "1.1",
-
-                paddingBottom: 20,
-                color: "#999",
+              {loading ? (
+                <Box
+                  sx={{
+                    display: "flex",
+                    width: "100%",
+                    justifyContent: "center",
+                  }}
+                >
+                  <CircularProgress />
+                </Box>
+              ) : (
+                <Button
+                  variant="contained"
+                  fullWidth
+                  onClick={handleLogin}
+                  type="submit"
+                  disabled={!dirty && isValid}
+                >
+                  {t("login.btn_text")}
+                </Button>
+              )}
+            </Box>
+            <Box sx={{ paddingTop: 2 }}>
+              <p
+                style={{
+                  fontSize: 14,
+                  margin: 0,
+                  paddingRight: 0,
+                  lineHeightStep: 1,
+                  lineHeight: "1.1",
+                  color: "#333333",
+                }}
+              >
+                {t("login.suggest1")}
+              </p>
+              <p
+                style={{
+                  fontSize: 14,
+                  margin: 0,
+                  paddingRight: 0,
+                  lineHeightStep: 1,
+                  lineHeight: "1.1",
+                  color: "#333333",
+                }}
+              >
+                {t("login.suggest2")}
+              </p>
+            </Box>
+            <Box
+              sx={{
+                textAlign: "center",
+                paddingTop: 2,
+                paddingBottom: 1,
               }}
             >
-              {t("login.warning2")}
-            </p>
+              <Link
+                href="/forgot-password"
+                sx={{
+                  fontSize: 16,
+                  margin: 0,
+                  padding: 0,
+                  lineHeightStep: 1,
+                  lineHeight: "1.1",
+                  color: "#47C53E",
+                  textDecoration: "none",
+
+                  // "&:hover": {
+                  //   color: "#428bca",
+                  // },
+                }}
+              >
+                {t("login.forgot_pass")}
+              </Link>
+            </Box>
+            <Box>
+              <p
+                style={{
+                  fontSize: 14,
+                  margin: 0,
+                  padding: 0,
+                  lineHeightStep: 1,
+                  lineHeight: "1.1",
+                  paddingTop: 20,
+
+                  color: "#999",
+                }}
+              >
+                {t("login.warning1")}
+              </p>
+              <p
+                style={{
+                  fontSize: 14,
+                  margin: 0,
+                  padding: 0,
+                  lineHeightStep: 1,
+                  lineHeight: "1.1",
+
+                  paddingBottom: 20,
+                  color: "#999",
+                }}
+              >
+                {t("login.warning2")}
+              </p>
+            </Box>
           </Box>
         </Box>
-      </Box>
+      </form>
     </Box>
   );
 }

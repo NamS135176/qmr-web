@@ -9,10 +9,21 @@ import { useTranslation } from "react-i18next";
 export default function PieChart({ data }: any) {
   const { t, i18n } = useTranslation();
 
+  const graphChangeName = data?.map((item) => {
+    if (item.name === "?") {
+      item.name = "Uncategorized";
+      item.nameJP = "未分類";
+    }
+    return item;
+  });
+
   const labels =
     i18n.language === "en"
       ? data?.sort((a, b) => b.total - a.total).map((item) => item.name)
       : data?.sort((a, b) => b.total - a.total).map((item) => item.nameJP);
+
+  console.log("this is data", graphChangeName);
+
   const d = data?.map((item) => item.total);
   const option: any = {
     labels: labels,
