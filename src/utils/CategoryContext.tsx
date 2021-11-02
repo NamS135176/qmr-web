@@ -38,7 +38,7 @@ export function CategoryProvider(props) {
         setShopNameDefault(res3);
         return;
       }
-      setListCategories(res1.categories);
+      setListCategories(result[0].categories);
       setPaymentMethodDefault(res2);
       setShopNameDefault(res3);
     } catch (e) {
