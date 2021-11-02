@@ -14,32 +14,36 @@ export function CategoryProvider(props) {
   const [paymentMethodDefault, setPaymentMethodDefault] = useState(undefined);
   const [shopNameDefault, setShopNameDefault] = useState(undefined);
   const getCate = async () => {
-    const res1: any = getCategory();
-    const resPayment = getPaymentMethod();
-    const resShop = getShopName();
-    // console.log({ resPayment, resShop });
-    let itemDefault: any;
-    Promise.all([res1, resPayment, resShop])
-      .then((result) => {
-        itemDefault = result[0].categories.find((item) => item.name === "?");
+    try {
+      const res1: any = getCategory();
+      const resPayment = getPaymentMethod();
+      const resShop = getShopName();
+      // console.log({ resPayment, resShop });
+      let itemDefault: any;
+      const result = await Promise.all([res1, resPayment, resShop]);
 
-        const res2 = result[1].find((item) => item.name === "");
-        const res3 = result[2].find((item) => item.name === "");
+      itemDefault = result[0].categories.find((item) => item.name === "?");
+
+      const res2 = result[1].find((item) => item.name === "");
+      const res3 = result[2].find((item) => item.name === "");
+
+      console.log({ result });
+
+      // const itemDefault = res1.categories.find((item) => item.name === '?');
+      if (!itemDefault) {
+        await addExpense("?", 1000);
+        const newList = await getCategory();
+        setListCategories(newList.categories);
         setPaymentMethodDefault(res2);
         setShopNameDefault(res3);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-
-    // const itemDefault = res1.categories.find((item) => item.name === '?');
-    if (!itemDefault) {
-      await addExpense("?", 1000);
-      const newList = await getCategory();
-      setListCategories(newList.categories);
-      return;
+        return;
+      }
+      setListCategories(res1.categories);
+      setPaymentMethodDefault(res2);
+      setShopNameDefault(res3);
+    } catch (e) {
+      console.log(e);
     }
-    setListCategories(res1.categories);
   };
   useEffect(() => {
     getCate();
