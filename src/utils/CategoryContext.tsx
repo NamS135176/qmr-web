@@ -16,31 +16,34 @@ export function CategoryProvider(props) {
   const getCate = async () => {
     try {
       const res1: any = getCategory();
-      const resPayment = getPaymentMethod();
-      const resShop = getShopName();
-      // console.log({ resPayment, resShop });
-      let itemDefault: any;
-      const result = await Promise.all([res1, resPayment, resShop]);
+      const resP = getPaymentMethod();
+      const resS = getShopName();
 
-      itemDefault = result[0].categories.find((item) => item.name === "?");
+      const [resCategory, resPaymentMethod, resShopName] = await Promise.all([
+        res1,
+        resP,
+        resS,
+      ]);
 
-      const res2 = result[1].find((item) => item.name === "");
-      const res3 = result[2].find((item) => item.name === "");
+      const itemCDefault = resCategory.categories.find(
+        (item) => item.name === "?"
+      );
 
-      console.log({ result });
+      const itemPDefault = resPaymentMethod.find((item) => item.name === "");
+      const itemSDefault = resShopName.find((item) => item.name === "");
 
-      // const itemDefault = res1.categories.find((item) => item.name === '?');
-      if (!itemDefault) {
+      if (!itemCDefault) {
         await addExpense("?", 1000);
         const newList = await getCategory();
         setListCategories(newList.categories);
-        setPaymentMethodDefault(res2);
-        setShopNameDefault(res3);
+        setPaymentMethodDefault(itemPDefault);
+        setShopNameDefault(itemSDefault);
         return;
       }
-      setListCategories(result[0].categories);
-      setPaymentMethodDefault(res2);
-      setShopNameDefault(res3);
+
+      setListCategories(resCategory.categories);
+      setPaymentMethodDefault(itemPDefault);
+      setShopNameDefault(itemSDefault);
     } catch (e) {
       console.log(e);
     }
@@ -53,6 +56,7 @@ export function CategoryProvider(props) {
     shopNameDefault: [shopNameDefault, setShopNameDefault],
     paymentMethodDefault: [paymentMethodDefault, setPaymentMethodDefault],
   };
+  console.log("abc", value);
   return (
     <CategoryContext.Provider value={value}>
       {children}
