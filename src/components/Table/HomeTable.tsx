@@ -29,15 +29,14 @@ export default function HomeTable({ data }: any) {
     return b.total - a.total;
   });
 
-  // const graphChangeName = d?.map((item) => {
-  //   if (item.category_name === '?') {
-  //     i18n.language === 'en'
-  //       ? (item.category_name = 'Uncategorized')
-  //       : (item.category_name = '未分類');
-  //   }
-  //   return item;
-  // });
-  // console.log({ graphChangeName });
+  const graphChangeName = d?.map((item) => {
+    if (item.name === "?") {
+      item.name = "Uncategorized";
+      item.nameJP = "未分類";
+    }
+    return item;
+  });
+  console.log({ graphChangeName });
   if (d) {
     for (const element of d) {
       totalPrice += element.total;
