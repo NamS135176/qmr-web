@@ -42,14 +42,15 @@ function Page() {
     []
   );
   const getMember = async () => {
-    const member = await getCurrentMember();
-    console.log("🚀 ~ file: index.tsx ~ line 46 ~ getMember ~ member", member);
+    const res1 = getCurrentMember();
+    const res2 = getCurrencies();
+    const [member, currencies] = await Promise.all([res1, res2]);
     apiQMRWeb.setHeader("Accept-Language", member.language);
-    const currencies = await getCurrencies();
+
     const currency = currencies.find((item) => item.id === member?.currency_id);
     const currencyDollar = currencies.find((item) => item.id === "1");
     if (!currency) {
-      await updateCurrentMember("en", currencyDollar?.id);
+      await updateCurrentMember("jp", currencyDollar?.id);
     }
     localStorage.setItem("currencies", JSON.stringify(currencies));
     localStorage.setItem(
