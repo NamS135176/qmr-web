@@ -71,42 +71,45 @@ export default function InputModal(props) {
   };
 
   const handleQuickCreate = async () => {
-    if (cateSelect) {
-      console.log(cateSelect.id);
+    setLoading(true);
 
-      setLoading(true);
-      const res: any = await createTransaction(
-        cateSelect.id,
-        moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
-        Number(money),
-        "",
-        window.navigator.userAgent,
-        "",
-        1,
-        "0",
-        paymentMethodDefault[0]?.id,
-        shopNameDefault[0]?.id
-      );
+    try {
+      if (cateSelect) {
+        console.log(cateSelect.id);
+        const res: any = await createTransaction(
+          cateSelect.id,
+          moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+          Number(money),
+          "",
+          window.navigator.userAgent,
+          "",
+          1,
+          "0",
+          paymentMethodDefault[0]?.id,
+          shopNameDefault[0]?.id
+        );
+        setLoading(false);
+        props.setOpen(false);
+        reloadPage[1](!reloadPage[0]);
+      } else {
+        const res: any = await createTransaction(
+          df.id,
+          moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+          Number(money),
+          "",
+          window.navigator.userAgent,
+          "",
+          1,
+          "0",
+          paymentMethodDefault[0]?.id,
+          shopNameDefault[0]?.id
+        );
+        setLoading(false);
+        props.setOpen(false);
+        reloadPage[1](!reloadPage[0]);
+      }
+    } catch (error) {
       setLoading(false);
-      props.setOpen(false);
-      reloadPage[1](!reloadPage[0]);
-    } else {
-      setLoading(true);
-      const res: any = await createTransaction(
-        df.id,
-        moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
-        Number(money),
-        "",
-        window.navigator.userAgent,
-        "",
-        1,
-        "0",
-        paymentMethodDefault[0]?.id,
-        shopNameDefault[0]?.id
-      );
-      setLoading(false);
-      props.setOpen(false);
-      reloadPage[1](!reloadPage[0]);
     }
   };
 

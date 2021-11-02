@@ -112,69 +112,73 @@ export default function DetailModal(props) {
 
   const handleCreateTransaction = async () => {
     setLoading(true);
-    console.log({ file });
-    if (value) {
-      console.log("handle create", listCategories[0]);
-      const itemDefault: any = listCategories[0].find(
-        (item: any) => item.count === "1000"
-      );
-      console.log("id", itemDefault.id);
-      if (!file) {
-        console.log("not image");
-        const res = await createTransaction(
-          category ? category : itemDefault?.id,
-          value,
-          price ? price : 0,
-          memo,
-          window.navigator.userAgent,
-          "",
-          1,
-          "0",
-          paymentMethodDefault[0]?.id,
-          shopNameDefault[0]?.id
-        );
-        setPrice(0);
-        setMemo("");
-        setCategory("");
-        reloadPage[1](!reloadPage[0]);
-        console.log({ reloadPage });
 
-        console.log({ res });
-        setLoading(false);
-        props.setOpen(false);
-        props.closeParent(false);
-      } else {
-        console.log(" image");
-
-        const resImg = await uploadImage(file);
-        console.log(
-          "🚀 ~ file: DetailModal.tsx ~ line 130 ~ handleCreateTransaction ~ resImg",
-          resImg
+    try {
+      if (value) {
+        console.log("handle create", listCategories[0]);
+        const itemDefault: any = listCategories[0].find(
+          (item: any) => item.count === "1000"
         );
-        const res = await createTransaction(
-          category ? category : itemDefault?.id,
-          value,
-          price ? price : 0,
-          memo,
-          window.navigator.userAgent,
-          resImg.photo_url,
-          1,
-          "0",
-          paymentMethodDefault[0]?.id,
-          shopNameDefault[0]?.id
-        );
-        setPrice(0);
-        setMemo("");
-        setCategory("");
-        // window.location.reload();
-        reloadPage[1](!reloadPage[0]);
-        console.log({ reloadPage });
+        console.log("id", itemDefault.id);
+        if (!file) {
+          console.log("not image");
+          const res = await createTransaction(
+            category ? category : itemDefault?.id,
+            value,
+            price ? price : 0,
+            memo,
+            window.navigator.userAgent,
+            "",
+            1,
+            "0",
+            paymentMethodDefault[0]?.id,
+            shopNameDefault[0]?.id
+          );
+          setPrice(0);
+          setMemo("");
+          setCategory("");
+          reloadPage[1](!reloadPage[0]);
+          console.log({ reloadPage });
 
-        console.log({ res });
-        setLoading(false);
-        props.setOpen(false);
-        props.closeParent(false);
+          console.log({ res });
+          setLoading(false);
+          props.setOpen(false);
+          props.closeParent(false);
+        } else {
+          console.log(" image");
+
+          const resImg = await uploadImage(file);
+          console.log(
+            "🚀 ~ file: DetailModal.tsx ~ line 130 ~ handleCreateTransaction ~ resImg",
+            resImg
+          );
+          const res = await createTransaction(
+            category ? category : itemDefault?.id,
+            value,
+            price ? price : 0,
+            memo,
+            window.navigator.userAgent,
+            resImg.photo_url,
+            1,
+            "0",
+            paymentMethodDefault[0]?.id,
+            shopNameDefault[0]?.id
+          );
+          setPrice(0);
+          setMemo("");
+          setCategory("");
+          // window.location.reload();
+          reloadPage[1](!reloadPage[0]);
+          console.log({ reloadPage });
+
+          console.log({ res });
+          setLoading(false);
+          props.setOpen(false);
+          props.closeParent(false);
+        }
       }
+    } catch (error) {
+      setLoading(false);
     }
   };
 
