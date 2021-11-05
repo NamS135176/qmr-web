@@ -19,6 +19,7 @@ function Page() {
   const history = useHistory();
   const [showError, setShowError] = useState<boolean>(false);
   const [loading, setLoading] = useState(false);
+  const [expire, setExpire] = useState(false);
   const { t, i18n } = useTranslation();
   const initialValues = useMemo(() => {
     return {
@@ -68,6 +69,7 @@ function Page() {
   };
 
   const onSubmit = async ({ email, password }) => {
+    setExpire(false);
     setShowError(false);
     setLoading(true);
     try {
@@ -83,7 +85,10 @@ function Page() {
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      console.log(error);
+      const e: any = error;
+      if (e.message == "This account expired!") {
+        setExpire(true);
+      }
       setShowError(true);
     }
   };
@@ -165,7 +170,7 @@ function Page() {
                   color: "red",
                 }}
               >
-                {t("login.error")}
+                {expire ? t("login.error2") : t("login.error")}
               </p>
             ) : (
               <p></p>
