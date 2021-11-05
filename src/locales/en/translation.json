@@ -5,9 +5,9 @@
     "part2": "Switch language between english and german using buttons above."
   },
   "nav": {
-    "summary": "Summary",
-    "list": "List",
-    "graph": "Graph",
+    "summary": "SUMMARY",
+    "list": "LIST",
+    "graph": "GRAPH",
     "support": "Support/Blog",
     "setting": "Setting"
   },
