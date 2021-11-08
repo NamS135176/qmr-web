@@ -182,13 +182,13 @@ function Page() {
               {t("logo") === "jp" ? (
                 <img
                   className="image"
-                  src={"assets/images/new_logo_jp.png"}
+                  src={"/assets/images/new_logo_jp.png"}
                   width="100%"
                 />
               ) : (
                 <img
                   className="image"
-                  src={"assets/images/logo_en.png"}
+                  src={"/assets/images/logo_en.png"}
                   width="100%"
                 />
               )}

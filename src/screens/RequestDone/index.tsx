@@ -44,14 +44,14 @@ export default function RequestDone() {
             {t("logo") === "jp" ? (
               <img
                 className="image"
-                src={"assets/images/new_logo_jp.png"}
+                src={"/assets/images/new_logo_jp.png"}
                 width="100%"
                 style={{ maxWidth: "200px" }}
               />
             ) : (
               <img
                 className="image"
-                src={"assets/images/logo_en.png"}
+                src={"/assets/images/logo_en.png"}
                 style={{ maxWidth: "200px" }}
                 width="100%"
               />
