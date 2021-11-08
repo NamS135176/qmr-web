@@ -43,7 +43,10 @@ export default function MenuNav({
   const handleLogout = () => {
     // window.localStorage.removeItem('access_token');
     // window.localStorage.removeItem('currency');
+    // window.localStorage.removeItem('currencies');
+    const currentLG = i18n.language;
     localStorage.clear();
+    localStorage.setItem("i18nextLng", currentLG);
     history.push("/login");
   };
 
