@@ -18,7 +18,7 @@ export default function ForgotPassScreen() {
   const [loading, setLoading] = useState<boolean>(false);
   const initialValues = useMemo(() => {
     return {
-      email: "tih920@smart-idea.jp",
+      email: "",
     };
   }, []);
 
