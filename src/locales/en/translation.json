@@ -78,10 +78,11 @@
     "warning1": "Quick Money Recorder PC is beta version. Some function may not work.",
     "warning2": "",
     "error": "Email or password is invalid. Please try again.",
+    "error2": "This account expired!",
     "typemail": "Enter a valid email",
     "typepass": "Password should be of minimum 8 characters length",
     "requiremail": "Email is required",
-    "requirepass": "Password is required。"
+    "requirepass": "Password is required"
   },
   "graph": {
     "pie": "pie",
