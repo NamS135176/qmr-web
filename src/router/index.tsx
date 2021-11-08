@@ -23,7 +23,7 @@ function AppRouter() {
   }, []);
 
   return (
-    <Router>
+    <Router basename="/app">
       <Switch>
         <Route exact path="/login" component={Login} />
         <Route exact path="/forgot-password" component={ForgotPassword} />
