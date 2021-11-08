@@ -35,7 +35,9 @@ export default function ListPageScreen() {
   const [open, setOpen] = useState(false);
   const dateSelect = useContext(DateSelectContext);
   const { dateFrom, dateTo } = useContext(DateSelectContext);
-  const { listCategories } = useContext(CategoryContext);
+  const { listCategories, shopNameDefault, paymentMethodDefault } =
+    useContext(CategoryContext);
+
   const [categories, setCategories] = useState([]);
   const [transactions, setTransactions] = useState([]);
   const [page, setPage] = useState(1);
@@ -74,57 +76,65 @@ export default function ListPageScreen() {
   const getList = async (offset, time, sort) => {
     setLoading(true);
     // const res1: any = await getCategory();
-    const res2: any = await getListTransactions(
-      dateFrom[0],
-      dateTo[0],
-      20,
-      offset,
-      time,
-      sort
-    );
-    console.log({ res2 });
-    console.log("category", listCategories[0]);
-    let responseList;
-    if (!listCategories[0].length) {
-      const res1: any = await getCategory();
-      console.log("data category", res1.categories);
-      setCategories(res1.categories);
-      responseList = res1.categories.map((item) => {
-        if (item.name === "?") {
-          item.name = "Uncategorized";
-          item.nameJP = "未分類";
-        }
-        return item;
-      });
-    } else {
-      setCategories(listCategories[0]);
-      responseList = listCategories[0].map((item) => {
-        if (item.name === "?") {
-          item.name = "Uncategorized";
-          item.nameJP = "未分類";
-        }
-        return item;
-      });
-    }
-    console.log({ responseList });
-
-    // listCategories[1](res1.categories);
-    const newList = res2.data.map((item: any) => {
-      let cate: any = responseList.find((it: any) => it.id == item.category_id);
-      if (cate != undefined) {
-        item.cate = cate.name;
-        item.nameJP = cate.nameJP;
+    try {
+      const res2: any = await getListTransactions(
+        dateFrom[0],
+        dateTo[0],
+        20,
+        offset,
+        time,
+        sort
+      );
+      console.log({ res2 });
+      console.log("category", listCategories[0]);
+      let responseList;
+      if (!listCategories[0].length) {
+        const res1: any = await getCategory();
+        console.log("data category", res1.categories);
+        setCategories(res1.categories);
+        responseList = res1.categories.map((item) => {
+          if (item.name === "?") {
+            item.name = "Uncategorized";
+            item.nameJP = "未分類";
+          }
+          return item;
+        });
       } else {
-        item.cate = "";
-        item.nameJP = "";
+        setCategories(listCategories[0]);
+        responseList = listCategories[0].map((item) => {
+          if (item.name === "?") {
+            item.name = "Uncategorized";
+            item.nameJP = "未分類";
+          }
+          return item;
+        });
       }
-      item.memo = item.memo.replaceAll("+", " ");
-      item.memo = decodeURIComponent(item.memo);
-      return item;
-    });
-    setTransactions(newList);
-    handlePaging(res2.offset, res2.total);
-    setLoading(false);
+      console.log({ responseList });
+
+      // listCategories[1](res1.categories);
+      const newList = res2.data.map((item: any) => {
+        let cate: any = responseList.find(
+          (it: any) => it.id == item.category_id
+        );
+        if (cate != undefined) {
+          item.cate = cate.name;
+          item.nameJP = cate.nameJP;
+        } else {
+          item.cate = "";
+          item.nameJP = "";
+        }
+        // if (item.memo) {
+        //   item.memo = item.memo.replaceAll("+", " ");
+        //   item.memo = decodeURIComponent(item.memo);
+        // }
+        return item;
+      });
+      setTransactions(newList);
+      handlePaging(res2.offset, res2.total);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
   };
 
   const handleChangePage = (event, value) => {

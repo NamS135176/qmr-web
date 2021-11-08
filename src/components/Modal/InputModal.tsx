@@ -49,10 +49,12 @@ export default function InputModal(props) {
   const [loading, setLoading] = useState(false);
   const [df, setDefault] = useState<any>(false);
   const { dateFrom, dateTo, reloadPage } = useContext(DateSelectContext);
-  const { listCategories } = useContext(CategoryContext);
+  const { listCategories, paymentMethodDefault, shopNameDefault } =
+    useContext(CategoryContext);
   const [listAll, setListAll] = useState<any>([]);
   const [st, setSt] = useState("");
   const [openMenu, setOpenMenu] = useState(false);
+  console.log(shopNameDefault[0]);
 
   const handleChangePrice = (e: any) => {
     const re = /^[0-9\b]+$/;
@@ -69,40 +71,60 @@ export default function InputModal(props) {
   };
 
   const handleQuickCreate = async () => {
-    if (cateSelect) {
-      console.log(cateSelect.id);
+    setLoading(true);
 
-      setLoading(true);
-      const res: any = await createTransaction(
-        cateSelect.id,
-        moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
-        Number(money),
-        "",
-        window.navigator.userAgent
-      );
+    try {
+      if (cateSelect) {
+        console.log(cateSelect.id);
+        const res: any = await createTransaction(
+          cateSelect.id,
+          moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+          Number(money),
+          "",
+          window.navigator.userAgent,
+          "",
+          1,
+          "0",
+          paymentMethodDefault[0]?.id,
+          shopNameDefault[0]?.id
+        );
+        setLoading(false);
+        props.setOpen(false);
+        reloadPage[1](!reloadPage[0]);
+      } else {
+        const res: any = await createTransaction(
+          df.id,
+          moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
+          Number(money),
+          "",
+          window.navigator.userAgent,
+          "",
+          1,
+          "0",
+          paymentMethodDefault[0]?.id,
+          shopNameDefault[0]?.id
+        );
+        setLoading(false);
+        props.setOpen(false);
+        reloadPage[1](!reloadPage[0]);
+      }
+    } catch (error) {
       setLoading(false);
-      props.setOpen(false);
-      reloadPage[1](!reloadPage[0]);
-    } else {
-      setLoading(true);
-      const res: any = await createTransaction(
-        df.id,
-        moment(new Date()).format("YYYY-MM-DD HH:mm:ss"),
-        Number(money),
-        "",
-        window.navigator.userAgent
-      );
-      setLoading(false);
-      props.setOpen(false);
-      reloadPage[1](!reloadPage[0]);
     }
   };
 
   const getCate = async () => {
     setLoadCate(true);
     // const res: any = await getCategory();
-    setListExpense(listCategories[0].filter((item: any) => item.count < 900));
-    setListIncome(listCategories[0].filter((item: any) => item.count >= 900));
+    console.log(listCategories[0]);
+
+    const listEx = listCategories[0].filter(
+      (item: any) => item.income_flag == "0" && item.count != "1000"
+    );
+    setListExpense(listEx);
+    setListIncome(
+      listCategories[0].filter((item: any) => item.income_flag != "0")
+    );
     setDefault(listCategories[0].find((item: any) => item.count == "1000"));
 
     setIncome(listCategories[0].find((item: any) => item.name == "Income"));
@@ -260,6 +282,7 @@ export default function InputModal(props) {
                                 backgroundColor: "#9AC30C",
                               },
                               borderRadius: "3px",
+                              width: "100%",
                             }}
                           >
                             {i18n.language == "en" ? item.name : item.nameJP}
@@ -288,6 +311,7 @@ export default function InputModal(props) {
                                 backgroundColor: "#D7D6D6",
                               },
                               borderRadius: "2px",
+                              width: "100%",
                             }}
                           >
                             {i18n.language == "en" ? item.name : item.nameJP}

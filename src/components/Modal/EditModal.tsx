@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Box from "@mui/material/Box";
 import Backdrop from "@mui/material/Backdrop";
 import Modal from "@mui/material/Modal";
@@ -28,6 +28,7 @@ import Resizer from "react-image-file-resizer";
 import { checkSize, resizeFile } from "utils/UploadFile";
 import CircularProgress from "@mui/material/CircularProgress";
 import NumberFormat from "react-number-format";
+import CategoryContext from "utils/CategoryContext";
 import "./style.scss";
 function NumberFormatCustom(props) {
   const { inputRef, onChange, ...other } = props;
@@ -50,6 +51,7 @@ function NumberFormatCustom(props) {
 }
 
 export default function EditModal(props: any) {
+  const { paymentMethodDefault, shopNameDefault } = useContext(CategoryContext);
   const history = useHistory();
   const [checked, setChecked] = React.useState(false);
   const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -111,7 +113,7 @@ export default function EditModal(props: any) {
       const res = await updateTransaction(
         oldItem.id,
         category.id,
-        "106806",
+        paymentMethodDefault[0]?.id,
         `${moment(valueDate).format("YYYY-MM-DD")} ${moment(valueTime).format(
           "HH:mm:ss"
         )}`,
@@ -121,7 +123,8 @@ export default function EditModal(props: any) {
         Number(oldItem.count),
         oldItem.client_id,
         oldItem.device_id,
-        true
+        true,
+        shopNameDefault[0]?.id
       );
     } else {
       if (file) {
@@ -132,7 +135,7 @@ export default function EditModal(props: any) {
         const res = await updateTransaction(
           oldItem.id,
           category.id,
-          oldItem.payment_method_id,
+          paymentMethodDefault[0]?.id,
           `${moment(valueDate).format("YYYY-MM-DD")} ${moment(valueTime).format(
             "HH:mm:ss"
           )}`,
@@ -142,13 +145,14 @@ export default function EditModal(props: any) {
           Number(oldItem.count),
           oldItem.client_id,
           oldItem.device_id,
-          false
+          false,
+          shopNameDefault[0]?.id
         );
       } else {
         const res = await updateTransaction(
           oldItem.id,
           category.id,
-          oldItem.payment_method_id,
+          paymentMethodDefault[0]?.id,
           `${moment(valueDate).format("YYYY-MM-DD")} ${moment(valueTime).format(
             "HH:mm:ss"
           )}`,
@@ -158,7 +162,8 @@ export default function EditModal(props: any) {
           Number(oldItem.count),
           oldItem.client_id,
           oldItem.device_id,
-          false
+          false,
+          shopNameDefault[0]?.id
         );
       }
     }
@@ -688,7 +693,7 @@ export default function EditModal(props: any) {
                       {({ getRootProps, getInputProps }) => (
                         <div className="dropzone" {...getRootProps()}>
                           <input {...getInputProps()} />
-                          <p>Drag'n'drop files, or click to select files</p>
+                          <p>{t("pick_file")}</p>
                         </div>
                       )}
                     </Dropzone>

@@ -24,6 +24,22 @@
   height: 65px !important;
 }
 
+.btn {
+  background-color: transparent;
+  &:hover {
+    background-color: #00b050;
+  }
+  width: 105px;
+  height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
 @media screen and (max-width: 900px) {
   .image {
     width: 220px;

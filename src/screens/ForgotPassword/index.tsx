@@ -45,7 +45,7 @@ export default function ForgotPassScreen() {
       console.log(res);
 
       setLoading(false);
-      history.push("/send_mail_done");
+      history.push("/send-mail-done");
     } catch (error) {
       setLoading(false);
       console.log(error);
@@ -133,14 +133,14 @@ export default function ForgotPassScreen() {
             {t("logo") === "jp" ? (
               <img
                 className="image"
-                src={"assets/images/new_logo_jp.png"}
+                src={"/assets/images/new_logo_jp.png"}
                 width="100%"
                 style={{ maxWidth: "200px" }}
               />
             ) : (
               <img
                 className="image"
-                src={"assets/images/logo_en.png"}
+                src={"/assets/images/logo_en.png"}
                 style={{ maxWidth: "200px" }}
                 width="100%"
               />

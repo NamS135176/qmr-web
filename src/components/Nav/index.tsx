@@ -5,20 +5,18 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import MenuItem from "@mui/material/MenuItem";
 import ListItem from "@mui/material/ListItem";
-
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import MenuNav from "components/MenuNav/Menu";
-// import TranactionModal from "components/Modal/TranactionModal";
-import React, { useState, useMemo, useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router-dom";
-import ButtonNav from "components/ButtonNav";
-import "./style.scss";
 import CurrencyModal from "components/Modal/CurrencyModal";
 import InputModal from "components/Modal/InputModal";
+// import TranactionModal from "components/Modal/TranactionModal";
+import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { NavLink, useHistory } from "react-router-dom";
+import "./style.scss";
+
 export default function Nav(props) {
   const [open, setOpen] = useState(false);
   const [checked, setChecked] = useState(false);
@@ -200,14 +198,14 @@ export default function Nav(props) {
             {t("logo") === "jp" ? (
               <img
                 className="image"
-                src={"assets/images/logo_jp.png"}
+                src={"/assets/images/logo_jp.png"}
                 height="100%"
                 alt="logo"
               />
             ) : (
               <img
                 className="image"
-                src={"assets/images/logo_en.png"}
+                src={"/assets/images/logo_en.png"}
                 height="100%"
                 alt="logo"
               />
@@ -222,51 +220,42 @@ export default function Nav(props) {
                 }}
               >
                 <Box sx={{ height: "100%" }}>
-                  {history.location.pathname === "/" ? (
-                    <ButtonNav
-                      logger={setChangeRoute}
-                      toPage="nav.summary"
-                      link="/"
-                      bgColor="#398439"
-                    ></ButtonNav>
-                  ) : (
-                    <ButtonNav
-                      logger={setChangeRoute}
-                      toPage="nav.summary"
-                      link="/"
-                      bgColor="transparent"
-                    ></ButtonNav>
-                  )}
-                  {history.location.pathname === "/transactions" ? (
-                    <ButtonNav
-                      logger={setChangeRoute}
-                      toPage="nav.list"
-                      link="/transactions"
-                      bgColor="#398439"
-                    ></ButtonNav>
-                  ) : (
-                    <ButtonNav
-                      logger={setChangeRoute}
-                      toPage="nav.list"
-                      link="/transactions"
-                      bgColor="transparent"
-                    ></ButtonNav>
-                  )}
-                  {history.location.pathname === "/graph" ? (
-                    <ButtonNav
-                      logger={setChangeRoute}
-                      toPage="nav.graph"
-                      link="/graph"
-                      bgColor="#398439"
-                    ></ButtonNav>
-                  ) : (
-                    <ButtonNav
-                      logger={setChangeRoute}
-                      toPage="nav.graph"
-                      link="/graph"
-                      bgColor="transparent"
-                    ></ButtonNav>
-                  )}
+                  <Box sx={{ display: "inline-block" }}>
+                    <NavLink
+                      activeStyle={{
+                        background: "#398439",
+                      }}
+                      className="btn"
+                      to="/"
+                      exact
+                    >
+                      {t("nav.summary")}
+                    </NavLink>
+                  </Box>
+                  <Box sx={{ display: "inline-block" }}>
+                    <NavLink
+                      activeStyle={{
+                        background: "#398439",
+                      }}
+                      className="btn"
+                      to="/transactions"
+                      exact
+                    >
+                      {t("nav.list")}
+                    </NavLink>
+                  </Box>
+                  <Box sx={{ display: "inline-block" }}>
+                    <NavLink
+                      activeStyle={{
+                        background: "#398439",
+                      }}
+                      className="btn"
+                      to="/graph"
+                      exact
+                    >
+                      {t("nav.graph")}
+                    </NavLink>
+                  </Box>
 
                   <Button
                     sx={{
