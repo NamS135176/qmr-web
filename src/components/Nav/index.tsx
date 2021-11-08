@@ -198,14 +198,14 @@ export default function Nav(props) {
             {t("logo") === "jp" ? (
               <img
                 className="image"
-                src={"/assets/images/logo_jp.png"}
+                src={process.env.PUBLIC_URL + "/assets/images/logo_jp.png"}
                 height="100%"
                 alt="logo"
               />
             ) : (
               <img
                 className="image"
-                src={"/assets/images/logo_en.png"}
+                src={process.env.PUBLIC_URL + "/assets/images/logo_en.png"}
                 height="100%"
                 alt="logo"
               />

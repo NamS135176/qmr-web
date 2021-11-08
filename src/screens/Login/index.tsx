@@ -176,19 +176,21 @@ function Page() {
               <p></p>
             )}
             <Box sx={{ textAlign: "center" }}>
-              <img src={"/assets/images/logo.png"} />
+              <img src={process.env.PUBLIC_URL + "/assets/images/logo.png"} />
             </Box>
             <Box sx={{ textAlign: "center" }}>
               {t("logo") === "jp" ? (
                 <img
                   className="image"
-                  src={"/assets/images/new_logo_jp.png"}
+                  src={
+                    process.env.PUBLIC_URL + "/assets/images/new_logo_jp.png"
+                  }
                   width="100%"
                 />
               ) : (
                 <img
                   className="image"
-                  src={"/assets/images/logo_en.png"}
+                  src={process.env.PUBLIC_URL + "/assets/images/logo_en.png"}
                   width="100%"
                 />
               )}
