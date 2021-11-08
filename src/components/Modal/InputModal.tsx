@@ -282,6 +282,7 @@ export default function InputModal(props) {
                                 backgroundColor: "#9AC30C",
                               },
                               borderRadius: "3px",
+                              width: "100%",
                             }}
                           >
                             {i18n.language == "en" ? item.name : item.nameJP}
@@ -310,6 +311,7 @@ export default function InputModal(props) {
                                 backgroundColor: "#D7D6D6",
                               },
                               borderRadius: "2px",
+                              width: "100%",
                             }}
                           >
                             {i18n.language == "en" ? item.name : item.nameJP}
