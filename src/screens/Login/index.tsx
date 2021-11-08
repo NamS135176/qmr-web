@@ -176,7 +176,7 @@ function Page() {
               <p></p>
             )}
             <Box sx={{ textAlign: "center" }}>
-              <img src={"assets/images/logo.png"} />
+              <img src={"/assets/images/logo.png"} />
             </Box>
             <Box sx={{ textAlign: "center" }}>
               {t("logo") === "jp" ? (
