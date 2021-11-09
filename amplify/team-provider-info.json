@@ -11,5 +11,18 @@
       "StackId": "arn:aws:cloudformation:ap-southeast-1:125501079021:stack/amplify-qmrwebreactjs-dev-172054/180182a0-2b46-11ec-8265-02363bd110d2",
       "AmplifyAppId": "d33ng095oeficd"
     }
+  },
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-qmrwebreactjs-prod-113513-authRole",
+      "UnauthRoleArn": "arn:aws:iam::125501079021:role/amplify-qmrwebreactjs-prod-113513-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::125501079021:role/amplify-qmrwebreactjs-prod-113513-authRole",
+      "Region": "ap-northeast-1",
+      "DeploymentBucketName": "amplify-qmrwebreactjs-prod-113513-deployment",
+      "UnauthRoleName": "amplify-qmrwebreactjs-prod-113513-unauthRole",
+      "StackName": "amplify-qmrwebreactjs-prod-113513",
+      "StackId": "arn:aws:cloudformation:ap-northeast-1:125501079021:stack/amplify-qmrwebreactjs-prod-113513/71221df0-4116-11ec-859a-06f54a2d114f",
+      "AmplifyAppId": "d15ckaa7nktfvs"
+    }
   }
 }
