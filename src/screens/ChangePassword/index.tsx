@@ -30,11 +30,11 @@ export default function ChangePassword() {
       yup.object({
         password: yup
           .string()
-          .min(8, t("login.typepass"))
+          // .min(8, t("login.typepass"))
           .required(t("login.requirepass")),
         cfPassword: yup
           .string()
-          .min(8, t("login.typepass"))
+          // .min(8, t("login.typepass"))
           .required(t("login.requirepass")),
       }),
     []

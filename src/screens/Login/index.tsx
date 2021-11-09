@@ -37,7 +37,7 @@ function Page() {
           .required(t("login.requiremail")),
         password: yup
           .string()
-          .min(8, t("login.typepass"))
+          // .min(8, t("login.typepass"))
           .required(t("login.requirepass")),
       }),
     []
