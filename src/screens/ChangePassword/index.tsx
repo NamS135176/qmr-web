@@ -11,6 +11,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { changePassword } from "api/member";
 import Typography from "@mui/material/Typography";
 import { useTranslation } from "react-i18next";
+import "./style.scss";
 export default function ChangePassword() {
   const history = useHistory();
   const queryParams = new URLSearchParams(window.location.search);
@@ -28,14 +29,8 @@ export default function ChangePassword() {
   const validationSchema = useMemo(
     () =>
       yup.object({
-        password: yup
-          .string()
-          // .min(8, t("login.typepass"))
-          .required(t("login.requirepass")),
-        cfPassword: yup
-          .string()
-          // .min(8, t("login.typepass"))
-          .required(t("login.requirepass")),
+        password: yup.string().required(t("login.requirepass")),
+        cfPassword: yup.string().required(t("login.requirepass")),
       }),
     []
   );
@@ -123,8 +118,8 @@ export default function ChangePassword() {
             marginRight: `auto`,
             width: {
               xs: "80%",
-              md: "30%",
-              lg: "20%",
+              md: "40%",
+              lg: "30%",
             },
           }}
         >
