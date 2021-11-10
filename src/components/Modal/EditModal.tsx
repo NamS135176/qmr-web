@@ -676,10 +676,7 @@ export default function EditModal(props: any) {
                 ) : (
                   <img
                     width="100%"
-                    src={
-                      "https://s3-ap-northeast-1.amazonaws.com/qmr-cloud-s3-dev/" +
-                      props.data.photo
-                    }
+                    src={process.env.REACT_APP_BUCKET_S3 + props.data.photo}
                     alt="note_img"
                   ></img>
                 )}
