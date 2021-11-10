@@ -2,7 +2,7 @@ import { create } from "apisauce";
 import i18n from "utils/i18n";
 
 export const apiQMRWeb = create({
-  baseURL: "http://api-web-dev.quick-money-recorder.com/",
+  baseURL: process.env.REACT_APP_API_URL,
   headers: {
     "Content-Type": "application/json",
     "Accept-Language": i18n.language ?? "jp",
