@@ -10,9 +10,9 @@
     "test": "react-app-rewired test",
     "format": "prettier --write src/**/**/*.{js,jsx,ts,tsx,json,css,scss,md}",
     "prepare": "husky install",
-    "deploy-dev": "amplify env checkout dev && amplify publish",
-    "deploy-stg": "amplify env checkout stg && amplify publish",
-    "deploy-prod": "amplify env checkout prod && amplify publish"
+    "deploy-dev": "cp .env.dev .env && amplify env checkout dev && amplify publish",
+    "deploy-stg": "cp .env.prod .env &&amplify env checkout stg && amplify publish",
+    "deploy-prod": "cp .env.prod .env &&amplify env checkout prod && amplify publish"
   },
   "dependencies": {
     "@date-io/date-fns": "^2.11.0",
