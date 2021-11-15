@@ -1,32 +1,31 @@
-import React, { useState, useEffect, useMemo, useContext } from "react";
-import Box from "@mui/material/Box";
-import Backdrop from "@mui/material/Backdrop";
-import Modal from "@mui/material/Modal";
-import Fade from "@mui/material/Fade";
-import Typography from "@mui/material/Typography";
-import TextField from "@mui/material/TextField";
-import { useTranslation } from "react-i18next";
-import InputAdornment from "@mui/material/InputAdornment";
-import NumberFormatCustom from "components/NumberInputCustom";
+import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
+import AdapterDateFns from "@mui/lab/AdapterDateFns";
 import DateTimePicker from "@mui/lab/DateTimePicker";
 import LocalizationProvider from "@mui/lab/LocalizationProvider";
-import AdapterDateFns from "@mui/lab/AdapterDateFns";
-import moment from "moment";
-import FormControl from "@mui/material/FormControl";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import Select, { SelectChangeEvent } from "@mui/material/Select";
-import { getCategory } from "api/category";
-import IconButton from "@mui/material/IconButton";
-import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
+import Backdrop from "@mui/material/Backdrop";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import CircularProgress from "@mui/material/CircularProgress";
+import Fade from "@mui/material/Fade";
+import FormControl from "@mui/material/FormControl";
+import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import MenuItem from "@mui/material/MenuItem";
+import Modal from "@mui/material/Modal";
+import Select, { SelectChangeEvent } from "@mui/material/Select";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import { getCategory } from "api/category";
+import { createTransaction, uploadImage } from "api/transaction";
+import NumberFormatCustom from "components/NumberInputCustom";
+import moment from "moment";
+import React, { useContext, useEffect, useMemo, useState } from "react";
+import { useDropzone } from "react-dropzone";
+import { useTranslation } from "react-i18next";
+import CategoryContext from "utils/CategoryContext";
 import DateSelectContext from "utils/context";
 // import Dropzone from "react-dropzone";
 import { checkSize, resizeFile } from "utils/UploadFile";
-import { uploadImage, createTransaction } from "api/transaction";
-import { useDropzone } from "react-dropzone";
-import CircularProgress from "@mui/material/CircularProgress";
-import CategoryContext from "utils/CategoryContext";
 const baseStyle = {};
 
 export default function DetailModal(props) {
@@ -107,7 +106,14 @@ export default function DetailModal(props) {
   const getCategoryData = async () => {
     const response = await getCategory();
     console.log({ response });
-    setListCategory(response.categories);
+    const newCategory = response.categories.map((item) => {
+      if (item.name === "?") {
+        item.name = "Uncategorized";
+        item.nameJP = "未分類";
+      }
+      return item;
+    });
+    setListCategory(newCategory);
   };
 
   const handleCreateTransaction = async () => {
