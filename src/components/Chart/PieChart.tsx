@@ -73,6 +73,7 @@ export default function PieChart({ data }: any) {
         width: {
           md: "90%",
           lg: "80%",
+          // background: 'red',
         },
 
         alignItems: "center",
@@ -81,6 +82,7 @@ export default function PieChart({ data }: any) {
           md: "block",
         },
         justifyContent: "center",
+        px: 1,
         // background: 'yellow',
       }}
     >
@@ -88,7 +90,7 @@ export default function PieChart({ data }: any) {
         <Chart className="pie-chart" options={option} series={d} type="pie" />
       ) : (
         <>
-          <Typography sx={{ textAlign: "center" }}>
+          <Typography sx={{ textAlign: "center", fontSize: "15px" }}>
             {t("graph.pie_nodata")}
           </Typography>
         </>

@@ -108,7 +108,7 @@ export default function BarChart({ data, dateFrom, dateTo }: any) {
         </>
       ) : (
         <Box sx={{}}>
-          <Typography sx={{ textAlign: "center" }}>
+          <Typography sx={{ textAlign: "center", fontSize: "15px" }}>
             {t("graph.pie_nodata")}
           </Typography>
         </Box>
