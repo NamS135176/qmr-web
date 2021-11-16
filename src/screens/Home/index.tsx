@@ -283,8 +283,11 @@ export default function Home() {
                   lg: 450,
                 },
                 boxShadow: 2,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
               }}
-              className="bar-chart"
+              className={graph?.price_by_time.length ? "bar-chart" : ""}
             >
               <div className="bar-chart-fake">
                 <BarChart

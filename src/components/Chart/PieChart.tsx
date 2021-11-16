@@ -5,6 +5,7 @@ import Chart from "react-apexcharts";
 import color from "constant/";
 import "./style.scss";
 import { useTranslation } from "react-i18next";
+import Typography from "@mui/material/Typography";
 
 export default function PieChart({ data }: any) {
   const { t, i18n } = useTranslation();
@@ -83,10 +84,14 @@ export default function PieChart({ data }: any) {
         // background: 'yellow',
       }}
     >
-      {data ? (
+      {data.length ? (
         <Chart className="pie-chart" options={option} series={d} type="pie" />
       ) : (
-        <></>
+        <>
+          <Typography sx={{ textAlign: "center" }}>
+            {t("graph.pie_nodata")}
+          </Typography>
+        </>
       )}
     </Box>
   );
