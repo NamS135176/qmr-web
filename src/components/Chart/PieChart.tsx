@@ -82,7 +82,10 @@ export default function PieChart({ data }: any) {
           md: "block",
         },
         justifyContent: "center",
-        px: 1,
+        px: {
+          xs: 1,
+          md: 0,
+        },
         // background: 'yellow',
       }}
     >
