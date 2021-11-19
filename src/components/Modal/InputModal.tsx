@@ -317,7 +317,7 @@ export default function InputModal(props) {
                             sx={{
                               backgroundColor: "#9AC30C",
                               color: "black",
-                              minHeight: {
+                              height: {
                                 xs: windowDimensions.h + "px",
                                 md: windowDimensions.h1 + "px",
                               },
