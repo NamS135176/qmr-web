@@ -86,7 +86,8 @@
   },
   "graph": {
     "pie": "pie",
-    "bar": "bar"
+    "bar": "bar",
+    "pie_nodata": "We have no data yet. Please enter from + on top"
   },
   "menunav": {
     "setting": "Language Setting",

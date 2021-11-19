@@ -3,6 +3,8 @@ import { Bar, defaults, Chart } from "react-chartjs-2";
 import Box from "@mui/material/Box";
 import zoomPlugin from "chartjs-plugin-zoom";
 import moment from "moment";
+import Typography from "@mui/material/Typography";
+import { useTranslation } from "react-i18next";
 
 Chart.register(zoomPlugin);
 
@@ -13,6 +15,8 @@ export default function BarChart({ data, dateFrom, dateTo }: any) {
   const dateB = moment(dateTo, "YYYY-MM-DD");
   const arrDays: string[] = [];
   const arrFullDays: string[] = [];
+  const { t, i18n } = useTranslation();
+
   for (let i = 0; i < moment.duration(dateB.diff(dateA)).asDays() + 1; i++) {
     arrDays.push(moment(dateFrom, "YYYY-MM-DD").add(i, "days").format("DD-MM"));
     arrFullDays.push(
@@ -77,9 +81,12 @@ export default function BarChart({ data, dateFrom, dateTo }: any) {
           md: 200,
           xs: 150,
         },
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      {data ? (
+      {data.length ? (
         <>
           <Bar
             options={options}
@@ -100,7 +107,11 @@ export default function BarChart({ data, dateFrom, dateTo }: any) {
           {/* <Chart options={option} series={series} type="bar" width="500" /> */}
         </>
       ) : (
-        <></>
+        <Box sx={{}}>
+          <Typography sx={{ textAlign: "center", fontSize: "15px" }}>
+            {t("graph.pie_nodata")}
+          </Typography>
+        </Box>
       )}
     </Box>
   );

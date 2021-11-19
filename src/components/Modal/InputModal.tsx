@@ -54,7 +54,52 @@ export default function InputModal(props) {
   const [listAll, setListAll] = useState<any>([]);
   const [st, setSt] = useState("");
   const [openMenu, setOpenMenu] = useState(false);
+  // const [h, setH] = useState(0);
+  // const [h1, setH1] = useState(0);
   console.log(shopNameDefault[0]);
+  // const h =  ((((window.innerHeight/10)*9-40-16)/10)*4.4 -8)/4
+  // const h1 =  ((800-40-16)*4/10 -8 - 10)/5
+  // console.log(h);
+  // console.log(window.innerHeight);
+  function getWindowDimensions() {
+    if ((window.innerHeight * 9) / 10 > 800) {
+      const h = (((800 - 40 - 16) * 4) / 10 - 8 - 10) / 5;
+      const h1 = (((800 - 40 - 16) * 4) / 10 - 8 - 10) / 5;
+      return {
+        h,
+        h1,
+      };
+    } else {
+      const h =
+        ((((window.innerHeight / 10) * 9 - 40 - 16) / 10) * 4.4 - 8) / 4;
+      const h1 = (((800 - 40 - 16) * 4) / 10 - 8 - 10) / 5;
+      return {
+        h,
+        h1,
+      };
+    }
+  }
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  );
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+  // useEffect(() => {
+  //   if(window.innerHeight*9/10>800){
+  //     setH(((800-40-16)*4/10 -8 - 10)/5)
+  //     setH1(((800-40-16)*4/10 -8 - 10)/5)
+  //   }
+  //   else{
+  //     setH(((((window.innerHeight/10)*9-40-16)/10)*4.4 -8)/4)
+  //     setH1(((800-40-16)*4/10 -8 - 10)/5)
+  //   }
+  // },[])
 
   const handleChangePrice = (e: any) => {
     const re = /^[0-9\b]+$/;
@@ -273,8 +318,8 @@ export default function InputModal(props) {
                               backgroundColor: "#9AC30C",
                               color: "black",
                               minHeight: {
-                                xs: "50px",
-                                md: "50px",
+                                xs: windowDimensions.h + "px",
+                                md: windowDimensions.h1 + "px",
                               },
                               wordBreak: "break-word",
                               fontWeight: "bold",
@@ -285,7 +330,13 @@ export default function InputModal(props) {
                               width: "100%",
                             }}
                           >
-                            {i18n.language == "en" ? item.name : item.nameJP}
+                            {i18n.language == "en"
+                              ? item.name.length > 10
+                                ? `${item.name.slice(0, 10)}...`
+                                : item.name
+                              : item.nameJP.length > 10
+                              ? `${item.nameJP.slice(0, 10)}...`
+                              : item.nameJP}
                           </Button>
                         );
                       } else {
@@ -301,9 +352,9 @@ export default function InputModal(props) {
                             sx={{
                               backgroundColor: "#D7D6D6",
                               color: "black",
-                              minHeight: {
-                                xs: "50px",
-                                md: "50px",
+                              height: {
+                                xs: windowDimensions.h + "px",
+                                md: windowDimensions.h1 + "px",
                               },
                               wordBreak: "break-word",
                               fontWeight: "bold",
@@ -314,7 +365,13 @@ export default function InputModal(props) {
                               width: "100%",
                             }}
                           >
-                            {i18n.language == "en" ? item.name : item.nameJP}
+                            {i18n.language == "en"
+                              ? item.name.length > 10
+                                ? `${item.name.slice(0, 10)}...`
+                                : item.name
+                              : item.nameJP.length > 10
+                              ? `${item.nameJP.slice(0, 10)}...`
+                              : item.nameJP}
                           </Button>
                         );
                       }

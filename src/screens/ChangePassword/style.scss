@@ -1,0 +1,8 @@
+@media screen and (max-width: 400px) {
+  input#password::placeholder {
+    font-size: 12px !important;
+  }
+  input#cfPassword::placeholder {
+    font-size: 12px !important;
+  }
+}
