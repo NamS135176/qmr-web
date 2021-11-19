@@ -64,7 +64,12 @@ export default function InputModal(props) {
   function getWindowDimensions() {
     if ((window.innerHeight * 9) / 10 > 800) {
       const h = (((800 - 40 - 16) * 4) / 10 - 8 - 10) / 5;
-      const h1 = (((800 - 40 - 16) * 4) / 10 - 8 - 10) / 5;
+      let h1;
+      if (window.innerHeight <= 800) {
+        h1 = (((window.innerHeight - 40 - 16) * 4) / 10 - 8 - 10) / 5;
+      } else {
+        h1 = (((800 - 40 - 16) * 4) / 10 - 8 - 10) / 5;
+      }
       return {
         h,
         h1,
@@ -72,7 +77,12 @@ export default function InputModal(props) {
     } else {
       const h =
         ((((window.innerHeight / 10) * 9 - 40 - 16) / 10) * 4.4 - 8) / 4;
-      const h1 = (((800 - 40 - 16) * 4) / 10 - 8 - 10) / 5;
+      let h1;
+      if (window.innerHeight <= 800) {
+        h1 = (((window.innerHeight - 40 - 16) * 4) / 10 - 8 - 10) / 5;
+      } else {
+        h1 = (((800 - 40 - 16) * 4) / 10 - 8 - 10) / 5;
+      }
       return {
         h,
         h1,
